@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO & Primary Meta Tags -->
+  <title>PropPartner — 3D Real Estate Affiliate Partner Network</title>
+  <meta name="title" content="PropPartner — 3D Real Estate Affiliate Partner Network">
+  <meta name="description" content="Join PropPartner, the elite 3D real estate affiliate partner network. Promote luxury residential towers, commercial hubs & waterfront villas. Earn up to 5.5% transparent commission on verified property referrals.">
+  <meta name="keywords" content="PropPartner, real estate affiliate program, real estate referral program, property affiliate program, real estate commission, property referral commission, earn commission property referrals, real estate investment referrals, luxury property affiliate">
+  <meta name="robots" content="index, follow">
+  <meta name="author" content="PropPartner Real Estate Network">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://proppartner.affiliate/">
+  <meta property="og:title" content="PropPartner — 3D Real Estate Affiliate Partner Network">
+  <meta property="og:description" content="Promote high-potential real estate developments, connect buyers and investors, and earn attractive commissions on successful qualifying transactions.">
+  <meta property="og:image" content="/assets/hero-3d-visual.jpg">
+
+  <!-- Twitter Card -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:title" content="PropPartner 3D Real Estate Affiliate Network">
+  <meta property="twitter:description" content="Join our vetted property affiliate network and earn high-yield commissions on verified real estate referrals.">
+  <meta property="twitter:image" content="/assets/hero-3d-visual.jpg">
+
+  <!-- Favicon & App Icons -->
+  <link rel="icon" type="image/jpeg" href="/assets/proppartner-icon.jpg">
+  <link rel="apple-touch-icon" href="/assets/proppartner-icon.jpg">
+  <meta name="msapplication-TileImage" content="/assets/proppartner-icon.jpg">
+
+  <!-- Schema.org JSON-LD structured data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "RealEstateAgent",
+    "name": "PropPartner Real Estate Affiliate Network",
+    "description": "Professional real estate partner network connecting affiliates, investors, and premier architectural developments.",
+    "url": "https://proppartner.affiliate",
+    "potentialAction": {
+      "@type": "JoinAction",
+      "target": "https://proppartner.affiliate/#register",
+      "name": "Become an Affiliate"
+    }
+  }
+  </script>
+
+  <!-- Google Fonts & Style -->
+  <link rel="stylesheet" href="/src/style.css">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       STICKY HEADER / NAVIGATION
+       ========================================================================== -->
+  <header class="site-header" id="site-header">
+    <div class="container header-container">
+      <a href="#" class="brand-logo brand-logo-img" id="header-logo" title="PropPartner 3D Real Estate Platform">
+        <img src="/assets/proppartner-icon.jpg" alt="PropPartner Logo Icon" class="logo-img-icon" width="38" height="38">
+        <div class="logo-text">PROP<span>PARTNER</span></div>
+      </a>
+
+      <nav>
+        <ul class="nav-links" id="nav-menu">
+          <li><a href="#projects" class="nav-link">Projects</a></li>
+          <li><a href="#how-it-works" class="nav-link">How It Works</a></li>
+          <li><a href="#calculator" class="nav-link">Commission</a></li>
+          <li><a href="#why-join" class="nav-link">Why Join</a></li>
+          <li><a href="#dashboard" class="nav-link">Portal Preview</a></li>
+          <li><a href="#network" class="nav-link">3D Network</a></li>
+          <li><a href="#toolkit" class="nav-link">Marketing Kit</a></li>
+          <li><a href="#faq" class="nav-link">FAQ</a></li>
+        </ul>
+      </nav>
+
+      <div class="header-actions">
+        <select class="curr-picker" id="global-currency-picker" aria-label="Select Currency">
+          <option value="PKR" selected>PKR (₨)</option>
+          <option value="USD">USD ($)</option>
+          <option value="AED">AED (د.إ)</option>
+        </select>
+
+        <a href="#register" class="btn btn-gold btn-sm" id="nav-join-btn">
+          <span>BECOME AN AFFILIATE</span>
+        </a>
+
+        <button type="button" class="mobile-menu-toggle" id="mobile-toggle-btn" aria-label="Toggle Navigation Menu">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ==========================================================================
+         HERO SECTION (3D WebGL Skyscraper & Floating Stats)
+         ========================================================================== -->
+    <section class="hero-section" id="hero">
+      <!-- 3D Three.js WebGL Canvas Viewport -->
+      <div class="hero-3d-viewport" id="hero-3d-canvas" aria-label="Interactive 3D Architectural Skyscraper"></div>
+      <div class="hero-overlay-gradient"></div>
+
+      <div class="container hero-content-wrapper">
+        <!-- Hero Text Column -->
+        <div class="hero-text-block">
+          <div class="section-eyebrow">
+            <i data-lucide="sparkles"></i>
+            <span>REAL ESTATE AFFILIATE PARTNER PROGRAM</span>
+          </div>
+
+          <h1 class="hero-main-title">
+            Earn More From <span class="gradient-text-gold">Every Connection.</span>
+          </h1>
+
+          <p class="hero-description">
+            Turn your personal and professional network into a powerful income opportunity. Join our real estate affiliate network, promote selected property projects, refer genuine buyers and investors, and earn commission when your referrals successfully convert.
+          </p>
+
+          <div class="hero-actions-row">
+            <a href="#register" class="btn btn-gold btn-lg" id="hero-primary-cta">
+              <i data-lucide="award"></i>
+              <span>JOIN THE AFFILIATE PROGRAM</span>
+            </a>
+
+            <a href="#projects" class="btn btn-secondary btn-lg" id="hero-secondary-cta">
+              <i data-lucide="compass"></i>
+              <span>VIEW REAL ESTATE PROJECTS</span>
+            </a>
+          </div>
+
+          <div class="hero-3d-hint">
+            <i data-lucide="move-3d"></i>
+            <span>Interactive 3D Viewport • Drag to Orbit Tower • Mouse Parallax</span>
+          </div>
+        </div>
+
+        <!-- Floating Glass Cards Around Building -->
+        <div class="hero-floating-cards" id="hero-floating-stats">
+          <div class="hero-stat-glass-card glass-card">
+            <div class="h-stat-meta">
+              <span>PROJECT VALUE</span>
+              <strong id="hero-stat-val-text">PKR 850 Million+</strong>
+            </div>
+            <div class="h-stat-icon"><i data-lucide="landmark"></i></div>
+          </div>
+
+          <div class="hero-stat-glass-card glass-card">
+            <div class="h-stat-meta">
+              <span>AFFILIATE COMMISSION</span>
+              <strong id="hero-stat-comm-text" style="color: var(--gold-light);">Up to 5.5%</strong>
+            </div>
+            <div class="h-stat-icon"><i data-lucide="badge-percent"></i></div>
+          </div>
+
+          <div class="hero-stat-glass-card glass-card">
+            <div class="h-stat-meta">
+              <span>ACTIVE PROJECTS</span>
+              <strong id="hero-stat-proj-text">24+ Developments</strong>
+            </div>
+            <div class="h-stat-icon"><i data-lucide="building"></i></div>
+          </div>
+
+          <div class="hero-stat-glass-card glass-card">
+            <div class="h-stat-meta">
+              <span>PARTNER NETWORK</span>
+              <strong id="hero-stat-network-text" style="color: var(--cyan-accent);">3,450+ Partners</strong>
+            </div>
+            <div class="h-stat-icon"><i data-lucide="users"></i></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         TRUST BAR SECTION
+         ========================================================================== -->
+    <section class="trust-section" id="trust">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow"><i data-lucide="shield-check"></i> WHO OUR PLATFORM IS BUILT FOR</div>
+          <h2 class="section-title">Built for People Who <span class="gradient-text-gold">Know People</span></h2>
+          <p class="section-subtitle">
+            Whether you're a property consultant, sales professional, entrepreneur, content creator, investor, community leader, or simply someone with a strong network — you can turn qualified referrals into commission opportunities.
+          </p>
+        </div>
+
+        <div class="trust-badge-marquee" id="trust-categories-grid">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         HOW IT WORKS (3D PROCESS TIMELINE)
+         ========================================================================== -->
+    <section class="timeline-section" id="how-it-works">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow"><i data-lucide="git-merge"></i> 6-STEP COMMISSION PATH</div>
+          <h2 class="section-title">Your Network. Our Projects. <span class="gradient-text-gold">Your Commission.</span></h2>
+          <p class="section-subtitle">
+            A seamless, frictionless workflow designed to let you focus on introductions while our expert sales desk handles the heavy lifting.
+          </p>
+        </div>
+
+        <div class="timeline-grid" id="timeline-steps-grid">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         FEATURED PROJECTS SHOWCASE
+         ========================================================================== -->
+    <section class="projects-section" id="projects">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow"><i data-lucide="sparkles"></i> HIGH-CONVERTING ASSETS</div>
+          <h2 class="section-title">Projects <span class="gradient-text-gold">Worth Promoting</span></h2>
+          <p class="section-subtitle">
+            Give your network access to carefully selected real estate opportunities across high-growth locations with pre-approved affiliate commission structures.
+          </p>
+        </div>
+
+        <div id="projects-showcase-mount">
+          <!-- Populated by projectShowcase.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         3D COMMISSION CALCULATOR
+         ========================================================================== -->
+    <section class="calculator-section" id="calculator">
+      <div class="container">
+        <div id="commission-calc-mount">
+          <!-- Populated by calculator.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         WHY JOIN SECTION (3D FEATURE CARDS)
+         ========================================================================== -->
+    <section class="why-section" id="why-join">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow"><i data-lucide="check-check"></i> INSTITUTIONAL ADVANTAGE</div>
+          <h2 class="section-title">More Than a <span class="gradient-text-gold">Referral Link</span></h2>
+          <p class="section-subtitle">
+            We provide the enterprise-grade infrastructure, closing muscle, and marketing firepower to ensure your introductions turn into completed transactions.
+          </p>
+        </div>
+
+        <div class="why-grid" id="why-join-grid">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         AFFILIATE DASHBOARD PREVIEW
+         ========================================================================== -->
+    <section class="dashboard-preview-section" id="dashboard">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow"><i data-lucide="layout-dashboard"></i> PROPRIETARY TRACKING TECHNOLOGY</div>
+          <h2 class="section-title">Futuristic <span class="gradient-text-cyan">Partner Portal</span></h2>
+          <p class="section-subtitle">
+            Track leads, view client site visit milestones, and monitor confirmed commission payouts in real time from your private portal.
+          </p>
+        </div>
+
+        <div id="dashboard-preview-mount">
+          <!-- Populated by dashboardPreview.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         WHO CAN JOIN (PERSONA PLAYBOOKS)
+         ========================================================================== -->
+    <section class="personas-section" id="personas">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow"><i data-lucide="users-2"></i> TAILORED PLAYBOOKS</div>
+          <h2 class="section-title">If You Have a Network, <span class="gradient-text-gold">You Have an Opportunity.</span></h2>
+          <p class="section-subtitle">
+            Discover how different professionals leverage their existing spheres of influence to generate substantial real estate referral fees.
+          </p>
+        </div>
+
+        <div class="personas-grid" id="personas-grid-mount">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         MARKETING TOOLKIT SECTION
+         ========================================================================== -->
+    <section class="toolkit-section" id="toolkit">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow"><i data-lucide="package"></i> PROMOTIONAL COLLATERAL</div>
+          <h2 class="section-title">Everything You Need to <span class="gradient-text-gold">Promote With Confidence</span></h2>
+          <p class="section-subtitle">
+            Pre-written WhatsApp scripts, executive pitch decks, 4K video walkthroughs, and brochures ready for 1-click sharing.
+          </p>
+        </div>
+
+        <div id="toolkit-mount">
+          <!-- Populated by marketingToolkit.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         AFFILIATE SUCCESS STORIES
+         ========================================================================== -->
+    <section class="stories-section" id="stories">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow"><i data-lucide="star"></i> PROVEN RESULTS</div>
+          <h2 class="section-title">Affiliate <span class="gradient-text-gold">Success Stories</span></h2>
+          <p class="section-subtitle">
+            Read how partners across business advisory, real estate, and digital media monetized their networks.
+          </p>
+        </div>
+
+        <div class="stories-grid" id="stories-grid-mount">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         3D NETWORK EARNING VISUALIZATION
+         ========================================================================== -->
+    <section class="network-section" id="network">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow"><i data-lucide="network"></i> NETWORK EFFECT VISUALIZER</div>
+          <h2 class="section-title">Imagine What Your Network <span class="gradient-text-gold">Can Generate</span></h2>
+          <p class="section-subtitle">
+            Hover over connected nodes to explore how different relationships in your network translate into referral transactions.
+          </p>
+        </div>
+
+        <div class="network-graph-card glass-card">
+          <div class="network-canvas-container" id="network-canvas-wrap">
+            <!-- Canvas rendered by networkGraph3d.js -->
+            <div class="network-tooltip" id="network-tooltip"></div>
+          </div>
+          <div class="network-graph-footer-msg">
+            <span class="gradient-text-gold">"One introduction can start a conversation. One qualified referral can create a transaction."</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         FAQ SECTION
+         ========================================================================== -->
+    <section class="faq-section" id="faq">
+      <div class="container">
+        <div class="section-header">
+          <div class="section-eyebrow"><i data-lucide="help-circle"></i> TRANSPARENCY & CLARITY</div>
+          <h2 class="section-title">Frequently Asked <span class="gradient-text-gold">Questions</span></h2>
+          <p class="section-subtitle">
+            Find answers regarding registration, lead attribution, payment timing, and compliance guidelines.
+          </p>
+        </div>
+
+        <div id="faq-mount">
+          <!-- Populated by faqAccordion.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         FINAL DRAMATIC 3D CTA
+         ========================================================================== -->
+    <section class="final-cta-section" id="final-cta">
+      <div class="final-cta-bg-glow"></div>
+      <div class="container final-cta-content">
+        <div class="final-cta-logo">
+          <img src="/assets/proppartner-icon.jpg" alt="PropPartner" class="final-cta-logo-img" width="80" height="80">
+        </div>
+        <div class="section-eyebrow"><i data-lucide="zap"></i> YOUR NEXT STEP</div>
+        <h2 class="final-cta-title">Your Next Commission Could Start With <span class="gradient-text-gold">One Introduction.</span></h2>
+        <p class="final-cta-desc">
+          Join our affiliate network, discover real estate projects worth sharing, and turn qualified referrals into a scalable commission opportunity.
+        </p>
+        <div class="final-cta-btns">
+          <a href="#register" class="btn btn-gold btn-lg">
+            <i data-lucide="user-plus"></i>
+            <span>BECOME AN AFFILIATE</span>
+          </a>
+          <a href="#projects" class="btn btn-secondary btn-lg">
+            <i data-lucide="compass"></i>
+            <span>EXPLORE PROJECTS</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         REGISTRATION SECTION
+         ========================================================================== -->
+    <section class="register-section" id="register">
+      <div class="container">
+        <div class="register-card-container glass-card">
+          <div class="section-header" style="margin-bottom: 24px;">
+            <div class="reg-logo-badge">
+              <img src="/assets/proppartner-icon.jpg" alt="PropPartner" class="reg-logo-badge-img" width="60" height="60">
+            </div>
+            <div class="section-eyebrow"><i data-lucide="user-plus"></i> FAST 60-SECOND ONBOARDING</div>
+            <h2 class="section-title">Become a Real Estate <span class="gradient-text-gold">Affiliate Partner</span></h2>
+            <p class="section-subtitle">
+              Fill in your details below. Our partner onboarding desk will review your submission and activate your dashboard access promptly.
+            </p>
+          </div>
+
+          <form id="affiliate-reg-form" novalidate>
+            <div class="reg-form-grid">
+              <!-- Full Name -->
+              <div class="form-group">
+                <label for="reg-fullname" class="form-label">Full Name <span class="req">*</span></label>
+                <input type="text" id="reg-fullname" class="form-input" placeholder="e.g. Tariq Mansoor" required>
+              </div>
+
+              <!-- Email -->
+              <div class="form-group">
+                <label for="reg-email" class="form-label">Email Address <span class="req">*</span></label>
+                <input type="email" id="reg-email" class="form-input" placeholder="name@company.com" required>
+              </div>
+
+              <!-- Phone / WhatsApp -->
+              <div class="form-group">
+                <label for="reg-phone" class="form-label">Phone / WhatsApp <span class="req">*</span></label>
+                <input type="tel" id="reg-phone" class="form-input" placeholder="+92 300 1234567" required>
+              </div>
+
+              <!-- Country -->
+              <div class="form-group">
+                <label for="reg-country" class="form-label">Country</label>
+                <select id="reg-country" class="form-select">
+                  <option value="Pakistan" selected>Pakistan</option>
+                  <option value="United Arab Emirates">United Arab Emirates</option>
+                  <option value="United Kingdom">United Kingdom</option>
+                  <option value="United States">United States</option>
+                  <option value="Saudi Arabia">Saudi Arabia</option>
+                  <option value="Canada">Canada</option>
+                  <option value="Other">Other International</option>
+                </select>
+              </div>
+
+              <!-- City -->
+              <div class="form-group">
+                <label for="reg-city" class="form-label">City</label>
+                <input type="text" id="reg-city" class="form-input" placeholder="e.g. Karachi / Dubai / Lahore">
+              </div>
+
+              <!-- Profession -->
+              <div class="form-group">
+                <label for="reg-profession" class="form-label">Profession / Background</label>
+                <select id="reg-profession" class="form-select">
+                  <option value="Real Estate Agent">Real Estate Agent / Broker</option>
+                  <option value="Property Consultant">Property Consultant</option>
+                  <option value="Sales Professional">Sales & Corporate Executive</option>
+                  <option value="Entrepreneur" selected>Entrepreneur / Business Founder</option>
+                  <option value="Content Creator">Content Creator / Influencer</option>
+                  <option value="Investor">Private Investor / Syndicate Lead</option>
+                  <option value="Community Leader">Community Leader / Expat Group</option>
+                  <option value="Other">Other Professional</option>
+                </select>
+              </div>
+
+              <!-- Company -->
+              <div class="form-group">
+                <label for="reg-company" class="form-label">Company / Organization (Optional)</label>
+                <input type="text" id="reg-company" class="form-input" placeholder="e.g. Apex Advisory">
+              </div>
+
+              <!-- Social / Website -->
+              <div class="form-group">
+                <label for="reg-social" class="form-label">LinkedIn / Social / Website</label>
+                <input type="url" id="reg-social" class="form-input" placeholder="https://linkedin.com/in/username">
+              </div>
+
+              <!-- Preferred Project Category -->
+              <div class="form-group">
+                <label for="reg-category" class="form-label">Preferred Project Category</label>
+                <select id="reg-category" class="form-select">
+                  <option value="All Categories" selected>All Luxury & Commercial Projects</option>
+                  <option value="Luxury Residential">Luxury High-Rise Residential</option>
+                  <option value="Waterfront Villas">Waterfront & Island Villas</option>
+                  <option value="Commercial Hubs">Commercial Office Hubs & Retail</option>
+                  <option value="Eco Townhomes">Eco-Friendly Townhomes</option>
+                </select>
+              </div>
+
+              <!-- Referral Source -->
+              <div class="form-group">
+                <label for="reg-source" class="form-label">How did you hear about us?</label>
+                <select id="reg-source" class="form-select">
+                  <option value="LinkedIn">LinkedIn</option>
+                  <option value="Affiliate Partner Referral">Affiliate Partner Referral</option>
+                  <option value="Online Search">Google / Web Search</option>
+                  <option value="Instagram">Instagram</option>
+                  <option value="Event / Seminar">Industry Event / Expo</option>
+                  <option value="Direct Outreach">Direct Contact</option>
+                </select>
+              </div>
+
+              <!-- Referral Code -->
+              <div class="form-group full-width">
+                <label for="reg-code" class="form-label">Referral / Invitation Code (Optional)</label>
+                <input type="text" id="reg-code" class="form-input" placeholder="e.g. PARTNER-VIP-2026">
+              </div>
+
+              <!-- Terms Checkbox -->
+              <div class="form-group full-width">
+                <label class="form-checkbox-row">
+                  <input type="checkbox" id="reg-terms" required>
+                  <span>
+                    I agree to the <a href="#terms-modal" class="accent-gold">Affiliate Program Terms & Conditions</a>, <a href="#privacy-modal" class="accent-gold">Privacy Policy</a>, and understand that commissions are contingent upon verified transaction completion under project-specific terms.
+                  </span>
+                </label>
+              </div>
+
+              <!-- Submit Button -->
+              <div class="form-group full-width" style="margin-top: 10px;">
+                <button type="submit" class="btn btn-gold btn-lg w-full" id="reg-submit-btn">
+                  <i data-lucide="send"></i>
+                  <span>SUBMIT APPLICATION</span>
+                </button>
+              </div>
+            </div>
+          </form>
+
+          <!-- Success Container -->
+          <div id="reg-success-container" style="display: none;"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ==========================================================================
+       FOOTER & LEGAL
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        <!-- Brand Col -->
+        <div class="footer-brand">
+          <div class="footer-logo-block">
+            <img src="/assets/proppartner-logo.jpg" alt="PropPartner — Connect. Refer. Earn." class="footer-logo-full" width="220" loading="lazy">
+          </div>
+          <p>The premier 3D real estate partner network. Connecting high-performing affiliates with verified high-yield residential towers and commercial hubs.</p>
+          <div class="footer-social-row">
+            <a href="#" class="footer-social-icon" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+            <a href="#" class="footer-social-icon" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+            <a href="#" class="footer-social-icon" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+            <a href="#" class="footer-social-icon" aria-label="YouTube"><i data-lucide="youtube"></i></a>
+            <a href="#" class="footer-social-icon" aria-label="WhatsApp"><i data-lucide="message-circle"></i></a>
+          </div>
+        </div>
+
+        <!-- Navigation Col -->
+        <div>
+          <h4 class="footer-col-title">Navigation</h4>
+          <ul class="footer-link-list">
+            <li><a href="#hero">Home</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#how-it-works">How It Works</a></li>
+            <li><a href="#calculator">Commission Calculator</a></li>
+            <li><a href="#dashboard">Portal Preview</a></li>
+            <li><a href="#toolkit">Marketing Kit</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+
+        <!-- Legal Col -->
+        <div>
+          <h4 class="footer-col-title">Legal & Compliance</h4>
+          <ul class="footer-link-list">
+            <li><a href="#" class="legal-modal-link" data-legal="terms">Terms & Conditions</a></li>
+            <li><a href="#" class="legal-modal-link" data-legal="agreement">Affiliate Agreement</a></li>
+            <li><a href="#" class="legal-modal-link" data-legal="privacy">Privacy Policy</a></li>
+            <li><a href="#" class="legal-modal-link" data-legal="commission">Commission Policy</a></li>
+            <li><a href="#" class="legal-modal-link" data-legal="referral">Referral Policy</a></li>
+            <li><a href="#" class="legal-modal-link" data-legal="disclaimer">Disclaimer</a></li>
+          </ul>
+        </div>
+
+        <!-- Contact Col -->
+        <div>
+          <h4 class="footer-col-title">Affiliate Desk</h4>
+          <ul class="footer-link-list">
+            <li><span style="color: var(--text-secondary);"><i data-lucide="mail" style="width:14px; height:14px; display:inline-block; vertical-align:middle;"></i> partners@proppartner.network</span></li>
+            <li><span style="color: var(--text-secondary);"><i data-lucide="phone" style="width:14px; height:14px; display:inline-block; vertical-align:middle;"></i> +92 (21) 3587-8890</span></li>
+            <li><span style="color: var(--text-secondary);"><i data-lucide="map-pin" style="width:14px; height:14px; display:inline-block; vertical-align:middle;"></i> Level 42, Sky Tower, Financial District</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Compliance Disclaimer -->
+      <div class="footer-disclaimer-box">
+        <p class="footer-disclaimer-text">
+          <strong>Mandatory Compliance Notice:</strong> Affiliate commissions are subject to project-specific terms, eligibility requirements, successful transaction completion, developer verification, and the applicable affiliate agreement. No income or commission is guaranteed. Illustrations and calculators are for simulation purposes only.
+        </p>
+      </div>
+
+      <!-- Bottom Bar -->
+      <div class="footer-bottom-bar">
+        <span>© 2026 PropPartner 3D Real Estate Affiliate Network. All rights reserved.</span>
+        <span>Designed for Ultra-High Conversion & 3D Interactive Web Experience</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       MODAL ROOT CONTAINERS
+       ========================================================================== -->
+  <div class="modal-overlay" id="app-modal-overlay">
+    <div class="modal-dialog glass-card" id="app-modal-body">
+      <!-- Injected dynamically -->
+    </div>
+  </div>
+
+  <!-- Admin / CMS Live Simulator Floating Dock -->
+  <div id="cms-drawer-root"></div>
+
+  <!-- Toast Notification Root -->
+  <div class="toast-notification" id="app-toast">
+    <i data-lucide="check-circle-2" class="accent-gold"></i>
+    <span id="toast-msg">Operation completed</span>
+  </div>
+
+  <!-- Main JavaScript App -->
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
