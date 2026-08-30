@@ -21,6 +21,16 @@ import { initAdminPortal } from './components/admin/AdminPortal.js';
 import { initAffiliatePortal } from './components/affiliate/AffiliatePortal.js';
 import { renderLegalView } from './components/legal/LegalView.js';
 import { renderContactView } from './components/contact/ContactView.js';
+import { renderAffiliateProgramView } from './components/public/AffiliateProgramView.js';
+import { renderCommissionView } from './components/public/CommissionView.js';
+import { renderHowItWorksView } from './components/public/HowItWorksView.js';
+import { renderAboutView } from './components/public/AboutView.js';
+import { renderProjectsDirectoryView } from './components/public/ProjectsDirectoryView.js';
+import { renderProjectDetailView } from './components/public/ProjectDetailView.js';
+import { renderResourcesHubView } from './components/public/ResourcesHubView.js';
+import { renderResourceArticleView } from './components/public/ResourceArticleView.js';
+import { renderNotFoundView } from './components/public/NotFoundView.js';
+import { updateSEO, seoRoutes } from './utils/seoManager.js';
 
 // Global state
 let currentCurrency = 'PKR';
@@ -191,6 +201,7 @@ export function switchView(targetView, params = {}) {
   const portalRoot = document.getElementById('portal-app-root');
   const legalRoot = document.getElementById('legal-page-root');
   const contactRoot = document.getElementById('contact-page-root');
+  const seoRoot = document.getElementById('seo-page-root');
   const dock = document.getElementById('platform-mode-dock');
 
   // Hide all view containers first
@@ -207,6 +218,10 @@ export function switchView(targetView, params = {}) {
     contactRoot.style.display = 'none';
     contactRoot.innerHTML = '';
   }
+  if (seoRoot) {
+    seoRoot.style.display = 'none';
+    seoRoot.innerHTML = '';
+  }
 
   // Update active dock buttons
   dock?.querySelectorAll('.dock-btn').forEach(btn => btn.classList.remove('active'));
@@ -215,6 +230,7 @@ export function switchView(targetView, params = {}) {
     if (landingWrap) landingWrap.style.display = 'block';
     const landBtn = document.getElementById('dock-btn-landing');
     if (landBtn) landBtn.classList.add('active');
+    updateSEO(seoRoutes.home);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   } else if (targetView === 'admin') {
     if (portalRoot) {
@@ -283,6 +299,170 @@ export function switchView(targetView, params = {}) {
       });
     }
     window.location.hash = '#contact';
+    updateSEO(seoRoutes.contact);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else if (targetView === 'affiliate-program') {
+    if (seoRoot) {
+      seoRoot.style.display = 'block';
+      renderAffiliateProgramView(
+        seoRoot,
+        () => {
+          window.location.hash = '';
+          switchView('landing');
+        },
+        () => openAuthModal('register', (user) => {
+          if (user.role === 'SUPER_ADMIN') switchView('admin');
+          else switchView('partner');
+        })
+      );
+    }
+    window.location.hash = '#affiliate-program';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else if (targetView === 'commission') {
+    if (seoRoot) {
+      seoRoot.style.display = 'block';
+      renderCommissionView(
+        seoRoot,
+        () => {
+          window.location.hash = '';
+          switchView('landing');
+        },
+        () => openAuthModal('register', (user) => {
+          if (user.role === 'SUPER_ADMIN') switchView('admin');
+          else switchView('partner');
+        })
+      );
+    }
+    window.location.hash = '#commission';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else if (targetView === 'how-it-works') {
+    if (seoRoot) {
+      seoRoot.style.display = 'block';
+      renderHowItWorksView(
+        seoRoot,
+        () => {
+          window.location.hash = '';
+          switchView('landing');
+        },
+        () => openAuthModal('register', (user) => {
+          if (user.role === 'SUPER_ADMIN') switchView('admin');
+          else switchView('partner');
+        })
+      );
+    }
+    window.location.hash = '#how-it-works';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else if (targetView === 'about') {
+    if (seoRoot) {
+      seoRoot.style.display = 'block';
+      renderAboutView(
+        seoRoot,
+        () => {
+          window.location.hash = '';
+          switchView('landing');
+        },
+        () => openAuthModal('register', (user) => {
+          if (user.role === 'SUPER_ADMIN') switchView('admin');
+          else switchView('partner');
+        })
+      );
+    }
+    window.location.hash = '#about';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else if (targetView === 'projects') {
+    if (seoRoot) {
+      seoRoot.style.display = 'block';
+      renderProjectsDirectoryView(
+        seoRoot,
+        () => {
+          window.location.hash = '';
+          switchView('landing');
+        },
+        (projId) => switchView('project-detail', { projectId: projId }),
+        () => openAuthModal('register', (user) => {
+          if (user.role === 'SUPER_ADMIN') switchView('admin');
+          else switchView('partner');
+        })
+      );
+    }
+    window.location.hash = '#projects';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else if (targetView === 'project-detail') {
+    if (seoRoot) {
+      seoRoot.style.display = 'block';
+      const pId = params.projectId || 'luminary-towers';
+      renderProjectDetailView(
+        seoRoot,
+        pId,
+        () => {
+          window.location.hash = '';
+          switchView('landing');
+        },
+        () => switchView('projects'),
+        () => openAuthModal('register', (user) => {
+          if (user.role === 'SUPER_ADMIN') switchView('admin');
+          else switchView('partner');
+        })
+      );
+    }
+    window.location.hash = `#projects/${params.projectId || 'luminary-towers'}`;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else if (targetView === 'resources') {
+    if (seoRoot) {
+      seoRoot.style.display = 'block';
+      renderResourcesHubView(
+        seoRoot,
+        () => {
+          window.location.hash = '';
+          switchView('landing');
+        },
+        (artSlug) => switchView('resource-article', { slug: artSlug }),
+        () => openAuthModal('register', (user) => {
+          if (user.role === 'SUPER_ADMIN') switchView('admin');
+          else switchView('partner');
+        })
+      );
+    }
+    window.location.hash = '#resources';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else if (targetView === 'resource-article') {
+    if (seoRoot) {
+      seoRoot.style.display = 'block';
+      const slug = params.slug || 'what-is-a-real-estate-affiliate-program';
+      renderResourceArticleView(
+        seoRoot,
+        slug,
+        () => {
+          window.location.hash = '';
+          switchView('landing');
+        },
+        () => switchView('resources'),
+        (nextSlug) => switchView('resource-article', { slug: nextSlug }),
+        () => openAuthModal('register', (user) => {
+          if (user.role === 'SUPER_ADMIN') switchView('admin');
+          else switchView('partner');
+        })
+      );
+    }
+    window.location.hash = `#resources/${params.slug || 'what-is-a-real-estate-affiliate-program'}`;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else if (targetView === '404') {
+    if (seoRoot) {
+      seoRoot.style.display = 'block';
+      renderNotFoundView(
+        seoRoot,
+        () => {
+          window.location.hash = '';
+          switchView('landing');
+        },
+        () => switchView('projects'),
+        () => openAuthModal('register', (user) => {
+          if (user.role === 'SUPER_ADMIN') switchView('admin');
+          else switchView('partner');
+        })
+      );
+    }
+    window.location.hash = '#404';
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -299,7 +479,7 @@ function handleHashRouting() {
     switchView('legal', { docKey: 'agreement' });
   } else if (hash === '#privacy-policy' || hash === '#privacy' || path === '/privacy-policy') {
     switchView('legal', { docKey: 'privacy' });
-  } else if (hash === '#commission-policy' || hash === '#commission' || path === '/commission-policy') {
+  } else if (hash === '#commission-policy' || path === '/commission-policy') {
     switchView('legal', { docKey: 'commission' });
   } else if (hash === '#referral-policy' || hash === '#referral' || path === '/referral-policy') {
     switchView('legal', { docKey: 'referral' });
@@ -307,6 +487,26 @@ function handleHashRouting() {
     switchView('legal', { docKey: 'disclaimer' });
   } else if (hash === '#contact' || path === '/contact') {
     switchView('contact');
+  } else if (hash === '#affiliate-program' || path === '/affiliate-program') {
+    switchView('affiliate-program');
+  } else if (hash === '#commission' || path === '/commission') {
+    switchView('commission');
+  } else if (hash === '#how-it-works' || path === '/how-it-works') {
+    switchView('how-it-works');
+  } else if (hash === '#about' || path === '/about') {
+    switchView('about');
+  } else if (hash === '#projects' || path === '/projects') {
+    switchView('projects');
+  } else if (hash.startsWith('#projects/') || hash.startsWith('#project/') || path.startsWith('/projects/')) {
+    const projId = hash.replace(/^#projects\//, '').replace(/^#project\//, '') || path.replace(/^\/projects\//, '');
+    switchView('project-detail', { projectId: projId });
+  } else if (hash === '#resources' || hash === '#blog' || path === '/resources' || path === '/blog') {
+    switchView('resources');
+  } else if (hash.startsWith('#resources/') || hash.startsWith('#blog/') || path.startsWith('/resources/') || path.startsWith('/blog/')) {
+    const slug = hash.replace(/^#resources\//, '').replace(/^#blog\//, '') || path.replace(/^\/resources\//, '').replace(/^\/blog\//, '');
+    switchView('resource-article', { slug });
+  } else if (hash === '#404' || path === '/404') {
+    switchView('404');
   } else if (hash.startsWith('#reset-password')) {
     const token = new URLSearchParams(hash.split('?')[1] || '').get('token') || '';
     openAuthModal('reset', (user) => {

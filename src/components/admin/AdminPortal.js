@@ -18,6 +18,7 @@ import { renderSettingsCenter } from './SettingsCenter.js';
 import { renderUsersManager } from './UsersManager.js';
 import { renderRolesPermissionsManager } from './RolesPermissionsManager.js';
 import { renderSecurityCenter } from './SecurityCenter.js';
+import { renderSEOManager } from './SEOManager.js';
 
 export function initAdminPortal(container, onNavigateLanding, onSwitchAffiliateView) {
   let currentSection = 'dashboard';
@@ -112,6 +113,10 @@ export function initAdminPortal(container, onNavigateLanding, onSwitchAffiliateV
             </button>
 
             <div class="nav-section-title">MANAGEMENT & ASSETS</div>
+            <button type="button" class="sidebar-nav-item ${currentSection === 'seo' ? 'active' : ''}" data-nav="seo">
+              <i data-lucide="search"></i>
+              <span>SEO & AEO Console</span>
+            </button>
             <button type="button" class="sidebar-nav-item ${currentSection === 'marketing' ? 'active' : ''}" data-nav="marketing">
               <i data-lucide="folder"></i>
               <span>Marketing Assets</span>
@@ -210,6 +215,8 @@ export function initAdminPortal(container, onNavigateLanding, onSwitchAffiliateV
         renderRolesPermissionsManager(mount);
       } else if (currentSection === 'security') {
         renderSecurityCenter(mount);
+      } else if (currentSection === 'seo') {
+        renderSEOManager(mount);
       } else if (currentSection === 'marketing') {
         renderMarketingManager(mount);
       } else if (currentSection === 'audit') {

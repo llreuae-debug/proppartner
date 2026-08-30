@@ -1,0 +1,32 @@
+# Robots.txt for PropPartner Real Estate Platform (https://proppartner.pro)
+User-agent: *
+Allow: /
+Allow: /assets/
+Allow: /projects
+Allow: /projects/*
+Allow: /affiliate-program
+Allow: /how-it-works
+Allow: /commission
+Allow: /resources
+Allow: /resources/*
+Allow: /about
+Allow: /contact
+Allow: /terms-and-conditions
+Allow: /affiliate-agreement
+Allow: /privacy-policy
+Allow: /commission-policy
+Allow: /referral-policy
+Allow: /disclaimer
+
+# Disallow Private Authenticated and Internal Areas
+Disallow: /admin
+Disallow: /admin/*
+Disallow: /dashboard
+Disallow: /dashboard/*
+Disallow: /partner
+Disallow: /partner/*
+Disallow: /api/
+Disallow: /auth/
+
+# XML Sitemap
+Sitemap: https://proppartner.pro/sitemap.xml

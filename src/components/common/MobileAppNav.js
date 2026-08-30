@@ -187,6 +187,10 @@ export function openMoreBottomSheet(role, onNavigate, onSwitchView) {
             <div class="sheet-icon purple"><i data-lucide="book-open"></i></div>
             <span>Ledgers</span>
           </button>
+          <button type="button" class="sheet-grid-item" data-sheet-nav="seo">
+            <div class="sheet-icon gold"><i data-lucide="search"></i></div>
+            <span>SEO AEO</span>
+          </button>
           <button type="button" class="sheet-grid-item" data-sheet-nav="audit">
             <div class="sheet-icon blue"><i data-lucide="shield-check"></i></div>
             <span>Audit Trail</span>

@@ -5441,7 +5441,75 @@ img {
   .contact-form-column {
     padding: 24px;
   }
+  .project-hero-grid {
+    grid-template-columns: 1fr !important;
+  }
 }
+
+/* ==========================================================================
+   AEO (ANSWER ENGINE OPTIMIZATION) & SEO ENHANCEMENTS
+   ========================================================================== */
+.aeo-answer-card {
+  padding: 24px 28px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.12) 0%, rgba(8, 11, 18, 0.98) 100%);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  margin-top: 20px;
+  position: relative;
+}
+
+.aeo-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: var(--gold-light);
+  background: rgba(212, 175, 55, 0.15);
+  padding: 3px 8px;
+  border-radius: 20px;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+.aeo-question {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-bottom: 8px;
+}
+
+.aeo-text {
+  font-size: 0.95rem;
+  color: #E2E8F0;
+  line-height: 1.65;
+}
+
+.seo-content-section {
+  scroll-margin-top: 100px;
+}
+
+.section-header-centered {
+  text-align: center;
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.section-title {
+  font-size: clamp(1.8rem, 3vw, 2.3rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #FFFFFF;
+  margin: 10px 0 6px 0;
+}
+
+.section-subtitle {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
 
 
 
