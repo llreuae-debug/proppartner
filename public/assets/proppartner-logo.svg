@@ -1,97 +1,140 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 480" width="100%" height="100%" fill="none">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 420" width="100%" height="100%" fill="none">
   <defs>
-    <!-- Navy / Deep Blue Gradients -->
-    <linearGradient id="ppNavyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#194C88" />
-      <stop offset="100%" stop-color="#0E2F5E" />
+    <!-- Sapphire / Navy Blue 3D Gradients -->
+    <linearGradient id="ppNavyDeep" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2563EB" />
+      <stop offset="60%" stop-color="#1E3A8A" />
+      <stop offset="100%" stop-color="#0F172A" />
     </linearGradient>
 
-    <!-- Emerald / Teal Green Gradients -->
-    <linearGradient id="ppTealGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#24A37A" />
-      <stop offset="100%" stop-color="#146E52" />
+    <linearGradient id="ppNavyLight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#60A5FA" />
+      <stop offset="100%" stop-color="#2563EB" />
     </linearGradient>
 
-    <!-- Center Building Split Gradient -->
-    <linearGradient id="ppCenterLeft" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#1A4A82" />
-      <stop offset="100%" stop-color="#0A2447" />
+    <!-- Emerald / Teal Green 3D Gradients -->
+    <linearGradient id="ppEmeraldDeep" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34D399" />
+      <stop offset="40%" stop-color="#10B981" />
+      <stop offset="100%" stop-color="#047857" />
     </linearGradient>
-    <linearGradient id="ppCenterRight" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#229D76" />
-      <stop offset="100%" stop-color="#105C44" />
+
+    <linearGradient id="ppEmeraldDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#064E3B" />
     </linearGradient>
+
+    <!-- Center Spire Split Gradients -->
+    <linearGradient id="ppCenterNavy" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3B82F6" />
+      <stop offset="50%" stop-color="#1E3A8A" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </linearGradient>
+
+    <linearGradient id="ppCenterEmerald" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34D399" />
+      <stop offset="60%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#064E3B" />
+    </linearGradient>
+
+    <!-- Text Gradients for Dark Background Contrast -->
+    <linearGradient id="ppTextBlue" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#60A5FA" />
+      <stop offset="100%" stop-color="#93C5FD" />
+    </linearGradient>
+
+    <linearGradient id="ppTextGreen" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#34D399" />
+      <stop offset="100%" stop-color="#10B981" />
+    </linearGradient>
+
+    <!-- Subtle Drop Shadow Filter -->
+    <filter id="ppShadow" x="-10%" y="-10%" width="120%" height="120%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.35" />
+    </filter>
   </defs>
 
-  <g transform="translate(50, 20)">
-    <!-- 1. BACKGROUND BUILDINGS -->
-    <!-- Left Building -->
-    <path d="M185 240 L185 140 L220 120 L220 240 Z" fill="url(#ppNavyGrad)" />
-    <!-- Left Building White Facet Line -->
-    <path d="M220 120 L240 108 L240 240 L220 240 Z" fill="#2965A8" opacity="0.9" />
+  <!-- ==================== 1. 3D SKYSCRAPERS EMBLEM ==================== -->
+  <g id="skyscrapers-group" filter="url(#ppShadow)">
+    <!-- LEFT BUILDING (Navy) -->
+    <!-- Front Face -->
+    <path d="M210 220 L210 135 L245 110 L245 220 Z" fill="url(#ppNavyDeep)" />
+    <!-- 3D Bevel / Light Edge -->
+    <path d="M245 110 L260 98 L260 220 L245 220 Z" fill="url(#ppNavyLight)" opacity="0.95" />
 
-    <!-- Center Tall Skyscraper -->
-    <!-- Left Facet -->
-    <path d="M240 70 L250 50 L250 240 L240 240 Z" fill="url(#ppCenterLeft)" />
-    <!-- Right Facet -->
-    <path d="M250 50 L260 70 L285 70 L285 240 L250 240 Z" fill="url(#ppCenterRight)" />
+    <!-- CENTER TALL TOWER (Diamond Point Spire) -->
+    <!-- Left Facet (Navy) -->
+    <path d="M260 68 L270 42 L270 220 L260 220 Z" fill="url(#ppCenterNavy)" />
+    <!-- Right Facet (Emerald) -->
+    <path d="M270 42 L280 68 L308 68 L308 220 L270 220 Z" fill="url(#ppCenterEmerald)" />
+    <!-- Center Ridge Highlight -->
+    <line x1="270" y1="42" x2="270" y2="220" stroke="#93C5FD" stroke-width="1.2" opacity="0.6" />
 
-    <!-- Right Building -->
-    <path d="M285 130 L310 150 L310 240 L285 240 Z" fill="url(#ppTealGrad)" />
-    <path d="M310 150 L325 162 L325 240 L310 240 Z" fill="#136048" />
-    <!-- Right Building Windows -->
-    <rect x="292" y="165" width="10" height="12" rx="1.5" fill="#FFFFFF" opacity="0.9" />
-    <rect x="292" y="185" width="10" height="12" rx="1.5" fill="#FFFFFF" opacity="0.9" />
+    <!-- RIGHT BUILDING (Emerald Green) -->
+    <!-- Front Face -->
+    <path d="M308 120 L336 142 L336 220 L308 220 Z" fill="url(#ppEmeraldDeep)" />
+    <!-- Side Shadow Face -->
+    <path d="M336 142 L350 152 L350 220 L336 220 Z" fill="url(#ppEmeraldDark)" />
+    <!-- Architectural Windows -->
+    <rect x="314" y="152" width="12" height="13" rx="2" fill="#E2E8F0" opacity="0.9" />
+    <rect x="314" y="172" width="12" height="13" rx="2" fill="#E2E8F0" opacity="0.9" />
+  </g>
 
-    <!-- 2. INTERLOCKING PARTNERS & CHAIN LINK EMBLEM -->
+  <!-- ==================== 2. INTERLOCKING PARTNERS & CHAIN LINK ==================== -->
+  <g id="interlocking-partners-group" filter="url(#ppShadow)">
     <!-- Left Partner Head -->
-    <circle cx="150" cy="180" r="26" fill="url(#ppNavyGrad)" />
+    <circle cx="178" cy="168" r="26" fill="url(#ppNavyDeep)" stroke="#3B82F6" stroke-width="1.5" />
 
     <!-- Right Partner Head -->
-    <circle cx="350" cy="180" r="26" fill="url(#ppTealGrad)" />
+    <circle cx="362" cy="168" r="26" fill="url(#ppEmeraldDeep)" stroke="#34D399" stroke-width="1.5" />
 
     <!-- Left Partner Loop Body (Navy) -->
-    <path d="M180 180 C180 180 235 230 260 255 C275 270 265 295 245 305 C220 318 175 310 150 270 C135 245 140 205 165 185 C172 180 180 180 180 180 Z" 
-          fill="none" stroke="url(#ppNavyGrad)" stroke-width="26" stroke-linecap="round" stroke-linejoin="round" />
+    <path d="M206 172 C206 172 258 220 280 242 C295 258 285 284 266 295 C242 308 198 300 174 260 C160 236 166 196 192 176 C198 172 206 172 206 172 Z" 
+          fill="none" stroke="url(#ppNavyDeep)" stroke-width="26" stroke-linecap="round" stroke-linejoin="round" />
 
-    <!-- Right Partner Loop Body (Teal) -->
-    <path d="M320 180 C320 180 265 230 240 255 C225 270 235 295 255 305 C280 318 325 310 350 270 C365 245 360 205 335 185 C328 180 320 180 320 180 Z" 
-          fill="none" stroke="url(#ppTealGrad)" stroke-width="26" stroke-linecap="round" stroke-linejoin="round" />
+    <!-- Right Partner Loop Body (Emerald Green) -->
+    <path d="M334 172 C334 172 282 220 260 242 C245 258 255 284 274 295 C298 308 342 300 366 260 C380 236 374 196 348 176 C342 172 334 172 334 172 Z" 
+          fill="none" stroke="url(#ppEmeraldDeep)" stroke-width="26" stroke-linecap="round" stroke-linejoin="round" />
 
-    <!-- Interlocking Center Connection -->
-    <path d="M225 220 L275 270" stroke="url(#ppNavyGrad)" stroke-width="26" stroke-linecap="round" />
-    <path d="M275 220 L225 270" stroke="url(#ppTealGrad)" stroke-width="26" stroke-linecap="round" />
+    <!-- Interlocking Center Handshake Connection -->
+    <!-- Navy Loop Overpass -->
+    <path d="M246 208 L294 256" stroke="url(#ppNavyDeep)" stroke-width="26" stroke-linecap="round" />
+    <!-- Emerald Loop Underpass with 3D Depth Layering -->
+    <path d="M294 208 L268 234" stroke="url(#ppEmeraldDeep)" stroke-width="26" stroke-linecap="round" />
+    <path d="M252 250 L246 256" stroke="url(#ppEmeraldDeep)" stroke-width="26" stroke-linecap="round" />
+  </g>
 
-    <!-- 3. TYPOGRAPHY: PropPartner -->
-    <!-- Prop (Navy) -->
-    <text x="35" y="380" 
+  <!-- ==================== 3. BRAND TYPOGRAPHY: PropPartner ==================== -->
+  <g id="brand-text-group">
+    <!-- "Prop" (Sapphire Blue / Clean Light Blue for Dark Theme) -->
+    <text x="75" y="358" 
           font-family="'Plus Jakarta Sans', 'Inter', 'Montserrat', -apple-system, sans-serif" 
-          font-size="64" 
+          font-size="62" 
           font-weight="800" 
           letter-spacing="-0.02em" 
-          fill="#14437B">Prop</text>
+          fill="url(#ppTextBlue)">Prop</text>
 
-    <!-- Partner (Emerald Green) -->
-    <text x="188" y="380" 
+    <!-- "Partner" (Vibrant Emerald Green) -->
+    <text x="228" y="358" 
           font-family="'Plus Jakarta Sans', 'Inter', 'Montserrat', -apple-system, sans-serif" 
-          font-size="64" 
+          font-size="62" 
           font-weight="800" 
           letter-spacing="-0.02em" 
-          fill="#1E936E">Partner</text>
+          fill="url(#ppTextGreen)">Partner</text>
 
-    <!-- 4. SUBTITLE: — Connect. Refer. Earn. — -->
+    <!-- ==================== 4. TAGLINE: — Connect. Refer. Earn. — ==================== -->
     <!-- Left Accent Line -->
-    <line x1="40" y1="418" x2="90" y2="418" stroke="#14437B" stroke-width="2.5" stroke-linecap="round" />
+    <line x1="82" y1="388" x2="135" y2="388" stroke="#3B82F6" stroke-width="2" stroke-linecap="round" />
 
-    <!-- Text -->
-    <text x="105" y="425" 
+    <!-- Tagline Text -->
+    <text x="150" y="394" 
           font-family="'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif" 
-          font-size="22" 
-          font-weight="600" 
-          letter-spacing="0.04em" 
-          fill="#1E293B">Connect. Refer. Earn.</text>
+          font-size="18" 
+          font-weight="700" 
+          letter-spacing="0.08em" 
+          fill="#CBD5E1">Connect. Refer. Earn.</text>
 
     <!-- Right Accent Line -->
-    <line x1="410" y1="418" x2="460" y2="418" stroke="#14437B" stroke-width="2.5" stroke-linecap="round" />
+    <line x1="425" y1="388" x2="478" y2="388" stroke="#10B981" stroke-width="2" stroke-linecap="round" />
   </g>
 </svg>
