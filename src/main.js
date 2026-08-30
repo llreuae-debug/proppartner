@@ -31,6 +31,7 @@ import { renderResourcesHubView } from './components/public/ResourcesHubView.js'
 import { renderResourceArticleView } from './components/public/ResourceArticleView.js';
 import { renderNotFoundView } from './components/public/NotFoundView.js';
 import { updateSEO, seoRoutes } from './utils/seoManager.js';
+import { ReferralTracker } from './utils/referralTracker.js';
 
 // Global state
 let currentCurrency = 'PKR';
@@ -43,8 +44,9 @@ window.lucide = {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Initialize Icons
+  // 1. Initialize Icons & Inbound Referral Tracking
   window.lucide.createIcons();
+  ReferralTracker.init();
 
   // Register PWA Service Worker
   if ('serviceWorker' in navigator) {

@@ -6118,6 +6118,270 @@ img {
   line-height: 1.6;
 }
 
+/* ==========================================================================
+   MEMBER-SPECIFIC REFERRAL URL & DYNAMIC QR CODE STYLES
+   ========================================================================== */
+.partner-ref-hero {
+  display: grid;
+  grid-template-columns: 1fr 280px;
+  gap: 28px;
+  padding: 32px;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(10, 14, 26, 0.95) 100%);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(212, 175, 55, 0.1);
+  margin-bottom: 28px;
+  position: relative;
+  overflow: hidden;
+}
+
+.partner-ref-hero::before {
+  content: '';
+  position: absolute;
+  top: -80px;
+  right: -80px;
+  width: 240px;
+  height: 240px;
+  background: radial-gradient(circle, rgba(212, 175, 55, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.ref-hero-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.ref-hero-title {
+  font-size: clamp(1.4rem, 2.2vw, 1.8rem);
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 6px 0 8px 0;
+}
+
+.ref-hero-input-row {
+  display: flex;
+  gap: 10px;
+  margin: 18px 0 16px 0;
+  flex-wrap: wrap;
+}
+
+.ref-input {
+  flex: 1;
+  min-width: 240px;
+  background: rgba(0, 0, 0, 0.5) !important;
+  border: 1px solid rgba(212, 175, 55, 0.4) !important;
+  color: #F8FAFC !important;
+  font-family: var(--font-mono, monospace) !important;
+  font-size: 0.92rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.02em;
+  padding: 12px 16px !important;
+  border-radius: 10px !important;
+}
+
+.ref-hero-btn-group {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.btn-whatsapp {
+  background: linear-gradient(135deg, #25D366 0%, #128C7E 100%);
+  color: #FFFFFF;
+  border: none;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-whatsapp:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(37, 211, 102, 0.35);
+  color: #FFFFFF;
+}
+
+.ref-meta-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.ref-meta-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 20px;
+  font-size: 0.78rem;
+  color: #94A3B8;
+}
+
+.ref-meta-pill.verified {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(16, 185, 129, 0.35);
+  color: #34D399;
+  font-weight: 600;
+}
+
+.ref-hero-qr-deck {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.qr-canvas-container {
+  background: #FFFFFF;
+  padding: 12px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 220px;
+}
+
+.real-qr-canvas {
+  width: 100% !important;
+  height: auto !important;
+  max-width: 196px;
+  display: block;
+}
+
+.qr-label-strip {
+  margin-top: 8px;
+  font-size: 0.72rem;
+  color: #1E293B;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.qr-label-strip code {
+  color: #1E3A8A;
+  font-weight: 700;
+  font-size: 0.76rem;
+}
+
+.qr-action-buttons-strip {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  width: 100%;
+  max-width: 220px;
+  margin-top: 12px;
+}
+
+.qr-action-buttons-strip .btn {
+  padding: 6px 4px;
+  font-size: 0.72rem;
+  justify-content: center;
+}
+
+/* Inbound Referral Attribution Toast */
+.ref-attribution-toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  max-width: 440px;
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  border-left: 4px solid #10B981;
+  border-radius: 12px;
+  padding: 16px 20px;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6), 0 0 20px rgba(16, 185, 129, 0.2);
+  z-index: 9999;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  transform: translateY(120%);
+  opacity: 0;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.ref-attribution-toast.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.ref-toast-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(16, 185, 129, 0.15);
+  color: #34D399;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.ref-toast-content {
+  flex: 1;
+}
+
+.ref-toast-title {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 2px;
+}
+
+.ref-toast-sub {
+  font-size: 0.78rem;
+  color: #94A3B8;
+  line-height: 1.4;
+}
+
+.ref-toast-sub strong {
+  color: #E2E8F0;
+}
+
+.ref-toast-close {
+  background: none;
+  border: none;
+  color: #64748B;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 4px;
+}
+
+.ref-toast-close:hover {
+  color: #FFFFFF;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .partner-ref-hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 24px;
+  }
+  .ref-hero-btn-group {
+    justify-content: center;
+    width: 100%;
+  }
+  .ref-meta-row {
+    justify-content: center;
+  }
+  .ref-hero-qr-deck {
+    margin-top: 16px;
+  }
+}
+
 
 
 

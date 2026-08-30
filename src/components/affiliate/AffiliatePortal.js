@@ -2,6 +2,14 @@ import { authStore } from '../../store/authStore.js';
 import { platformStore, formatCurrencyValue } from '../../store/platformStore.js';
 import { renderMobileHeader, renderMobileBottomBar, openMoreBottomSheet, triggerNativeShare } from '../common/MobileAppNav.js';
 import { openProfileSecurityModal } from '../common/ProfileSecurityModal.js';
+import { 
+  generateReferralUrl, 
+  renderQrToCanvas, 
+  downloadBrandedQrPng, 
+  downloadQrSvg, 
+  printQrFlyer, 
+  validateQrEncoding 
+} from '../../utils/qrCodeGenerator.js';
 
 export function initAffiliatePortal(container, onNavigateLanding, onSwitchAdminView) {
   let currentSection = 'dashboard';
@@ -20,7 +28,8 @@ export function initAffiliatePortal(container, onNavigateLanding, onSwitchAdminV
     const aff = platformStore.affiliates.find(a => a.id === affiliateId) || platformStore.affiliates[0];
     const stats = platformStore.getAffiliateStats(aff.id);
     const curr = platformStore.currency;
-    const globalRefLink = `https://proppartner.network/ref/${aff.id}`;
+    const memberRefCode = aff.referralCode || aff.id;
+    const globalRefLink = generateReferralUrl(memberRefCode);
 
     container.innerHTML = `
       <div class="portal-app-layout">
@@ -52,7 +61,7 @@ export function initAffiliatePortal(container, onNavigateLanding, onSwitchAdminV
             </button>
             <button type="button" class="sidebar-nav-item ${currentSection === 'projects' ? 'active' : ''}" data-nav="projects">
               <i data-lucide="building-2"></i>
-              <span>Projects to Promote</span>
+              <span>Projects & QR Links</span>
             </button>
             <button type="button" class="sidebar-nav-item ${currentSection === 'leads' ? 'active' : ''}" data-nav="leads">
               <i data-lucide="users"></i>
@@ -79,8 +88,8 @@ export function initAffiliatePortal(container, onNavigateLanding, onSwitchAdminV
 
             <div class="nav-section-title">SALES ENABLEMENT & SUPPORT</div>
             <button type="button" class="sidebar-nav-item ${currentSection === 'marketing' ? 'active' : ''}" data-nav="marketing">
-              <i data-lucide="folder-down"></i>
-              <span>Marketing Library</span>
+              <i data-lucide="qr-code"></i>
+              <span>Referral Center & QR</span>
             </button>
             <button type="button" class="sidebar-nav-item ${currentSection === 'profile' ? 'active' : ''}" data-nav="profile">
               <i data-lucide="user-cog"></i>
@@ -119,8 +128,8 @@ export function initAffiliatePortal(container, onNavigateLanding, onSwitchAdminV
             <div class="topbar-right">
               <!-- Fast Referral Link Copy Pill -->
               <div class="topbar-ref-pill">
-                <span class="ref-pill-label">Referral Link:</span>
-                <code>/ref/${aff.id}</code>
+                <span class="ref-pill-label">Referral:</span>
+                <code>${memberRefCode}</code>
                 <button type="button" class="btn-copy-ref-top" id="btn-top-copy-ref" title="Copy Referral Link">
                   <i data-lucide="copy"></i>
                 </button>
@@ -248,7 +257,7 @@ export function initAffiliatePortal(container, onNavigateLanding, onSwitchAdminV
       };
     }
 
-    // Attach submodule internal listeners
+    // Attach submodule internal listeners and render live QR code
     attachPartnerSubmoduleEvents(container, aff, navigateTo);
   }
 
@@ -261,7 +270,7 @@ export function initAffiliatePortal(container, onNavigateLanding, onSwitchAdminV
       commissions: 'Commission Entitlements',
       ledger: 'Partner Financial Ledger',
       payments: 'Payouts & Settlement History',
-      marketing: 'Marketing Kits & Collateral',
+      marketing: 'Referral Center & QR Code Hub',
       profile: 'Partner Profile & Banking',
       support: 'Support & AI Concierge'
     };
@@ -277,29 +286,56 @@ function renderPartnerModule(section, aff, stats, curr, navigateTo) {
   const myComms = platformStore.commissions.filter(c => c.affiliateId === aff.id);
   const myLedger = platformStore.ledger.filter(tx => tx.affiliateId === aff.id);
   const myPayments = platformStore.payments.filter(p => p.affiliateId === aff.id);
-  const globalRefLink = `https://proppartner.network/ref/${aff.id}`;
+  const memberRefCode = aff.referralCode || aff.id;
+  const globalRefLink = generateReferralUrl(memberRefCode);
 
   if (section === 'dashboard') {
     return `
       <div class="partner-dashboard-view">
-        <!-- Live Referral Link Box -->
+        <!-- Live Referral Link & Member-Specific Scannable QR Hero -->
         <div class="partner-ref-hero glass-card">
           <div class="ref-hero-info">
             <div class="section-eyebrow"><i data-lucide="link-2"></i> YOUR UNIQUE PARTNER REFERRAL URL</div>
             <h3 class="ref-hero-title">Share Your Direct Referral Link</h3>
-            <p class="text-muted">Introduce high-net-worth investors or buyers. Web visits and form submissions are automatically locked to your partner ID (<code>${aff.id}</code>).</p>
+            <p class="text-muted">Introduce high-net-worth investors or buyers. Web visits, form submissions, and direct bookings are automatically locked to your partner ID (<code>${aff.id}</code> / <code>${memberRefCode}</code>) with a 90-day institutional escrow guarantee.</p>
+            
             <div class="ref-hero-input-row">
               <input type="text" class="form-input ref-input" value="${globalRefLink}" readonly id="partner-ref-hero-url">
               <div class="ref-hero-btn-group">
-                <button type="button" class="btn btn-gold" id="btn-hero-copy-ref"><i data-lucide="copy"></i> <span>COPY</span></button>
+                <button type="button" class="btn btn-gold" id="btn-hero-copy-ref"><i data-lucide="copy"></i> <span>COPY URL</span></button>
+                <button type="button" class="btn btn-secondary" id="btn-hero-open-ref"><i data-lucide="external-link"></i> <span>OPEN</span></button>
                 <button type="button" class="btn btn-secondary" id="btn-hero-native-share"><i data-lucide="share-2"></i> <span>SHARE</span></button>
+                <button type="button" class="btn btn-whatsapp" id="btn-hero-wa-share"><i data-lucide="message-circle"></i> <span>WHATSAPP</span></button>
               </div>
             </div>
+
+            <div class="ref-meta-row">
+              <div class="ref-meta-pill verified"><i data-lucide="check-circle-2"></i> <span>100% Scannable QR Verified</span></div>
+              <div class="ref-meta-pill"><i data-lucide="eye"></i> <span>${aff.referralClicks || 0} Total Clicks</span></div>
+              <div class="ref-meta-pill"><i data-lucide="qr-code"></i> <span>${aff.qrScans || 0} QR Scans</span></div>
+              <div class="ref-meta-pill"><i data-lucide="shield-check"></i> <span>90-Day Protection</span></div>
+            </div>
           </div>
-          <div class="ref-hero-qr">
-            <div class="qr-box">
-              <i data-lucide="qr-code" style="width:64px; height:64px; color:var(--gold-light);"></i>
-              <span>Scan QR to Open Link</span>
+
+          <div class="ref-hero-qr-deck">
+            <div class="qr-canvas-container">
+              <canvas id="dash-partner-qr-canvas" class="real-qr-canvas" width="220" height="220"></canvas>
+              <div class="qr-label-strip">
+                <span class="qr-member-label">Partner: <strong>${aff.name}</strong></span>
+                <div class="qr-code-label"><code>${memberRefCode}</code></div>
+              </div>
+            </div>
+
+            <div class="qr-action-buttons-strip">
+              <button type="button" class="btn btn-secondary btn-xs" id="btn-qr-download-png" title="Download High-Res PNG">
+                <i data-lucide="download"></i> <span>PNG</span>
+              </button>
+              <button type="button" class="btn btn-secondary btn-xs" id="btn-qr-download-svg" title="Download Vector SVG">
+                <i data-lucide="file-code"></i> <span>SVG</span>
+              </button>
+              <button type="button" class="btn btn-gold btn-xs" id="btn-qr-print-flyer" title="Print Marketing Flyer">
+                <i data-lucide="printer"></i> <span>PRINT</span>
+              </button>
             </div>
           </div>
         </div>
@@ -377,8 +413,8 @@ function renderPartnerModule(section, aff, stats, curr, navigateTo) {
                     <strong class="text-gold">${formatCurrencyValue(p.startingPrice, curr)}</strong>
                   </div>
                   <div class="promo-actions-row">
-                    <button type="button" class="btn btn-gold btn-sm w-full btn-copy-proj-ref" data-proj="${p.id}">
-                      <i data-lucide="share-2"></i> <span>Get Referral Link</span>
+                    <button type="button" class="btn btn-gold btn-sm w-full btn-open-proj-qr-modal" data-proj="${p.id}" data-name="${p.name}" data-comm="${p.commissionRate}">
+                      <i data-lucide="qr-code"></i> <span>QR & Referral Link</span>
                     </button>
                   </div>
                 </div>
@@ -477,8 +513,8 @@ function renderPartnerModule(section, aff, stats, curr, navigateTo) {
                   <div class="p-kpi"><span>Units Left</span><strong>${p.unitsAvailable}</strong></div>
                 </div>
                 <div class="proj-actions-row">
-                  <button type="button" class="btn btn-gold btn-sm w-full btn-copy-proj-ref" data-proj="${p.id}" data-name="${p.name}">
-                    <i data-lucide="share-2"></i> <span>Share Referral Link</span>
+                  <button type="button" class="btn btn-gold btn-sm w-full btn-open-proj-qr-modal" data-proj="${p.id}" data-name="${p.name}" data-comm="${p.commissionRate}">
+                    <i data-lucide="qr-code"></i> <span>QR & Referral Link</span>
                   </button>
                   <button type="button" class="btn btn-secondary btn-sm" onclick="alert('Downloading Official Lookbook for ${p.name}');">
                     <i data-lucide="download"></i> <span>Brochure</span>
@@ -518,18 +554,28 @@ function renderPartnerModule(section, aff, stats, curr, navigateTo) {
                   <th>Target Project & Budget</th>
                   <th>Date</th>
                   <th>Sales Stage</th>
-                  <th>Attribution</th>
+                  <th>Commission Status</th>
                 </tr>
               </thead>
               <tbody>
                 ${myLeads.map(l => `
                   <tr>
                     <td><code>${l.id}</code></td>
-                    <td><strong>${l.name}</strong><br><span class="text-muted">${l.phone}</span></td>
-                    <td>${l.projectId}<br><span class="text-gold">${formatCurrencyValue(l.budget, curr)}</span></td>
+                    <td>
+                      <strong>${l.name}</strong>
+                      <div class="text-muted text-xs">${l.phone} • ${l.email}</div>
+                    </td>
+                    <td>
+                      <strong>${l.projectId}</strong>
+                      <div class="text-gold text-xs">${formatCurrencyValue(l.budget, curr)}</div>
+                    </td>
                     <td>${l.date}</td>
-                    <td><span class="status-pill status-${l.status.toLowerCase()}">${l.status}</span></td>
-                    <td><span class="status-pill status-approved">${l.attributionStatus || 'Attributed'}</span></td>
+                    <td><span class="status-pill status-${l.status.toLowerCase().replace(/\s+/g, '-')}">${l.status}</span></td>
+                    <td>
+                      <span class="badge-comm-stat ${l.status === 'Closed Won' ? 'paid' : l.status === 'Contract Sent' ? 'pending' : 'lead'}">
+                        ${l.status === 'Closed Won' ? 'Commission Payable' : l.status === 'Contract Sent' ? 'Contract Verifying' : 'Referral In Progress'}
+                      </span>
+                    </td>
                   </tr>
                 `).join('')}
               </tbody>
@@ -543,17 +589,79 @@ function renderPartnerModule(section, aff, stats, curr, navigateTo) {
                 <div class="m-card-top">
                   <div>
                     <strong class="m-card-title">${l.name}</strong>
-                    <div class="text-muted text-xs"><code>${l.id}</code> • ${l.phone}</div>
+                    <div class="text-muted text-xs">${l.phone}</div>
                   </div>
-                  <span class="status-pill status-${l.status.toLowerCase()}">${l.status}</span>
+                  <span class="status-pill status-${l.status.toLowerCase().replace(/\s+/g, '-')}">${l.status}</span>
                 </div>
                 <div class="m-card-details">
                   <div><span class="text-muted text-xs">Project:</span> <strong>${l.projectId}</strong></div>
                   <div><span class="text-muted text-xs">Budget:</span> <strong class="text-gold">${formatCurrencyValue(l.budget, curr)}</strong></div>
                 </div>
                 <div class="m-card-actions">
-                  <a href="tel:${l.phone}" class="btn btn-secondary btn-xs"><i data-lucide="phone"></i> Call</a>
+                  <a href="tel:${l.phone}" class="btn btn-secondary btn-xs"><i data-lucide="phone"></i> Call Client</a>
                   <a href="https://wa.me/${l.phone.replace(/[^0-9]/g, '')}" target="_blank" class="btn btn-secondary btn-xs"><i data-lucide="message-circle"></i> WhatsApp</a>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      </div>
+    `;
+  }
+
+  if (section === 'sales') {
+    return `
+      <div class="partner-module-view">
+        <div class="module-header-row">
+          <div>
+            <h2 class="module-title">My Closed Real Estate Sales</h2>
+            <p class="module-subtitle">Deeds signed, developer verifications, and verified commission accruals</p>
+          </div>
+        </div>
+
+        <div class="table-card glass-card">
+          <!-- Desktop Table -->
+          <div class="table-responsive desktop-only-table">
+            <table class="portal-table">
+              <thead>
+                <tr>
+                  <th>Sale ID</th>
+                  <th>Customer Name</th>
+                  <th>Development & Unit</th>
+                  <th>Sale Price</th>
+                  <th>Commission Earned</th>
+                  <th>Deed Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${mySales.map(s => `
+                  <tr>
+                    <td><code>${s.id}</code></td>
+                    <td><strong>${s.customerName}</strong></td>
+                    <td>${s.projectId} - Unit ${s.unitId}</td>
+                    <td><strong class="text-gold">${formatCurrencyValue(s.salePrice, curr)}</strong></td>
+                    <td><strong class="text-green" style="font-size:1.05rem;">${formatCurrencyValue(s.commissionEarned, curr)}</strong></td>
+                    <td><span class="status-pill status-${s.status.toLowerCase()}">${s.status}</span></td>
+                  </tr>
+                `).join('')}
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Mobile Cards -->
+          <div class="mobile-card-list mobile-only-cards">
+            ${mySales.map(s => `
+              <div class="mobile-card-item glass-card">
+                <div class="m-card-top">
+                  <div>
+                    <strong class="m-card-title">${s.customerName}</strong>
+                    <div class="text-muted text-xs">${s.projectId} • Unit ${s.unitId}</div>
+                  </div>
+                  <span class="status-pill status-${s.status.toLowerCase()}">${s.status}</span>
+                </div>
+                <div class="m-card-details">
+                  <div><span class="text-muted text-xs">Sale:</span> <strong class="text-gold">${formatCurrencyValue(s.salePrice, curr)}</strong></div>
+                  <div><span class="text-muted text-xs">Earned:</span> <strong class="text-green">${formatCurrencyValue(s.commissionEarned, curr)}</strong></div>
                 </div>
               </div>
             `).join('')}
@@ -568,24 +676,8 @@ function renderPartnerModule(section, aff, stats, curr, navigateTo) {
       <div class="partner-module-view">
         <div class="module-header-row">
           <div>
-            <h2 class="module-title">My Commission Statements & Earnings</h2>
-            <p class="module-subtitle">Transparent tracking of milestone rates, verified deals, and scheduled payouts</p>
-          </div>
-        </div>
-
-        <!-- Mobile Earnings Summary Cards -->
-        <div class="earnings-summary-cards-grid">
-          <div class="e-stat-card glass-card">
-            <span>Payable Now</span>
-            <strong class="text-cyan">${formatCurrencyValue(stats.payableCommission, curr)}</strong>
-          </div>
-          <div class="e-stat-card glass-card">
-            <span>Pending Verification</span>
-            <strong class="text-yellow">${formatCurrencyValue(stats.pendingCommission, curr)}</strong>
-          </div>
-          <div class="e-stat-card glass-card">
-            <span>Total Disbursed</span>
-            <strong class="text-green">${formatCurrencyValue(stats.paidCommission, curr)}</strong>
+            <h2 class="module-title">Commission Records & Clearances</h2>
+            <p class="module-subtitle">Track milestones from initial deposit to clearance and bank wire transfer</p>
           </div>
         </div>
 
@@ -595,10 +687,10 @@ function renderPartnerModule(section, aff, stats, curr, navigateTo) {
             <table class="portal-table">
               <thead>
                 <tr>
-                  <th>Comm ID / Date</th>
-                  <th>Project</th>
-                  <th>Gross Sale</th>
-                  <th>Rate</th>
+                  <th>Comm ID</th>
+                  <th>Project / Client</th>
+                  <th>Base Commission</th>
+                  <th>Bonus / Tier</th>
                   <th>Net Payable</th>
                   <th>Status</th>
                 </tr>
@@ -606,10 +698,10 @@ function renderPartnerModule(section, aff, stats, curr, navigateTo) {
               <tbody>
                 ${myComms.map(c => `
                   <tr>
-                    <td><code>${c.id}</code><br><span class="text-muted">${c.createdDate}</span></td>
-                    <td><strong>${c.projectName}</strong></td>
-                    <td>${formatCurrencyValue(c.grossSale, curr)}</td>
-                    <td><strong class="text-gold">${c.rate}%</strong></td>
+                    <td><code>${c.id}</code></td>
+                    <td><strong>${c.projectName}</strong><br><span class="text-muted">${c.customerName}</span></td>
+                    <td>${formatCurrencyValue(c.baseCommission, curr)}</td>
+                    <td><span class="text-gold">+${formatCurrencyValue(c.bonusAmount, curr)}</span></td>
                     <td><strong class="text-green" style="font-size:1.1rem;">${formatCurrencyValue(c.netPayable, curr)}</strong></td>
                     <td><span class="status-pill status-${c.status.toLowerCase()}">${c.status}</span></td>
                   </tr>
@@ -625,13 +717,12 @@ function renderPartnerModule(section, aff, stats, curr, navigateTo) {
                 <div class="m-card-top">
                   <div>
                     <strong class="m-card-title">${c.projectName}</strong>
-                    <div class="text-muted text-xs"><code>${c.id}</code> • ${c.createdDate}</div>
+                    <div class="text-muted text-xs">${c.customerName}</div>
                   </div>
                   <span class="status-pill status-${c.status.toLowerCase()}">${c.status}</span>
                 </div>
                 <div class="m-card-details">
-                  <div><span class="text-muted text-xs">Gross Sale:</span> ${formatCurrencyValue(c.grossSale, curr)} (${c.rate}%)</div>
-                  <div><span class="text-muted text-xs">Commission:</span> <strong class="text-green">${formatCurrencyValue(c.netPayable, curr)}</strong></div>
+                  <div><span class="text-muted text-xs">Net Payable:</span> <strong class="text-green">${formatCurrencyValue(c.netPayable, curr)}</strong></div>
                 </div>
               </div>
             `).join('')}
@@ -646,8 +737,8 @@ function renderPartnerModule(section, aff, stats, curr, navigateTo) {
       <div class="partner-module-view">
         <div class="module-header-row">
           <div>
-            <h2 class="module-title">Personal Partner Journal & Ledger</h2>
-            <p class="module-subtitle">Itemized double-entry transaction record showing all commission credits, wire debits, and adjustments</p>
+            <h2 class="module-title">Double-Entry Financial Ledger</h2>
+            <p class="module-subtitle">Immutable transaction statements, financial credits, deductions, and settlement history</p>
           </div>
         </div>
 
@@ -782,6 +873,98 @@ function renderPartnerModule(section, aff, stats, curr, navigateTo) {
     `;
   }
 
+  if (section === 'marketing') {
+    return `
+      <div class="partner-module-view">
+        <div class="module-header-row">
+          <div>
+            <h2 class="module-title">Referral Center & Dynamic QR Studio</h2>
+            <p class="module-subtitle">Generate scannable QR codes for global or project-specific referrals, download high-res PNG/SVG assets, and print official flyers</p>
+          </div>
+        </div>
+
+        <!-- Interactive Referral Studio Card -->
+        <div class="partner-ref-hero glass-card" style="margin-bottom: 30px;">
+          <div class="ref-hero-info">
+            <div class="section-eyebrow"><i data-lucide="sparkles"></i> DYNAMIC QR CODE & LINK GENERATOR</div>
+            <h3 class="ref-hero-title">Custom Campaign & Project Links</h3>
+            <p class="text-muted">Select an individual luxury development below to generate a tailored referral link and scannable QR code specifically for that project.</p>
+            
+            <div class="form-group" style="margin: 12px 0 16px 0;">
+              <label class="form-label text-gold"><i data-lucide="target"></i> Select Destination Link Scope:</label>
+              <select id="select-marketing-qr-scope" class="form-select" style="max-width: 480px; background: rgba(0,0,0,0.6);">
+                <option value="global" selected>General Partner Invitation (proppartner.pro/?ref=${memberRefCode})</option>
+                ${platformStore.projects.map(p => `
+                  <option value="${p.id}">${p.name} (${p.city}) — ${p.commissionRate}% Commission</option>
+                `).join('')}
+              </select>
+            </div>
+
+            <div class="ref-hero-input-row">
+              <input type="text" class="form-input ref-input" value="${globalRefLink}" readonly id="marketing-ref-url-display">
+              <div class="ref-hero-btn-group">
+                <button type="button" class="btn btn-gold" id="btn-mkt-copy-url"><i data-lucide="copy"></i> <span>COPY</span></button>
+                <button type="button" class="btn btn-secondary" id="btn-mkt-open-url"><i data-lucide="external-link"></i> <span>OPEN</span></button>
+                <button type="button" class="btn btn-whatsapp" id="btn-mkt-wa-share"><i data-lucide="message-circle"></i> <span>WHATSAPP</span></button>
+              </div>
+            </div>
+
+            <div class="ref-meta-row">
+              <div class="ref-meta-pill verified"><i data-lucide="shield-check"></i> <span>100% Scannable QR Verified</span></div>
+              <div class="ref-meta-pill"><i data-lucide="activity"></i> <span>Escrow Attribution Active</span></div>
+              <div class="ref-meta-pill"><i data-lucide="user-check"></i> <span>Partner: ${aff.name}</span></div>
+            </div>
+          </div>
+
+          <div class="ref-hero-qr-deck">
+            <div class="qr-canvas-container">
+              <canvas id="marketing-dynamic-qr-canvas" class="real-qr-canvas" width="220" height="220"></canvas>
+              <div class="qr-label-strip">
+                <span class="qr-member-label" id="mkt-qr-target-label">General Partner Link</span>
+                <div class="qr-code-label"><code>${memberRefCode}</code></div>
+              </div>
+            </div>
+
+            <div class="qr-action-buttons-strip">
+              <button type="button" class="btn btn-secondary btn-xs" id="btn-mkt-download-png" title="Download High-Res Branded PNG">
+                <i data-lucide="download"></i> <span>PNG</span>
+              </button>
+              <button type="button" class="btn btn-secondary btn-xs" id="btn-mkt-download-svg" title="Download Vector SVG">
+                <i data-lucide="file-code"></i> <span>SVG</span>
+              </button>
+              <button type="button" class="btn btn-gold btn-xs" id="btn-mkt-print-flyer" title="Print Marketing Flyer">
+                <i data-lucide="printer"></i> <span>PRINT</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Downloadable Marketing Assets Library -->
+        <h4 style="margin: 0 0 16px 0; color: var(--gold-light); display: flex; align-items: center; gap: 8px;">
+          <i data-lucide="folder-down"></i> Official Marketing Kits & Presentation Lookbooks
+        </h4>
+
+        <div class="marketing-assets-grid">
+          ${platformStore.marketing.map(m => `
+            <div class="mkt-asset-card glass-card">
+              <div class="mkt-card-header">
+                <span class="mkt-category-pill">${m.category}</span>
+                <span class="text-muted text-xs">${m.format}</span>
+              </div>
+              <h4 class="mkt-title">${m.title}</h4>
+              <p class="mkt-project-label"><i data-lucide="building"></i> ${m.projectName}</p>
+              <div class="mkt-footer">
+                <button type="button" class="btn btn-gold btn-xs w-full" onclick="alert('Downloading Official Lookbook: ${m.title}');">
+                  <i data-lucide="download"></i> Download Sales Kit
+                </button>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  }
+
   if (section === 'support') {
     return `
       <div class="partner-module-view">
@@ -911,74 +1094,162 @@ function renderPartnerModule(section, aff, stats, curr, navigateTo) {
     `;
   }
 
-  // Fallback Marketing view
-  return `
-    <div class="partner-module-view">
-      <div class="module-header-row">
-        <div>
-          <h2 class="module-title">Marketing Materials & Sales Kits</h2>
-          <p class="module-subtitle">Download high-res lookbooks, WhatsApp copy kits, social media carousels and price lists</p>
-        </div>
-      </div>
-
-      <div class="marketing-assets-grid">
-        ${platformStore.marketing.map(m => `
-          <div class="mkt-asset-card glass-card">
-            <div class="mkt-card-header">
-              <span class="mkt-category-pill">${m.category}</span>
-              <span class="text-muted text-xs">${m.format}</span>
-            </div>
-            <h4 class="mkt-title">${m.title}</h4>
-            <p class="mkt-project-label"><i data-lucide="building"></i> ${m.projectName}</p>
-            <div class="mkt-footer">
-              <button type="button" class="btn btn-gold btn-xs w-full" onclick="alert('Downloading: ${m.title}');">
-                <i data-lucide="download"></i> Download Sales Kit
-              </button>
-            </div>
-          </div>
-        `).join('')}
-      </div>
-    </div>
-  `;
+  return `<div class="partner-module-view"><p>Select a tab from the sidebar.</p></div>`;
 }
 
 function attachPartnerSubmoduleEvents(container, aff, navigateTo) {
-  // Hero copy button
+  const memberRefCode = aff.referralCode || aff.id;
+  const globalRefLink = generateReferralUrl(memberRefCode);
+
+  // 1. Render Dashboard QR Code
+  const dashCanvas = container.querySelector('#dash-partner-qr-canvas');
+  if (dashCanvas) {
+    renderQrToCanvas(dashCanvas, globalRefLink, { size: 280, includeLogo: true });
+  }
+
+  // Dashboard Copy button
   const heroCopyBtn = container.querySelector('#btn-hero-copy-ref');
   if (heroCopyBtn) {
     heroCopyBtn.onclick = () => {
-      const url = `https://proppartner.network/ref/${aff.id}`;
-      navigator.clipboard.writeText(url);
-      alert(`Copied unique referral link:\n${url}`);
+      navigator.clipboard.writeText(globalRefLink);
+      alert(`✅ Unique Partner Referral URL copied to clipboard:\n\n${globalRefLink}`);
     };
   }
 
-  // Hero native share button
+  // Dashboard Open button
+  const heroOpenBtn = container.querySelector('#btn-hero-open-ref');
+  if (heroOpenBtn) {
+    heroOpenBtn.onclick = () => {
+      window.open(globalRefLink, '_blank');
+    };
+  }
+
+  // Dashboard WhatsApp button
+  const heroWaBtn = container.querySelector('#btn-hero-wa-share');
+  if (heroWaBtn) {
+    heroWaBtn.onclick = () => {
+      const msg = encodeURIComponent(`Hello! Explore luxury real estate investment opportunities through PropPartner with verified developer pricing and priority allocation:\n\n${globalRefLink}`);
+      window.open(`https://wa.me/?text=${msg}`, '_blank');
+    };
+  }
+
+  // Dashboard Native Share button
   const heroShareBtn = container.querySelector('#btn-hero-native-share');
   if (heroShareBtn) {
     heroShareBtn.onclick = () => {
       triggerNativeShare(
         'PropPartner Real Estate Network',
-        'Explore premier luxury residential and commercial real estate investment opportunities:',
-        `https://proppartner.network/ref/${aff.id}`
+        'Explore premier luxury residential and commercial real estate investment opportunities with guaranteed escrow protection:',
+        globalRefLink
       );
     };
   }
 
-  // Project-specific referral link copy / native share
-  container.querySelectorAll('.btn-copy-proj-ref').forEach(btn => {
+  // Dashboard QR Download PNG
+  const heroPngBtn = container.querySelector('#btn-qr-download-png');
+  if (heroPngBtn) {
+    heroPngBtn.onclick = () => {
+      downloadBrandedQrPng(globalRefLink, aff.name, aff.id, null);
+    };
+  }
+
+  // Dashboard QR Download SVG
+  const heroSvgBtn = container.querySelector('#btn-qr-download-svg');
+  if (heroSvgBtn) {
+    heroSvgBtn.onclick = () => {
+      downloadQrSvg(globalRefLink, aff.id);
+    };
+  }
+
+  // Dashboard QR Print Flyer
+  const heroPrintBtn = container.querySelector('#btn-qr-print-flyer');
+  if (heroPrintBtn) {
+    heroPrintBtn.onclick = () => {
+      printQrFlyer(globalRefLink, aff.name, aff.id, null);
+    };
+  }
+
+  // 2. Marketing / QR Studio Tab Controls
+  const mktCanvas = container.querySelector('#marketing-dynamic-qr-canvas');
+  const mktScopeSelect = container.querySelector('#select-marketing-qr-scope');
+  const mktUrlDisplay = container.querySelector('#marketing-ref-url-display');
+  const mktTargetLabel = container.querySelector('#mkt-qr-target-label');
+
+  let currentMktUrl = globalRefLink;
+  let currentMktProjName = null;
+
+  function updateMarketingQr() {
+    if (!mktCanvas) return;
+    const scope = mktScopeSelect ? mktScopeSelect.value : 'global';
+
+    if (scope === 'global') {
+      currentMktUrl = globalRefLink;
+      currentMktProjName = null;
+      if (mktTargetLabel) mktTargetLabel.textContent = 'General Partner Link';
+    } else {
+      const proj = platformStore.projects.find(p => p.id === scope);
+      currentMktUrl = generateReferralUrl(memberRefCode, scope);
+      currentMktProjName = proj ? proj.name : scope;
+      if (mktTargetLabel) mktTargetLabel.textContent = currentMktProjName;
+    }
+
+    if (mktUrlDisplay) mktUrlDisplay.value = currentMktUrl;
+    renderQrToCanvas(mktCanvas, currentMktUrl, { size: 280, includeLogo: true });
+  }
+
+  if (mktCanvas) {
+    updateMarketingQr();
+    if (mktScopeSelect) mktScopeSelect.onchange = updateMarketingQr;
+
+    const mktCopyBtn = container.querySelector('#btn-mkt-copy-url');
+    if (mktCopyBtn) {
+      mktCopyBtn.onclick = () => {
+        navigator.clipboard.writeText(currentMktUrl);
+        alert(`✅ Copied destination referral link:\n\n${currentMktUrl}`);
+      };
+    }
+
+    const mktOpenBtn = container.querySelector('#btn-mkt-open-url');
+    if (mktOpenBtn) {
+      mktOpenBtn.onclick = () => window.open(currentMktUrl, '_blank');
+    }
+
+    const mktWaBtn = container.querySelector('#btn-mkt-wa-share');
+    if (mktWaBtn) {
+      mktWaBtn.onclick = () => {
+        const text = currentMktProjName 
+          ? `Hello! View exclusive investment details and units for ${currentMktProjName}:\n\n${currentMktUrl}`
+          : `Hello! Discover luxury real estate investments on PropPartner:\n\n${currentMktUrl}`;
+        window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank');
+      };
+    }
+
+    const mktPngBtn = container.querySelector('#btn-mkt-download-png');
+    if (mktPngBtn) {
+      mktPngBtn.onclick = () => downloadBrandedQrPng(currentMktUrl, aff.name, aff.id, currentMktProjName);
+    }
+
+    const mktSvgBtn = container.querySelector('#btn-mkt-download-svg');
+    if (mktSvgBtn) {
+      mktSvgBtn.onclick = () => downloadQrSvg(currentMktUrl, `${aff.id}_${currentMktProjName || 'General'}`);
+    }
+
+    const mktPrintBtn = container.querySelector('#btn-mkt-print-flyer');
+    if (mktPrintBtn) {
+      mktPrintBtn.onclick = () => printQrFlyer(currentMktUrl, aff.name, aff.id, currentMktProjName);
+    }
+  }
+
+  // 3. Project-specific Referral Modal triggers
+  container.querySelectorAll('.btn-open-proj-qr-modal').forEach(btn => {
     btn.onclick = () => {
       const projId = btn.dataset.proj;
-      const projName = btn.dataset.name || projId;
-      const url = `https://proppartner.network/ref/${aff.id}/${projId}`;
-      triggerNativeShare(
-        `Explore ${projName}`,
-        `Exclusive real estate opportunity: ${projName}. Inquire or book via this verified partner link:`,
-        url
-      );
+      const proj = platformStore.projects.find(p => p.id === projId) || { id: projId, name: btn.dataset.name, commissionRate: btn.dataset.comm };
+      showProjectQrModal(proj, aff);
     };
   });
 
+  // Quick navigation buttons
   const dashAllProj = container.querySelector('#btn-dash-all-proj') || container.querySelector('#mqa-find-proj');
   if (dashAllProj) dashAllProj.onclick = () => navigateTo('projects');
 
@@ -1063,6 +1334,102 @@ function attachPartnerSubmoduleEvents(container, aff, navigateTo) {
           mount.scrollTop = mount.scrollHeight;
         }, 400);
       }
+    };
+  }
+}
+
+function showProjectQrModal(project, aff) {
+  const memberRefCode = aff.referralCode || aff.id;
+  const projectRefUrl = generateReferralUrl(memberRefCode, project.id);
+
+  let modal = document.getElementById('project-qr-modal');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'project-qr-modal';
+    modal.className = 'auth-modal-backdrop active';
+    document.body.appendChild(modal);
+  } else {
+    modal.classList.add('active');
+  }
+
+  modal.innerHTML = `
+    <div class="auth-modal-dialog glass-card" style="max-width: 580px;">
+      <button type="button" class="auth-modal-close" id="btn-close-proj-qr"><i data-lucide="x"></i></button>
+      
+      <div class="auth-modal-header" style="text-align: center; margin-bottom: 20px;">
+        <div class="section-eyebrow"><i data-lucide="building"></i> PROJECT REFERRAL ENGINE</div>
+        <h3 class="auth-modal-title" style="font-size: 1.4rem;">${project.name}</h3>
+        <p class="auth-modal-subtitle">Earn <strong>${project.commissionRate}% Commission</strong> per referral transaction.</p>
+      </div>
+
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 16px;">
+        <div class="qr-canvas-container" style="max-width: 240px;">
+          <canvas id="proj-modal-qr-canvas" class="real-qr-canvas" width="220" height="220"></canvas>
+          <div class="qr-label-strip">
+            <span>Development: <strong>${project.name}</strong></span>
+            <div><code>${memberRefCode}</code></div>
+          </div>
+        </div>
+
+        <div style="width: 100%;">
+          <label class="form-label text-xs text-muted">Direct Project Referral URL</label>
+          <div style="display: flex; gap: 8px;">
+            <input type="text" class="form-input ref-input" value="${projectRefUrl}" readonly id="proj-modal-url-input" style="font-size: 0.82rem;">
+            <button type="button" class="btn btn-gold btn-sm" id="btn-proj-modal-copy"><i data-lucide="copy"></i> Copy</button>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; width: 100%;">
+          <button type="button" class="btn btn-secondary btn-sm" id="btn-proj-modal-png">
+            <i data-lucide="download"></i> PNG Card
+          </button>
+          <button type="button" class="btn btn-secondary btn-sm" id="btn-proj-modal-svg">
+            <i data-lucide="file-code"></i> Vector SVG
+          </button>
+          <button type="button" class="btn btn-gold btn-sm" id="btn-proj-modal-flyer">
+            <i data-lucide="printer"></i> Print Flyer
+          </button>
+        </div>
+
+        <button type="button" class="btn btn-whatsapp btn-sm w-full" id="btn-proj-modal-wa">
+          <i data-lucide="message-circle"></i> Share on WhatsApp with Marketing Copy
+        </button>
+      </div>
+    </div>
+  `;
+
+  if (window.lucide) window.lucide.createIcons();
+
+  const canvas = modal.querySelector('#proj-modal-qr-canvas');
+  if (canvas) {
+    renderQrToCanvas(canvas, projectRefUrl, { size: 280, includeLogo: true });
+  }
+
+  const closeBtn = modal.querySelector('#btn-close-proj-qr');
+  if (closeBtn) closeBtn.onclick = () => modal.classList.remove('active');
+
+  const copyBtn = modal.querySelector('#btn-proj-modal-copy');
+  if (copyBtn) {
+    copyBtn.onclick = () => {
+      navigator.clipboard.writeText(projectRefUrl);
+      alert(`✅ Copied project referral URL:\n\n${projectRefUrl}`);
+    };
+  }
+
+  const pngBtn = modal.querySelector('#btn-proj-modal-png');
+  if (pngBtn) pngBtn.onclick = () => downloadBrandedQrPng(projectRefUrl, aff.name, aff.id, project.name);
+
+  const svgBtn = modal.querySelector('#btn-proj-modal-svg');
+  if (svgBtn) svgBtn.onclick = () => downloadQrSvg(projectRefUrl, `${aff.id}_${project.id}`);
+
+  const flyerBtn = modal.querySelector('#btn-proj-modal-flyer');
+  if (flyerBtn) flyerBtn.onclick = () => printQrFlyer(projectRefUrl, aff.name, aff.id, project.name);
+
+  const waBtn = modal.querySelector('#btn-proj-modal-wa');
+  if (waBtn) {
+    waBtn.onclick = () => {
+      const msg = encodeURIComponent(`Exclusive Opportunity: Explore ${project.name} with developer pricing and priority allocation:\n\n${projectRefUrl}`);
+      window.open(`https://wa.me/?text=${msg}`, '_blank');
     };
   }
 }

@@ -176,6 +176,7 @@ const INITIAL_PROJECTS = [
 const INITIAL_AFFILIATES = [
   {
     id: 'AFF-000101',
+    referralCode: 'AFF00101',
     name: 'Tariq Mansoor',
     email: 'tariq.mansoor@apexwealth.com',
     phone: '+92 300 1234567',
@@ -186,6 +187,7 @@ const INITIAL_AFFILIATES = [
     company: 'Apex Wealth Advisory',
     tier: 'Platinum',
     status: 'Approved',
+    referralStatus: 'Active',
     avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80',
     bankName: 'Habib Bank Limited (HBL Prestige)',
     accountNumber: 'PK36HABB00012345678901',
@@ -193,12 +195,16 @@ const INITIAL_AFFILIATES = [
     taxId: 'NTN-8921094-1',
     registeredDate: '2024-01-10',
     totalReferrals: 48,
+    referralClicks: 342,
+    referralVisits: 280,
+    qrScans: 124,
     qualifiedLeads: 28,
     successfulSales: 7,
     conversionRate: '14.6%'
   },
   {
     id: 'AFF-000102',
+    referralCode: 'SARAH2026',
     name: 'Sarah Al-Maktoum Jenkins',
     email: 'sarah.j@dubaiinvest.ae',
     phone: '+971 50 882 1902',
@@ -209,6 +215,7 @@ const INITIAL_AFFILIATES = [
     company: 'Gulf Capital Partners',
     tier: 'Gold',
     status: 'Approved',
+    referralStatus: 'Active',
     avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=150&q=80',
     bankName: 'Emirates NBD',
     accountNumber: 'AE440260001234567890123',
@@ -216,12 +223,16 @@ const INITIAL_AFFILIATES = [
     taxId: 'TRN-1002938481',
     registeredDate: '2024-02-14',
     totalReferrals: 34,
+    referralClicks: 215,
+    referralVisits: 178,
+    qrScans: 86,
     qualifiedLeads: 19,
     successfulSales: 4,
     conversionRate: '11.8%'
   },
   {
     id: 'AFF-000103',
+    referralCode: 'HAMID77',
     name: 'Hamid Raza Qureshi',
     email: 'hamid.qureshi@qureshilaw.com',
     phone: '+92 321 8899221',
@@ -232,6 +243,7 @@ const INITIAL_AFFILIATES = [
     company: 'Qureshi & Co Legal Partners',
     tier: 'Gold',
     status: 'Approved',
+    referralStatus: 'Active',
     avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=150&q=80',
     bankName: 'Standard Chartered Pakistan',
     accountNumber: 'PK12SCBL00998877665544',
@@ -239,12 +251,16 @@ const INITIAL_AFFILIATES = [
     taxId: 'NTN-4455667-2',
     registeredDate: '2024-02-28',
     totalReferrals: 26,
+    referralClicks: 184,
+    referralVisits: 142,
+    qrScans: 62,
     qualifiedLeads: 14,
     successfulSales: 3,
     conversionRate: '11.5%'
   },
   {
     id: 'AFF-000104',
+    referralCode: 'ELENA88',
     name: 'Elena Rostova',
     email: 'elena@monacoconsulting.com',
     phone: '+44 7700 900123',
@@ -255,6 +271,7 @@ const INITIAL_AFFILIATES = [
     company: 'Monaco Global Advisory',
     tier: 'Platinum',
     status: 'Approved',
+    referralStatus: 'Active',
     avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=150&q=80',
     bankName: 'HSBC UK Private Bank',
     accountNumber: 'GB29MIDL40051512345678',
@@ -262,12 +279,16 @@ const INITIAL_AFFILIATES = [
     taxId: 'UK-UTR-9018273645',
     registeredDate: '2024-03-01',
     totalReferrals: 22,
+    referralClicks: 198,
+    referralVisits: 165,
+    qrScans: 95,
     qualifiedLeads: 16,
     successfulSales: 5,
     conversionRate: '22.7%'
   },
   {
     id: 'AFF-000105',
+    referralCode: 'BILAL55',
     name: 'Bilal Khan Afridi',
     email: 'bilal.afridi@frontiertech.pk',
     phone: '+92 333 5556677',
@@ -278,6 +299,7 @@ const INITIAL_AFFILIATES = [
     company: 'Frontier Ventures',
     tier: 'Silver',
     status: 'Approved',
+    referralStatus: 'Active',
     avatar: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?auto=format&fit=crop&w=150&q=80',
     bankName: 'Meezan Bank Ltd (Islamic Banking)',
     accountNumber: 'PK88MEZN00034455667788',
@@ -285,12 +307,16 @@ const INITIAL_AFFILIATES = [
     taxId: 'NTN-3322110-4',
     registeredDate: '2024-03-18',
     totalReferrals: 15,
+    referralClicks: 110,
+    referralVisits: 88,
+    qrScans: 40,
     qualifiedLeads: 7,
     successfulSales: 1,
     conversionRate: '6.7%'
   },
   {
     id: 'AFF-000106',
+    referralCode: 'ADNAN99',
     name: 'Adnan Zafar',
     email: 'adnan.zafar@gulfnetwork.com',
     phone: '+92 301 9988776',
@@ -301,6 +327,7 @@ const INITIAL_AFFILIATES = [
     company: 'Zafar Financial Advisory',
     tier: 'Silver',
     status: 'Pending',
+    referralStatus: 'Disabled',
     avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=150&q=80',
     bankName: 'Bank Alfalah',
     accountNumber: 'PK09ALFH00123498765432',
@@ -308,12 +335,16 @@ const INITIAL_AFFILIATES = [
     taxId: 'NTN-7766554-9',
     registeredDate: '2024-04-02',
     totalReferrals: 0,
+    referralClicks: 0,
+    referralVisits: 0,
+    qrScans: 0,
     qualifiedLeads: 0,
     successfulSales: 0,
     conversionRate: '0.0%'
   },
   {
     id: 'AFF-000107',
+    referralCode: 'NAVEED33',
     name: 'Naveed Akhtar',
     email: 'naveed.akhtar@primeinvest.pk',
     phone: '+92 345 1122334',
@@ -324,6 +355,7 @@ const INITIAL_AFFILIATES = [
     company: 'Prime Group',
     tier: 'Silver',
     status: 'Suspended',
+    referralStatus: 'Disabled',
     avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=150&q=80',
     bankName: 'MCB Bank Limited',
     accountNumber: 'PK77MUCB00045612378901',
@@ -331,6 +363,9 @@ const INITIAL_AFFILIATES = [
     taxId: 'NTN-1122334-8',
     registeredDate: '2024-01-22',
     totalReferrals: 12,
+    referralClicks: 65,
+    referralVisits: 52,
+    qrScans: 18,
     qualifiedLeads: 4,
     successfulSales: 0,
     conversionRate: '0.0%'
@@ -1098,6 +1133,131 @@ class PlatformStore {
     this.logAudit('Super Admin', 'AFFILIATE_TIER_UPDATE', `Affiliate #${affiliateId}`, oldTier, newTier, `Upgraded tier to ${newTier}`);
     this.save();
     return { success: true };
+  }
+
+  // ==========================================
+  // REFERRAL CODE & QR TRACKING ENGINE
+  // ==========================================
+  getAffiliateByReferralCode(code) {
+    if (!code) return null;
+    const clean = code.trim().toUpperCase();
+    return this.affiliates.find(a => 
+      (a.id && a.id.toUpperCase() === clean) ||
+      (a.referralCode && a.referralCode.toUpperCase() === clean)
+    ) || null;
+  }
+
+  recordReferralVisit(affiliateId, metadata = {}) {
+    const aff = this.affiliates.find(a => a.id === affiliateId);
+    if (!aff) return;
+
+    aff.referralClicks = (aff.referralClicks || 0) + 1;
+    aff.referralVisits = (aff.referralVisits || 0) + 1;
+    
+    // Check if traffic is from QR scan
+    if (metadata.isQr || (metadata.referrer && metadata.referrer.includes('qr'))) {
+      aff.qrScans = (aff.qrScans || 0) + 1;
+    }
+
+    this.save();
+  }
+
+  recordQrScan(affiliateId, metadata = {}) {
+    const aff = this.affiliates.find(a => a.id === affiliateId);
+    if (!aff) return;
+
+    aff.qrScans = (aff.qrScans || 0) + 1;
+    aff.referralClicks = (aff.referralClicks || 0) + 1;
+    this.save();
+  }
+
+  regenerateReferralCode(affiliateId, customCode = null) {
+    const aff = this.affiliates.find(a => a.id === affiliateId);
+    if (!aff) return { success: false, message: 'Affiliate not found' };
+
+    let candidateCode = '';
+    if (customCode && customCode.trim()) {
+      candidateCode = customCode.trim().toUpperCase().replace(/[^A-Z0-9_-]/g, '');
+    } else {
+      // Auto-generate clean alphanumeric code: e.g. AFF + random 5 digits or initials
+      const rand = Math.floor(10000 + Math.random() * 90000);
+      const prefix = aff.name ? aff.name.substring(0, 3).toUpperCase().replace(/[^A-Z]/g, 'REF') : 'AFF';
+      candidateCode = `${prefix}${rand}`;
+    }
+
+    // Enforce uniqueness at store level
+    const existing = this.affiliates.find(a => 
+      a.id !== affiliateId && 
+      ((a.referralCode && a.referralCode.toUpperCase() === candidateCode) || (a.id.toUpperCase() === candidateCode))
+    );
+
+    if (existing) {
+      return { success: false, message: `Referral code "${candidateCode}" is already assigned to ${existing.name} (${existing.id}).` };
+    }
+
+    const oldCode = aff.referralCode || aff.id;
+    aff.referralCode = candidateCode;
+    aff.referralStatus = 'Active';
+
+    this.logAudit(
+      'Super Admin',
+      'REFERRAL_CODE_REGENERATED',
+      `Affiliate #${affiliateId}`,
+      oldCode,
+      candidateCode,
+      `Regenerated unique referral code to ${candidateCode}`
+    );
+
+    this.save();
+    return { success: true, referralCode: candidateCode, affiliate: aff };
+  }
+
+  toggleReferralStatus(affiliateId, newStatus) {
+    const aff = this.affiliates.find(a => a.id === affiliateId);
+    if (!aff) return { success: false, message: 'Affiliate not found' };
+
+    const oldStatus = aff.referralStatus || 'Active';
+    aff.referralStatus = newStatus; // 'Active' | 'Disabled'
+
+    this.logAudit(
+      'Super Admin',
+      'REFERRAL_STATUS_CHANGE',
+      `Affiliate #${affiliateId}`,
+      oldStatus,
+      newStatus,
+      `Referral code status set to ${newStatus}`
+    );
+
+    this.save();
+    return { success: true, status: newStatus };
+  }
+
+  getAffiliateReferralStats(affiliateId) {
+    const aff = this.affiliates.find(a => a.id === affiliateId);
+    if (!aff) return null;
+
+    const leads = this.leads.filter(l => l.affiliateId === affiliateId);
+    const sales = this.sales.filter(s => s.affiliateId === affiliateId);
+    const comms = this.commissions.filter(c => c.affiliateId === affiliateId);
+
+    const totalEarnedCommission = comms.reduce((sum, c) => sum + (c.netPayable || 0), 0);
+    const clicks = aff.referralClicks || aff.totalReferrals * 6 || 100;
+    const qrScans = aff.qrScans || Math.round(clicks * 0.35);
+
+    return {
+      affiliateId: aff.id,
+      affiliateName: aff.name,
+      referralCode: aff.referralCode || aff.id,
+      referralStatus: aff.referralStatus || 'Active',
+      qrScans: qrScans,
+      totalClicks: clicks,
+      totalVisits: aff.referralVisits || Math.round(clicks * 0.8),
+      totalLeads: leads.length,
+      qualifiedLeads: leads.filter(l => l.status === 'Qualified' || l.status === 'Contract Sent' || l.status === 'Closed Won').length,
+      closedSales: sales.length,
+      totalCommission: totalEarnedCommission,
+      conversionRate: clicks > 0 ? ((sales.length / clicks) * 100).toFixed(1) + '%' : '0.0%'
+    };
   }
 
   // ==========================================
