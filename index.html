@@ -51,6 +51,7 @@
 </head>
 <body>
 
+<div id="landing-page-wrap">
   <!-- ==========================================================================
        STICKY HEADER / NAVIGATION
        ========================================================================== -->
@@ -80,6 +81,11 @@
           <option value="USD">USD ($)</option>
           <option value="AED">AED (د.إ)</option>
         </select>
+
+        <button type="button" class="btn btn-secondary btn-sm" id="nav-portal-login-btn">
+          <i data-lucide="log-in"></i>
+          <span>SIGN IN</span>
+        </button>
 
         <a href="#register" class="btn btn-gold btn-sm" id="nav-join-btn">
           <span>BECOME AN AFFILIATE</span>
@@ -617,30 +623,51 @@
       <!-- Bottom Bar -->
       <div class="footer-bottom-bar">
         <span>© 2026 PropPartner 3D Real Estate Affiliate Network. All rights reserved.</span>
-        <span>Designed for Ultra-High Conversion & 3D Interactive Web Experience</span>
-      </div>
     </div>
   </footer>
+</div>
 
-  <!-- ==========================================================================
-       MODAL ROOT CONTAINERS
-       ========================================================================== -->
-  <div class="modal-overlay" id="app-modal-overlay">
-    <div class="modal-dialog glass-card" id="app-modal-body">
-      <!-- Injected dynamically -->
-    </div>
+<!-- Super Admin & Affiliate ERP Platform Root -->
+<div id="portal-app-root" style="display: none;"></div>
+
+<!-- Persistent Platform Switcher Floating Dock -->
+<div class="platform-mode-dock" id="platform-mode-dock">
+  <div class="dock-pill-bar glass-card">
+    <span class="dock-label"><i data-lucide="layers"></i> WORKSPACE:</span>
+    <button type="button" class="dock-btn active" id="dock-btn-landing">
+      <i data-lucide="globe"></i> <span>Landing Page</span>
+    </button>
+    <button type="button" class="dock-btn text-cyan" id="dock-btn-admin">
+      <i data-lucide="shield-check"></i> <span>Super Admin ERP</span>
+    </button>
+    <button type="button" class="dock-btn text-gold" id="dock-btn-partner">
+      <i data-lucide="user-check"></i> <span>Partner Portal</span>
+    </button>
+    <button type="button" class="dock-btn" id="dock-btn-auth">
+      <i data-lucide="log-in"></i> <span>Auth / Sign In</span>
+    </button>
   </div>
+</div>
 
-  <!-- Admin / CMS Live Simulator Floating Dock -->
-  <div id="cms-drawer-root"></div>
-
-  <!-- Toast Notification Root -->
-  <div class="toast-notification" id="app-toast">
-    <i data-lucide="check-circle-2" class="accent-gold"></i>
-    <span id="toast-msg">Operation completed</span>
+<!-- ==========================================================================
+     MODAL ROOT CONTAINERS
+     ========================================================================== -->
+<div class="modal-overlay" id="app-modal-overlay">
+  <div class="modal-dialog glass-card" id="app-modal-body">
+    <!-- Injected dynamically -->
   </div>
+</div>
 
-  <!-- Main JavaScript App -->
-  <script type="module" src="/src/main.js"></script>
+<!-- Admin / CMS Live Simulator Floating Dock -->
+<div id="cms-drawer-root"></div>
+
+<!-- Toast Notification Root -->
+<div class="toast-notification" id="app-toast">
+  <i data-lucide="check-circle-2" class="accent-gold"></i>
+  <span id="toast-msg">Operation completed</span>
+</div>
+
+<!-- Main JavaScript App -->
+<script type="module" src="/src/main.js"></script>
 </body>
 </html>

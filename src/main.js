@@ -1,4 +1,4 @@
-// Main Application Coordinator & Orchestrator
+// Main Application Coordinator & Orchestrator - PropPartner 3D Landing & SaaS Portal
 
 import { createIcons, icons } from 'lucide';
 import { trustCategories, processSteps, whyJoinFeatures, personas, testimonials, heroStats } from './data/affiliateData.js';
@@ -13,9 +13,17 @@ import { initRegistrationForm } from './components/registrationForm.js';
 import { initFAQ } from './components/faqAccordion.js';
 import { initCMSDrawer } from './components/cmsDrawer.js';
 
+// Enterprise Platform & Auth Stores
+import { authStore } from './store/authStore.js';
+import { platformStore } from './store/platformStore.js';
+import { openAuthModal } from './components/auth/AuthModal.js';
+import { initAdminPortal } from './components/admin/AdminPortal.js';
+import { initAffiliatePortal } from './components/affiliate/AffiliatePortal.js';
+
 // Global state
 let currentCurrency = 'PKR';
 let activeProjects = [...initialProjects];
+let currentView = 'landing'; // 'landing' | 'admin' | 'partner'
 
 // Expose lucide globally for components
 window.lucide = {
@@ -26,123 +34,129 @@ document.addEventListener('DOMContentLoaded', () => {
   // 1. Initialize Icons
   window.lucide.createIcons();
 
-  // 2. Render Trust Categories
+  // 2. Render Landing Page Sections
   renderTrustCategories();
-
-  // 3. Render 6-Step Process Timeline
   renderProcessTimeline();
-
-  // 4. Render Why Join Features
   renderWhyJoin();
-
-  // 5. Render Who Can Join Personas
   renderPersonas();
-
-  // 6. Render Testimonials
   renderTestimonials();
 
-  // 7. Initialize Three.js 3D Hero Scene
+  // 3. Initialize Three.js 3D Hero Scene
   const heroCanvasContainer = document.getElementById('hero-3d-canvas');
-  initHero3D(heroCanvasContainer);
+  if (heroCanvasContainer) initHero3D(heroCanvasContainer);
 
-  // 8. Initialize 3D Network Visualization Graph
+  // 4. Initialize 3D Network Visualization Graph
   const networkWrap = document.getElementById('network-canvas-wrap');
   const networkTooltip = document.getElementById('network-tooltip');
-  initNetworkGraph(networkWrap, networkTooltip);
+  if (networkWrap) initNetworkGraph(networkWrap, networkTooltip);
 
-  // 9. Initialize 3D Commission Calculator
+  // 5. Initialize 3D Commission Calculator
   const calcMount = document.getElementById('commission-calc-mount');
-  const calculatorInstance = initCommissionCalculator(calcMount, currentCurrency);
+  const calculatorInstance = calcMount ? initCommissionCalculator(calcMount, currentCurrency) : null;
 
-  // 10. Initialize Dashboard Preview
+  // 6. Initialize Dashboard Preview
   const dashMount = document.getElementById('dashboard-preview-mount');
-  const dashboardInstance = initDashboardPreview(dashMount, currentCurrency);
+  const dashboardInstance = dashMount ? initDashboardPreview(dashMount, currentCurrency) : null;
 
-  // 11. Initialize Featured Projects Showcase
+  // 7. Initialize Featured Projects Showcase
   const projectMount = document.getElementById('projects-showcase-mount');
-  const projectInstance = initProjectShowcase(projectMount, handleModalOpen, currentCurrency);
+  const projectInstance = projectMount ? initProjectShowcase(projectMount, handleModalOpen, currentCurrency) : null;
 
-  // 12. Initialize Marketing Toolkit
+  // 8. Initialize Marketing Toolkit
   const toolkitMount = document.getElementById('toolkit-mount');
-  initMarketingToolkit(toolkitMount, showToast);
+  if (toolkitMount) initMarketingToolkit(toolkitMount, showToast);
 
-  // 13. Initialize Registration Form
+  // 9. Initialize Registration Form
   const regForm = document.getElementById('affiliate-reg-form');
   const regSuccess = document.getElementById('reg-success-container');
-  initRegistrationForm(regForm, regSuccess, showToast);
+  if (regForm) initRegistrationForm(regForm, regSuccess, showToast);
 
-  // 14. Initialize FAQ Accordion
+  // 10. Initialize FAQ Accordion
   const faqMount = document.getElementById('faq-mount');
-  initFAQ(faqMount);
+  if (faqMount) initFAQ(faqMount);
 
-  // 15. Initialize Admin/CMS Live Simulator Drawer
+  // 11. Initialize Admin/CMS Live Simulator Drawer
   const cmsRoot = document.getElementById('cms-drawer-root');
-  initCMSDrawer(cmsRoot, (cmsData) => {
-    // Live update hero stats
-    document.getElementById('hero-stat-val-text').textContent = cmsData.heroProjectValue;
-    document.getElementById('hero-stat-network-text').textContent = cmsData.heroPartnerNetwork;
-    document.getElementById('hero-stat-comm-text').textContent = cmsData.heroMaxCommission;
+  if (cmsRoot) {
+    initCMSDrawer(cmsRoot, (cmsData) => {
+      const heroVal = document.getElementById('hero-stat-val-text');
+      if (heroVal) heroVal.textContent = cmsData.heroProjectValue;
+      const heroNet = document.getElementById('hero-stat-network-text');
+      if (heroNet) heroNet.textContent = cmsData.heroPartnerNetwork;
+      const heroComm = document.getElementById('hero-stat-comm-text');
+      if (heroComm) heroComm.textContent = cmsData.heroMaxCommission;
 
-    // Update Luminary project price/rate
-    const luminary = activeProjects.find(p => p.id === 'luminary-towers');
-    if (luminary) {
-      luminary.startingPrice = cmsData.luminaryPrice;
-      luminary.commissionRate = cmsData.luminaryRate;
-    }
-    const elysium = activeProjects.find(p => p.id === 'elysium-waterfront');
-    if (elysium) {
-      elysium.startingPrice = cmsData.elysiumPrice;
-      elysium.commissionRate = cmsData.elysiumRate;
-    }
+      const luminary = activeProjects.find(p => p.id === 'luminary-towers');
+      if (luminary) {
+        luminary.startingPrice = cmsData.luminaryPrice;
+        luminary.commissionRate = cmsData.luminaryRate;
+      }
+      const elysium = activeProjects.find(p => p.id === 'elysium-waterfront');
+      if (elysium) {
+        elysium.startingPrice = cmsData.elysiumPrice;
+        elysium.commissionRate = cmsData.elysiumRate;
+      }
 
-    // Update global currency if changed
-    if (cmsData.currency !== currentCurrency) {
-      currentCurrency = cmsData.currency;
-      document.getElementById('global-currency-picker').value = currentCurrency;
-    }
+      if (cmsData.currency !== currentCurrency) {
+        currentCurrency = cmsData.currency;
+        const picker = document.getElementById('global-currency-picker');
+        if (picker) picker.value = currentCurrency;
+      }
 
-    // Refresh instances
-    calculatorInstance?.setCurrency(currentCurrency);
-    dashboardInstance?.setCurrency(currentCurrency);
-    projectInstance?.updateProjects(activeProjects);
-    projectInstance?.setCurrency(currentCurrency);
+      calculatorInstance?.setCurrency(currentCurrency);
+      dashboardInstance?.setCurrency(currentCurrency);
+      projectInstance?.updateProjects(activeProjects);
+      projectInstance?.setCurrency(currentCurrency);
 
-    showToast('Admin CMS settings applied in real time!');
-  });
+      showToast('Admin CMS settings applied in real time!');
+    });
+  }
 
-  // 16. Header Currency Picker
+  // 12. Header Currency Picker
   const currPicker = document.getElementById('global-currency-picker');
   currPicker?.addEventListener('change', (e) => {
     currentCurrency = e.target.value;
+    platformStore.setCurrency(currentCurrency);
     calculatorInstance?.setCurrency(currentCurrency);
     dashboardInstance?.setCurrency(currentCurrency);
     projectInstance?.setCurrency(currentCurrency);
     showToast(`Currency converted to ${currentCurrency}`);
   });
 
-  // 17. Header Sticky Scroll Spy
+  // 13. Header Sticky Scroll
   const header = document.getElementById('site-header');
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-      header.classList.add('scrolled');
-    } else {
-      header.classList.remove('scrolled');
+    if (header) {
+      if (window.scrollY > 50) header.classList.add('scrolled');
+      else header.classList.remove('scrolled');
     }
   });
 
-  // 18. Mobile Menu Toggle
+  // 14. Mobile Menu Toggle
   const mobileToggle = document.getElementById('mobile-toggle-btn');
   const navMenu = document.getElementById('nav-menu');
   mobileToggle?.addEventListener('click', () => {
-    navMenu.classList.toggle('open');
+    navMenu?.classList.toggle('open');
   });
-  navMenu.querySelectorAll('.nav-link').forEach(link => {
+  navMenu?.querySelectorAll('.nav-link').forEach(link => {
     link.addEventListener('click', () => {
-      navMenu.classList.remove('open');
+      navMenu?.classList.remove('open');
     });
   });
 
-  // 19. Legal Modal Links
+  // 15. Header "Sign In" Button
+  const navLoginBtn = document.getElementById('nav-portal-login-btn');
+  navLoginBtn?.addEventListener('click', () => {
+    openAuthModal('login', (user) => {
+      if (user.role === 'SUPER_ADMIN') switchView('admin');
+      else switchView('partner');
+    });
+  });
+
+  // 16. Persistent Platform Switcher Dock
+  setupPlatformModeDock();
+
+  // 17. Legal Modals
   document.querySelectorAll('.legal-modal-link').forEach(link => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
@@ -151,9 +165,105 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  // Check URL hash for routing e.g. #admin, #partner
+  handleHashRouting();
+  window.addEventListener('hashchange', handleHashRouting);
+
   // Re-run icons
   window.lucide.createIcons();
 });
+
+// View Switching Coordinator
+export function switchView(targetView) {
+  currentView = targetView;
+  const landingWrap = document.getElementById('landing-page-wrap');
+  const portalRoot = document.getElementById('portal-app-root');
+  const dock = document.getElementById('platform-mode-dock');
+
+  // Update active dock buttons
+  dock?.querySelectorAll('.dock-btn').forEach(btn => btn.classList.remove('active'));
+
+  if (targetView === 'landing') {
+    if (landingWrap) landingWrap.style.display = 'block';
+    if (portalRoot) {
+      portalRoot.style.display = 'none';
+      portalRoot.innerHTML = '';
+    }
+    const landBtn = document.getElementById('dock-btn-landing');
+    if (landBtn) landBtn.classList.add('active');
+    window.location.hash = '';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else if (targetView === 'admin') {
+    if (landingWrap) landingWrap.style.display = 'none';
+    if (portalRoot) {
+      portalRoot.style.display = 'block';
+      if (!authStore.isSuperAdmin()) {
+        authStore.loginAs('admin');
+      }
+      initAdminPortal(
+        portalRoot,
+        () => switchView('landing'),
+        () => switchView('partner')
+      );
+    }
+    const adminBtn = document.getElementById('dock-btn-admin');
+    if (adminBtn) adminBtn.classList.add('active');
+    window.location.hash = '#admin';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else if (targetView === 'partner') {
+    if (landingWrap) landingWrap.style.display = 'none';
+    if (portalRoot) {
+      portalRoot.style.display = 'block';
+      if (!authStore.isAffiliate()) {
+        authStore.loginAs('partnerPlatinum');
+      }
+      initAffiliatePortal(
+        portalRoot,
+        () => switchView('landing'),
+        () => switchView('admin')
+      );
+    }
+    const partBtn = document.getElementById('dock-btn-partner');
+    if (partBtn) partBtn.classList.add('active');
+    window.location.hash = '#partner';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  if (window.lucide) window.lucide.createIcons();
+}
+
+function handleHashRouting() {
+  const hash = window.location.hash;
+  if (hash === '#admin' || hash.startsWith('#admin/')) {
+    switchView('admin');
+  } else if (hash === '#partner' || hash.startsWith('#partner/')) {
+    switchView('partner');
+  } else if (hash === '#login') {
+    openAuthModal('login', (user) => {
+      if (user.role === 'SUPER_ADMIN') switchView('admin');
+      else switchView('partner');
+    });
+  }
+}
+
+function setupPlatformModeDock() {
+  const dockLanding = document.getElementById('dock-btn-landing');
+  dockLanding?.addEventListener('click', () => switchView('landing'));
+
+  const dockAdmin = document.getElementById('dock-btn-admin');
+  dockAdmin?.addEventListener('click', () => switchView('admin'));
+
+  const dockPartner = document.getElementById('dock-btn-partner');
+  dockPartner?.addEventListener('click', () => switchView('partner'));
+
+  const dockAuth = document.getElementById('dock-btn-auth');
+  dockAuth?.addEventListener('click', () => {
+    openAuthModal('login', (user) => {
+      if (user.role === 'SUPER_ADMIN') switchView('admin');
+      else switchView('partner');
+    });
+  });
+}
 
 // Toast notification helper
 function showToast(message, type = 'success') {
@@ -227,14 +337,16 @@ function handleModalOpen(modalType, data) {
       </div>
     `;
   } else if (modalType === 'promote-project') {
-    const affiliateLink = `https://proppartner.network/ref/partner-demo?project=${data.id}`;
+    const user = authStore.getUser();
+    const affId = user ? (user.affiliateId || 'AFF-000101') : 'AFF-000101';
+    const affiliateLink = `https://proppartner.network/ref/${affId}/${data.id}`;
     modalBody.innerHTML = `
       <button type="button" class="modal-close-btn" id="modal-close"><i data-lucide="x"></i></button>
       <div style="text-align: center;">
         <div class="section-eyebrow"><i data-lucide="share-2"></i> AFFILIATE ASSET GENERATOR</div>
         <h2 style="font-size: 1.8rem; margin: 8px 0 12px 0;">Promote ${data.name}</h2>
         <p style="color: var(--text-secondary); margin-bottom: 24px;">
-          Share your unique tracked referral link. Inquiries via this link are locked to your affiliate profile for 90 days.
+          Share your unique tracked referral link. Inquiries via this link are locked to your affiliate profile for 180 days with duplicate collision protection.
         </p>
 
         <div style="background: #06090E; border: 1px solid var(--border-gold); padding: 16px; border-radius: 12px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; gap: 12px;">
@@ -246,173 +358,168 @@ function handleModalOpen(modalType, data) {
         </div>
 
         <div style="background: rgba(255, 255, 255, 0.03); padding: 16px; border-radius: 12px; font-size: 0.82rem; color: var(--text-secondary); text-align: left; margin-bottom: 24px;">
-          <strong style="color: #FFFFFF; display: block; margin-bottom: 4px;"><i data-lucide="shield-check" style="width:14px; height:14px; color:#10B981; display:inline-block; vertical-align:middle;"></i> Guaranteed Attribution</strong>
-          Leads who click your link or register with our concierge desk are assigned directly to your Partner ID. You will receive an instant email notification when a site tour is booked.
+          <strong style="color: #FFFFFF; display: block; margin-bottom: 4px;"><i data-lucide="shield-check" style="width:14px; height:14px; color:#10B981; display:inline-block; vertical-align:middle;"></i> Guaranteed Attribution & Direct Payouts</strong>
+          Leads who click your link or register with our concierge desk are assigned directly to your Partner ID. Commission entitlements are credited to your personal ledger upon contract verification.
         </div>
 
-        <a href="#register" class="btn btn-secondary w-full" id="modal-onboard-cta">
-          <span>NEW PARTNER? SUBMIT APPLICATION</span>
-        </a>
+        <div style="display: flex; gap: 12px; justify-content: center;">
+          <button type="button" class="btn btn-secondary" id="modal-goto-portal-btn">
+            <i data-lucide="layout-dashboard"></i>
+            <span>OPEN PARTNER PORTAL</span>
+          </button>
+        </div>
       </div>
     `;
-
-    modalBody.querySelector('#copy-modal-link-btn')?.addEventListener('click', () => {
-      navigator.clipboard.writeText(affiliateLink).then(() => {
-        showToast('Referral link copied to clipboard!');
-      });
-    });
   }
 
-  if (window.lucide) window.lucide.createIcons();
-  overlay.classList.add('open');
+  overlay.classList.add('active');
+  window.lucide.createIcons();
 
-  // Close handlers
-  modalBody.querySelector('#modal-close')?.addEventListener('click', () => overlay.classList.remove('open'));
-  overlay.addEventListener('click', (e) => {
-    if (e.target === overlay) overlay.classList.remove('open');
+  document.getElementById('modal-close')?.addEventListener('click', () => {
+    overlay.classList.remove('active');
   });
-  modalBody.querySelector('#modal-quick-promote')?.addEventListener('click', () => {
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) overlay.classList.remove('active');
+  });
+
+  document.getElementById('copy-modal-link-btn')?.addEventListener('click', () => {
+    const user = authStore.getUser();
+    const affId = user ? (user.affiliateId || 'AFF-000101') : 'AFF-000101';
+    navigator.clipboard.writeText(`https://proppartner.network/ref/${affId}/${data.id}`);
+    showToast('Custom project referral link copied to clipboard!');
+  });
+
+  document.getElementById('modal-quick-promote')?.addEventListener('click', () => {
     handleModalOpen('promote-project', data);
   });
-  modalBody.querySelector('#modal-apply-btn')?.addEventListener('click', () => {
-    overlay.classList.remove('open');
+
+  document.getElementById('modal-apply-btn')?.addEventListener('click', () => {
+    overlay.classList.remove('active');
   });
-  modalBody.querySelector('#modal-onboard-cta')?.addEventListener('click', () => {
-    overlay.classList.remove('open');
+
+  document.getElementById('modal-goto-portal-btn')?.addEventListener('click', () => {
+    overlay.classList.remove('active');
+    switchView('partner');
   });
 }
 
 function handleLegalModal(type) {
+  const overlay = document.getElementById('app-modal-overlay');
+  const modalBody = document.getElementById('app-modal-body');
+  if (!overlay || !modalBody) return;
+
   const titles = {
-    terms: "Affiliate Terms & Conditions",
-    agreement: "Official Partner Network Agreement",
-    privacy: "Privacy & Data Protection Policy",
-    commission: "Commission Structure & Payout Policy",
-    referral: "Referral Attribution & Cookie Policy",
-    disclaimer: "Legal Disclaimer & Regulatory Notice"
+    terms: 'Terms & Conditions',
+    agreement: 'Official Affiliate Master Agreement',
+    privacy: 'Privacy & Data Governance Policy',
+    commission: 'Commission Calculation & Settlement Policy',
+    referral: 'Referral Attribution & Duplicate Policy',
+    disclaimer: 'Legal & Risk Disclaimer'
   };
 
-  const dummyProject = {
-    id: "legal-doc",
-    name: titles[type] || "Legal Policy",
-    tagline: "Official Compliance & Governance Documentation (2026 Edition)",
-    type: "Legal Policy",
-    startingPrice: 0,
-    commissionRate: 0,
-    status: "Active",
-    completionDate: "2026",
-    image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80",
-    highlights: [
-      "Commissions are payable only upon completed qualifying transactions and clearance of required buyer deposits.",
-      "90-day multi-channel CRM lead attribution lock on registered client introductions.",
-      "Full transparency with zero undisclosed admin deductions or hidden fees.",
-      "Strict compliance with local real estate advertising and anti-money laundering regulations."
-    ]
-  };
+  modalBody.innerHTML = `
+    <button type="button" class="modal-close-btn" id="modal-close"><i data-lucide="x"></i></button>
+    <div class="section-eyebrow"><i data-lucide="shield-check"></i> LEGAL & COMPLIANCE</div>
+    <h2 style="font-size: 1.6rem; margin: 6px 0 16px 0;">${titles[type] || 'Compliance Policy'}</h2>
+    <div style="font-size: 0.88rem; color: #CBD5E1; line-height: 1.7; max-height: 400px; overflow-y: auto; padding-right: 12px;">
+      <p style="margin-bottom: 12px;">This document establishes the binding terms governing all affiliate partners and transactions transacted through PropPartner.</p>
+      <h4 style="color: var(--gold-light); margin: 16px 0 6px 0;">1. Commission Eligibility</h4>
+      <p style="margin-bottom: 12px;">Commissions are calculated based on verified net contract sales value and are payable upon buyer token clearance and developer escrow deed registration.</p>
+      <h4 style="color: var(--gold-light); margin: 16px 0 6px 0;">2. Duplicate Lead Protection</h4>
+      <p style="margin-bottom: 12px;">In the event of duplicate referral submissions for identical buyer contacts, administrative review will determine attribution based on chronological submission and client confirmation.</p>
+      <h4 style="color: var(--gold-light); margin: 16px 0 6px 0;">3. Anti-Money Laundering & KYC</h4>
+      <p>All affiliate partners must provide verifiable tax and banking details prior to wire disbursement approval.</p>
+    </div>
+    <div style="margin-top: 24px; text-align: right;">
+      <button type="button" class="btn btn-gold btn-sm" id="legal-agree-btn"><span>I UNDERSTAND & AGREE</span></button>
+    </div>
+  `;
 
-  handleModalOpen('project-detail', dummyProject);
+  overlay.classList.add('active');
+  window.lucide.createIcons();
+
+  document.getElementById('modal-close')?.addEventListener('click', () => overlay.classList.remove('active'));
+  document.getElementById('legal-agree-btn')?.addEventListener('click', () => overlay.classList.remove('active'));
 }
 
-// Sub-renderers
+// -------------------------------------------------------------
+// Landing Page Rendering Helpers
+// -------------------------------------------------------------
 function renderTrustCategories() {
-  const grid = document.getElementById('trust-categories-grid');
-  if (!grid) return;
-
-  grid.innerHTML = trustCategories.map(cat => `
-    <div class="trust-persona-card glass-card">
-      <div class="persona-icon"><i data-lucide="${cat.icon}"></i></div>
-      <div class="persona-info">
-        <h4>${cat.title}</h4>
-        <p>${cat.description}</p>
-      </div>
+  const mount = document.getElementById('trust-categories-mount');
+  if (!mount) return;
+  mount.innerHTML = trustCategories.map(cat => `
+    <div class="trust-badge-item">
+      <i data-lucide="${cat.icon}"></i>
+      <span>${cat.label}</span>
     </div>
   `).join('');
 }
 
 function renderProcessTimeline() {
-  const grid = document.getElementById('timeline-steps-grid');
-  if (!grid) return;
-
-  grid.innerHTML = processSteps.map(step => `
-    <div class="timeline-step-card glass-card tilt-target-3d">
-      <div>
-        <div class="step-card-top">
-          <span class="step-num-badge">${step.step}</span>
-          <div class="step-icon-wrap"><i data-lucide="${step.icon}"></i></div>
-        </div>
-        <h3 class="step-title">${step.title}</h3>
-        <span class="step-subtitle">${step.subtitle}</span>
-        <p class="step-desc">${step.description}</p>
+  const mount = document.getElementById('process-timeline-mount');
+  if (!mount) return;
+  mount.innerHTML = processSteps.map(step => `
+    <div class="timeline-step glass-card">
+      <div class="step-badge">${step.number}</div>
+      <div class="step-icon-wrap">
+        <i data-lucide="${step.icon}"></i>
       </div>
-      <div class="step-pill-highlight">
-        <i data-lucide="check-circle" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle;"></i>
-        ${step.highlight}
-      </div>
+      <h3 class="step-title">${step.title}</h3>
+      <p class="step-desc">${step.description}</p>
     </div>
   `).join('');
 }
 
 function renderWhyJoin() {
-  const grid = document.getElementById('why-join-grid');
-  if (!grid) return;
-
-  grid.innerHTML = whyJoinFeatures.map(feat => `
-    <div class="why-card glass-card tilt-target-3d">
-      <div class="why-top-row">
-        <span class="why-num">${feat.number}</span>
-        <div class="why-icon"><i data-lucide="${feat.icon}"></i></div>
+  const mount = document.getElementById('why-join-mount');
+  if (!mount) return;
+  mount.innerHTML = whyJoinFeatures.map(feat => `
+    <div class="why-card glass-card">
+      <div class="why-icon-wrap">
+        <i data-lucide="${feat.icon}"></i>
       </div>
-      <h3 class="why-title">${feat.title}</h3>
-      <p class="why-desc">${feat.description}</p>
+      <h3 class="why-card-title">${feat.title}</h3>
+      <p class="why-card-desc">${feat.description}</p>
     </div>
   `).join('');
 }
 
 function renderPersonas() {
-  const grid = document.getElementById('personas-grid-mount');
-  if (!grid) return;
-
-  grid.innerHTML = personas.map(p => `
-    <div class="persona-profile-card glass-card tilt-target-3d">
-      <div class="p-card-top">
-        <div class="p-card-icon"><i data-lucide="${p.icon}"></i></div>
-        <h3 class="p-card-role">${p.role}</h3>
+  const mount = document.getElementById('personas-mount');
+  if (!mount) return;
+  mount.innerHTML = personas.map(p => `
+    <div class="persona-card glass-card">
+      <div class="persona-icon-wrap">
+        <i data-lucide="${p.icon}"></i>
       </div>
-      <div class="p-card-headline">${p.headline}</div>
-      <p class="p-card-desc">${p.description}</p>
-      <div class="p-card-earning-pill">
-        <span>Earning Target:</span>
-        <strong>${p.earningsPotential}</strong>
-      </div>
-      <div class="p-card-strategy">
-        <strong>Playbook:</strong> <span>${p.strategy}</span>
+      <h3 class="persona-title">${p.title}</h3>
+      <p class="persona-desc">${p.description}</p>
+      <div class="persona-tag">
+        <i data-lucide="check"></i>
+        <span>${p.highlight}</span>
       </div>
     </div>
   `).join('');
 }
 
 function renderTestimonials() {
-  const grid = document.getElementById('stories-grid-mount');
-  if (!grid) return;
-
-  grid.innerHTML = testimonials.map(item => `
-    <div class="story-card glass-card tilt-target-3d">
-      <div>
-        <div class="story-tag-pill">
-          <i data-lucide="award" style="width: 14px; height: 14px;"></i>
-          ${item.tag}
-        </div>
-        <p class="story-quote">"${item.quote}"</p>
+  const mount = document.getElementById('testimonials-mount');
+  if (!mount) return;
+  mount.innerHTML = testimonials.map(t => `
+    <div class="testimonial-card glass-card">
+      <div class="test-quote-icon">“</div>
+      <p class="test-quote-text">${t.quote}</p>
+      <div class="test-stat-pill">
+        <i data-lucide="trending-up"></i>
+        <span>${t.earnings}</span>
       </div>
-      <div class="story-footer">
-        <img src="${item.avatar}" alt="${item.name}" class="story-avatar" loading="lazy">
-        <div class="story-user-meta">
-          <h4>${item.name}</h4>
-          <span>${item.role} • ${item.city}</span>
-          <div class="story-comm-pill">
-            <i data-lucide="check-check" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle; color: #10B981;"></i>
-            ${item.referrals} Closed Sales • ${item.commissionEarned} Paid
-          </div>
+      <div class="test-author-info">
+        <img src="${t.avatar}" alt="${t.name}" class="test-avatar" loading="lazy" width="48" height="48">
+        <div>
+          <h4 class="test-author-name">${t.name}</h4>
+          <p class="test-author-role">${t.role}</p>
+          <span class="test-author-loc">${t.location}</span>
         </div>
       </div>
     </div>
