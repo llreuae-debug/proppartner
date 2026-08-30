@@ -3727,6 +3727,167 @@ img {
   background: rgba(239, 68, 68, 0.04) !important;
 }
 
+/* ==========================================================================
+   ADMIN — PROJECTS MANAGER CARD GRID
+   ========================================================================== */
+.projects-admin-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 24px;
+}
+
+.admin-project-card {
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.admin-project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.5);
+}
+
+/* Image Media Panel */
+.proj-card-media {
+  position: relative;
+  height: 180px;
+  background-size: cover;
+  background-position: center;
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+/* Dark gradient overlay so text is readable over image */
+.proj-card-media::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(8,11,18,0.25) 0%, rgba(8,11,18,0.75) 100%);
+  pointer-events: none;
+}
+
+/* Badges row: status pill + commission rate — top-left */
+.proj-card-badges {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 2;
+}
+
+.badge-comm-rate {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 100px;
+  background: rgba(212, 175, 55, 0.2);
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  color: #FDE68A;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+/* Title + Location overlay — bottom of image */
+.proj-media-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 12px 16px;
+  z-index: 2;
+}
+
+.proj-media-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0 0 4px;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.proj-media-loc {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.75);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.proj-media-loc i {
+  width: 13px;
+  height: 13px;
+  flex-shrink: 0;
+  color: var(--gold-light);
+}
+
+/* Card body below image */
+.proj-card-body {
+  padding: 18px 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1;
+}
+
+.proj-meta-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  flex-wrap: wrap;
+  line-height: 1.4;
+}
+.proj-meta-row strong { color: var(--text-primary); }
+
+/* 3-column KPI mini-grid */
+.proj-kpis-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 10px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+
+.p-kpi {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.p-kpi span {
+  font-size: 0.68rem;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.p-kpi strong {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+/* Full-width action button row */
+.proj-actions-row {
+  margin-top: auto;
+}
+.proj-actions-row .btn {
+  width: 100%;
+  justify-content: center;
+}
+
 /* 12-Tab Project ERP Layout */
 .project-erp-view {
   gap: 20px;
