@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 340" width="100%" height="100%" fill="none">
+  <defs>
+    <!-- Sapphire / Navy Blue 3D Gradients -->
+    <linearGradient id="iconNavyDeep" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3B82F6" />
+      <stop offset="60%" stop-color="#1E3A8A" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </linearGradient>
+
+    <linearGradient id="iconNavyLight" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#60A5FA" />
+      <stop offset="100%" stop-color="#2563EB" />
+    </linearGradient>
+
+    <!-- Emerald / Teal Green 3D Gradients -->
+    <linearGradient id="iconEmeraldDeep" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34D399" />
+      <stop offset="40%" stop-color="#10B981" />
+      <stop offset="100%" stop-color="#047857" />
+    </linearGradient>
+
+    <linearGradient id="iconEmeraldDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#064E3B" />
+    </linearGradient>
+
+    <!-- Center Spire Split Gradients -->
+    <linearGradient id="iconCenterNavy" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3B82F6" />
+      <stop offset="50%" stop-color="#1E3A8A" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </linearGradient>
+
+    <linearGradient id="iconCenterEmerald" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34D399" />
+      <stop offset="60%" stop-color="#059669" />
+      <stop offset="100%" stop-color="#064E3B" />
+    </linearGradient>
+
+    <!-- Drop Shadow Filter -->
+    <filter id="iconShadow" x="-10%" y="-10%" width="120%" height="120%" filterUnits="userSpaceOnUse">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000000" flood-opacity="0.4" />
+    </filter>
+  </defs>
+
+  <g transform="translate(-70, -10)">
+    <!-- ==================== 1. 3D SKYSCRAPERS ==================== -->
+    <g filter="url(#iconShadow)">
+      <!-- LEFT BUILDING (Navy) -->
+      <path d="M210 220 L210 135 L245 110 L245 220 Z" fill="url(#iconNavyDeep)" />
+      <path d="M245 110 L260 98 L260 220 L245 220 Z" fill="url(#iconNavyLight)" opacity="0.95" />
+
+      <!-- CENTER TALL TOWER -->
+      <path d="M260 68 L270 42 L270 220 L260 220 Z" fill="url(#iconCenterNavy)" />
+      <path d="M270 42 L280 68 L308 68 L308 220 L270 220 Z" fill="url(#iconCenterEmerald)" />
+      <line x1="270" y1="42" x2="270" y2="220" stroke="#93C5FD" stroke-width="1.2" opacity="0.6" />
+
+      <!-- RIGHT BUILDING (Emerald Green) -->
+      <path d="M308 120 L336 142 L336 220 L308 220 Z" fill="url(#iconEmeraldDeep)" />
+      <path d="M336 142 L350 152 L350 220 L336 220 Z" fill="url(#iconEmeraldDark)" />
+      <rect x="314" y="152" width="12" height="13" rx="2" fill="#E2E8F0" opacity="0.9" />
+      <rect x="314" y="172" width="12" height="13" rx="2" fill="#E2E8F0" opacity="0.9" />
+    </g>
+
+    <!-- ==================== 2. INTERLOCKING PARTNERS ==================== -->
+    <g filter="url(#iconShadow)">
+      <circle cx="178" cy="168" r="26" fill="url(#iconNavyDeep)" stroke="#3B82F6" stroke-width="1.5" />
+      <circle cx="362" cy="168" r="26" fill="url(#iconEmeraldDeep)" stroke="#34D399" stroke-width="1.5" />
+
+      <path d="M206 172 C206 172 258 220 280 242 C295 258 285 284 266 295 C242 308 198 300 174 260 C160 236 166 196 192 176 C198 172 206 172 206 172 Z" 
+            fill="none" stroke="url(#iconNavyDeep)" stroke-width="26" stroke-linecap="round" stroke-linejoin="round" />
+
+      <path d="M334 172 C334 172 282 220 260 242 C245 258 255 284 274 295 C298 308 342 300 366 260 C380 236 374 196 348 176 C342 172 334 172 334 172 Z" 
+            fill="none" stroke="url(#iconEmeraldDeep)" stroke-width="26" stroke-linecap="round" stroke-linejoin="round" />
+
+      <!-- Center Handshake -->
+      <path d="M246 208 L294 256" stroke="url(#iconNavyDeep)" stroke-width="26" stroke-linecap="round" />
+      <path d="M294 208 L268 234" stroke="url(#iconEmeraldDeep)" stroke-width="26" stroke-linecap="round" />
+      <path d="M252 250 L246 256" stroke="url(#iconEmeraldDeep)" stroke-width="26" stroke-linecap="round" />
+    </g>
+  </g>
+</svg>

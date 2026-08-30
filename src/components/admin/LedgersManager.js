@@ -41,6 +41,9 @@ export function renderLedgersManager(container, navigateTo, initialParams = {}) 
             <p class="module-subtitle">Immutable double-entry transaction journals, project ledgers, affiliate balances, and audit adjustments</p>
           </div>
           <div class="module-actions">
+            <button type="button" class="btn btn-secondary btn-sm" id="btn-print-ledger-pdf">
+              <i data-lucide="printer"></i> <span>Print / PDF Statement</span>
+            </button>
             <button type="button" class="btn btn-secondary btn-sm" id="btn-export-ledger-csv">
               <i data-lucide="download"></i> <span>Export CSV</span>
             </button>
@@ -178,6 +181,14 @@ export function renderLedgersManager(container, navigateTo, initialParams = {}) 
       };
     }
 
+    const printBtn = container.querySelector('#btn-print-ledger-pdf');
+    if (printBtn) {
+      printBtn.onclick = () => {
+        const scopeTitle = activeLedger === 'master' ? 'Master System Financial Ledger' : activeLedger === 'project' ? `Project Ledger — ${selectedProj ? selectedProj.name : 'All Projects'}` : `Affiliate Ledger — ${selectedAff ? selectedAff.name : 'All Affiliates'}`;
+        printLedgerPDF(transactions, scopeTitle, curr);
+      };
+    }
+
     const adjBtn = container.querySelector('#btn-add-adj-modal');
     if (adjBtn) adjBtn.onclick = () => showAdjustmentModal();
 
@@ -300,6 +311,84 @@ export function renderLedgersManager(container, navigateTo, initialParams = {}) 
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+  }
+
+  function printLedgerPDF(transactions, title, curr) {
+    const printWindow = window.open('', '_blank');
+    if (!printWindow) return;
+    printWindow.document.write(`
+      <!DOCTYPE html>
+      <html>
+      <head>
+        <title>PropPartner — Official Financial Ledger Statement</title>
+        <style>
+          body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding: 40px; color: #0F172A; background: #FFF; }
+          .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #E2E8F0; padding-bottom: 20px; margin-bottom: 24px; }
+          .logo { height: 60px; object-fit: contain; }
+          .meta { text-align: right; font-size: 12px; color: #64748B; }
+          .title { font-size: 22px; font-weight: 800; color: #1E3A8A; margin: 0 0 6px 0; }
+          table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 12px; }
+          th { background: #F8FAFC; border: 1px solid #CBD5E1; padding: 10px 8px; text-align: left; font-weight: 700; color: #1E293B; }
+          td { border: 1px solid #E2E8F0; padding: 8px; color: #334155; }
+          tr:nth-child(even) { background: #F8FAFC; }
+          .text-right { text-align: right; }
+          .footer { margin-top: 36px; padding-top: 16px; border-top: 1px solid #E2E8F0; font-size: 11px; color: #94A3B8; display: flex; justify-content: space-between; }
+        </style>
+      </head>
+      <body>
+        <div class="header">
+          <div>
+            <img src="/assets/proppartner-logo.png" alt="PropPartner" class="logo">
+          </div>
+          <div class="meta">
+            <div><strong>PropPartner Network Financial Ledger</strong></div>
+            <div>Generated: ${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}</div>
+            <div>Document Ref: STMT-${Date.now()}</div>
+          </div>
+        </div>
+        <h1 class="title">${title}</h1>
+        <p style="font-size: 13px; color: #64748B; margin: 0 0 16px 0;">Official double-entry immutable audit statement of commission accruals, escrow disbursements, and balance journals.</p>
+        <table>
+          <thead>
+            <tr>
+              <th>Tx ID</th>
+              <th>Date</th>
+              <th>Type</th>
+              <th>Project</th>
+              <th>Unit</th>
+              <th>Affiliate</th>
+              <th>Gross Amount</th>
+              <th class="text-right">Net Commission</th>
+              <th>Reference</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${transactions.map(t => `
+              <tr>
+                <td><code>${t.id}</code></td>
+                <td>${t.date}</td>
+                <td><strong>${t.type}</strong></td>
+                <td>${t.projectId}</td>
+                <td>${t.unitId || '-'}</td>
+                <td>${t.affiliateName || t.affiliateId}</td>
+                <td>${formatCurrencyValue(t.amount, curr)}</td>
+                <td class="text-right"><strong>${formatCurrencyValue(t.netCommission, curr)}</strong></td>
+                <td><code>${t.reference || 'REF-STD'}</code></td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+        <div class="footer">
+          <span>PropPartner Real Estate Affiliate Partner Network · Confidential Financial Record</span>
+          <span>Verified Double-Entry Escrow Ledger</span>
+        </div>
+        <script>
+          window.onload = function() { window.print(); }
+        </script>
+      </body>
+      </html>
+    `);
+    printWindow.document.close();
   }
 
   render();

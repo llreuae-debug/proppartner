@@ -11,20 +11,20 @@
   "categories": ["business", "finance", "productivity"],
   "icons": [
     {
-      "src": "/assets/proppartner-icon.png",
+      "src": "/assets/pwa-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/assets/proppartner-icon.png",
+      "src": "/assets/pwa-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any maskable"
     },
     {
       "src": "/assets/proppartner-logo.png",
-      "sizes": "512x512",
+      "sizes": "1200x861",
       "type": "image/png",
       "purpose": "any"
     }
