@@ -104,7 +104,7 @@ export function renderSEOManager(container) {
               <span class="text-muted text-xs" style="font-weight: 700; text-transform: uppercase;">Social Share (Open Graph / WhatsApp / LinkedIn) Card</span>
               <div class="og-preview-card glass-card" style="max-width: 480px; margin-top: 8px; border-radius: 12px; overflow: hidden; background: #0A0E17; border: 1px solid rgba(255,255,255,0.1);">
                 <div style="height: 180px; background: #0b0f19; overflow: hidden; position: relative; display: flex; align-items: center; justify-content: center; padding: 20px;">
-                  <img src="/assets/proppartner-logo.svg" alt="OG Preview" style="width: 85%; height: auto; object-fit: contain;">
+                  <img src="/assets/proppartner-logo.png" alt="OG Preview" style="width: 85%; height: auto; object-fit: contain;">
                 </div>
                 <div style="padding: 14px;">
                   <span style="font-size: 0.7rem; color: #94A3B8; text-transform: uppercase; font-family: var(--font-mono);">PROPPARTNER.PRO</span>

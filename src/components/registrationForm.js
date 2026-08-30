@@ -46,7 +46,7 @@ export function initRegistrationForm(formElement, successContainer, showToastCal
         successContainer.innerHTML = `
           <div class="registration-success-card glass-card">
             <div class="success-brand-logo">
-              <img src="/assets/proppartner-logo.svg" alt="PropPartner" class="success-logo-img" width="220" loading="lazy">
+              <img src="/assets/proppartner-logo.png" alt="PropPartner" class="success-logo-img" width="220" loading="lazy">
             </div>
             <div class="success-icon-badge">
               <i data-lucide="check-circle-2"></i>
