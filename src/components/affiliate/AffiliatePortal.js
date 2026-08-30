@@ -31,7 +31,7 @@ export function initAffiliatePortal(container, onNavigateLanding, onSwitchAdminV
         <aside class="portal-sidebar glass-card" id="partner-sidebar">
           <div class="sidebar-brand-header">
             <a href="#partner" class="brand-logo brand-logo-img">
-              <img src="/assets/proppartner-icon.jpg" alt="PropPartner" class="logo-img-icon" width="34" height="34">
+              <img src="/assets/proppartner-icon.svg" alt="PropPartner" class="logo-img-icon" width="34" height="34">
               <div class="logo-text">PROP<span>PARTNER</span></div>
             </a>
             <span class="badge-role-partner">${aff.tier || 'Gold'} Partner</span>

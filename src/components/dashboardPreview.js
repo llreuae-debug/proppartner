@@ -100,7 +100,7 @@ export function initDashboardPreview(containerElement, currency = 'PKR') {
             <span class="dot green"></span>
           </div>
           <div class="dash-window-title">
-            <img src="/assets/proppartner-icon.jpg" alt="PropPartner" style="width:20px; height:20px; border-radius:5px; object-fit:cover; vertical-align:middle; margin-right:6px; border:1px solid rgba(26,155,107,0.5);">
+            <img src="/assets/proppartner-icon.svg" alt="PropPartner" style="width:20px; height:20px; object-fit:contain; vertical-align:middle; margin-right:6px;">
             <i data-lucide="shield-check" style="width:14px; height:14px; color:#10B981"></i>
             <span>PROPPARTNER 3D — LIVE PARTNER SESSION</span>
           </div>

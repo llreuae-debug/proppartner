@@ -31,7 +31,7 @@ export function renderMobileHeader(container, title, onToggleDrawer, onOpenNotif
           <i data-lucide="menu"></i>
         </button>
         <div class="mobile-header-brand">
-          <img src="/assets/proppartner-icon.jpg" alt="PropPartner" class="mobile-logo-icon" width="28" height="28">
+          <img src="/assets/proppartner-icon.svg" alt="PropPartner" class="mobile-logo-icon" width="28" height="28">
           <span class="mobile-header-title">${title || (isAdmin ? 'Admin ERP' : 'Partner Portal')}</span>
         </div>
       </div>

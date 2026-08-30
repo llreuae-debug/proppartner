@@ -44,7 +44,7 @@ export function renderCommissionView(container, onNavigateHome, onRegister) {
       <header class="legal-page-header glass-card">
         <div class="legal-header-inner container">
           <a href="#hero" class="brand-logo brand-logo-img" id="comm-home-logo-btn" title="PropPartner">
-            <img src="/assets/proppartner-icon.jpg" alt="PropPartner" class="logo-img-icon" width="36" height="36">
+            <img src="/assets/proppartner-icon.svg" alt="PropPartner" class="logo-img-icon" width="36" height="36">
             <div class="logo-text">PROP<span>PARTNER</span></div>
           </a>
 

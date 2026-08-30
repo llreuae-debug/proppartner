@@ -1,11 +1,12 @@
 // PropPartner Progressive Web App Service Worker
 
-const CACHE_NAME = 'proppartner-pwa-v1';
+const CACHE_NAME = 'proppartner-pwa-v2';
 const PRECACHE_ASSETS = [
   '/',
   '/index.html',
-  '/assets/proppartner-icon.jpg',
-  '/assets/proppartner-logo.jpg',
+  '/assets/proppartner-icon.svg',
+  '/assets/proppartner-icon.png',
+  '/assets/proppartner-logo.svg',
   '/assets/proppartner-logo.png',
   '/assets/hero-3d-visual.jpg',
   '/manifest.webmanifest'

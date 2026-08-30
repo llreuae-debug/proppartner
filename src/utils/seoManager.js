@@ -3,7 +3,7 @@
 
 const BASE_URL = 'https://proppartner.pro';
 const ORG_NAME = 'PropPartner';
-const DEFAULT_OG_IMAGE = 'https://proppartner.pro/assets/proppartner-logo.jpg';
+const DEFAULT_OG_IMAGE = 'https://proppartner.pro/assets/proppartner-logo.png';
 
 export const seoRoutes = {
   home: {
@@ -218,8 +218,8 @@ function injectStructuredData(customSchemas = [], pageContext = {}) {
     'name': 'PropPartner',
     'legalName': 'PropPartner Real Estate Affiliate Network',
     'url': BASE_URL,
-    'logo': `${BASE_URL}/assets/proppartner-logo.jpg`,
-    'image': `${BASE_URL}/assets/proppartner-logo.jpg`,
+    'logo': `${BASE_URL}/assets/proppartner-logo.png`,
+    'image': `${BASE_URL}/assets/proppartner-logo.png`,
     'description': 'The premier 3D real estate partner network connecting high-performing affiliates with verified high-yield residential towers and commercial developments.',
     'telephone': '+923228654411',
     'email': 'llre.uae@gmail.com',
@@ -332,7 +332,7 @@ export function buildArticleSchema({ title, description, url, image, datePublish
       'name': 'PropPartner',
       'logo': {
         '@type': 'ImageObject',
-        'url': `${BASE_URL}/assets/proppartner-logo.jpg`
+        'url': `${BASE_URL}/assets/proppartner-logo.png`
       }
     }
   };

@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="100%" height="100%" fill="none">
+  <defs>
+    <!-- Gold Gradients -->
+    <linearGradient id="iconGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF0B3" />
+      <stop offset="30%" stop-color="#E5BA43" />
+      <stop offset="70%" stop-color="#D4AF37" />
+      <stop offset="100%" stop-color="#9A7B20" />
+    </linearGradient>
+
+    <!-- Cyan / Platinum Tech Gradients -->
+    <linearGradient id="iconCyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#80F7FF" />
+      <stop offset="50%" stop-color="#00F2FE" />
+      <stop offset="100%" stop-color="#008B99" />
+    </linearGradient>
+
+    <!-- Deep Blue Metallic Accent -->
+    <linearGradient id="iconMetalGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2D3748" />
+      <stop offset="100%" stop-color="#0F172A" />
+    </linearGradient>
+
+    <!-- Glow Filter -->
+    <filter id="iconGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="2.5" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- Ambient Glow subtle halo -->
+  <circle cx="64" cy="64" r="54" fill="url(#iconGoldGrad)" opacity="0.08" filter="url(#iconGlow)" />
+
+  <!-- Left Tower (Modern Beveled Skyscraper) -->
+  <path d="M26 106 L26 52 L50 34 L50 106 Z" fill="url(#iconMetalGrad)" stroke="url(#iconCyanGrad)" stroke-width="2.2" stroke-linejoin="round" />
+  <!-- Left Tower Windows -->
+  <line x1="34" y1="56" x2="34" y2="100" stroke="#00F2FE" stroke-width="1.8" opacity="0.65" stroke-dasharray="4 3" />
+  <line x1="42" y1="48" x2="42" y2="100" stroke="#00F2FE" stroke-width="1.8" opacity="0.65" stroke-dasharray="4 3" />
+
+  <!-- Center Tower (Tall Master Penthouse Spire) -->
+  <path d="M52 106 L52 18 L76 4 L76 106 Z" fill="#060A12" stroke="url(#iconGoldGrad)" stroke-width="2.8" stroke-linejoin="round" />
+  <path d="M76 4 L98 18 L98 106 L76 106 Z" fill="url(#iconMetalGrad)" stroke="url(#iconGoldGrad)" stroke-width="2.8" stroke-linejoin="round" />
+  <!-- Spire Peak -->
+  <polygon points="76,0 73.5,6 78.5,6" fill="url(#iconGoldGrad)" />
+  <!-- Center Tower Facets -->
+  <line x1="64" y1="26" x2="64" y2="100" stroke="url(#iconGoldGrad)" stroke-width="2" opacity="0.8" stroke-dasharray="5 3" />
+  <line x1="86" y1="26" x2="86" y2="100" stroke="url(#iconGoldGrad)" stroke-width="2" opacity="0.8" stroke-dasharray="5 3" />
+
+  <!-- Right Tower (Terraced Luxury Villa Wing) -->
+  <path d="M100 106 L100 46 L122 60 L122 106 Z" fill="#060A12" stroke="url(#iconCyanGrad)" stroke-width="2.2" stroke-linejoin="round" />
+  <!-- Right Tower Windows -->
+  <line x1="110" y1="58" x2="110" y2="100" stroke="#00F2FE" stroke-width="1.8" opacity="0.65" stroke-dasharray="4 3" />
+
+  <!-- Interlocking Partnership Chain Link / Infinite Loop Base -->
+  <path d="M14 90 C14 76 30 74 44 74 C54 74 64 80 70 87 L62 93 C56 89 50 85 44 85 C34 85 25 87 25 92 C25 97 34 99 44 99 L82 99 C92 99 104 103 104 110 C104 118 90 122 78 122 L38 122 C22 122 14 107 14 90 Z" 
+        fill="url(#iconGoldGrad)" />
+  
+  <path d="M114 90 C114 76 98 74 84 74 C74 74 64 80 58 87 L66 93 C72 89 78 85 84 85 C94 85 103 87 103 92 C103 97 94 99 84 99 L46 99 C36 99 24 103 24 110 C24 118 38 122 50 122 L90 122 C106 122 114 107 114 90 Z" 
+        fill="url(#iconCyanGrad)" opacity="0.9" />
+
+  <!-- Central Link Diamond Accent -->
+  <polygon points="64,90 71,97 64,104 57,97" fill="#FFFFFF" filter="url(#iconGlow)" />
+</svg>

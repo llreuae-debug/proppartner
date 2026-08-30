@@ -397,19 +397,19 @@ img {
 
 /* Real logo image in header */
 .logo-img-icon {
-  width: 42px;
-  height: 42px;
-  object-fit: cover;
-  border-radius: 10px;
-  border: 1px solid rgba(212, 175, 55, 0.4);
-  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.5), 0 6px 18px rgba(26, 155, 107, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+  background: transparent;
+  border-radius: 8px;
+  border: none;
+  filter: drop-shadow(0 2px 8px rgba(212, 175, 55, 0.35));
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   flex-shrink: 0;
 }
 .brand-logo-img:hover .logo-img-icon {
-  transform: translateY(-2px) scale(1.06);
-  box-shadow: 0 6px 0 rgba(0, 0, 0, 0.5), 0 12px 24px rgba(26, 155, 107, 0.5);
-  border-color: rgba(26, 155, 107, 0.7);
+  transform: translateY(-2px) scale(1.08);
+  filter: drop-shadow(0 4px 14px rgba(212, 175, 55, 0.6));
 }
 
 /* Footer full logo */
@@ -417,14 +417,20 @@ img {
   margin-bottom: 20px;
 }
 .footer-logo-full {
-  width: 220px;
+  width: 240px;
   max-width: 100%;
   height: auto;
-  border-radius: 14px;
-  background: #FFFFFF;
-  padding: 14px 18px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.08);
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+  filter: drop-shadow(0 4px 16px rgba(212, 175, 55, 0.25));
   display: block;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.footer-logo-full:hover {
+  transform: translateY(-2px);
+  filter: drop-shadow(0 8px 24px rgba(212, 175, 55, 0.45));
 }
 
 /* Nav Menu (Strictly 1-Line) */
@@ -2194,7 +2200,7 @@ img {
 .site-footer {
   background: #04060A;
   border-top: 1px solid var(--border-subtle);
-  padding: 80px 0 40px 0;
+  padding: 80px 0 110px 0;
 }
 
 .footer-top-grid {
@@ -2606,18 +2612,19 @@ img {
   margin-bottom: 20px;
 }
 .reg-logo-badge-img {
-  width: 68px;
-  height: 68px;
-  border-radius: 14px;
-  object-fit: cover;
-  background: #FFFFFF;
-  padding: 6px;
-  box-shadow: 0 4px 0 rgba(0,0,0,0.5), 0 8px 24px rgba(26, 155, 107, 0.4), 0 0 0 1px rgba(26, 155, 107, 0.3);
+  width: 72px;
+  height: 72px;
+  border-radius: 12px;
+  object-fit: contain;
+  background: transparent;
+  padding: 0;
+  border: none;
+  filter: drop-shadow(0 4px 16px rgba(212, 175, 55, 0.4));
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .reg-logo-badge-img:hover {
-  transform: translateY(-4px) scale(1.08);
-  box-shadow: 0 8px 0 rgba(0,0,0,0.4), 0 16px 32px rgba(26, 155, 107, 0.55);
+  transform: translateY(-3px) scale(1.06);
+  filter: drop-shadow(0 8px 24px rgba(212, 175, 55, 0.6));
 }
 
 /* Final CTA section logo */
@@ -2627,13 +2634,14 @@ img {
   margin-bottom: 24px;
 }
 .final-cta-logo-img {
-  width: 90px;
-  height: 90px;
-  border-radius: 20px;
-  object-fit: cover;
-  background: #FFFFFF;
-  padding: 8px;
-  box-shadow: 0 6px 0 rgba(0,0,0,0.5), 0 12px 36px rgba(212, 175, 55, 0.4), 0 0 0 1px rgba(212, 175, 55, 0.3);
+  width: 96px;
+  height: 96px;
+  border-radius: 16px;
+  object-fit: contain;
+  background: transparent;
+  padding: 0;
+  border: none;
+  filter: drop-shadow(0 8px 28px rgba(212, 175, 55, 0.45));
   animation: logo-float 3s ease-in-out infinite;
 }
 @keyframes logo-float {
@@ -2648,12 +2656,13 @@ img {
   margin-bottom: 24px;
 }
 .success-logo-img {
-  width: 170px;
+  width: 220px;
   height: auto;
-  border-radius: 14px;
-  background: #FFFFFF;
-  padding: 12px 16px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.06);
+  border-radius: 0;
+  background: transparent;
+  padding: 0;
+  border: none;
+  filter: drop-shadow(0 4px 16px rgba(212, 175, 55, 0.35));
   display: block;
 }
 

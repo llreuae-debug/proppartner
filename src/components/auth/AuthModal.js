@@ -25,7 +25,7 @@ export function openAuthModal(initialTab = 'login', onAuthSuccess, initialData =
 
         <div class="auth-modal-header">
           <div class="auth-brand-badge">
-            <img src="/assets/proppartner-icon.jpg" alt="PropPartner" width="44" height="44">
+            <img src="/assets/proppartner-icon.svg" alt="PropPartner" width="44" height="44">
           </div>
           <h3 class="auth-modal-title">PropPartner <span class="gradient-text-gold">Partner Network</span></h3>
           <p class="auth-modal-subtitle">

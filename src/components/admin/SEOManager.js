@@ -87,7 +87,7 @@ export function renderSEOManager(container) {
               <span class="text-muted text-xs" style="font-weight: 700; text-transform: uppercase;">Google Search Result Snippet Preview</span>
               <div class="google-serp-preview glass-card" style="padding: 16px; margin-top: 8px; background: #0b0f19; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px;">
                 <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
-                  <img src="/assets/proppartner-icon.jpg" alt="Favicon" style="width: 16px; height: 16px; border-radius: 50%;">
+                  <img src="/assets/proppartner-icon.svg" alt="Favicon" style="width: 16px; height: 16px; object-fit: contain;">
                   <span style="font-size: 0.75rem; color: #94A3B8;">proppartner.pro &gt; ${selectedRouteKey}</span>
                 </div>
                 <div id="preview-serp-title" style="color: #8AB4F8; font-size: 1.15rem; font-weight: 600; text-decoration: underline; line-height: 1.3; cursor: pointer;">
@@ -103,8 +103,8 @@ export function renderSEOManager(container) {
             <div style="margin-top: 24px;">
               <span class="text-muted text-xs" style="font-weight: 700; text-transform: uppercase;">Social Share (Open Graph / WhatsApp / LinkedIn) Card</span>
               <div class="og-preview-card glass-card" style="max-width: 480px; margin-top: 8px; border-radius: 12px; overflow: hidden; background: #0A0E17; border: 1px solid rgba(255,255,255,0.1);">
-                <div style="height: 180px; background: #1E293B; overflow: hidden; position: relative;">
-                  <img src="/assets/proppartner-logo.jpg" alt="OG Preview" style="width: 100%; height: 100%; object-fit: cover;">
+                <div style="height: 180px; background: #0b0f19; overflow: hidden; position: relative; display: flex; align-items: center; justify-content: center; padding: 20px;">
+                  <img src="/assets/proppartner-logo.svg" alt="OG Preview" style="width: 85%; height: auto; object-fit: contain;">
                 </div>
                 <div style="padding: 14px;">
                   <span style="font-size: 0.7rem; color: #94A3B8; text-transform: uppercase; font-family: var(--font-mono);">PROPPARTNER.PRO</span>

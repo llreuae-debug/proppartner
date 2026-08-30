@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 540 140" width="100%" height="100%" fill="none">
+  <defs>
+    <!-- Gold Gradients -->
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFF0B3" />
+      <stop offset="30%" stop-color="#E5BA43" />
+      <stop offset="70%" stop-color="#D4AF37" />
+      <stop offset="100%" stop-color="#9A7B20" />
+    </linearGradient>
+
+    <!-- Cyan / Platinum Tech Gradients -->
+    <linearGradient id="cyanGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#80F7FF" />
+      <stop offset="50%" stop-color="#00F2FE" />
+      <stop offset="100%" stop-color="#008B99" />
+    </linearGradient>
+
+    <!-- Deep Blue Metallic Accent -->
+    <linearGradient id="metalGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4A5568" />
+      <stop offset="100%" stop-color="#1A202C" />
+    </linearGradient>
+
+    <!-- Glow Filter -->
+    <filter id="goldGlow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur" />
+      <feComposite in="SourceGraphic" in2="blur" operator="over" />
+    </filter>
+  </defs>
+
+  <!-- ICON EMBLEM (Left: X=10 to 110) -->
+  <g transform="translate(15, 10)">
+    <!-- Ambient Glow subtle halo -->
+    <circle cx="55" cy="60" r="50" fill="url(#goldGrad)" opacity="0.08" filter="url(#goldGlow)" />
+
+    <!-- Left Tower (Modern Beveled Skyscraper) -->
+    <path d="M22 105 L22 54 L44 38 L44 105 Z" fill="url(#metalGrad)" stroke="url(#cyanGrad)" stroke-width="2" stroke-linejoin="round" />
+    <!-- Left Tower Windows / Facet -->
+    <line x1="30" y1="58" x2="30" y2="100" stroke="#00F2FE" stroke-width="1.5" opacity="0.6" stroke-dasharray="4 3" />
+    <line x1="37" y1="50" x2="37" y2="100" stroke="#00F2FE" stroke-width="1.5" opacity="0.6" stroke-dasharray="4 3" />
+
+    <!-- Center Tower (Tall Master Penthouse Spire) -->
+    <path d="M46 105 L46 22 L66 8 L66 105 Z" fill="#0C1322" stroke="url(#goldGrad)" stroke-width="2.5" stroke-linejoin="round" />
+    <path d="M66 8 L86 22 L86 105 L66 105 Z" fill="url(#metalGrad)" stroke="url(#goldGrad)" stroke-width="2.5" stroke-linejoin="round" />
+    <!-- Center Tower Spire Peak -->
+    <polygon points="66,0 64,10 68,10" fill="url(#goldGrad)" />
+    <!-- Center Tower Facet Lines -->
+    <line x1="56" y1="30" x2="56" y2="100" stroke="url(#goldGrad)" stroke-width="1.8" opacity="0.75" stroke-dasharray="5 3" />
+    <line x1="76" y1="30" x2="76" y2="100" stroke="url(#goldGrad)" stroke-width="1.8" opacity="0.75" stroke-dasharray="5 3" />
+
+    <!-- Right Tower (Terraced Luxury Villa Wing) -->
+    <path d="M88 105 L88 48 L108 62 L108 105 Z" fill="#0C1322" stroke="url(#cyanGrad)" stroke-width="2" stroke-linejoin="round" />
+    <!-- Right Tower Windows -->
+    <line x1="96" y1="60" x2="96" y2="100" stroke="#00F2FE" stroke-width="1.5" opacity="0.6" stroke-dasharray="4 3" />
+
+    <!-- Interlocking Partnership Chain Link / Infinite Loop Base (Connecting Towers) -->
+    <!-- Link Left -->
+    <path d="M12 90 C12 78 26 76 38 76 C48 76 56 82 62 88 L54 94 C49 90 44 86 38 86 C30 86 22 88 22 92 C22 96 30 98 38 98 L72 98 C80 98 90 102 90 108 C90 116 78 120 68 120 L32 120 C18 120 12 106 12 90 Z" 
+          fill="url(#goldGrad)" />
+    
+    <!-- Link Right Connector (Infinity loop intersection) -->
+    <path d="M98 90 C98 78 84 76 72 76 C62 76 54 82 48 88 L56 94 C61 90 66 86 72 86 C80 86 88 88 88 92 C88 96 80 98 72 98 L38 98 C30 98 20 102 20 108 C20 116 32 120 42 120 L78 120 C92 120 98 106 98 90 Z" 
+          fill="url(#cyanGrad)" opacity="0.9" />
+
+    <!-- Central Link Diamond Accent -->
+    <polygon points="55,90 61,96 55,102 49,96" fill="#FFFFFF" filter="url(#goldGlow)" />
+  </g>
+
+  <!-- BRAND WORDMARK (Right: X=145 to 530) -->
+  <g transform="translate(148, 20)">
+    <!-- PROP Text (Crisp White / Platinum Geometric Sans) -->
+    <text x="0" y="58" 
+          font-family="'Plus Jakarta Sans', 'Inter', 'Montserrat', -apple-system, sans-serif" 
+          font-size="52" 
+          font-weight="900" 
+          letter-spacing="-0.03em" 
+          fill="#FFFFFF">PROP</text>
+
+    <!-- PARTNER Text (Lustrous Metallic Gold) -->
+    <text x="148" y="58" 
+          font-family="'Plus Jakarta Sans', 'Inter', 'Montserrat', -apple-system, sans-serif" 
+          font-size="52" 
+          font-weight="900" 
+          letter-spacing="-0.03em" 
+          fill="url(#goldGrad)">PARTNER</text>
+
+    <!-- Tagline: CONNECT • REFER • EARN -->
+    <text x="3" y="90" 
+          font-family="'Space Grotesk', 'Plus Jakarta Sans', 'Inter', sans-serif" 
+          font-size="14" 
+          font-weight="800" 
+          letter-spacing="0.32em" 
+          fill="#00F2FE" 
+          opacity="0.95">CONNECT</text>
+
+    <circle cx="106" cy="85" r="2.5" fill="url(#goldGrad)" />
+
+    <text x="122" y="90" 
+          font-family="'Space Grotesk', 'Plus Jakarta Sans', 'Inter', sans-serif" 
+          font-size="14" 
+          font-weight="800" 
+          letter-spacing="0.32em" 
+          fill="#E2E8F0" 
+          opacity="0.95">REFER</text>
+
+    <circle cx="198" cy="85" r="2.5" fill="url(#goldGrad)" />
+
+    <text x="214" y="90" 
+          font-family="'Space Grotesk', 'Plus Jakarta Sans', 'Inter', sans-serif" 
+          font-size="14" 
+          font-weight="800" 
+          letter-spacing="0.32em" 
+          fill="url(#goldGrad)">EARN</text>
+
+    <!-- Subtle Golden Tech Underline Accent -->
+    <line x1="2" y1="104" x2="350" y2="104" stroke="url(#goldGrad)" stroke-width="1.5" opacity="0.4" />
+    <circle cx="350" cy="104" r="2" fill="url(#goldGrad)" />
+  </g>
+</svg>
