@@ -10,6 +10,13 @@ export class ReferralTracker {
   static init() {
     this.processInboundReferral();
     this.bindAutoFillToForms();
+
+    window.addEventListener('hashchange', () => {
+      this.processInboundReferral();
+    });
+    window.addEventListener('popstate', () => {
+      this.processInboundReferral();
+    });
   }
 
   /**

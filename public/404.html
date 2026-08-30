@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>PropPartner — Redirecting...</title>
+  <script>
+    // Single Page App redirect for deep links with query parameters preserved
+    var pathSegments = location.pathname.split('/').filter(Boolean);
+    var search = location.search || '';
+    var hash = location.hash || '';
+    
+    // Store original full path in sessionStorage and redirect to root SPA
+    sessionStorage.setItem('proppartner_spa_redirect', location.pathname + search + hash);
+    location.replace('/#' + location.pathname + search + hash);
+  </script>
+</head>
+<body style="background:#060911; color:#D4AF37; font-family:sans-serif; text-align:center; padding-top:100px;">
+  <h2>Loading PropPartner...</h2>
+</body>
+</html>

@@ -188,9 +188,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Check URL hash for routing e.g. #admin, #partner
+  // Check URL hash / pathname for routing e.g. /projects/luminary-towers, #admin, #partner
   handleHashRouting();
   window.addEventListener('hashchange', handleHashRouting);
+  window.addEventListener('popstate', handleHashRouting);
 
   // Re-run icons
   window.lucide.createIcons();
@@ -377,6 +378,9 @@ export function switchView(targetView, params = {}) {
       renderProjectsDirectoryView(
         seoRoot,
         () => {
+          if (window.location.pathname === '/projects') {
+            window.history.pushState({}, '', '/');
+          }
           window.location.hash = '';
           switchView('landing');
         },
@@ -387,27 +391,39 @@ export function switchView(targetView, params = {}) {
         })
       );
     }
-    window.location.hash = '#projects';
+    if (window.location.pathname !== '/projects') {
+      window.location.hash = '#projects';
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   } else if (targetView === 'project-detail') {
     if (seoRoot) {
       seoRoot.style.display = 'block';
-      const pId = params.projectId || 'luminary-towers';
+      const pId = String(params.projectId || 'luminary-towers').split('?')[0].split('#')[0].replace(/^\/+|\/+$/g, '');
       renderProjectDetailView(
         seoRoot,
         pId,
         () => {
+          if (window.location.pathname.startsWith('/projects/')) {
+            window.history.pushState({}, '', '/');
+          }
           window.location.hash = '';
           switchView('landing');
         },
-        () => switchView('projects'),
+        () => {
+          if (window.location.pathname.startsWith('/projects/')) {
+            window.history.pushState({}, '', '/projects');
+          }
+          switchView('projects');
+        },
         () => openAuthModal('register', (user) => {
           if (user.role === 'SUPER_ADMIN') switchView('admin');
           else switchView('partner');
         })
       );
     }
-    window.location.hash = `#projects/${params.projectId || 'luminary-towers'}`;
+    if (!window.location.pathname.startsWith('/projects/')) {
+      window.location.hash = `#projects/${String(params.projectId || 'luminary-towers').split('?')[0].split('#')[0].replace(/^\/+|\/+$/g, '')}`;
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   } else if (targetView === 'resources') {
     if (seoRoot) {
@@ -415,6 +431,9 @@ export function switchView(targetView, params = {}) {
       renderResourcesHubView(
         seoRoot,
         () => {
+          if (window.location.pathname === '/resources' || window.location.pathname === '/blog') {
+            window.history.pushState({}, '', '/');
+          }
           window.location.hash = '';
           switchView('landing');
         },
@@ -425,16 +444,21 @@ export function switchView(targetView, params = {}) {
         })
       );
     }
-    window.location.hash = '#resources';
+    if (window.location.pathname !== '/resources' && window.location.pathname !== '/blog') {
+      window.location.hash = '#resources';
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   } else if (targetView === 'resource-article') {
     if (seoRoot) {
       seoRoot.style.display = 'block';
-      const slug = params.slug || 'what-is-a-real-estate-affiliate-program';
+      const slug = String(params.slug || 'what-is-a-real-estate-affiliate-program').split('?')[0].split('#')[0].replace(/^\/+|\/+$/g, '');
       renderResourceArticleView(
         seoRoot,
         slug,
         () => {
+          if (window.location.pathname.startsWith('/resources/') || window.location.pathname.startsWith('/blog/')) {
+            window.history.pushState({}, '', '/');
+          }
           window.location.hash = '';
           switchView('landing');
         },
@@ -446,7 +470,9 @@ export function switchView(targetView, params = {}) {
         })
       );
     }
-    window.location.hash = `#resources/${params.slug || 'what-is-a-real-estate-affiliate-program'}`;
+    if (!window.location.pathname.startsWith('/resources/') && !window.location.pathname.startsWith('/blog/')) {
+      window.location.hash = `#resources/${String(params.slug || 'what-is-a-real-estate-affiliate-program').split('?')[0].split('#')[0].replace(/^\/+|\/+$/g, '')}`;
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   } else if (targetView === '404') {
     if (seoRoot) {
@@ -464,7 +490,6 @@ export function switchView(targetView, params = {}) {
         })
       );
     }
-    window.location.hash = '#404';
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
@@ -472,61 +497,78 @@ export function switchView(targetView, params = {}) {
 }
 
 function handleHashRouting() {
-  const hash = window.location.hash;
-  const path = window.location.pathname;
+  const rawHash = window.location.hash || '';
+  const rawPath = window.location.pathname || '';
 
-  if (hash === '#terms-and-conditions' || hash === '#terms' || path === '/terms-and-conditions') {
+  // Clean path and hash: isolate pathnames and strip any query strings for route matching
+  const cleanPath = rawPath.split('?')[0].replace(/\/+$/, '');
+  const cleanHash = rawHash.replace(/^#/, '').split('?')[0].replace(/\/+$/, '');
+
+  if (cleanHash === 'terms-and-conditions' || cleanHash === 'terms' || cleanPath === '/terms-and-conditions') {
     switchView('legal', { docKey: 'terms' });
-  } else if (hash === '#affiliate-agreement' || hash === '#agreement' || path === '/affiliate-agreement') {
+  } else if (cleanHash === 'affiliate-agreement' || cleanHash === 'agreement' || cleanPath === '/affiliate-agreement') {
     switchView('legal', { docKey: 'agreement' });
-  } else if (hash === '#privacy-policy' || hash === '#privacy' || path === '/privacy-policy') {
+  } else if (cleanHash === 'privacy-policy' || cleanHash === 'privacy' || cleanPath === '/privacy-policy') {
     switchView('legal', { docKey: 'privacy' });
-  } else if (hash === '#commission-policy' || path === '/commission-policy') {
+  } else if (cleanHash === 'commission-policy' || cleanPath === '/commission-policy') {
     switchView('legal', { docKey: 'commission' });
-  } else if (hash === '#referral-policy' || hash === '#referral' || path === '/referral-policy') {
+  } else if (cleanHash === 'referral-policy' || cleanHash === 'referral' || cleanPath === '/referral-policy') {
     switchView('legal', { docKey: 'referral' });
-  } else if (hash === '#disclaimer' || path === '/disclaimer') {
+  } else if (cleanHash === 'disclaimer' || cleanPath === '/disclaimer') {
     switchView('legal', { docKey: 'disclaimer' });
-  } else if (hash === '#contact' || path === '/contact') {
+  } else if (cleanHash === 'contact' || cleanPath === '/contact') {
     switchView('contact');
-  } else if (hash === '#affiliate-program' || path === '/affiliate-program') {
+  } else if (cleanHash === 'affiliate-program' || cleanPath === '/affiliate-program') {
     switchView('affiliate-program');
-  } else if (hash === '#commission' || path === '/commission') {
+  } else if (cleanHash === 'commission' || cleanPath === '/commission') {
     switchView('commission');
-  } else if (hash === '#how-it-works' || path === '/how-it-works') {
+  } else if (cleanHash === 'how-it-works' || cleanPath === '/how-it-works') {
     switchView('how-it-works');
-  } else if (hash === '#about' || path === '/about') {
+  } else if (cleanHash === 'about' || cleanPath === '/about') {
     switchView('about');
-  } else if (hash === '#projects' || path === '/projects') {
+  } else if (cleanHash === 'projects' || cleanPath === '/projects') {
     switchView('projects');
-  } else if (hash.startsWith('#projects/') || hash.startsWith('#project/') || path.startsWith('/projects/')) {
-    const projId = hash.replace(/^#projects\//, '').replace(/^#project\//, '') || path.replace(/^\/projects\//, '');
+  } else if (cleanPath.startsWith('/projects/') || cleanHash.startsWith('projects/') || cleanHash.startsWith('project/')) {
+    let projId = '';
+    if (cleanPath.startsWith('/projects/')) {
+      projId = cleanPath.replace(/^\/projects\//, '');
+    } else if (cleanHash.startsWith('projects/')) {
+      projId = cleanHash.replace(/^projects\//, '');
+    } else if (cleanHash.startsWith('project/')) {
+      projId = cleanHash.replace(/^project\//, '');
+    }
+    projId = projId.split('?')[0].split('#')[0].replace(/^\/+|\/+$/g, '').trim();
     switchView('project-detail', { projectId: projId });
-  } else if (hash === '#resources' || hash === '#blog' || path === '/resources' || path === '/blog') {
+  } else if (cleanHash === 'resources' || cleanHash === 'blog' || cleanPath === '/resources' || cleanPath === '/blog') {
     switchView('resources');
-  } else if (hash.startsWith('#resources/') || hash.startsWith('#blog/') || path.startsWith('/resources/') || path.startsWith('/blog/')) {
-    const slug = hash.replace(/^#resources\//, '').replace(/^#blog\//, '') || path.replace(/^\/resources\//, '').replace(/^\/blog\//, '');
+  } else if (cleanPath.startsWith('/resources/') || cleanPath.startsWith('/blog/') || cleanHash.startsWith('resources/') || cleanHash.startsWith('blog/')) {
+    let slug = '';
+    if (cleanPath.startsWith('/resources/')) slug = cleanPath.replace(/^\/resources\//, '');
+    else if (cleanPath.startsWith('/blog/')) slug = cleanPath.replace(/^\/blog\//, '');
+    else if (cleanHash.startsWith('resources/')) slug = cleanHash.replace(/^resources\//, '');
+    else if (cleanHash.startsWith('blog/')) slug = cleanHash.replace(/^blog\//, '');
+    slug = slug.split('?')[0].split('#')[0].replace(/^\/+|\/+$/g, '').trim();
     switchView('resource-article', { slug });
-  } else if (hash === '#404' || path === '/404') {
+  } else if (cleanHash === '404' || cleanPath === '/404') {
     switchView('404');
-  } else if (hash.startsWith('#reset-password')) {
-    const token = new URLSearchParams(hash.split('?')[1] || '').get('token') || '';
+  } else if (cleanHash.startsWith('reset-password')) {
+    const token = new URLSearchParams(rawHash.split('?')[1] || '').get('token') || '';
     openAuthModal('reset', (user) => {
       if (user.role === 'SUPER_ADMIN') switchView('admin');
       else switchView('partner');
     }, { token });
-  } else if (hash === '#forgot-password') {
+  } else if (cleanHash === 'forgot-password') {
     openAuthModal('forgot');
-  } else if (hash === '#admin' || hash.startsWith('#admin/')) {
+  } else if (cleanHash === 'admin' || cleanHash.startsWith('admin/')) {
     switchView('admin');
-  } else if (hash === '#partner' || hash.startsWith('#partner/')) {
+  } else if (cleanHash === 'partner' || cleanHash.startsWith('partner/')) {
     switchView('partner');
-  } else if (hash === '#login') {
+  } else if (cleanHash === 'login') {
     openAuthModal('login', (user) => {
       if (user.role === 'SUPER_ADMIN') switchView('admin');
       else switchView('partner');
     });
-  } else if (!hash || hash === '#' || hash === '#hero') {
+  } else if (!cleanHash && (cleanPath === '' || cleanPath === '/' || cleanPath === '/index.html')) {
     if (currentView !== 'landing') {
       switchView('landing');
     }

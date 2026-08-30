@@ -33,6 +33,7 @@ export function formatCurrencyValue(amount, currency = 'PKR') {
 const INITIAL_PROJECTS = [
   {
     id: 'luminary-towers',
+    slug: 'luminary-towers',
     name: 'The Luminary Sky Residences',
     developer: 'Emaar Pakistan / HRL Group',
     location: 'Main Boulevard, Financial District, Phase 8',
@@ -61,6 +62,7 @@ const INITIAL_PROJECTS = [
   },
   {
     id: 'elysium-waterfront',
+    slug: 'elysium-waterfront',
     name: 'Elysium Waterfront Villas',
     developer: 'Damac / Premier Properties Ltd',
     location: 'Coastal Palm Avenue, Sector E',
@@ -89,6 +91,7 @@ const INITIAL_PROJECTS = [
   },
   {
     id: 'nexus-horizon',
+    slug: 'nexus-horizon',
     name: 'Nexus Horizon Corporate Hub',
     developer: 'Habib & Sons Real Estate',
     location: 'Central Business District, Tech Corridor',
@@ -117,6 +120,7 @@ const INITIAL_PROJECTS = [
   },
   {
     id: 'crescent-bay',
+    slug: 'crescent-bay',
     name: 'Crescent Bay Horizon Suites',
     developer: 'Emaar Properties Group',
     location: 'Seaview Waterfront Boulevard, DHA Phase 8',
@@ -145,6 +149,7 @@ const INITIAL_PROJECTS = [
   },
   {
     id: 'marina-enclave',
+    slug: 'marina-enclave',
     name: 'The Marina Heights Enclave',
     developer: 'Al-Ghurair & Apex Developers',
     location: 'Dubai Marina North Shore / Gwadar West Bay',
@@ -1004,25 +1009,27 @@ class PlatformStore {
 
   load() {
     try {
-      const stored = localStorage.getItem(STORE_STORAGE_KEY);
-      if (stored) {
-        const parsed = JSON.parse(stored);
-        this.projects = parsed.projects || INITIAL_PROJECTS;
-        this.affiliates = parsed.affiliates || INITIAL_AFFILIATES;
-        this.inventory = parsed.inventory || INITIAL_INVENTORY;
-        this.leads = parsed.leads || INITIAL_LEADS;
-        this.sales = parsed.sales || INITIAL_SALES;
-        this.commissions = parsed.commissions || INITIAL_COMMISSIONS;
-        this.payments = parsed.payments || INITIAL_PAYMENTS;
-        this.ledger = parsed.ledger || INITIAL_LEDGER;
-        this.auditLogs = parsed.auditLogs || INITIAL_AUDIT_LOGS;
-        this.marketing = parsed.marketing || INITIAL_MARKETING;
-        this.notifications = parsed.notifications || INITIAL_NOTIFICATIONS;
-        this.tickets = parsed.tickets || INITIAL_TICKETS;
-        this.currency = parsed.currency || 'PKR';
-      } else {
-        this.resetToDefaults();
+      if (typeof window !== 'undefined' && window.localStorage) {
+        const stored = localStorage.getItem(STORE_STORAGE_KEY);
+        if (stored) {
+          const parsed = JSON.parse(stored);
+          this.projects = parsed.projects || INITIAL_PROJECTS;
+          this.affiliates = parsed.affiliates || INITIAL_AFFILIATES;
+          this.inventory = parsed.inventory || INITIAL_INVENTORY;
+          this.leads = parsed.leads || INITIAL_LEADS;
+          this.sales = parsed.sales || INITIAL_SALES;
+          this.commissions = parsed.commissions || INITIAL_COMMISSIONS;
+          this.payments = parsed.payments || INITIAL_PAYMENTS;
+          this.ledger = parsed.ledger || INITIAL_LEDGER;
+          this.auditLogs = parsed.auditLogs || INITIAL_AUDIT_LOGS;
+          this.marketing = parsed.marketing || INITIAL_MARKETING;
+          this.notifications = parsed.notifications || INITIAL_NOTIFICATIONS;
+          this.tickets = parsed.tickets || INITIAL_TICKETS;
+          this.currency = parsed.currency || 'PKR';
+          return;
+        }
       }
+      this.resetToDefaults();
     } catch (e) {
       console.warn('Store load failed, resetting:', e);
       this.resetToDefaults();
@@ -1031,22 +1038,24 @@ class PlatformStore {
 
   save() {
     try {
-      const data = {
-        projects: this.projects,
-        affiliates: this.affiliates,
-        inventory: this.inventory,
-        leads: this.leads,
-        sales: this.sales,
-        commissions: this.commissions,
-        payments: this.payments,
-        ledger: this.ledger,
-        auditLogs: this.auditLogs,
-        marketing: this.marketing,
-        notifications: this.notifications,
-        tickets: this.tickets,
-        currency: this.currency
-      };
-      localStorage.setItem(STORE_STORAGE_KEY, JSON.stringify(data));
+      if (typeof window !== 'undefined' && window.localStorage) {
+        const data = {
+          projects: this.projects,
+          affiliates: this.affiliates,
+          inventory: this.inventory,
+          leads: this.leads,
+          sales: this.sales,
+          commissions: this.commissions,
+          payments: this.payments,
+          ledger: this.ledger,
+          auditLogs: this.auditLogs,
+          marketing: this.marketing,
+          notifications: this.notifications,
+          tickets: this.tickets,
+          currency: this.currency
+        };
+        localStorage.setItem(STORE_STORAGE_KEY, JSON.stringify(data));
+      }
     } catch (e) {
       console.warn('Store save error:', e);
     }
@@ -1272,6 +1281,7 @@ class PlatformStore {
       location: projectData.location || '',
       city: projectData.city || 'Karachi',
       country: projectData.country || 'Pakistan',
+      slug: projectData.slug || id,
       type: projectData.type || 'Luxury Residential',
       description: projectData.description || '',
       status: projectData.status || 'Active',
@@ -1300,9 +1310,29 @@ class PlatformStore {
     return { success: true, project: newProj };
   }
 
+  getProjectBySlug(slugOrId) {
+    if (!slugOrId) return null;
+    const clean = String(slugOrId).toLowerCase().trim();
+    return this.projects.find(p => 
+      (p.id && p.id.toLowerCase() === clean) ||
+      (p.slug && p.slug.toLowerCase() === clean) ||
+      (p.name && p.name.toLowerCase().replace(/[^a-z0-9]+/g, '-') === clean)
+    ) || null;
+  }
+
   updateProject(id, updates) {
     const proj = this.projects.find(p => p.id === id);
     if (!proj) return { success: false, message: 'Project not found' };
+
+    // Validate slug collision if slug is being updated
+    if (updates.slug && updates.slug !== proj.slug) {
+      const cleanSlug = updates.slug.toLowerCase().trim().replace(/[^a-z0-9_-]/g, '-');
+      const existing = this.projects.find(p => p.id !== id && (p.slug === cleanSlug || p.id === cleanSlug));
+      if (existing) {
+        return { success: false, message: `Public URL slug "${cleanSlug}" is already in use by project #${existing.id} (${existing.name}).` };
+      }
+      updates.slug = cleanSlug;
+    }
 
     // Check if commission rate changed
     if (updates.commissionRate && updates.commissionRate !== proj.commissionRate) {
