@@ -10,20 +10,23 @@ export function initHero3D(containerElement) {
   const width = containerElement.clientWidth || window.innerWidth;
   const height = containerElement.clientHeight || window.innerHeight;
 
+  const isMobile = (window.innerWidth || width) < 768;
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
-  camera.position.set(22, 18, 32);
+  camera.position.set(isMobile ? 26 : 22, isMobile ? 20 : 18, isMobile ? 36 : 32);
 
   const renderer = new THREE.WebGLRenderer({
-    antialias: true,
+    antialias: !isMobile,
     alpha: true,
-    powerPreference: "high-performance"
+    powerPreference: isMobile ? "default" : "high-performance"
   });
   renderer.setSize(width, height);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setPixelRatio(isMobile ? 1 : Math.min(window.devicePixelRatio, 2));
   renderer.toneMapping = THREE.ACESFilmicToneMapping;
   renderer.toneMappingExposure = 1.3;
-  renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  renderer.shadowMap.enabled = !isMobile;
+  if (!isMobile) renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
   containerElement.innerHTML = '';
   containerElement.appendChild(renderer.domElement);

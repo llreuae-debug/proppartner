@@ -1,0 +1,48 @@
+{
+  "name": "PropPartner — 3D Real Estate Affiliate Partner Network",
+  "short_name": "PropPartner",
+  "description": "Enterprise Real Estate Affiliate Partner Management, Project Ledger & Super Admin Platform",
+  "start_url": "/",
+  "id": "/",
+  "display": "standalone",
+  "background_color": "#06090E",
+  "theme_color": "#080B11",
+  "orientation": "any",
+  "categories": ["business", "finance", "productivity"],
+  "icons": [
+    {
+      "src": "/assets/proppartner-icon.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/proppartner-icon.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/assets/proppartner-logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Partner Dashboard",
+      "short_name": "Dashboard",
+      "description": "Open Affiliate Partner Portal",
+      "url": "/#partner",
+      "icons": [{ "src": "/assets/proppartner-icon.jpg", "sizes": "192x192" }]
+    },
+    {
+      "name": "Super Admin ERP",
+      "short_name": "Admin",
+      "description": "Open Super Admin Control Center",
+      "url": "/#admin",
+      "icons": [{ "src": "/assets/proppartner-icon.jpg", "sizes": "192x192" }]
+    }
+  ]
+}

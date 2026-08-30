@@ -1,7 +1,8 @@
-// Affiliate Portal Shell - Partner Workspace, Navigation & Submodule Coordinator
+// Affiliate Portal Shell - Partner Workspace, Navigation & Mobile App Controls
 
 import { authStore } from '../../store/authStore.js';
 import { platformStore, formatCurrencyValue } from '../../store/platformStore.js';
+import { renderMobileHeader, renderMobileBottomBar, openMoreBottomSheet, triggerNativeShare } from '../common/MobileAppNav.js';
 
 export function initAffiliatePortal(container, onNavigateLanding, onSwitchAdminView) {
   let currentSection = 'dashboard';
@@ -11,6 +12,7 @@ export function initAffiliatePortal(container, onNavigateLanding, onSwitchAdminV
     currentSection = section;
     sectionParams = params;
     render();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   function render() {
@@ -23,7 +25,10 @@ export function initAffiliatePortal(container, onNavigateLanding, onSwitchAdminV
 
     container.innerHTML = `
       <div class="portal-app-layout">
-        <!-- Partner Sidebar -->
+        <!-- Native Mobile Header (Shown on < 1024px) -->
+        ${renderMobileHeader(container, getPartnerPageTitle(currentSection), null, null)}
+
+        <!-- Partner Sidebar (Desktop / Tablet Drawer) -->
         <aside class="portal-sidebar glass-card" id="partner-sidebar">
           <div class="sidebar-brand-header">
             <a href="#" class="brand-logo brand-logo-img">
@@ -101,10 +106,10 @@ export function initAffiliatePortal(container, onNavigateLanding, onSwitchAdminV
 
         <!-- Main Body -->
         <main class="portal-main-area">
-          <!-- Topbar -->
+          <!-- Desktop Topbar -->
           <header class="portal-topbar glass-card">
             <div class="topbar-left">
-              <button type="button" class="topbar-toggle-sidebar" id="partner-toggle-sidebar">
+              <button type="button" class="topbar-toggle-sidebar" id="partner-toggle-sidebar" aria-label="Toggle Sidebar">
                 <i data-lucide="menu"></i>
               </button>
               <div class="topbar-title-wrap">
@@ -119,6 +124,9 @@ export function initAffiliatePortal(container, onNavigateLanding, onSwitchAdminV
                 <code>/ref/${aff.id}</code>
                 <button type="button" class="btn-copy-ref-top" id="btn-top-copy-ref" title="Copy Referral Link">
                   <i data-lucide="copy"></i>
+                </button>
+                <button type="button" class="btn-copy-ref-top text-gold" id="btn-top-share-ref" title="Share via Mobile">
+                  <i data-lucide="share-2"></i>
                 </button>
               </div>
 
@@ -147,6 +155,9 @@ export function initAffiliatePortal(container, onNavigateLanding, onSwitchAdminV
           <div class="portal-content-body" id="partner-module-mount">
             ${renderPartnerModule(currentSection, aff, stats, curr, navigateTo)}
           </div>
+
+          <!-- Sticky Mobile Bottom App Navigation Bar (Shown on < 1024px) -->
+          ${renderMobileBottomBar(currentSection, 'AFFILIATE_PARTNER')}
         </main>
       </div>
     `;
@@ -154,23 +165,62 @@ export function initAffiliatePortal(container, onNavigateLanding, onSwitchAdminV
     if (window.lucide) window.lucide.createIcons();
 
     // Attach listeners
-    container.querySelectorAll('.sidebar-nav-item').forEach(item => {
+    container.querySelectorAll('.sidebar-nav-item, .bottom-nav-tab[data-nav]').forEach(item => {
       item.onclick = () => {
+        const sb = container.querySelector('#partner-sidebar');
+        if (sb) sb.classList.remove('open');
         navigateTo(item.dataset.nav);
       };
     });
+
+    const moreBtn = container.querySelector('#btn-open-more-sheet');
+    if (moreBtn) {
+      moreBtn.onclick = () => {
+        openMoreBottomSheet('AFFILIATE_PARTNER', (targetSec) => navigateTo(targetSec), (view) => {
+          if (view === 'landing' && onNavigateLanding) onNavigateLanding();
+          if (view === 'admin' && onSwitchAdminView) onSwitchAdminView();
+        });
+      };
+    }
+
+    const mobileDrawerBtn = container.querySelector('#mobile-app-drawer-btn');
+    if (mobileDrawerBtn) {
+      mobileDrawerBtn.onclick = () => {
+        const sb = container.querySelector('#partner-sidebar');
+        if (sb) sb.classList.toggle('open');
+      };
+    }
 
     const topCopyBtn = container.querySelector('#btn-top-copy-ref');
     if (topCopyBtn) {
       topCopyBtn.onclick = () => {
         navigator.clipboard.writeText(globalRefLink);
-        alert(`Copied unique referral link: ${globalRefLink}`);
+        alert(`Copied unique referral link:\n${globalRefLink}`);
+      };
+    }
+
+    const topShareBtn = container.querySelector('#btn-top-share-ref');
+    if (topShareBtn) {
+      topShareBtn.onclick = () => {
+        triggerNativeShare(
+          'PropPartner Real Estate Network',
+          `Join me on PropPartner. Promote high-commission luxury properties with guaranteed payouts:`,
+          globalRefLink
+        );
       };
     }
 
     const currSelect = container.querySelector('#partner-topbar-currency');
     if (currSelect) {
       currSelect.onchange = (e) => {
+        platformStore.setCurrency(e.target.value);
+        render();
+      };
+    }
+
+    const mobileCurrSelect = container.querySelector('#mobile-curr-picker');
+    if (mobileCurrSelect) {
+      mobileCurrSelect.onchange = (e) => {
         platformStore.setCurrency(e.target.value);
         render();
       };
@@ -205,16 +255,16 @@ export function initAffiliatePortal(container, onNavigateLanding, onSwitchAdminV
 
   function getPartnerPageTitle(section) {
     const titles = {
-      dashboard: 'Partner Earnings Dashboard & Performance',
-      projects: 'Real Estate Projects & Commission Tiers',
-      leads: 'My Referred Prospects & Lead CRM',
-      sales: 'My Verified Closed Property Sales',
-      commissions: 'My Commission Entitlement Statement',
-      ledger: 'Personal Double-Entry Partner Ledger',
-      payments: 'Payout Disbursements & Bank Transfers',
-      marketing: 'Marketing Center & Sales Enablement',
-      profile: 'Partner Profile & Banking Settlement Info',
-      support: 'Partner Support Desk & PropPartner AI Assistant'
+      dashboard: 'Partner Earnings Dashboard',
+      projects: 'Projects & Referral Generators',
+      leads: 'My Referred Leads CRM',
+      sales: 'My Closed Sales',
+      commissions: 'Commission Entitlements',
+      ledger: 'Partner Financial Ledger',
+      payments: 'Payouts & Settlement History',
+      marketing: 'Marketing Kits & Collateral',
+      profile: 'Partner Profile & Banking',
+      support: 'Support & AI Concierge'
     };
     return titles[section] || 'Affiliate Partner Portal';
   }
@@ -228,6 +278,7 @@ function renderPartnerModule(section, aff, stats, curr, navigateTo) {
   const myComms = platformStore.commissions.filter(c => c.affiliateId === aff.id);
   const myLedger = platformStore.ledger.filter(tx => tx.affiliateId === aff.id);
   const myPayments = platformStore.payments.filter(p => p.affiliateId === aff.id);
+  const globalRefLink = `https://proppartner.network/ref/${aff.id}`;
 
   if (section === 'dashboard') {
     return `
@@ -237,31 +288,34 @@ function renderPartnerModule(section, aff, stats, curr, navigateTo) {
           <div class="ref-hero-info">
             <div class="section-eyebrow"><i data-lucide="link-2"></i> YOUR UNIQUE PARTNER REFERRAL URL</div>
             <h3 class="ref-hero-title">Share Your Direct Referral Link</h3>
-            <p class="text-muted">Introduce high-net-worth investors or buyers to any project. All web visits and form submissions are automatically attributed to your partner ID (<code>${aff.id}</code>).</p>
+            <p class="text-muted">Introduce high-net-worth investors or buyers. Web visits and form submissions are automatically locked to your partner ID (<code>${aff.id}</code>).</p>
             <div class="ref-hero-input-row">
-              <input type="text" class="form-input ref-input" value="https://proppartner.network/ref/${aff.id}" readonly id="partner-ref-hero-url">
-              <button type="button" class="btn btn-gold" id="btn-hero-copy-ref"><i data-lucide="copy"></i> <span>COPY LINK</span></button>
+              <input type="text" class="form-input ref-input" value="${globalRefLink}" readonly id="partner-ref-hero-url">
+              <div class="ref-hero-btn-group">
+                <button type="button" class="btn btn-gold" id="btn-hero-copy-ref"><i data-lucide="copy"></i> <span>COPY</span></button>
+                <button type="button" class="btn btn-secondary" id="btn-hero-native-share"><i data-lucide="share-2"></i> <span>SHARE</span></button>
+              </div>
             </div>
           </div>
           <div class="ref-hero-qr">
             <div class="qr-box">
-              <i data-lucide="qr-code" style="width:72px; height:72px; color:var(--gold-light);"></i>
+              <i data-lucide="qr-code" style="width:64px; height:64px; color:var(--gold-light);"></i>
               <span>Scan QR to Open Link</span>
             </div>
           </div>
         </div>
 
-        <!-- 8 Live Personal KPI Cards -->
+        <!-- 8 Live Personal KPI Cards (Responsive Grid) -->
         <div class="admin-kpi-grid" style="margin-bottom: 24px;">
           <div class="kpi-card glass-card">
             <div class="kpi-header"><span class="kpi-title">TOTAL REFERRALS</span><div class="kpi-badge"><i data-lucide="users"></i></div></div>
             <div class="kpi-number">${stats.totalReferrals}</div>
-            <div class="kpi-footer"><span>Total Leads Ingested</span></div>
+            <div class="kpi-footer"><span>Total Ingested Leads</span></div>
           </div>
           <div class="kpi-card glass-card">
             <div class="kpi-header"><span class="kpi-title">QUALIFIED LEADS</span><div class="kpi-badge purple"><i data-lucide="target"></i></div></div>
             <div class="kpi-number text-purple">${stats.qualifiedLeads}</div>
-            <div class="kpi-footer"><span>Verified In Negotiation</span></div>
+            <div class="kpi-footer"><span>Active in Negotiation</span></div>
           </div>
           <div class="kpi-card glass-card">
             <div class="kpi-header"><span class="kpi-title">CLOSED SALES</span><div class="kpi-badge gold"><i data-lucide="award"></i></div></div>
@@ -269,43 +323,63 @@ function renderPartnerModule(section, aff, stats, curr, navigateTo) {
             <div class="kpi-footer gold"><span>${stats.conversionRate} Conversion</span></div>
           </div>
           <div class="kpi-card glass-card">
-            <div class="kpi-header"><span class="kpi-title">PENDING COMMISSION</span><div class="kpi-badge yellow"><i data-lucide="clock"></i></div></div>
+            <div class="kpi-header"><span class="kpi-title">PENDING COMM.</span><div class="kpi-badge yellow"><i data-lucide="clock"></i></div></div>
             <div class="kpi-number text-yellow">${formatCurrencyValue(stats.pendingCommission, curr)}</div>
-            <div class="kpi-footer"><span>Under Developer Verification</span></div>
+            <div class="kpi-footer"><span>Under Verification</span></div>
           </div>
           <div class="kpi-card glass-card highlight-cyan">
-            <div class="kpi-header"><span class="kpi-title">PAYABLE COMMISSION</span><div class="kpi-badge cyan"><i data-lucide="wallet"></i></div></div>
+            <div class="kpi-header"><span class="kpi-title">PAYABLE COMM.</span><div class="kpi-badge cyan"><i data-lucide="wallet"></i></div></div>
             <div class="kpi-number text-cyan">${formatCurrencyValue(stats.payableCommission, curr)}</div>
             <div class="kpi-footer cyan"><span>Ready for Wire Transfer</span></div>
           </div>
           <div class="kpi-card glass-card highlight-green">
-            <div class="kpi-header"><span class="kpi-title">PAID EARNINGS</span><div class="kpi-badge green"><i data-lucide="badge-check"></i></div></div>
+            <div class="kpi-header"><span class="kpi-title">TOTAL PAID</span><div class="kpi-badge green"><i data-lucide="badge-check"></i></div></div>
             <div class="kpi-number text-green">${formatCurrencyValue(stats.paidCommission, curr)}</div>
             <div class="kpi-footer green"><span>Settled & Disbursed</span></div>
           </div>
         </div>
 
-        <!-- Featured Projects with Instant 1-Click Referral Link Gen -->
+        <!-- Mobile Quick Action Strip -->
+        <div class="partner-mobile-quick-actions glass-card">
+          <button type="button" class="m-qa-item" id="mqa-find-proj">
+            <i data-lucide="building-2"></i>
+            <span>Browse Projects</span>
+          </button>
+          <button type="button" class="m-qa-item" id="mqa-add-lead">
+            <i data-lucide="user-plus"></i>
+            <span>Submit Lead</span>
+          </button>
+          <button type="button" class="m-qa-item" id="mqa-view-ledger">
+            <i data-lucide="book-open"></i>
+            <span>View Ledger</span>
+          </button>
+          <button type="button" class="m-qa-item" id="mqa-mkt-kit">
+            <i data-lucide="folder-down"></i>
+            <span>Marketing Kit</span>
+          </button>
+        </div>
+
+        <!-- Featured Projects -->
         <div class="table-card glass-card" style="margin-bottom: 24px;">
           <div class="table-card-header">
-            <h4><i data-lucide="building-2"></i> Active Real Estate Developments Ready to Promote</h4>
-            <button type="button" class="btn-text-link" id="btn-dash-all-proj">View All Projects →</button>
+            <h4><i data-lucide="building-2"></i> Projects Ready to Promote</h4>
+            <button type="button" class="btn-text-link" id="btn-dash-all-proj">View All →</button>
           </div>
           <div class="partner-proj-cards-grid">
             ${platformStore.projects.slice(0, 3).map(p => `
               <div class="p-promo-card glass-card">
-                <img src="${p.image}" alt="${p.name}" class="promo-card-thumb">
+                <img src="${p.image}" alt="${p.name}" class="promo-card-thumb" loading="lazy">
                 <div class="promo-card-body">
                   <div class="promo-rate-pill">${p.commissionRate}% Base Comm.</div>
                   <h4 class="promo-card-title">${p.name}</h4>
                   <p class="text-muted text-xs"><i data-lucide="map-pin"></i> ${p.location}, ${p.city}</p>
                   <div class="promo-price-row">
-                    <span>Starting from:</span>
+                    <span>Starting:</span>
                     <strong class="text-gold">${formatCurrencyValue(p.startingPrice, curr)}</strong>
                   </div>
-                  <div class="promo-actions">
+                  <div class="promo-actions-row">
                     <button type="button" class="btn btn-gold btn-sm w-full btn-copy-proj-ref" data-proj="${p.id}">
-                      <i data-lucide="share-2"></i> <span>Get Project Referral Link</span>
+                      <i data-lucide="share-2"></i> <span>Get Referral Link</span>
                     </button>
                   </div>
                 </div>
@@ -314,13 +388,15 @@ function renderPartnerModule(section, aff, stats, curr, navigateTo) {
           </div>
         </div>
 
-        <!-- Recent Leads & Pipeline -->
+        <!-- Recent Leads (Responsive Table + Mobile Cards) -->
         <div class="table-card glass-card">
           <div class="table-card-header">
-            <h4><i data-lucide="target"></i> My Recent Referred Leads (${myLeads.length})</h4>
-            <button type="button" class="btn btn-gold btn-sm" id="btn-dash-submit-lead"><i data-lucide="plus"></i> Submit New Lead</button>
+            <h4><i data-lucide="target"></i> Recent Referred Leads (${myLeads.length})</h4>
+            <button type="button" class="btn btn-gold btn-sm" id="btn-dash-submit-lead"><i data-lucide="plus"></i> Submit Lead</button>
           </div>
-          <div class="table-responsive">
+
+          <!-- Desktop Table View -->
+          <div class="table-responsive desktop-only-table">
             <table class="portal-table">
               <thead>
                 <tr>
@@ -344,6 +420,29 @@ function renderPartnerModule(section, aff, stats, curr, navigateTo) {
               </tbody>
             </table>
           </div>
+
+          <!-- Mobile Card List View -->
+          <div class="mobile-card-list mobile-only-cards">
+            ${myLeads.slice(0, 5).map(l => `
+              <div class="mobile-card-item glass-card">
+                <div class="m-card-top">
+                  <div>
+                    <strong class="m-card-title">${l.name}</strong>
+                    <div class="text-muted text-xs">${l.phone} • ${l.date}</div>
+                  </div>
+                  <span class="status-pill status-${l.status.toLowerCase()}">${l.status}</span>
+                </div>
+                <div class="m-card-details">
+                  <div><span class="text-muted text-xs">Project:</span> <strong>${l.projectId}</strong></div>
+                  <div><span class="text-muted text-xs">Budget:</span> <strong class="text-gold">${formatCurrencyValue(l.budget, curr)}</strong></div>
+                </div>
+                <div class="m-card-actions">
+                  <a href="tel:${l.phone}" class="btn btn-secondary btn-xs"><i data-lucide="phone"></i> Call</a>
+                  <a href="https://wa.me/${l.phone.replace(/[^0-9]/g, '')}" target="_blank" class="btn btn-secondary btn-xs"><i data-lucide="message-circle"></i> WhatsApp</a>
+                </div>
+              </div>
+            `).join('')}
+          </div>
         </div>
       </div>
     `;
@@ -355,7 +454,7 @@ function renderPartnerModule(section, aff, stats, curr, navigateTo) {
         <div class="module-header-row">
           <div>
             <h2 class="module-title">Projects Portfolio & Referral Generators</h2>
-            <p class="module-subtitle">Generate project-specific referral links, download brochures and review commission schedules</p>
+            <p class="module-subtitle">Generate project-specific referral links, share via WhatsApp, and download sales collateral</p>
           </div>
         </div>
 
@@ -375,12 +474,12 @@ function renderPartnerModule(section, aff, stats, curr, navigateTo) {
               <div class="proj-card-body">
                 <div class="proj-kpis-3">
                   <div class="p-kpi"><span>Starting Price</span><strong class="text-gold">${formatCurrencyValue(p.startingPrice, curr)}</strong></div>
-                  <div class="p-kpi"><span>Estimated Comm.</span><strong class="text-green">${formatCurrencyValue((p.startingPrice * p.commissionRate) / 100, curr)}</strong></div>
+                  <div class="p-kpi"><span>Est. Comm.</span><strong class="text-green">${formatCurrencyValue((p.startingPrice * p.commissionRate) / 100, curr)}</strong></div>
                   <div class="p-kpi"><span>Units Left</span><strong>${p.unitsAvailable}</strong></div>
                 </div>
                 <div class="proj-actions-row">
-                  <button type="button" class="btn btn-gold btn-sm w-full btn-copy-proj-ref" data-proj="${p.id}">
-                    <i data-lucide="share-2"></i> <span>Copy Project Referral Link</span>
+                  <button type="button" class="btn btn-gold btn-sm w-full btn-copy-proj-ref" data-proj="${p.id}" data-name="${p.name}">
+                    <i data-lucide="share-2"></i> <span>Share Referral Link</span>
                   </button>
                   <button type="button" class="btn btn-secondary btn-sm" onclick="alert('Downloading Official Lookbook for ${p.name}');">
                     <i data-lucide="download"></i> <span>Brochure</span>
@@ -399,8 +498,8 @@ function renderPartnerModule(section, aff, stats, curr, navigateTo) {
       <div class="partner-module-view">
         <div class="module-header-row">
           <div>
-            <h2 class="module-title">My Referred Prospects & Lead CRM</h2>
-            <p class="module-subtitle">Track the verification and negotiation status of every buyer you introduce</p>
+            <h2 class="module-title">My Referred Prospects & CRM</h2>
+            <p class="module-subtitle">Track lead progression from submission to negotiation and final deed signing</p>
           </div>
           <div class="module-actions">
             <button type="button" class="btn btn-gold btn-sm" id="btn-partner-submit-lead-modal">
@@ -410,22 +509,21 @@ function renderPartnerModule(section, aff, stats, curr, navigateTo) {
         </div>
 
         <div class="table-card glass-card">
-          <div class="table-responsive">
+          <!-- Desktop Table -->
+          <div class="table-responsive desktop-only-table">
             <table class="portal-table">
               <thead>
                 <tr>
                   <th>Lead ID</th>
                   <th>Client Contact</th>
                   <th>Target Project & Budget</th>
-                  <th>Submission Date</th>
-                  <th>Current Sales Stage</th>
-                  <th>Attribution Status</th>
+                  <th>Date</th>
+                  <th>Sales Stage</th>
+                  <th>Attribution</th>
                 </tr>
               </thead>
               <tbody>
-                ${myLeads.length === 0 ? `
-                  <tr><td colspan="6" class="text-center py-6 text-muted">No referrals submitted yet. Click "Submit Client Referral" above to introduce your first prospect!</td></tr>
-                ` : myLeads.map(l => `
+                ${myLeads.map(l => `
                   <tr>
                     <td><code>${l.id}</code></td>
                     <td><strong>${l.name}</strong><br><span class="text-muted">${l.phone}</span></td>
@@ -438,6 +536,29 @@ function renderPartnerModule(section, aff, stats, curr, navigateTo) {
               </tbody>
             </table>
           </div>
+
+          <!-- Mobile Cards -->
+          <div class="mobile-card-list mobile-only-cards">
+            ${myLeads.map(l => `
+              <div class="mobile-card-item glass-card">
+                <div class="m-card-top">
+                  <div>
+                    <strong class="m-card-title">${l.name}</strong>
+                    <div class="text-muted text-xs"><code>${l.id}</code> • ${l.phone}</div>
+                  </div>
+                  <span class="status-pill status-${l.status.toLowerCase()}">${l.status}</span>
+                </div>
+                <div class="m-card-details">
+                  <div><span class="text-muted text-xs">Project:</span> <strong>${l.projectId}</strong></div>
+                  <div><span class="text-muted text-xs">Budget:</span> <strong class="text-gold">${formatCurrencyValue(l.budget, curr)}</strong></div>
+                </div>
+                <div class="m-card-actions">
+                  <a href="tel:${l.phone}" class="btn btn-secondary btn-xs"><i data-lucide="phone"></i> Call</a>
+                  <a href="https://wa.me/${l.phone.replace(/[^0-9]/g, '')}" target="_blank" class="btn btn-secondary btn-xs"><i data-lucide="message-circle"></i> WhatsApp</a>
+                </div>
+              </div>
+            `).join('')}
+          </div>
         </div>
       </div>
     `;
@@ -449,38 +570,72 @@ function renderPartnerModule(section, aff, stats, curr, navigateTo) {
         <div class="module-header-row">
           <div>
             <h2 class="module-title">My Commission Statements & Earnings</h2>
-            <p class="module-subtitle">Audited record of all qualifying deals, milestone rates and scheduled disbursements</p>
+            <p class="module-subtitle">Transparent tracking of milestone rates, verified deals, and scheduled payouts</p>
+          </div>
+        </div>
+
+        <!-- Mobile Earnings Summary Cards -->
+        <div class="earnings-summary-cards-grid">
+          <div class="e-stat-card glass-card">
+            <span>Payable Now</span>
+            <strong class="text-cyan">${formatCurrencyValue(stats.payableCommission, curr)}</strong>
+          </div>
+          <div class="e-stat-card glass-card">
+            <span>Pending Verification</span>
+            <strong class="text-yellow">${formatCurrencyValue(stats.pendingCommission, curr)}</strong>
+          </div>
+          <div class="e-stat-card glass-card">
+            <span>Total Disbursed</span>
+            <strong class="text-green">${formatCurrencyValue(stats.paidCommission, curr)}</strong>
           </div>
         </div>
 
         <div class="table-card glass-card">
-          <div class="table-responsive">
+          <!-- Desktop Table -->
+          <div class="table-responsive desktop-only-table">
             <table class="portal-table">
               <thead>
                 <tr>
                   <th>Comm ID / Date</th>
-                  <th>Project & Unit</th>
-                  <th>Gross Sale Price</th>
+                  <th>Project</th>
+                  <th>Gross Sale</th>
                   <th>Rate</th>
-                  <th>Net Payable Commission</th>
+                  <th>Net Payable</th>
                   <th>Status</th>
                 </tr>
               </thead>
               <tbody>
-                ${myComms.length === 0 ? `
-                  <tr><td colspan="6" class="text-center py-6 text-muted">No commission records yet.</td></tr>
-                ` : myComms.map(c => `
+                ${myComms.map(c => `
                   <tr>
                     <td><code>${c.id}</code><br><span class="text-muted">${c.createdDate}</span></td>
                     <td><strong>${c.projectName}</strong></td>
                     <td>${formatCurrencyValue(c.grossSale, curr)}</td>
                     <td><strong class="text-gold">${c.rate}%</strong></td>
-                    <td><strong class="text-green" style="font-size: 1.1rem;">${formatCurrencyValue(c.netPayable, curr)}</strong></td>
+                    <td><strong class="text-green" style="font-size:1.1rem;">${formatCurrencyValue(c.netPayable, curr)}</strong></td>
                     <td><span class="status-pill status-${c.status.toLowerCase()}">${c.status}</span></td>
                   </tr>
                 `).join('')}
               </tbody>
             </table>
+          </div>
+
+          <!-- Mobile Cards -->
+          <div class="mobile-card-list mobile-only-cards">
+            ${myComms.map(c => `
+              <div class="mobile-card-item glass-card">
+                <div class="m-card-top">
+                  <div>
+                    <strong class="m-card-title">${c.projectName}</strong>
+                    <div class="text-muted text-xs"><code>${c.id}</code> • ${c.createdDate}</div>
+                  </div>
+                  <span class="status-pill status-${c.status.toLowerCase()}">${c.status}</span>
+                </div>
+                <div class="m-card-details">
+                  <div><span class="text-muted text-xs">Gross Sale:</span> ${formatCurrencyValue(c.grossSale, curr)} (${c.rate}%)</div>
+                  <div><span class="text-muted text-xs">Commission:</span> <strong class="text-green">${formatCurrencyValue(c.netPayable, curr)}</strong></div>
+                </div>
+              </div>
+            `).join('')}
           </div>
         </div>
       </div>
@@ -492,29 +647,28 @@ function renderPartnerModule(section, aff, stats, curr, navigateTo) {
       <div class="partner-module-view">
         <div class="module-header-row">
           <div>
-            <h2 class="module-title">Personal Financial Journal & Partner Ledger</h2>
+            <h2 class="module-title">Personal Partner Journal & Ledger</h2>
             <p class="module-subtitle">Itemized double-entry transaction record showing all commission credits, wire debits, and adjustments</p>
           </div>
         </div>
 
         <div class="table-card glass-card">
-          <div class="table-responsive">
+          <!-- Desktop Table -->
+          <div class="table-responsive desktop-only-table">
             <table class="portal-table">
               <thead>
                 <tr>
                   <th>Tx ID / Date</th>
                   <th>Type</th>
                   <th>Project / Details</th>
-                  <th>Customer / Party</th>
+                  <th>Customer</th>
                   <th>Net Financial Impact</th>
                   <th>Reference</th>
                   <th>Status</th>
                 </tr>
               </thead>
               <tbody>
-                ${myLedger.length === 0 ? `
-                  <tr><td colspan="7" class="text-center py-6 text-muted">No ledger transactions posted yet.</td></tr>
-                ` : myLedger.map(tx => `
+                ${myLedger.map(tx => `
                   <tr>
                     <td><code>${tx.id}</code><br><span class="text-muted">${tx.date}</span></td>
                     <td><span class="tx-type-pill tx-${tx.type.toLowerCase()}">${tx.type}</span></td>
@@ -531,6 +685,31 @@ function renderPartnerModule(section, aff, stats, curr, navigateTo) {
                 `).join('')}
               </tbody>
             </table>
+          </div>
+
+          <!-- Mobile Cards -->
+          <div class="mobile-card-list mobile-only-cards">
+            ${myLedger.map(tx => `
+              <div class="mobile-card-item glass-card">
+                <div class="m-card-top">
+                  <div>
+                    <strong class="m-card-title">${tx.customerName}</strong>
+                    <div class="text-muted text-xs"><code>${tx.id}</code> • ${tx.date}</div>
+                  </div>
+                  <span class="tx-type-pill tx-${tx.type.toLowerCase()}">${tx.type}</span>
+                </div>
+                <div class="m-card-details">
+                  <div><span class="text-muted text-xs">Project:</span> ${tx.projectId}</div>
+                  <div>
+                    <span class="text-muted text-xs">Impact:</span> 
+                    <strong class="${tx.netCommission < 0 ? 'text-green' : 'text-gold'}">
+                      ${tx.netCommission > 0 ? '+' : ''}${formatCurrencyValue(tx.netCommission, curr)}
+                    </strong>
+                  </div>
+                </div>
+                <div class="text-muted text-xs" style="margin-top:4px;">Ref: <code>${tx.reference}</code></div>
+              </div>
+            `).join('')}
           </div>
         </div>
       </div>
@@ -553,33 +732,51 @@ function renderPartnerModule(section, aff, stats, curr, navigateTo) {
         </div>
 
         <div class="table-card glass-card">
-          <div class="table-responsive">
+          <!-- Desktop Table -->
+          <div class="table-responsive desktop-only-table">
             <table class="portal-table">
               <thead>
                 <tr>
                   <th>Payment ID</th>
-                  <th>Disbursement Date</th>
+                  <th>Date</th>
                   <th>Method & Reference</th>
-                  <th>Amount Disbursed</th>
-                  <th>Settlement Receipt</th>
+                  <th>Amount Paid</th>
+                  <th>Receipt</th>
                   <th>Status</th>
                 </tr>
               </thead>
               <tbody>
-                ${myPayments.length === 0 ? `
-                  <tr><td colspan="6" class="text-center py-6 text-muted">No wire disbursements recorded yet.</td></tr>
-                ` : myPayments.map(p => `
+                ${myPayments.map(p => `
                   <tr>
                     <td><code>${p.id}</code></td>
                     <td>${p.date}</td>
                     <td><strong>${p.method}</strong><br><code>${p.reference}</code></td>
                     <td><strong class="text-green" style="font-size:1.1rem;">${formatCurrencyValue(p.amount, curr)}</strong></td>
-                    <td><a href="#" class="btn-text-link" onclick="alert('Viewing Bank Settlement Receipt Voucher #${p.reference}'); return false;"><i data-lucide="file-text"></i> Download PDF</a></td>
+                    <td><a href="#" class="btn-text-link" onclick="alert('Viewing Bank Settlement Receipt Voucher #${p.reference}'); return false;"><i data-lucide="file-text"></i> Download</a></td>
                     <td><span class="status-pill status-paid">${p.status}</span></td>
                   </tr>
                 `).join('')}
               </tbody>
             </table>
+          </div>
+
+          <!-- Mobile Cards -->
+          <div class="mobile-card-list mobile-only-cards">
+            ${myPayments.map(p => `
+              <div class="mobile-card-item glass-card">
+                <div class="m-card-top">
+                  <div>
+                    <strong class="m-card-title">${p.method}</strong>
+                    <div class="text-muted text-xs"><code>${p.reference}</code> • ${p.date}</div>
+                  </div>
+                  <span class="status-pill status-paid">${p.status}</span>
+                </div>
+                <div class="m-card-details">
+                  <div><span class="text-muted text-xs">Amount:</span> <strong class="text-green">${formatCurrencyValue(p.amount, curr)}</strong></div>
+                  <a href="#" class="btn-text-link text-xs" onclick="alert('Viewing Bank Settlement Receipt Voucher #${p.reference}'); return false;"><i data-lucide="file-text"></i> Receipt</a>
+                </div>
+              </div>
+            `).join('')}
           </div>
         </div>
       </div>
@@ -592,7 +789,7 @@ function renderPartnerModule(section, aff, stats, curr, navigateTo) {
         <div class="module-header-row">
           <div>
             <h2 class="module-title">Partner Concierge & AI Real Estate Assistant</h2>
-            <p class="module-subtitle">Get instant answers on commission rules, project lookbooks, site visits and submit support tickets</p>
+            <p class="module-subtitle">Ask questions 24/7 on commission rules, lookbooks, site visits, or submit support tickets</p>
           </div>
         </div>
 
@@ -608,7 +805,7 @@ function renderPartnerModule(section, aff, stats, curr, navigateTo) {
             </div>
             <div class="ai-chat-messages" id="ai-chat-msg-mount">
               <div class="ai-bubble incoming">
-                Hello ${aff.name}! I am your PropPartner AI Concierge. Ask me anything about our 5 premier real estate developments, commission payout timelines, or marketing kits!
+                Hello ${aff.name}! I am your PropPartner AI Concierge. Ask me anything about our 5 premier developments, commission payout schedules, or marketing materials!
               </div>
             </div>
             <form class="ai-chat-input-row" id="ai-chat-form">
@@ -704,7 +901,7 @@ function renderPartnerModule(section, aff, stats, curr, navigateTo) {
       <div class="module-header-row">
         <div>
           <h2 class="module-title">Marketing Materials & Sales Kits</h2>
-          <p class="module-subtitle">Download high-res brochures, WhatsApp pitch copy, social media carousels and price lists</p>
+          <p class="module-subtitle">Download high-res lookbooks, WhatsApp copy kits, social media carousels and price lists</p>
         </div>
       </div>
 
@@ -740,51 +937,53 @@ function attachPartnerSubmoduleEvents(container, aff, navigateTo) {
     };
   }
 
-  // Project-specific referral link copy
+  // Hero native share button
+  const heroShareBtn = container.querySelector('#btn-hero-native-share');
+  if (heroShareBtn) {
+    heroShareBtn.onclick = () => {
+      triggerNativeShare(
+        'PropPartner Real Estate Network',
+        'Explore premier luxury residential and commercial real estate investment opportunities:',
+        `https://proppartner.network/ref/${aff.id}`
+      );
+    };
+  }
+
+  // Project-specific referral link copy / native share
   container.querySelectorAll('.btn-copy-proj-ref').forEach(btn => {
     btn.onclick = () => {
       const projId = btn.dataset.proj;
+      const projName = btn.dataset.name || projId;
       const url = `https://proppartner.network/ref/${aff.id}/${projId}`;
-      navigator.clipboard.writeText(url);
-      alert(`Copied project-specific referral link:\n${url}`);
+      triggerNativeShare(
+        `Explore ${projName}`,
+        `Exclusive real estate opportunity: ${projName}. Inquire or book via this verified partner link:`,
+        url
+      );
     };
   });
 
-  const dashAllProj = container.querySelector('#btn-dash-all-proj');
+  const dashAllProj = container.querySelector('#btn-dash-all-proj') || container.querySelector('#mqa-find-proj');
   if (dashAllProj) dashAllProj.onclick = () => navigateTo('projects');
+
+  const mqaAddLead = container.querySelector('#mqa-add-lead');
+  if (mqaAddLead) mqaAddLead.onclick = () => showSubmitLeadPrompt(aff, navigateTo);
+
+  const mqaViewLedger = container.querySelector('#mqa-view-ledger');
+  if (mqaViewLedger) mqaViewLedger.onclick = () => navigateTo('ledger');
+
+  const mqaMktKit = container.querySelector('#mqa-mkt-kit');
+  if (mqaMktKit) mqaMktKit.onclick = () => navigateTo('marketing');
 
   const dashSubmitLead = container.querySelector('#btn-dash-submit-lead') || container.querySelector('#btn-partner-submit-lead-modal');
   if (dashSubmitLead) {
-    dashSubmitLead.onclick = () => {
-      const name = prompt('Enter Client / Buyer Name:');
-      if (!name) return;
-      const phone = prompt('Enter Client Phone / WhatsApp:', '+92 300 1234567');
-      const email = prompt('Enter Client Email:', 'client@domain.com');
-      const budget = prompt('Estimated Budget in PKR:', '35000000');
-
-      const res = platformStore.submitLead({
-        name,
-        phone,
-        email,
-        budget: Number(budget) || 35000000,
-        projectId: platformStore.projects[0].id,
-        affiliateId: aff.id,
-        source: 'Affiliate Partner Portal'
-      });
-
-      if (res.isDuplicate) {
-        alert('⚠️ Note: This client contact was flagged as a potential duplicate and is currently under administrative review.');
-      } else {
-        alert('✅ Client lead submitted successfully! Our project sales desk has been assigned.');
-      }
-      navigateTo('leads');
-    };
+    dashSubmitLead.onclick = () => showSubmitLeadPrompt(aff, navigateTo);
   }
 
   const reqPayoutBtn = container.querySelector('#btn-request-payout-modal');
   if (reqPayoutBtn) {
     reqPayoutBtn.onclick = () => {
-      alert(`✅ Payout Request Submitted!\nYour payable balance of PKR 1,015,000 will be processed in Friday's batch wire transfer to ${aff.bankName || 'HBL Prestige'}.`);
+      alert(`✅ Payout Request Submitted!\nYour payable balance will be processed in Friday's batch wire transfer to ${aff.bankName || 'HBL Prestige'}.`);
     };
   }
 
@@ -800,13 +999,11 @@ function attachPartnerSubmoduleEvents(container, aff, navigateTo) {
 
       const mount = container.querySelector('#ai-chat-msg-mount');
       if (mount) {
-        // User bubble
         const userDiv = document.createElement('div');
         userDiv.className = 'ai-bubble outgoing';
         userDiv.textContent = text;
         mount.appendChild(userDiv);
 
-        // AI Answer simulation
         setTimeout(() => {
           const aiDiv = document.createElement('div');
           aiDiv.className = 'ai-bubble incoming';
@@ -828,4 +1025,29 @@ function attachPartnerSubmoduleEvents(container, aff, navigateTo) {
       }
     };
   }
+}
+
+function showSubmitLeadPrompt(aff, navigateTo) {
+  const name = prompt('Enter Client / Buyer Legal Name:');
+  if (!name) return;
+  const phone = prompt('Enter Client Phone / WhatsApp:', '+92 300 1234567');
+  const email = prompt('Enter Client Email:', 'client@domain.com');
+  const budget = prompt('Estimated Budget in PKR:', '35000000');
+
+  const res = platformStore.submitLead({
+    name,
+    phone,
+    email,
+    budget: Number(budget) || 35000000,
+    projectId: platformStore.projects[0].id,
+    affiliateId: aff.id,
+    source: 'Affiliate Partner Portal'
+  });
+
+  if (res.isDuplicate) {
+    alert('⚠️ Note: This client contact was flagged as a potential duplicate and is currently under administrative review.');
+  } else {
+    alert('✅ Client lead submitted successfully! Our project sales desk has been assigned.');
+  }
+  navigateTo('leads');
 }

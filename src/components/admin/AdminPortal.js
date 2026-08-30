@@ -1,7 +1,8 @@
-// Admin Portal Shell - Super Admin Master Workspace Shell, Navigation & Submodule Coordinator
+// Admin Portal Shell - Super Admin Master Workspace Shell, Navigation & Mobile Bottom Bar
 
 import { authStore } from '../../store/authStore.js';
 import { platformStore } from '../../store/platformStore.js';
+import { renderMobileHeader, renderMobileBottomBar, openMoreBottomSheet } from '../common/MobileAppNav.js';
 import { renderAdminDashboard } from './AdminDashboard.js';
 import { renderAffiliatesManager } from './AffiliatesManager.js';
 import { renderProjectsManager } from './ProjectsManager.js';
@@ -22,6 +23,7 @@ export function initAdminPortal(container, onNavigateLanding, onSwitchAffiliateV
     currentSection = section;
     sectionParams = params;
     render();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   function render() {
@@ -33,7 +35,10 @@ export function initAdminPortal(container, onNavigateLanding, onSwitchAffiliateV
 
     container.innerHTML = `
       <div class="portal-app-layout">
-        <!-- Sidebar Navigation -->
+        <!-- Native Mobile Header (Shown on < 1024px) -->
+        ${renderMobileHeader(container, getPageTitle(currentSection), null, null)}
+
+        <!-- Sidebar Navigation (Desktop / Tablet Drawer) -->
         <aside class="portal-sidebar glass-card" id="admin-sidebar">
           <div class="sidebar-brand-header">
             <a href="#" class="brand-logo brand-logo-img" id="sidebar-logo-link">
@@ -112,10 +117,10 @@ export function initAdminPortal(container, onNavigateLanding, onSwitchAffiliateV
 
         <!-- Main Body Content Area -->
         <main class="portal-main-area">
-          <!-- Topbar -->
+          <!-- Desktop Topbar -->
           <header class="portal-topbar glass-card">
             <div class="topbar-left">
-              <button type="button" class="topbar-toggle-sidebar" id="admin-toggle-sidebar">
+              <button type="button" class="topbar-toggle-sidebar" id="admin-toggle-sidebar" aria-label="Toggle Sidebar">
                 <i data-lucide="menu"></i>
               </button>
               <div class="topbar-title-wrap">
@@ -153,6 +158,9 @@ export function initAdminPortal(container, onNavigateLanding, onSwitchAffiliateV
 
           <!-- Module Container -->
           <div class="portal-content-body" id="admin-module-mount"></div>
+
+          <!-- Sticky Mobile Bottom App Navigation Bar (Shown on < 1024px) -->
+          ${renderMobileBottomBar(currentSection, 'SUPER_ADMIN')}
         </main>
       </div>
     `;
@@ -188,15 +196,45 @@ export function initAdminPortal(container, onNavigateLanding, onSwitchAffiliateV
     }
 
     // Attach sidebar navigation listeners
-    container.querySelectorAll('.sidebar-nav-item').forEach(item => {
+    container.querySelectorAll('.sidebar-nav-item, .bottom-nav-tab[data-nav]').forEach(item => {
       item.onclick = () => {
+        const sb = container.querySelector('#admin-sidebar');
+        if (sb) sb.classList.remove('open');
         navigateTo(item.dataset.nav);
       };
     });
 
+    // Mobile More bottom sheet trigger
+    const moreBtn = container.querySelector('#btn-open-more-sheet');
+    if (moreBtn) {
+      moreBtn.onclick = () => {
+        openMoreBottomSheet('SUPER_ADMIN', (targetSec) => navigateTo(targetSec), (view) => {
+          if (view === 'landing' && onNavigateLanding) onNavigateLanding();
+          if (view === 'partner' && onSwitchAffiliateView) onSwitchAffiliateView();
+        });
+      };
+    }
+
+    // Mobile drawer button
+    const mobileDrawerBtn = container.querySelector('#mobile-app-drawer-btn');
+    if (mobileDrawerBtn) {
+      mobileDrawerBtn.onclick = () => {
+        const sb = container.querySelector('#admin-sidebar');
+        if (sb) sb.classList.toggle('open');
+      };
+    }
+
     const currSelect = container.querySelector('#admin-topbar-currency');
     if (currSelect) {
       currSelect.onchange = (e) => {
+        platformStore.setCurrency(e.target.value);
+        render();
+      };
+    }
+
+    const mobileCurrSelect = container.querySelector('#mobile-curr-picker');
+    if (mobileCurrSelect) {
+      mobileCurrSelect.onchange = (e) => {
         platformStore.setCurrency(e.target.value);
         render();
       };
@@ -236,17 +274,17 @@ export function initAdminPortal(container, onNavigateLanding, onSwitchAffiliateV
 
   function getPageTitle(section) {
     const titles = {
-      dashboard: 'Executive BI Dashboard & Operations',
-      affiliates: 'Affiliate Partner Network Management',
-      projects: 'Real Estate Projects & Inventory Ledger',
-      leads: 'Customer Leads & Duplicate Collision CRM',
-      sales: 'Verified Closed Sales & Transactions',
-      commissions: 'Commission Approval & Entitlement Engine',
-      payments: 'Payment Disbursement & Pending Payout Center',
-      ledgers: 'Master Financial & Double-Entry Ledgers',
-      marketing: 'Marketing Asset & Creative Library',
-      audit: 'Immutable System & Transaction Audit Trail',
-      settings: 'System Control Center & Policies'
+      dashboard: 'Executive BI Dashboard',
+      affiliates: 'Affiliate Partner Network',
+      projects: 'Projects & Inventory ERP',
+      leads: 'Leads & Duplicate CRM',
+      sales: 'Verified Closed Sales',
+      commissions: 'Commission Approvals',
+      payments: 'Payment Disbursement',
+      ledgers: 'Master Financial Ledgers',
+      marketing: 'Marketing Asset Center',
+      audit: 'System Audit Trail',
+      settings: 'System Control Center'
     };
     return titles[section] || 'Super Admin Portal';
   }
