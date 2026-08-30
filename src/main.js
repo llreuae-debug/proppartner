@@ -243,7 +243,15 @@ export function switchView(targetView) {
 
 function handleHashRouting() {
   const hash = window.location.hash;
-  if (hash === '#admin' || hash.startsWith('#admin/')) {
+  if (hash.startsWith('#reset-password')) {
+    const token = new URLSearchParams(hash.split('?')[1] || '').get('token') || '';
+    openAuthModal('reset', (user) => {
+      if (user.role === 'SUPER_ADMIN') switchView('admin');
+      else switchView('partner');
+    }, { token });
+  } else if (hash === '#forgot-password') {
+    openAuthModal('forgot');
+  } else if (hash === '#admin' || hash.startsWith('#admin/')) {
     switchView('admin');
   } else if (hash === '#partner' || hash.startsWith('#partner/')) {
     switchView('partner');

@@ -1,8 +1,7 @@
-// Affiliate Portal Shell - Partner Workspace, Navigation & Mobile App Controls
-
 import { authStore } from '../../store/authStore.js';
 import { platformStore, formatCurrencyValue } from '../../store/platformStore.js';
 import { renderMobileHeader, renderMobileBottomBar, openMoreBottomSheet, triggerNativeShare } from '../common/MobileAppNav.js';
+import { openProfileSecurityModal } from '../common/ProfileSecurityModal.js';
 
 export function initAffiliatePortal(container, onNavigateLanding, onSwitchAdminView) {
   let currentSection = 'dashboard';
@@ -137,8 +136,8 @@ export function initAffiliatePortal(container, onNavigateLanding, onSwitchAdminV
                 <option value="AED" ${platformStore.currency === 'AED' ? 'selected' : ''}>AED (د.إ)</option>
               </select>
 
-              <!-- User Profile Menu -->
-              <div class="topbar-user-pill">
+              <!-- User Profile Menu (Click to open Profile & Password Security) -->
+              <div class="topbar-user-pill" id="partner-topbar-profile-trigger" style="cursor:pointer;" title="Click to manage password & security settings">
                 <img src="${aff.avatar}" alt="${aff.name}" class="topbar-avatar">
                 <div class="topbar-user-meta">
                   <span class="user-name">${aff.name}</span>
@@ -890,6 +889,23 @@ function renderPartnerModule(section, aff, stats, curr, navigateTo) {
               <i data-lucide="save"></i> Save Banking Details
             </button>
           </div>
+
+          <!-- Account Password & 2FA Security -->
+          <div class="glass-card settings-card" style="grid-column: span 2;">
+            <h4 class="card-sec-title"><i data-lucide="shield-check"></i> Account Security, Password & Active Sessions</h4>
+            <p class="text-muted text-xs" style="margin-bottom:12px;">Protect your commission entitlements and banking information with enterprise credential management.</p>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <button type="button" class="btn btn-gold btn-sm" id="btn-partner-open-pass-modal">
+                <i data-lucide="key-round"></i> Change Password
+              </button>
+              <button type="button" class="btn btn-secondary btn-sm" id="btn-partner-open-2fa-modal">
+                <i data-lucide="shield-check"></i> Two-Factor Authentication (2FA)
+              </button>
+              <button type="button" class="btn btn-secondary btn-sm" id="btn-partner-open-sessions-modal">
+                <i data-lucide="smartphone"></i> Active Device Sessions
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     `;
@@ -985,6 +1001,30 @@ function attachPartnerSubmoduleEvents(container, aff, navigateTo) {
     reqPayoutBtn.onclick = () => {
       alert(`✅ Payout Request Submitted!\nYour payable balance will be processed in Friday's batch wire transfer to ${aff.bankName || 'HBL Prestige'}.`);
     };
+  }
+
+  // Profile & Password Security Modal triggers
+  const profileTrigger = container.querySelector('#partner-topbar-profile-trigger');
+  if (profileTrigger) {
+    profileTrigger.onclick = (e) => {
+      if (e.target.closest('#btn-partner-logout')) return;
+      openProfileSecurityModal('password', () => navigateTo('profile'));
+    };
+  }
+
+  const passModalBtn = container.querySelector('#btn-partner-open-pass-modal');
+  if (passModalBtn) {
+    passModalBtn.onclick = () => openProfileSecurityModal('password', () => navigateTo('profile'));
+  }
+
+  const twoFAModalBtn = container.querySelector('#btn-partner-open-2fa-modal');
+  if (twoFAModalBtn) {
+    twoFAModalBtn.onclick = () => openProfileSecurityModal('2fa', () => navigateTo('profile'));
+  }
+
+  const sessionsModalBtn = container.querySelector('#btn-partner-open-sessions-modal');
+  if (sessionsModalBtn) {
+    sessionsModalBtn.onclick = () => openProfileSecurityModal('sessions', () => navigateTo('profile'));
   }
 
   // AI Chat Assistant handling

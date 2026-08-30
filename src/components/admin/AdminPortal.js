@@ -3,6 +3,7 @@
 import { authStore } from '../../store/authStore.js';
 import { platformStore } from '../../store/platformStore.js';
 import { renderMobileHeader, renderMobileBottomBar, openMoreBottomSheet } from '../common/MobileAppNav.js';
+import { openProfileSecurityModal } from '../common/ProfileSecurityModal.js';
 import { renderAdminDashboard } from './AdminDashboard.js';
 import { renderAffiliatesManager } from './AffiliatesManager.js';
 import { renderProjectsManager } from './ProjectsManager.js';
@@ -14,6 +15,9 @@ import { renderLedgersManager } from './LedgersManager.js';
 import { renderMarketingManager } from './MarketingManager.js';
 import { renderAuditLogs } from './AuditLogsViewer.js';
 import { renderSettingsCenter } from './SettingsCenter.js';
+import { renderUsersManager } from './UsersManager.js';
+import { renderRolesPermissionsManager } from './RolesPermissionsManager.js';
+import { renderSecurityCenter } from './SecurityCenter.js';
 
 export function initAdminPortal(container, onNavigateLanding, onSwitchAffiliateView) {
   let currentSection = 'dashboard';
@@ -27,7 +31,7 @@ export function initAdminPortal(container, onNavigateLanding, onSwitchAffiliateV
   }
 
   function render() {
-    const user = authStore.getUser() || { name: 'Super Admin', role: 'SUPER_ADMIN' };
+    const user = authStore.getUser() || authStore.getSuperAdmin();
     const pendingAffs = platformStore.affiliates.filter(a => a.status === 'Pending').length;
     const duplicateLeads = platformStore.leads.filter(l => l.duplicateFlag).length;
     const pendingComms = platformStore.commissions.filter(c => c.status === 'Pending').length;
@@ -89,14 +93,28 @@ export function initAdminPortal(container, onNavigateLanding, onSwitchAffiliateV
               <span>Financial Ledgers</span>
             </button>
 
-            <div class="nav-section-title">MANAGEMENT & AUDIT</div>
-            <button type="button" class="sidebar-nav-item ${currentSection === 'marketing' ? 'active' : ''}" data-nav="marketing">
-              <i data-lucide="folder"></i>
-              <span>Marketing Assets</span>
+            <div class="nav-section-title">SECURITY & GOVERNANCE</div>
+            <button type="button" class="sidebar-nav-item ${currentSection === 'users' ? 'active' : ''}" data-nav="users">
+              <i data-lucide="user-check"></i>
+              <span>User Accounts</span>
+            </button>
+            <button type="button" class="sidebar-nav-item ${currentSection === 'roles' ? 'active' : ''}" data-nav="roles">
+              <i data-lucide="shield"></i>
+              <span>Roles & RBAC</span>
+            </button>
+            <button type="button" class="sidebar-nav-item ${currentSection === 'security' ? 'active' : ''}" data-nav="security">
+              <i data-lucide="lock"></i>
+              <span>Security Center</span>
             </button>
             <button type="button" class="sidebar-nav-item ${currentSection === 'audit' ? 'active' : ''}" data-nav="audit">
               <i data-lucide="shield-check"></i>
               <span>Audit Trail</span>
+            </button>
+
+            <div class="nav-section-title">MANAGEMENT & ASSETS</div>
+            <button type="button" class="sidebar-nav-item ${currentSection === 'marketing' ? 'active' : ''}" data-nav="marketing">
+              <i data-lucide="folder"></i>
+              <span>Marketing Assets</span>
             </button>
             <button type="button" class="sidebar-nav-item ${currentSection === 'settings' ? 'active' : ''}" data-nav="settings">
               <i data-lucide="settings"></i>
@@ -142,12 +160,12 @@ export function initAdminPortal(container, onNavigateLanding, onSwitchAffiliateV
                 ${platformStore.notifications.filter(n => !n.read).length > 0 ? `<span class="icon-badge"></span>` : ''}
               </button>
 
-              <!-- User Profile Menu -->
-              <div class="topbar-user-pill">
+              <!-- User Profile Menu (Click to open Profile & Password Security) -->
+              <div class="topbar-user-pill" id="topbar-admin-profile-trigger" style="cursor:pointer;" title="Click to manage password & security settings">
                 <img src="${user.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80'}" alt="${user.name}" class="topbar-avatar">
                 <div class="topbar-user-meta">
                   <span class="user-name">${user.name}</span>
-                  <span class="user-role">Super Admin</span>
+                  <span class="user-role">${user.email}</span>
                 </div>
                 <button type="button" class="btn-logout" id="btn-admin-logout" title="Sign Out">
                   <i data-lucide="log-out"></i>
@@ -186,6 +204,12 @@ export function initAdminPortal(container, onNavigateLanding, onSwitchAffiliateV
         renderPaymentsManager(mount, navigateTo, sectionParams.action);
       } else if (currentSection === 'ledgers') {
         renderLedgersManager(mount, navigateTo, sectionParams);
+      } else if (currentSection === 'users') {
+        renderUsersManager(mount, navigateTo);
+      } else if (currentSection === 'roles') {
+        renderRolesPermissionsManager(mount);
+      } else if (currentSection === 'security') {
+        renderSecurityCenter(mount);
       } else if (currentSection === 'marketing') {
         renderMarketingManager(mount);
       } else if (currentSection === 'audit') {
@@ -203,6 +227,15 @@ export function initAdminPortal(container, onNavigateLanding, onSwitchAffiliateV
         navigateTo(item.dataset.nav);
       };
     });
+
+    // Profile & Password Security Trigger
+    const profileTrigger = container.querySelector('#topbar-admin-profile-trigger');
+    if (profileTrigger) {
+      profileTrigger.onclick = (e) => {
+        if (e.target.closest('#btn-admin-logout')) return;
+        openProfileSecurityModal('password', () => render());
+      };
+    }
 
     // Mobile More bottom sheet trigger
     const moreBtn = container.querySelector('#btn-open-more-sheet');
@@ -282,6 +315,9 @@ export function initAdminPortal(container, onNavigateLanding, onSwitchAffiliateV
       commissions: 'Commission Approvals',
       payments: 'Payment Disbursement',
       ledgers: 'Master Financial Ledgers',
+      users: 'User Accounts & Access Control',
+      roles: 'Roles & Permissions (RBAC)',
+      security: 'Security Center & Emergency Control',
       marketing: 'Marketing Asset Center',
       audit: 'System Audit Trail',
       settings: 'System Control Center'

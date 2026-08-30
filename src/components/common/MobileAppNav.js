@@ -1,7 +1,6 @@
-// Mobile App Navigation - Native Mobile Header, Sticky Bottom App Bar & "More" Bottom Sheet
-
 import { authStore } from '../../store/authStore.js';
 import { platformStore } from '../../store/platformStore.js';
+import { openProfileSecurityModal } from './ProfileSecurityModal.js';
 
 let deferredPrompt = null;
 
@@ -16,6 +15,14 @@ window.addEventListener('beforeinstallprompt', (e) => {
 export function renderMobileHeader(container, title, onToggleDrawer, onOpenNotifs) {
   const user = authStore.getUser() || { name: 'User', role: 'GUEST' };
   const isAdmin = user.role === 'SUPER_ADMIN';
+
+  // Attach mobile avatar click listener on next tick
+  setTimeout(() => {
+    const mobAvatar = container.querySelector('#mobile-avatar-btn');
+    if (mobAvatar) {
+      mobAvatar.onclick = () => openProfileSecurityModal('password');
+    }
+  }, 50);
 
   return `
     <header class="mobile-app-header">
@@ -41,7 +48,7 @@ export function renderMobileHeader(container, title, onToggleDrawer, onOpenNotif
           ${platformStore.notifications.filter(n => !n.read).length > 0 ? '<span class="icon-badge"></span>' : ''}
         </button>
 
-        <img src="${user.avatar || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80'}" alt="${user.name}" class="mobile-user-avatar" id="mobile-avatar-btn">
+        <img src="${user.avatar || 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=150&q=80'}" alt="${user.name}" class="mobile-user-avatar" id="mobile-avatar-btn" style="cursor:pointer;" title="Click to manage password & security">
       </div>
     </header>
   `;
@@ -152,13 +159,25 @@ export function openMoreBottomSheet(role, onNavigate, onSwitchView) {
 
       <div class="bottom-sheet-grid">
         ${isAdmin ? `
+          <button type="button" class="sheet-grid-item" data-sheet-nav="users">
+            <div class="sheet-icon green"><i data-lucide="user-check"></i></div>
+            <span>Users</span>
+          </button>
+          <button type="button" class="sheet-grid-item" data-sheet-nav="roles">
+            <div class="sheet-icon cyan"><i data-lucide="shield"></i></div>
+            <span>Roles RBAC</span>
+          </button>
+          <button type="button" class="sheet-grid-item" data-sheet-nav="security">
+            <div class="sheet-icon gold"><i data-lucide="lock"></i></div>
+            <span>Security</span>
+          </button>
           <button type="button" class="sheet-grid-item" data-sheet-nav="affiliates">
             <div class="sheet-icon gold"><i data-lucide="users"></i></div>
             <span>Affiliates</span>
           </button>
           <button type="button" class="sheet-grid-item" data-sheet-nav="projects">
             <div class="sheet-icon cyan"><i data-lucide="building"></i></div>
-            <span>Projects ERP</span>
+            <span>Projects</span>
           </button>
           <button type="button" class="sheet-grid-item" data-sheet-nav="payments">
             <div class="sheet-icon green"><i data-lucide="wallet"></i></div>
@@ -167,10 +186,6 @@ export function openMoreBottomSheet(role, onNavigate, onSwitchView) {
           <button type="button" class="sheet-grid-item" data-sheet-nav="ledgers">
             <div class="sheet-icon purple"><i data-lucide="book-open"></i></div>
             <span>Ledgers</span>
-          </button>
-          <button type="button" class="sheet-grid-item" data-sheet-nav="marketing">
-            <div class="sheet-icon yellow"><i data-lucide="folder"></i></div>
-            <span>Marketing</span>
           </button>
           <button type="button" class="sheet-grid-item" data-sheet-nav="audit">
             <div class="sheet-icon blue"><i data-lucide="shield-check"></i></div>
