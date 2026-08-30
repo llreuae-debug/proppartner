@@ -20,18 +20,26 @@
   <meta name="robots" content="index, follow">
   <meta name="author" content="PropPartner Real Estate Network">
 
+  <!-- Canonical URL -->
+  <link rel="canonical" href="https://proppartner.pro/">
+
   <!-- Open Graph / Facebook -->
   <meta property="og:type" content="website">
-  <meta property="og:url" content="https://proppartner.affiliate/">
+  <meta property="og:url" content="https://proppartner.pro/">
+  <meta property="og:site_name" content="PropPartner">
   <meta property="og:title" content="PropPartner — 3D Real Estate Affiliate Partner Network">
   <meta property="og:description" content="Promote high-potential real estate developments, connect buyers and investors, and earn attractive commissions on successful qualifying transactions.">
-  <meta property="og:image" content="/assets/hero-3d-visual.jpg">
+  <meta property="og:image" content="https://proppartner.pro/assets/hero-3d-visual.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="en_US">
 
   <!-- Twitter Card -->
   <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:title" content="PropPartner 3D Real Estate Affiliate Network">
+  <meta property="twitter:site" content="@proppartner">
+  <meta property="twitter:title" content="PropPartner — 3D Real Estate Affiliate Partner Network">
   <meta property="twitter:description" content="Join our vetted property affiliate network and earn high-yield commissions on verified real estate referrals.">
-  <meta property="twitter:image" content="/assets/hero-3d-visual.jpg">
+  <meta property="twitter:image" content="https://proppartner.pro/assets/hero-3d-visual.jpg">
 
   <!-- Favicon & App Icons -->
   <link rel="icon" type="image/svg+xml" href="/assets/proppartner-icon.svg">
@@ -39,18 +47,145 @@
   <link rel="apple-touch-icon" href="/assets/proppartner-icon.png">
   <meta name="msapplication-TileImage" content="/assets/proppartner-icon.png">
 
-  <!-- Schema.org JSON-LD structured data -->
+  <!-- ============================================================
+       Schema.org JSON-LD — Global Head Schemas
+       Organization · RealEstateAgent/LocalBusiness · WebSite · WebPage
+       All linked via @id for Knowledge Graph entity merging.
+       BreadcrumbList: INTENTIONALLY SKIPPED — pending URL migration
+       to real sub-URLs per Phase 2 roadmap.
+       ============================================================ -->
+
+  <!-- 1. Organization (sitewide entity anchor) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "@id": "https://proppartner.pro/#organization",
+    "name": "PropPartner",
+    "legalName": "[PLACEHOLDER: registered legal entity name, e.g. PropPartner Pvt. Ltd.]",
+    "url": "https://proppartner.pro/",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://proppartner.pro/assets/proppartner-logo.png",
+      "width": 460,
+      "height": 354
+    },
+    "image": "https://proppartner.pro/assets/hero-3d-visual.jpg",
+    "description": "PropPartner is a real estate affiliate partner network connecting property consultants, sales professionals, and investors with verified luxury residential, waterfront, and commercial real estate developments, offering commission on successful qualifying referrals.",
+    "email": "llre.uae@gmail.com",
+    "telephone": "+92-322-865-4411",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Gatwala Chowk, Canal Expressway",
+      "addressLocality": "Faisalabad",
+      "addressRegion": "Punjab",
+      "addressCountry": "PK"
+    },
+    "sameAs": [
+      "[PLACEHOLDER: actual LinkedIn company page URL, e.g. https://www.linkedin.com/company/proppartner]",
+      "[PLACEHOLDER: actual YouTube channel URL, e.g. https://www.youtube.com/@proppartner]",
+      "https://wa.me/923228654411"
+    ],
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "telephone": "+92-322-865-4411",
+        "contactType": "sales",
+        "areaServed": ["PK", "AE", "GB", "US", "SA", "CA"],
+        "availableLanguage": ["English", "Urdu"]
+      },
+      {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "url": "https://wa.me/923228654411",
+        "availableLanguage": ["English", "Urdu"]
+      },
+      {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "email": "llre.uae@gmail.com"
+      }
+    ]
+  }
+  </script>
+
+  <!-- 2. LocalBusiness / RealEstateAgent (local search & Google Maps entity) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "RealEstateAgent",
-    "name": "PropPartner Real Estate Affiliate Network",
-    "description": "Professional real estate partner network connecting affiliates, investors, and premier architectural developments.",
-    "url": "https://proppartner.affiliate",
-    "potentialAction": {
-      "@type": "JoinAction",
-      "target": "https://proppartner.affiliate/#register",
-      "name": "Become an Affiliate"
+    "@id": "https://proppartner.pro/#localbusiness",
+    "name": "PropPartner",
+    "image": "https://proppartner.pro/assets/hero-3d-visual.jpg",
+    "url": "https://proppartner.pro/",
+    "telephone": "+92-322-865-4411",
+    "email": "llre.uae@gmail.com",
+    "priceRange": "Commission-based (2.5% – 5.5% per qualifying transaction)",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Gatwala Chowk, Canal Expressway",
+      "addressLocality": "Faisalabad",
+      "addressRegion": "Punjab",
+      "postalCode": "[PLACEHOLDER: Faisalabad postal code, e.g. 38000]",
+      "addressCountry": "PK"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "[PLACEHOLDER: pull from Google Maps listing]",
+      "longitude": "[PLACEHOLDER: pull from Google Maps listing]"
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+        "opens": "00:00",
+        "closes": "23:59"
+      }
+    ],
+    "areaServed": [
+      { "@type": "Country", "name": "Pakistan" },
+      { "@type": "Country", "name": "United Arab Emirates" },
+      { "@type": "Country", "name": "United Kingdom" },
+      { "@type": "Country", "name": "United States" },
+      { "@type": "Country", "name": "Saudi Arabia" },
+      { "@type": "Country", "name": "Canada" }
+    ],
+    "sameAs": [
+      "[PLACEHOLDER: actual LinkedIn company page URL]",
+      "[PLACEHOLDER: actual YouTube channel URL]"
+    ]
+  }
+  </script>
+
+  <!-- 3. WebSite (site-level entity; no SearchAction — no on-site search present) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "@id": "https://proppartner.pro/#website",
+    "url": "https://proppartner.pro/",
+    "name": "PropPartner",
+    "description": "The premier 3D real estate affiliate partner network connecting brokers, consultants, and investors with verified high-yield residential and commercial developments.",
+    "publisher": { "@id": "https://proppartner.pro/#organization" },
+    "inLanguage": "en"
+  }
+  </script>
+
+  <!-- 4. WebPage (homepage) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": "https://proppartner.pro/#webpage",
+    "url": "https://proppartner.pro/",
+    "name": "PropPartner — 3D Real Estate Affiliate Partner Network",
+    "isPartOf": { "@id": "https://proppartner.pro/#website" },
+    "about": { "@id": "https://proppartner.pro/#organization" },
+    "description": "Join PropPartner, the elite 3D real estate affiliate partner network. Promote luxury residential towers, commercial hubs & waterfront villas. Earn up to 5.5% transparent commission on verified property referrals.",
+    "inLanguage": "en",
+    "primaryImageOfPage": {
+      "@type": "ImageObject",
+      "url": "https://proppartner.pro/assets/hero-3d-visual.jpg"
     }
   }
   </script>
@@ -730,7 +865,350 @@
   <span id="toast-msg">Operation completed</span>
 </div>
 
+<!-- ============================================================
+     Schema.org JSON-LD — Body-Level Schemas
+     Service · HowTo · FAQPage · ItemList · Review · ContactPage
+     Scoped to their matching on-page sections.
+     ============================================================ -->
+
+<!-- 5. Service — PropPartner Affiliate Program (core product offering) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "@id": "https://proppartner.pro/#affiliate-service",
+  "serviceType": "Real Estate Affiliate Referral Program",
+  "name": "PropPartner Real Estate Affiliate Partner Program",
+  "provider": { "@id": "https://proppartner.pro/#organization" },
+  "description": "A commission-based affiliate program for property consultants, sales professionals, entrepreneurs, content creators, investors, and community leaders to refer buyers and investors to vetted real estate developments and earn commission on successfully completed transactions.",
+  "areaServed": [
+    { "@type": "Country", "name": "Pakistan" },
+    { "@type": "Country", "name": "United Arab Emirates" },
+    { "@type": "Country", "name": "United Kingdom" },
+    { "@type": "Country", "name": "United States" },
+    { "@type": "Country", "name": "Saudi Arabia" },
+    { "@type": "Country", "name": "Canada" }
+  ],
+  "audience": {
+    "@type": "Audience",
+    "audienceType": "Real estate agents, brokers, sales professionals, entrepreneurs, content creators, investors, community leaders"
+  },
+  "offers": {
+    "@type": "Offer",
+    "@id": "https://proppartner.pro/#commission-offer",
+    "url": "https://proppartner.pro/#commission",
+    "priceSpecification": {
+      "@type": "PriceSpecification",
+      "description": "Commission of up to 5.5% on verified, successfully completed real estate referral transactions. Subject to project-specific terms and the Affiliate Agreement; no income is guaranteed.",
+      "maxPrice": "5.5",
+      "unitText": "PERCENT"
+    }
+  }
+}
+</script>
+
+<!-- 6. HowTo — 6-Step Commission Path (text pulled verbatim from affiliateData.js processSteps) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "HowTo",
+  "name": "How the PropPartner Affiliate Commission Path Works",
+  "description": "A 6-step workflow for affiliate partners to refer clients and earn commission through PropPartner.",
+  "step": [
+    {
+      "@type": "HowToStep",
+      "position": 1,
+      "name": "Join — Instant Account Activation",
+      "text": "Submit a 60-second application. Once approved, gain access to your private partner dashboard and custom referral links. Zero registration fees."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 2,
+      "name": "Choose a Project — Curated Luxury Portfolio",
+      "text": "Explore vetted residential towers, beachfront villas, and commercial hubs with guaranteed project viability and transparent commission matrices. Vetted Tier-1 developments."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 3,
+      "name": "Share — White-Label Assets & Collateral",
+      "text": "Utilize high-converting promotional kits: 4K 3D renders, video tours, investor pitch decks, pre-written WhatsApp scripts, and brochures. Done-for-you creatives."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 4,
+      "name": "Refer — Seamless Lead Attribution",
+      "text": "Introduce qualified buyers or investors via your link, direct dashboard submission, or dedicated concierge introduction. 90-day cookie & CRM lock."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 5,
+      "name": "Close — Elite Sales Desk Closing",
+      "text": "Our dedicated licensed property advisors conduct presentations, site tours, contract negotiations, and legal paperwork. Zero sales burden on you."
+    },
+    {
+      "@type": "HowToStep",
+      "position": 6,
+      "name": "Earn — Direct Bank Disbursement",
+      "text": "Upon verified transaction completion and initial deposit clearance, your commission is calculated and wired directly to your designated bank account. Fast transparent payout."
+    }
+  ]
+}
+</script>
+
+<!-- 7. FAQPage — Q&A pulled verbatim from affiliateData.js faqs array -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is a real estate affiliate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "A real estate affiliate is a registered partner who introduces potential buyers or investors to eligible real estate projects. You share project information or custom referral links, our sales team manages the client consultation and closing, and you receive an agreed commission upon successful completion of the qualifying transaction."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How do I become an affiliate?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Registration is free and takes under two minutes. Simply fill out our affiliate application form with your contact details and preferred investor network profile. Once approved by our compliance team (typically within 24 hours), you will receive your unique partner dashboard access and referral links."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How much commission can I earn?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Commission rates typically range from 2.5% to 5.5% of the total qualifying property transaction value, depending on the project, volume tiers, and promotional campaigns. For instance, referring a buyer for a PKR 40,000,000 residence at a 3.5% commission rate yields PKR 1,400,000 upon verified deal closure."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do I need real estate experience?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No prior real estate license or brokerage experience is required. The platform is designed for professionals, entrepreneurs, consultants, creators, and community leaders who possess strong networks. Our internal licensed property advisors handle all technical consultations, paperwork, and legal closings."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "How are referrals tracked?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Every partner receives a unique referral identifier, dynamic web links, and access to a direct lead submission portal. Our CRM locks your referral attribution for 90 days across web visits, phone inquiries, and in-person showroom visits."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "When do I receive my commission?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Commissions are processed and disbursed immediately following the verification of the qualifying transaction and receipt of the required developer deposit/token clearance, according to the official project affiliate agreement."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Can I promote multiple projects?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes! As an approved affiliate, you have unrestricted access to promote our entire catalog of luxury residential towers, commercial offices, beachfront villas, and eco-estates across multiple cities and regions."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Is commission guaranteed?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "No. In accordance with strict compliance and legal standards, commissions are never guaranteed income. Commission payouts are strictly contingent upon qualified leads completing a legally binding and verified property transaction pursuant to the applicable affiliate terms."
+      }
+    }
+  ]
+}
+</script>
+
+<!-- 8. ItemList — Featured Developments (pulled from projectsData.js initialProjects) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "PropPartner Featured Real Estate Developments",
+  "description": "Curated portfolio of vetted real estate developments available for affiliate promotion through PropPartner.",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@type": "ApartmentComplex",
+        "name": "The Luminary Sky Residences",
+        "description": "Ultra-luxury twin towers with panoramic penthouse suites in Karachi Financial District.",
+        "url": "https://proppartner.pro/projects/luminary-towers",
+        "image": "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1200&q=80",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Main Boulevard, Financial District",
+          "addressLocality": "Karachi",
+          "addressCountry": "PK"
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@type": "SingleFamilyResidence",
+        "name": "Elysium Waterfront Villas",
+        "description": "Exclusive private island beachfront villas with private marina in Gwadar Waterfront Bay.",
+        "url": "https://proppartner.pro/projects/elysium-waterfront",
+        "image": "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=1200&q=80",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Coastal Palm Avenue",
+          "addressLocality": "Gwadar",
+          "addressCountry": "PK"
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "item": {
+        "@type": "OfficeComplex",
+        "name": "Nexus Horizon Corporate Hub",
+        "description": "Grade-A LEED Platinum commercial offices & tech incubator spaces in Islamabad Blue Area.",
+        "url": "https://proppartner.pro/projects/nexus-horizon-corporate",
+        "image": "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1200&q=80",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Central Business District, Blue Area",
+          "addressLocality": "Islamabad",
+          "addressCountry": "PK"
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 4,
+      "item": {
+        "@type": "House",
+        "name": "Verdant Heights Eco-Townhomes",
+        "description": "Sustainable community living with 70% green canopy & solar grid in Lahore DHA Phase 9.",
+        "url": "https://proppartner.pro/projects/verdant-heights-estate",
+        "image": "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=80",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Pine Hills Viewway, DHA Phase 9",
+          "addressLocality": "Lahore",
+          "addressCountry": "PK"
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 5,
+      "item": {
+        "@type": "ApartmentComplex",
+        "name": "Solaria Sky Penthouses",
+        "description": "Luxury sky penthouses with panoramic city views in Capital Heights.",
+        "url": "https://proppartner.pro/projects/solaria-penthouse-suites",
+        "image": "[PLACEHOLDER: Solaria project image URL from projectsData.js gallery]",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Capital Heights",
+          "addressCountry": "PK"
+        }
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 6,
+      "item": {
+        "@type": "LocalBusiness",
+        "name": "Aurora Lifestyle Galleria",
+        "description": "Commercial retail & food lifestyle destination in Mega City Center.",
+        "url": "https://proppartner.pro/projects/aurora-retail-galleria",
+        "image": "[PLACEHOLDER: Aurora project image URL from projectsData.js gallery]",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Mega City Center",
+          "addressCountry": "PK"
+        }
+      }
+    }
+  ]
+}
+</script>
+
+<!-- 9. Review — Affiliate Success Stories (verbatim from affiliateData.js testimonials;
+     rating:5 is the on-page displayed star rating for each testimonial) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Review",
+  "itemReviewed": { "@id": "https://proppartner.pro/#organization" },
+  "author": { "@type": "Person", "name": "Kamran Zubair", "jobTitle": "Senior Corporate Strategy Consultant" },
+  "reviewBody": "In my first 4 months, I referred 6 business colleagues looking to park capital. Three completed purchases at The Luminary Towers, generating over PKR 4.2 Million in transparent affiliate payouts with zero closing headaches.",
+  "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Review",
+  "itemReviewed": { "@id": "https://proppartner.pro/#organization" },
+  "author": { "@type": "Person", "name": "Sana Mir", "jobTitle": "Financial Advisory Principal" },
+  "reviewBody": "As a commercial mortgage broker, many clients ask for trusted luxury development recommendations. This platform provides vetted projects, flawless white-label brochures, and an automated tracking dashboard that pays like clockwork.",
+  "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Review",
+  "itemReviewed": { "@id": "https://proppartner.pro/#organization" },
+  "author": { "@type": "Person", "name": "Haris Farooq", "jobTitle": "Tech Entrepreneur & Creator" },
+  "reviewBody": "I run a business YouTube channel and newsletter. By sharing project virtual tours and factsheets with my audience, I've created an entirely new recurring revenue stream that eclipses my typical brand sponsorships.",
+  "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
+}
+</script>
+
+<!-- 10. ContactPage / ContactPoint (machine-typed contact modalities) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "url": "https://proppartner.pro/#contact",
+  "about": { "@id": "https://proppartner.pro/#organization" },
+  "mainEntity": {
+    "@type": "Organization",
+    "@id": "https://proppartner.pro/#organization",
+    "contactPoint": [
+      {
+        "@type": "ContactPoint",
+        "contactType": "sales",
+        "telephone": "+92-322-865-4411",
+        "availableLanguage": ["English", "Urdu"]
+      },
+      {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "url": "https://wa.me/923228654411",
+        "availableLanguage": ["English", "Urdu"]
+      },
+      {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "email": "llre.uae@gmail.com"
+      }
+    ]
+  }
+}
+</script>
+
 <!-- Main JavaScript App -->
+
 <script type="module" src="/src/main.js"></script>
 </body>
 </html>
