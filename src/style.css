@@ -2932,15 +2932,20 @@ img {
 .portal-app-layout {
   display: flex;
   min-height: 100vh;
+  max-width: 100vw;
+  overflow-x: hidden;
   background: #06090E;
   color: #F8FAFC;
 }
 
 .portal-sidebar {
-  width: 280px;
+  width: 260px;
+  min-width: 260px;
+  max-width: 260px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
   border-radius: 0;
   border-left: none;
   border-top: none;
@@ -2954,11 +2959,27 @@ img {
 }
 
 .sidebar-brand-header {
-  padding: 22px 20px;
+  padding: 18px 16px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  overflow: hidden;
+}
+
+.sidebar-brand-header .brand-logo {
+  display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 10px;
+  min-width: 0;
+  text-decoration: none;
+}
+
+.sidebar-brand-header .logo-text {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .badge-role-admin {
@@ -2968,9 +2989,11 @@ img {
   font-family: var(--font-mono);
   font-size: 0.65rem;
   font-weight: 700;
-  padding: 4px 8px;
+  padding: 3px 8px;
   border-radius: 6px;
   letter-spacing: 0.04em;
+  align-self: flex-start;
+  flex-shrink: 0;
 }
 
 .badge-role-partner {
@@ -3135,10 +3158,11 @@ img {
 }
 
 .portal-topbar {
-  padding: 16px 32px;
+  padding: 14px 24px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 12px;
   border-radius: 0;
   border-left: none;
   border-top: none;
@@ -3148,12 +3172,17 @@ img {
   top: 0;
   z-index: 90;
   background: rgba(8, 11, 18, 0.85);
+  min-width: 0;
+  overflow: hidden;
 }
 
 .topbar-left {
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 12px;
+  min-width: 0;
+  flex: 1;
+  overflow: hidden;
 }
 
 .topbar-toggle-sidebar {
@@ -3165,16 +3194,21 @@ img {
 }
 
 .topbar-page-title {
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   font-weight: 800;
   letter-spacing: -0.01em;
   margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 280px;
 }
 
 .topbar-right {
   display: flex;
   align-items: center;
-  gap: 14px;
+  gap: 10px;
+  flex-shrink: 0;
 }
 
 .topbar-ref-pill {
@@ -3272,7 +3306,9 @@ img {
 
 .portal-content-body {
   flex: 1;
+  min-width: 0;
   padding: 32px;
+  overflow-x: hidden;
   overflow-y: auto;
 }
 
@@ -3283,26 +3319,32 @@ img {
   display: flex;
   flex-direction: column;
   gap: 24px;
+  min-width: 0;
+  width: 100%;
   max-width: 1400px;
   margin: 0 auto;
 }
 
 .module-header-row {
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
   justify-content: space-between;
-  gap: 20px;
+  gap: 16px;
+  flex-wrap: wrap;
+  min-width: 0;
 }
 
 .module-title {
-  font-size: 1.5rem;
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
   font-weight: 800;
   margin-bottom: 4px;
+  word-break: break-word;
 }
 
 .module-subtitle {
-  font-size: 0.85rem;
+  font-size: 0.84rem;
   color: var(--text-secondary);
+  word-break: break-word;
 }
 
 .admin-kpi-grid {
@@ -3881,7 +3923,7 @@ img {
   .portal-sidebar {
     position: fixed;
     top: 0;
-    left: -300px;
+    left: -280px;
     height: 100vh;
     z-index: 1000;
     transition: left 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -3908,6 +3950,14 @@ img {
   .platform-mode-dock {
     bottom: 74px; /* Lift above Mobile Bottom Bar */
   }
+}
+
+/* Hide verbose topbar items on medium screens to prevent overflow */
+@media (max-width: 1280px) {
+  .topbar-ref-pill { display: none; }
+}
+@media (max-width: 1440px) {
+  .topbar-user-meta .user-role { display: none; }
 }
 
 /* ==========================================================================
