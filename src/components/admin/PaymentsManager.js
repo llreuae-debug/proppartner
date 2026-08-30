@@ -118,9 +118,9 @@ export function renderPaymentsManager(container, navigateTo, initialAction = nul
                     </td>
                     <td><strong class="text-green" style="font-size: 1.05rem;">${formatCurrencyValue(p.amount, curr)}</strong></td>
                     <td>
-                      <a href="#" class="btn-text-link" onclick="alert('Viewing Bank Settlement Voucher #${p.reference}'); return false;">
+                      <button type="button" class="btn-text-link" onclick="alert('Viewing Bank Settlement Voucher #${p.reference}');">
                         <i data-lucide="file-text"></i> View Receipt
-                      </a>
+                      </button>
                     </td>
                     <td><span class="status-pill status-paid">${p.status}</span></td>
                   </tr>

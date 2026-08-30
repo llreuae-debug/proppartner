@@ -30,7 +30,7 @@ export function initAffiliatePortal(container, onNavigateLanding, onSwitchAdminV
         <!-- Partner Sidebar (Desktop / Tablet Drawer) -->
         <aside class="portal-sidebar glass-card" id="partner-sidebar">
           <div class="sidebar-brand-header">
-            <a href="#" class="brand-logo brand-logo-img">
+            <a href="#partner" class="brand-logo brand-logo-img">
               <img src="/assets/proppartner-icon.jpg" alt="PropPartner" class="logo-img-icon" width="34" height="34">
               <div class="logo-text">PROP<span>PARTNER</span></div>
             </a>
@@ -751,7 +751,7 @@ function renderPartnerModule(section, aff, stats, curr, navigateTo) {
                     <td>${p.date}</td>
                     <td><strong>${p.method}</strong><br><code>${p.reference}</code></td>
                     <td><strong class="text-green" style="font-size:1.1rem;">${formatCurrencyValue(p.amount, curr)}</strong></td>
-                    <td><a href="#" class="btn-text-link" onclick="alert('Viewing Bank Settlement Receipt Voucher #${p.reference}'); return false;"><i data-lucide="file-text"></i> Download</a></td>
+                    <td><button type="button" class="btn-text-link" onclick="alert('Viewing Bank Settlement Receipt Voucher #${p.reference}');"><i data-lucide="file-text"></i> Download</button></td>
                     <td><span class="status-pill status-paid">${p.status}</span></td>
                   </tr>
                 `).join('')}
@@ -772,7 +772,7 @@ function renderPartnerModule(section, aff, stats, curr, navigateTo) {
                 </div>
                 <div class="m-card-details">
                   <div><span class="text-muted text-xs">Amount:</span> <strong class="text-green">${formatCurrencyValue(p.amount, curr)}</strong></div>
-                  <a href="#" class="btn-text-link text-xs" onclick="alert('Viewing Bank Settlement Receipt Voucher #${p.reference}'); return false;"><i data-lucide="file-text"></i> Receipt</a>
+                  <button type="button" class="btn-text-link text-xs" onclick="alert('Viewing Bank Settlement Receipt Voucher #${p.reference}');"><i data-lucide="file-text"></i> Receipt</button>
                 </div>
               </div>
             `).join('')}

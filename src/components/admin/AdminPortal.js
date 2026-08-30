@@ -45,7 +45,7 @@ export function initAdminPortal(container, onNavigateLanding, onSwitchAffiliateV
         <!-- Sidebar Navigation (Desktop / Tablet Drawer) -->
         <aside class="portal-sidebar glass-card" id="admin-sidebar">
           <div class="sidebar-brand-header">
-            <a href="#" class="brand-logo brand-logo-img" id="sidebar-logo-link">
+            <a href="#admin" class="brand-logo brand-logo-img" id="sidebar-logo-link">
               <img src="/assets/proppartner-icon.jpg" alt="PropPartner" class="logo-img-icon" width="34" height="34">
               <div class="logo-text">PROP<span>PARTNER</span></div>
             </a>

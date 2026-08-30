@@ -105,7 +105,7 @@ export function openAuthModal(initialTab = 'login', onAuthSuccess, initialData =
         <div class="form-group">
           <div class="label-split">
             <label class="form-label" for="login-password">Password</label>
-            <a href="#" class="forgot-link" id="link-forgot-pass">Forgot Password?</a>
+            <a href="#forgot-password" class="forgot-link" id="link-forgot-pass">Forgot Password?</a>
           </div>
           <input type="password" id="login-password" class="form-input" placeholder="••••••••••••" required value="PropPartner2026!">
         </div>

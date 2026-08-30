@@ -19,6 +19,8 @@ import { platformStore } from './store/platformStore.js';
 import { openAuthModal } from './components/auth/AuthModal.js';
 import { initAdminPortal } from './components/admin/AdminPortal.js';
 import { initAffiliatePortal } from './components/affiliate/AffiliatePortal.js';
+import { renderLegalView } from './components/legal/LegalView.js';
+import { renderContactView } from './components/contact/ContactView.js';
 
 // Global state
 let currentCurrency = 'PKR';
@@ -165,12 +167,12 @@ document.addEventListener('DOMContentLoaded', () => {
   // 16. Persistent Platform Switcher Dock
   setupPlatformModeDock();
 
-  // 17. Legal Modals
-  document.querySelectorAll('.legal-modal-link').forEach(link => {
+  // 17. Legal Page Links
+  document.querySelectorAll('.legal-route-link').forEach(link => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
-      const type = link.getAttribute('data-legal');
-      handleLegalModal(type);
+      const docKey = link.getAttribute('data-legal-route') || 'terms';
+      switchView('legal', { docKey });
     });
   });
 
@@ -183,27 +185,38 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // View Switching Coordinator
-export function switchView(targetView) {
+export function switchView(targetView, params = {}) {
   currentView = targetView;
   const landingWrap = document.getElementById('landing-page-wrap');
   const portalRoot = document.getElementById('portal-app-root');
+  const legalRoot = document.getElementById('legal-page-root');
+  const contactRoot = document.getElementById('contact-page-root');
   const dock = document.getElementById('platform-mode-dock');
+
+  // Hide all view containers first
+  if (landingWrap) landingWrap.style.display = 'none';
+  if (portalRoot) {
+    portalRoot.style.display = 'none';
+    portalRoot.innerHTML = '';
+  }
+  if (legalRoot) {
+    legalRoot.style.display = 'none';
+    legalRoot.innerHTML = '';
+  }
+  if (contactRoot) {
+    contactRoot.style.display = 'none';
+    contactRoot.innerHTML = '';
+  }
 
   // Update active dock buttons
   dock?.querySelectorAll('.dock-btn').forEach(btn => btn.classList.remove('active'));
 
   if (targetView === 'landing') {
     if (landingWrap) landingWrap.style.display = 'block';
-    if (portalRoot) {
-      portalRoot.style.display = 'none';
-      portalRoot.innerHTML = '';
-    }
     const landBtn = document.getElementById('dock-btn-landing');
     if (landBtn) landBtn.classList.add('active');
-    window.location.hash = '';
     window.scrollTo({ top: 0, behavior: 'smooth' });
   } else if (targetView === 'admin') {
-    if (landingWrap) landingWrap.style.display = 'none';
     if (portalRoot) {
       portalRoot.style.display = 'block';
       if (!authStore.isSuperAdmin()) {
@@ -220,7 +233,6 @@ export function switchView(targetView) {
     window.location.hash = '#admin';
     window.scrollTo({ top: 0, behavior: 'smooth' });
   } else if (targetView === 'partner') {
-    if (landingWrap) landingWrap.style.display = 'none';
     if (portalRoot) {
       portalRoot.style.display = 'block';
       if (!authStore.isAffiliate()) {
@@ -236,6 +248,42 @@ export function switchView(targetView) {
     if (partBtn) partBtn.classList.add('active');
     window.location.hash = '#partner';
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else if (targetView === 'legal') {
+    if (legalRoot) {
+      legalRoot.style.display = 'block';
+      const docKey = params.docKey || 'terms';
+      renderLegalView(
+        legalRoot,
+        docKey,
+        () => {
+          window.location.hash = '';
+          switchView('landing');
+        },
+        (nextDocKey) => {
+          const docSlugMap = {
+            terms: '#terms-and-conditions',
+            agreement: '#affiliate-agreement',
+            privacy: '#privacy-policy',
+            commission: '#commission-policy',
+            referral: '#referral-policy',
+            disclaimer: '#disclaimer'
+          };
+          window.location.hash = docSlugMap[nextDocKey] || '#terms-and-conditions';
+          switchView('legal', { docKey: nextDocKey });
+        }
+      );
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  } else if (targetView === 'contact') {
+    if (contactRoot) {
+      contactRoot.style.display = 'block';
+      renderContactView(contactRoot, () => {
+        window.location.hash = '';
+        switchView('landing');
+      });
+    }
+    window.location.hash = '#contact';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
   if (window.lucide) window.lucide.createIcons();
@@ -243,7 +291,23 @@ export function switchView(targetView) {
 
 function handleHashRouting() {
   const hash = window.location.hash;
-  if (hash.startsWith('#reset-password')) {
+  const path = window.location.pathname;
+
+  if (hash === '#terms-and-conditions' || hash === '#terms' || path === '/terms-and-conditions') {
+    switchView('legal', { docKey: 'terms' });
+  } else if (hash === '#affiliate-agreement' || hash === '#agreement' || path === '/affiliate-agreement') {
+    switchView('legal', { docKey: 'agreement' });
+  } else if (hash === '#privacy-policy' || hash === '#privacy' || path === '/privacy-policy') {
+    switchView('legal', { docKey: 'privacy' });
+  } else if (hash === '#commission-policy' || hash === '#commission' || path === '/commission-policy') {
+    switchView('legal', { docKey: 'commission' });
+  } else if (hash === '#referral-policy' || hash === '#referral' || path === '/referral-policy') {
+    switchView('legal', { docKey: 'referral' });
+  } else if (hash === '#disclaimer' || path === '/disclaimer') {
+    switchView('legal', { docKey: 'disclaimer' });
+  } else if (hash === '#contact' || path === '/contact') {
+    switchView('contact');
+  } else if (hash.startsWith('#reset-password')) {
     const token = new URLSearchParams(hash.split('?')[1] || '').get('token') || '';
     openAuthModal('reset', (user) => {
       if (user.role === 'SUPER_ADMIN') switchView('admin');
@@ -260,6 +324,10 @@ function handleHashRouting() {
       if (user.role === 'SUPER_ADMIN') switchView('admin');
       else switchView('partner');
     });
+  } else if (!hash || hash === '#' || hash === '#hero') {
+    if (currentView !== 'landing') {
+      switchView('landing');
+    }
   }
 }
 
