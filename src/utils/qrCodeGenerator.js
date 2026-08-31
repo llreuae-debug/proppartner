@@ -281,17 +281,19 @@ export async function printQrFlyer(textToEncode, affiliateName, affiliateId, pro
 
   printWin.document.write(`
     <!DOCTYPE html>
-    <html>
+    <html lang="en">
     <head>
+      <meta charset="utf-8">
       <title>PropPartner — Official Partner Invitation & QR Flyer</title>
       <style>
-        @page { size: A4 portrait; margin: 15mm; }
+        @page { size: A4 portrait; margin: 12mm 15mm 15mm 15mm; }
+        * { box-sizing: border-box; -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
         body {
           font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
           color: #0F172A;
           background: #FFFFFF;
           margin: 0;
-          padding: 20px;
+          padding: 10px 0;
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -299,44 +301,94 @@ export async function printQrFlyer(textToEncode, affiliateName, affiliateId, pro
         }
         .card {
           width: 100%;
-          max-width: 580px;
-          border: 2px solid #E2E8F0;
+          max-width: 620px;
+          border: 2px solid #D4AF37;
           border-radius: 20px;
-          padding: 36px 30px;
+          padding: 32px 30px;
           box-sizing: border-box;
+          background: #FFFFFF;
+          box-shadow: 0 10px 30px rgba(0,0,0,0.06);
         }
-        .logo-img { height: 60px; object-fit: contain; margin-bottom: 8px; }
-        .network-tag { font-size: 13px; font-weight: 700; color: #D4AF37; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; }
-        .headline { font-size: 24px; font-weight: 900; color: #0F172A; margin: 0 0 10px 0; line-height: 1.25; }
-        .subtext { font-size: 14px; color: #64748B; margin: 0 0 24px 0; line-height: 1.5; }
+        .flyer-header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          border-bottom: 2px solid #E2E8F0;
+          padding-bottom: 16px;
+          margin-bottom: 20px;
+          text-align: left;
+        }
+        .logo-img { height: 48px; object-fit: contain; }
+        .header-meta-tag {
+          text-align: right;
+          font-size: 9.5px;
+          color: #64748B;
+        }
+        .header-meta-tag strong { color: #0F172A; }
+        .network-tag { font-size: 11px; font-weight: 800; color: #D4AF37; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 10px; }
+        .headline { font-size: 22px; font-weight: 900; color: #0F172A; margin: 0 0 8px 0; line-height: 1.25; }
+        .subtext { font-size: 12.5px; color: #475569; margin: 0 0 20px 0; line-height: 1.5; }
         .qr-frame {
           background: #F8FAFC;
-          border: 1px solid #E2E8F0;
+          border: 2px solid #E2E8F0;
           border-radius: 16px;
-          padding: 16px;
+          padding: 14px;
           display: inline-block;
-          margin-bottom: 24px;
+          margin-bottom: 18px;
+          box-shadow: inset 0 2px 6px rgba(0,0,0,0.04);
         }
-        .qr-img { width: 260px; height: 260px; display: block; }
+        .qr-img { width: 220px; height: 220px; display: block; }
         .partner-box {
           background: #F1F5F9;
+          border: 1px solid #E2E8F0;
           border-radius: 12px;
-          padding: 14px 20px;
-          margin-bottom: 20px;
+          padding: 12px 18px;
+          margin-bottom: 16px;
         }
-        .partner-name { font-size: 18px; font-weight: 800; color: #1E293B; margin: 0 0 4px 0; }
-        .partner-id { font-family: monospace; font-size: 14px; color: #475569; margin: 0; }
-        .url-box { font-family: monospace; font-size: 13px; color: #1E3A8A; word-break: break-all; margin-bottom: 20px; font-weight: 600; }
-        .instructions { font-size: 12px; color: #94A3B8; line-height: 1.5; border-top: 1px solid #E2E8F0; padding-top: 16px; }
+        .partner-name { font-size: 16px; font-weight: 800; color: #1E293B; margin: 0 0 2px 0; }
+        .partner-id { font-family: monospace; font-size: 12px; color: #475569; margin: 0; }
+        .url-box { font-family: monospace; font-size: 11.5px; color: #1E3A8A; word-break: break-all; margin-bottom: 16px; font-weight: 600; background: #EFF6FF; padding: 6px 12px; border-radius: 6px; border: 1px solid #BFDBFE; display: inline-block; }
+        .instructions { font-size: 11px; color: #64748B; line-height: 1.5; border-top: 1px solid #E2E8F0; padding-top: 14px; margin-bottom: 20px; }
+        
+        /* Corporate Footer with Address */
+        .flyer-footer {
+          border-top: 2px solid #D4AF37;
+          padding-top: 14px;
+          font-size: 9px;
+          color: #64748B;
+          text-align: left;
+          line-height: 1.5;
+        }
+        .flyer-footer-grid {
+          display: grid;
+          grid-template-columns: 1.2fr 1fr;
+          gap: 12px;
+        }
+        .flyer-footer-grid strong {
+          color: #0F172A;
+          display: block;
+          margin-bottom: 2px;
+        }
       </style>
     </head>
     <body>
       <div class="card">
-        <img src="/assets/proppartner-logo.png" alt="PropPartner" class="logo-img">
+        <!-- Top Branded Header -->
+        <div class="flyer-header">
+          <div>
+            <img src="/assets/proppartner-logo.png" alt="PropPartner" class="logo-img" onerror="this.src='/assets/proppartner-icon.svg';">
+          </div>
+          <div class="header-meta-tag">
+            <div><strong>PROPPARTNER NETWORK</strong></div>
+            <div>Verified Partner Invitation</div>
+            <div>Ref: <code>${affiliateId}</code></div>
+          </div>
+        </div>
+
         <div class="network-tag">3D Real Estate Affiliate Partner Network</div>
         
         <h1 class="headline">${projectName ? `Exclusive Access: ${projectName}` : 'VIP Real Estate Investment Access'}</h1>
-        <p class="subtext">Scan the verified QR code below using your mobile camera to explore high-yield luxury developments with priority buyer allocation.</p>
+        <p class="subtext">Scan the verified QR code below using your mobile camera to explore premier luxury developments with priority buyer allocation and 90-day escrow attribution.</p>
 
         <div class="qr-frame">
           <img src="${qrDataUrl}" alt="Partner Referral QR" class="qr-img">
@@ -344,15 +396,33 @@ export async function printQrFlyer(textToEncode, affiliateName, affiliateId, pro
 
         <div class="partner-box">
           <div class="partner-name">${affiliateName || 'PropPartner Verified Affiliate'}</div>
-          <div class="partner-id">Partner ID: ${affiliateId} · 90-Day Escrow Protection</div>
+          <div class="partner-id">Partner ID: <code>${affiliateId}</code> · Regulated Developer Escrow</div>
         </div>
 
-        <div class="url-box">${textToEncode}</div>
+        <div>
+          <div class="url-box">${textToEncode}</div>
+        </div>
 
         <div class="instructions">
           Point your smartphone camera at the QR code above to automatically open and lock your direct introduction.<br>
-          © 2026 PropPartner Network. All transactions processed via regulated developer escrow.
+          All buyer transactions are secured through regulated developer escrow accounts and certified milestones.
         </div>
+
+        <!-- Corporate Address Footer -->
+        <footer class="flyer-footer">
+          <div class="flyer-footer-grid">
+            <div>
+              <strong>PropPartner Global Real Estate Network Ltd.</strong>
+              Level 24, Boulevard Financial Tower, Financial Center Road<br>
+              Downtown Financial District, Dubai, UAE / Main Boulevard, Karachi
+            </div>
+            <div style="text-align: right;">
+              <strong>Direct Verification & Concierge Desk</strong>
+              Email: support@proppartner.pro • Web: https://proppartner.pro<br>
+              Direct: +971 4 200 8899 / +92 21 3581 0000
+            </div>
+          </div>
+        </footer>
       </div>
 
       <script>
@@ -363,3 +433,4 @@ export async function printQrFlyer(textToEncode, affiliateName, affiliateId, pro
   `);
   printWin.document.close();
 }
+

@@ -1,6 +1,7 @@
 // Ledgers Manager - Super Admin Triple Financial Ledger (Master, Project-Wise, Affiliate-Wise) & Immutable Audit Adjustments
 
 import { platformStore, formatCurrencyValue } from '../../store/platformStore.js';
+import { printLedgerStatement, exportLedgerCSV } from '../../utils/statementGenerator.js';
 
 export function renderLedgersManager(container, navigateTo, initialParams = {}) {
   let activeLedger = initialParams.affiliateId ? 'affiliate' : initialParams.projectId ? 'project' : 'master';
@@ -184,8 +185,18 @@ export function renderLedgersManager(container, navigateTo, initialParams = {}) 
     const printBtn = container.querySelector('#btn-print-ledger-pdf');
     if (printBtn) {
       printBtn.onclick = () => {
-        const scopeTitle = activeLedger === 'master' ? 'Master System Financial Ledger' : activeLedger === 'project' ? `Project Ledger — ${selectedProj ? selectedProj.name : 'All Projects'}` : `Affiliate Ledger — ${selectedAff ? selectedAff.name : 'All Affiliates'}`;
-        printLedgerPDF(transactions, scopeTitle, curr);
+        const scopeTitle = activeLedger === 'master' 
+          ? 'Master System Financial Ledger' 
+          : activeLedger === 'project' 
+            ? `Project Ledger — ${selectedProj ? selectedProj.name : 'All Projects'}` 
+            : `Affiliate Partner Financial Statement — ${selectedAff ? selectedAff.name : 'All Affiliates'}`;
+        
+        printLedgerStatement({
+          transactions,
+          scopeTitle,
+          currency: curr,
+          affiliateInfo: activeLedger === 'affiliate' ? selectedAff : null
+        });
       };
     }
 
@@ -193,7 +204,12 @@ export function renderLedgersManager(container, navigateTo, initialParams = {}) 
     if (adjBtn) adjBtn.onclick = () => showAdjustmentModal();
 
     const exportBtn = container.querySelector('#btn-export-ledger-csv');
-    if (exportBtn) exportBtn.onclick = () => exportLedgerCSV(transactions);
+    if (exportBtn) {
+      exportBtn.onclick = () => {
+        const scopeName = activeLedger === 'master' ? 'Master_Ledger' : activeLedger === 'project' ? `Project_${selectedProjectId}` : `Affiliate_${selectedAffiliateId}`;
+        exportLedgerCSV({ transactions, filename: `PropPartner_${scopeName}` });
+      };
+    }
   }
 
   function showAdjustmentModal() {
@@ -219,44 +235,45 @@ export function renderLedgersManager(container, navigateTo, initialParams = {}) 
         <form id="adj-form" class="auth-form">
           <div class="form-row-2">
             <div class="form-group">
-              <label class="form-label">Target Affiliate <span class="req">*</span></label>
-              <select id="adj-aff-select" class="form-select" required>
-                ${platformStore.affiliates.map(a => `
-                  <option value="${a.id}">${a.name} (${a.id})</option>
-                `).join('')}
+              <label class="form-label text-xs">Target Project</label>
+              <select class="form-input" id="adj-project">
+                ${platformStore.projects.map(p => `<option value="${p.id}">${p.name}</option>`).join('')}
               </select>
             </div>
             <div class="form-group">
-              <label class="form-label">Target Project <span class="req">*</span></label>
-              <select id="adj-proj-select" class="form-select" required>
-                ${platformStore.projects.map(p => `
-                  <option value="${p.id}">${p.name}</option>
-                `).join('')}
+              <label class="form-label text-xs">Target Affiliate</label>
+              <select class="form-input" id="adj-affiliate">
+                ${platformStore.affiliates.map(a => `<option value="${a.id}">${a.name} (${a.id})</option>`).join('')}
               </select>
             </div>
           </div>
 
           <div class="form-row-2">
             <div class="form-group">
-              <label class="form-label">Adjustment Amount (PKR) <span class="req">*</span></label>
-              <input type="number" id="adj-amount-input" class="form-input" placeholder="e.g. -25000 or +50000" required>
-              <span class="text-xs text-muted">Use negative (-) for deductions/penalties, positive (+) for bonuses/corrections</span>
+              <label class="form-label text-xs">Adjustment Amount in PKR (Negative for Deductions)</label>
+              <input type="number" class="form-input" id="adj-amount" placeholder="e.g. 50000 or -25000" required>
             </div>
             <div class="form-group">
-              <label class="form-label">Reference ID / Ticket #</label>
-              <input type="text" id="adj-ref-input" class="form-input" placeholder="e.g. AUDIT-CORR-2026-04" required value="AUDIT-CORR-2026-04">
+              <label class="form-label text-xs">Adjustment Reason</label>
+              <select class="form-input" id="adj-reason">
+                <option value="Commission Correction">Commission Correction</option>
+                <option value="Bonus Credit">Bonus Credit</option>
+                <option value="Clawback / Withholding">Clawback / Withholding</option>
+                <option value="Tax Deduction">Tax Deduction</option>
+                <option value="Manual Reconciliation">Manual Reconciliation</option>
+              </select>
             </div>
           </div>
 
           <div class="form-group">
-            <label class="form-label">Mandatory Business Justification / Audit Reason <span class="req">*</span></label>
-            <textarea id="adj-reason-text" class="form-textarea" rows="3" required placeholder="Describe reason for financial adjustment..."></textarea>
+            <label class="form-label text-xs">Detailed Audit Notes</label>
+            <textarea class="form-input" id="adj-notes" rows="3" placeholder="Provide reason and authorization details for compliance audit..." required></textarea>
           </div>
 
-          <button type="submit" class="btn btn-gold w-full btn-lg">
-            <i data-lucide="check-circle-2"></i>
-            <span>POST IMMUTABLE AUDIT TRANSACTION</span>
-          </button>
+          <div class="modal-actions-row">
+            <button type="button" class="btn btn-secondary" id="adj-cancel-btn">Cancel</button>
+            <button type="submit" class="btn btn-gold">Post Immutable Adjustment</button>
+          </div>
         </form>
       </div>
     `;
@@ -265,130 +282,38 @@ export function renderLedgersManager(container, navigateTo, initialParams = {}) 
 
     const close = () => modal.classList.remove('active');
     modal.querySelector('#adj-close-btn').onclick = close;
+    modal.querySelector('#adj-cancel-btn').onclick = close;
 
     modal.querySelector('#adj-form').onsubmit = (e) => {
       e.preventDefault();
-      const affId = modal.querySelector('#adj-aff-select').value;
-      const projId = modal.querySelector('#adj-proj-select').value;
-      const amount = modal.querySelector('#adj-amount-input').value;
-      const reference = modal.querySelector('#adj-ref-input').value;
-      const reason = modal.querySelector('#adj-reason-text').value;
+      const pId = modal.querySelector('#adj-project').value;
+      const aId = modal.querySelector('#adj-affiliate').value;
+      const amt = Number(modal.querySelector('#adj-amount').value);
+      const reason = modal.querySelector('#adj-reason').value;
+      const notes = modal.querySelector('#adj-notes').value;
 
-      platformStore.addLedgerAdjustment({
-        affiliateId: affId,
-        projectId: projId,
-        amount: Number(amount),
-        reference,
-        reason
+      const aff = platformStore.affiliates.find(a => a.id === aId);
+      const proj = platformStore.projects.find(p => p.id === pId);
+
+      platformStore.addLedgerEntry({
+        type: 'Adjustment',
+        projectId: pId,
+        unitId: 'ADJ-MANUAL',
+        affiliateId: aId,
+        affiliateName: aff ? aff.name : aId,
+        customerName: `Adjustment: ${reason}`,
+        amount: 0,
+        netCommission: amt,
+        reference: `ADJ-${Date.now().toString().slice(-6)}`,
+        status: 'Completed',
+        createdBy: 'Super Admin',
+        notes: notes
       });
 
+      alert(`Adjustment of PKR ${amt.toLocaleString()} recorded to ledger successfully.`);
       close();
       render();
     };
-  }
-
-  function exportLedgerCSV(transactions) {
-    const headers = ['Tx ID', 'Date', 'Type', 'Project', 'Unit', 'Affiliate', 'Customer', 'Amount', 'Net Commission', 'Reference', 'Audited By'];
-    const rows = transactions.map(t => [
-      t.id,
-      t.date,
-      t.type,
-      t.projectId,
-      t.unitId,
-      `"${t.affiliateName || t.affiliateId}"`,
-      `"${t.customerName}"`,
-      t.amount,
-      t.netCommission,
-      t.reference,
-      `"${t.createdBy}"`
-    ]);
-
-    const csvContent = 'data:text/csv;charset=utf-8,' + [headers.join(','), ...rows.map(e => e.join(','))].join('\n');
-    const encodedUri = encodeURI(csvContent);
-    const link = document.createElement('a');
-    link.setAttribute('href', encodedUri);
-    link.setAttribute('download', `PropPartner_Ledger_${new Date().toISOString().split('T')[0]}.csv`);
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  }
-
-  function printLedgerPDF(transactions, title, curr) {
-    const printWindow = window.open('', '_blank');
-    if (!printWindow) return;
-    printWindow.document.write(`
-      <!DOCTYPE html>
-      <html>
-      <head>
-        <title>PropPartner — Official Financial Ledger Statement</title>
-        <style>
-          body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; padding: 40px; color: #0F172A; background: #FFF; }
-          .header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #E2E8F0; padding-bottom: 20px; margin-bottom: 24px; }
-          .logo { height: 60px; object-fit: contain; }
-          .meta { text-align: right; font-size: 12px; color: #64748B; }
-          .title { font-size: 22px; font-weight: 800; color: #1E3A8A; margin: 0 0 6px 0; }
-          table { width: 100%; border-collapse: collapse; margin-top: 20px; font-size: 12px; }
-          th { background: #F8FAFC; border: 1px solid #CBD5E1; padding: 10px 8px; text-align: left; font-weight: 700; color: #1E293B; }
-          td { border: 1px solid #E2E8F0; padding: 8px; color: #334155; }
-          tr:nth-child(even) { background: #F8FAFC; }
-          .text-right { text-align: right; }
-          .footer { margin-top: 36px; padding-top: 16px; border-top: 1px solid #E2E8F0; font-size: 11px; color: #94A3B8; display: flex; justify-content: space-between; }
-        </style>
-      </head>
-      <body>
-        <div class="header">
-          <div>
-            <img src="/assets/proppartner-logo.png" alt="PropPartner" class="logo">
-          </div>
-          <div class="meta">
-            <div><strong>PropPartner Network Financial Ledger</strong></div>
-            <div>Generated: ${new Date().toLocaleDateString()} ${new Date().toLocaleTimeString()}</div>
-            <div>Document Ref: STMT-${Date.now()}</div>
-          </div>
-        </div>
-        <h1 class="title">${title}</h1>
-        <p style="font-size: 13px; color: #64748B; margin: 0 0 16px 0;">Official double-entry immutable audit statement of commission accruals, escrow disbursements, and balance journals.</p>
-        <table>
-          <thead>
-            <tr>
-              <th>Tx ID</th>
-              <th>Date</th>
-              <th>Type</th>
-              <th>Project</th>
-              <th>Unit</th>
-              <th>Affiliate</th>
-              <th>Gross Amount</th>
-              <th class="text-right">Net Commission</th>
-              <th>Reference</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${transactions.map(t => `
-              <tr>
-                <td><code>${t.id}</code></td>
-                <td>${t.date}</td>
-                <td><strong>${t.type}</strong></td>
-                <td>${t.projectId}</td>
-                <td>${t.unitId || '-'}</td>
-                <td>${t.affiliateName || t.affiliateId}</td>
-                <td>${formatCurrencyValue(t.amount, curr)}</td>
-                <td class="text-right"><strong>${formatCurrencyValue(t.netCommission, curr)}</strong></td>
-                <td><code>${t.reference || 'REF-STD'}</code></td>
-              </tr>
-            `).join('')}
-          </tbody>
-        </table>
-        <div class="footer">
-          <span>PropPartner Real Estate Affiliate Partner Network · Confidential Financial Record</span>
-          <span>Verified Double-Entry Escrow Ledger</span>
-        </div>
-        <script>
-          window.onload = function() { window.print(); }
-        </script>
-      </body>
-      </html>
-    `);
-    printWindow.document.close();
   }
 
   render();

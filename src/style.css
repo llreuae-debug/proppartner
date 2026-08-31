@@ -6527,6 +6527,62 @@ img {
   }
 }
 
+/* ==========================================================================
+   PRINT / PDF MEDIA STYLES
+   ========================================================================== */
+@media print {
+  body {
+    background: #FFFFFF !important;
+    color: #0F172A !important;
+    font-size: 11pt !important;
+  }
+
+  .nav-header,
+  .mobile-bottom-bar,
+  .mobile-header,
+  .btn,
+  .module-actions,
+  .m-qa-item,
+  .partner-mobile-quick-actions,
+  .auth-modal-backdrop,
+  .ref-toast-card,
+  #bg-canvas {
+    display: none !important;
+  }
+
+  .glass-card,
+  .table-card,
+  .admin-module-view,
+  .partner-module-view {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+
+  .portal-table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+  }
+
+  .portal-table th,
+  .portal-table td {
+    border: 1px solid #CBD5E1 !important;
+    color: #0F172A !important;
+    padding: 6px 8px !important;
+  }
+
+  .portal-table th {
+    background: #F1F5F9 !important;
+    font-weight: 700 !important;
+  }
+
+  tr {
+    page-break-inside: avoid !important;
+  }
+}
+
+
 
 
 

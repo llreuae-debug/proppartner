@@ -10,6 +10,7 @@ import {
   printQrFlyer, 
   validateQrEncoding 
 } from '../../utils/qrCodeGenerator.js';
+import { printLedgerStatement, exportLedgerCSV } from '../../utils/statementGenerator.js';
 
 export function initAffiliatePortal(container, onNavigateLanding, onSwitchAdminView) {
   let currentSection = 'dashboard';
@@ -764,6 +765,14 @@ function renderPartnerModule(section, aff, stats, curr, navigateTo) {
             <h2 class="module-title">Double-Entry Financial Ledger</h2>
             <p class="module-subtitle">Immutable transaction statements, financial credits, deductions, and settlement history</p>
           </div>
+          <div class="module-actions">
+            <button type="button" class="btn btn-secondary btn-sm" id="btn-partner-print-stmt">
+              <i data-lucide="printer"></i> <span>Print / PDF Statement</span>
+            </button>
+            <button type="button" class="btn btn-secondary btn-sm" id="btn-partner-export-csv">
+              <i data-lucide="download"></i> <span>Export CSV</span>
+            </button>
+          </div>
         </div>
 
         <div class="table-card glass-card">
@@ -1295,6 +1304,28 @@ function attachPartnerSubmoduleEvents(container, aff, navigateTo) {
   if (reqPayoutBtn) {
     reqPayoutBtn.onclick = () => {
       alert(`✅ Payout Request Submitted!\nYour payable balance will be processed in Friday's batch wire transfer to ${aff.bankName || 'HBL Prestige'}.`);
+    };
+  }
+
+  const partnerPrintStmtBtn = container.querySelector('#btn-partner-print-stmt');
+  if (partnerPrintStmtBtn) {
+    partnerPrintStmtBtn.onclick = () => {
+      printLedgerStatement({
+        transactions: myLedger,
+        scopeTitle: `Partner Financial Statement — ${aff.name}`,
+        currency: curr,
+        affiliateInfo: aff
+      });
+    };
+  }
+
+  const partnerExportCsvBtn = container.querySelector('#btn-partner-export-csv');
+  if (partnerExportCsvBtn) {
+    partnerExportCsvBtn.onclick = () => {
+      exportLedgerCSV({
+        transactions: myLedger,
+        filename: `PropPartner_Statement_${aff.id}`
+      });
     };
   }
 
