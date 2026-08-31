@@ -236,11 +236,19 @@ export function switchView(targetView, params = {}) {
     updateSEO(seoRoutes.home);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   } else if (targetView === 'admin') {
+    const user = authStore.currentUser;
+    if (!user || (user.role !== 'SUPER_ADMIN' && user.role !== 'ADMIN')) {
+      openAuthModal('login', (authUser) => {
+        if (authUser.role === 'SUPER_ADMIN' || authUser.role === 'ADMIN') {
+          switchView('admin');
+        } else {
+          switchView('partner');
+        }
+      });
+      return;
+    }
     if (portalRoot) {
       portalRoot.style.display = 'block';
-      if (!authStore.isSuperAdmin()) {
-        authStore.loginAs('admin');
-      }
       initAdminPortal(
         portalRoot,
         () => switchView('landing'),
@@ -252,11 +260,19 @@ export function switchView(targetView, params = {}) {
     window.location.hash = '#admin';
     window.scrollTo({ top: 0, behavior: 'smooth' });
   } else if (targetView === 'partner') {
+    const user = authStore.currentUser;
+    if (!user) {
+      openAuthModal('login', (authUser) => {
+        if (authUser.role === 'SUPER_ADMIN' || authUser.role === 'ADMIN') {
+          switchView('admin');
+        } else {
+          switchView('partner');
+        }
+      });
+      return;
+    }
     if (portalRoot) {
       portalRoot.style.display = 'block';
-      if (!authStore.isAffiliate()) {
-        authStore.loginAs('partnerPlatinum');
-      }
       initAffiliatePortal(
         portalRoot,
         () => switchView('landing'),

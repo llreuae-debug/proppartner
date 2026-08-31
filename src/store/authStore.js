@@ -112,9 +112,9 @@ const INITIAL_USERS = [
     mustChangePassword: false,
     lastLogin: '2026-08-30 19:45',
     createdDate: '2026-01-01',
-    // Pre-salted hash for secure initialization
+    // Pre-salted PBKDF2-SHA256 hash for secure initialization
     salt: 'a1f89c2049e0b123d4e5f67890123456',
-    passwordHash: '8b7f3d4a2e1c9b8a7f6e5d4c3b2a1f0e9d8c7b6a5f4e3d2c1b0a9f8e7d6c5b4a'
+    passwordHash: '5c9792dc8ccbd0bc1f66c4324c3b81b3db8b5e3cbccbf4750356d05df713d418'
   },
   {
     id: 'USR-AFF-101',
@@ -210,14 +210,20 @@ class AuthStore {
         this.saveUsers();
       }
 
-      // Ensure Super Admin llre.uae@gmail.com is present with SUPER_ADMIN role
+      // Ensure Super Admin llre.uae@gmail.com is present with SUPER_ADMIN role and current cryptographic credentials
       let superAdmin = this.users.find(u => u.email.toLowerCase() === 'llre.uae@gmail.com');
       if (!superAdmin) {
         superAdmin = { ...INITIAL_USERS[0] };
         this.users.unshift(superAdmin);
         this.saveUsers();
-      } else if (superAdmin.role !== 'SUPER_ADMIN') {
-        superAdmin.role = 'SUPER_ADMIN';
+      } else {
+        if (superAdmin.role !== 'SUPER_ADMIN') {
+          superAdmin.role = 'SUPER_ADMIN';
+        }
+        if (!superAdmin.salt || superAdmin.passwordHash !== INITIAL_USERS[0].passwordHash) {
+          superAdmin.salt = INITIAL_USERS[0].salt;
+          superAdmin.passwordHash = INITIAL_USERS[0].passwordHash;
+        }
         this.saveUsers();
       }
 
@@ -570,6 +576,230 @@ class AuthStore {
     }
 
     return { success: false, message: 'Invalid demo key' };
+  }
+
+  // ==========================================
+  // PARTNER REGISTRATION & AUTHENTICATION
+  // ==========================================
+  async registerPartner(data) {
+    const { name, email, phone, password, termsAccepted, referralSource } = data;
+
+    if (!name || !name.trim()) {
+      return { success: false, message: 'Please enter your full legal name.' };
+    }
+    if (!email || !email.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) {
+      return { success: false, message: 'Please enter a valid email address.' };
+    }
+    if (!phone || !phone.trim() || phone.trim().length < 7) {
+      return { success: false, message: 'Please enter a valid phone number with country code.' };
+    }
+    if (!password) {
+      return { success: false, message: 'Please enter a password.' };
+    }
+    if (password.length < 8) {
+      return { success: false, message: 'Password must be at least 8 characters in length.' };
+    }
+    if (!termsAccepted) {
+      return { success: false, message: 'You must accept the PropPartner Partner Terms & Conditions.' };
+    }
+
+    const cleanEmail = email.trim().toLowerCase();
+
+    // Prevent duplicate emails
+    if (this.users.some(u => u.email.toLowerCase() === cleanEmail)) {
+      return { success: false, message: 'An account with this email address is already registered. Please sign in.' };
+    }
+
+    // Generate next Partner ID e.g. AFF-000103
+    const existingAffIds = this.users
+      .filter(u => u.affiliateId && u.affiliateId.startsWith('AFF-'))
+      .map(u => parseInt(u.affiliateId.replace('AFF-', ''), 10))
+      .filter(n => !isNaN(n));
+    const nextNum = existingAffIds.length > 0 ? Math.max(...existingAffIds) + 1 : 103;
+    const partnerId = `AFF-${String(nextNum).padStart(6, '0')}`;
+    const referralCode = partnerId;
+
+    // Hash password with salt
+    const salt = generateSalt(16);
+    const passwordHash = await hashPassword(password, salt);
+
+    const newUser = {
+      id: `USR-${partnerId}`,
+      name: name.trim(),
+      email: cleanEmail,
+      role: 'AFFILIATE_PARTNER',
+      authMethod: 'PASSWORD',
+      avatar: `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(name.trim())}`,
+      title: 'Affiliate Partner',
+      phone: phone.trim(),
+      affiliateId: partnerId,
+      tier: 'Platinum',
+      status: 'ACTIVE',
+      twoFactorEnabled: false,
+      mustChangePassword: false,
+      createdDate: new Date().toISOString().substring(0, 10),
+      lastLogin: new Date().toISOString().replace('T', ' ').substring(0, 16),
+      salt,
+      passwordHash,
+      referralSource: referralSource || ''
+    };
+
+    this.users.push(newUser);
+    this.saveUsers();
+
+    // Auto-create session and log in
+    this.currentUser = { ...newUser };
+    this.createSession(newUser.id, true);
+    this.saveSession();
+
+    this.recordSecurityAudit('Partner Registered', `Partner ${newUser.name} (${newUser.email}) registered account ${partnerId}`);
+
+    return {
+      success: true,
+      user: this.currentUser,
+      partnerId,
+      referralCode,
+      referralUrl: `https://proppartner.pro/?ref=${referralCode}`
+    };
+  }
+
+  async adminCreatePartner(partnerData) {
+    const { 
+      name, 
+      email, 
+      phone, 
+      company,
+      tier = 'Platinum', 
+      status = 'Approved', 
+      commissionRate = 3.5, 
+      password, 
+      mustChangePassword = false,
+      notes = '',
+      projectAccess = 'ALL'
+    } = partnerData;
+
+    if (!name || !name.trim()) return { success: false, message: 'Partner name is required.' };
+    if (!email || !email.trim()) return { success: false, message: 'Partner email is required.' };
+
+    const cleanEmail = email.trim().toLowerCase();
+    if (this.users.some(u => u.email.toLowerCase() === cleanEmail)) {
+      return { success: false, message: 'A partner account with this email address already exists.' };
+    }
+
+    // Generate unique ID
+    const existingAffIds = this.users
+      .filter(u => u.affiliateId && u.affiliateId.startsWith('AFF-'))
+      .map(u => parseInt(u.affiliateId.replace('AFF-', ''), 10))
+      .filter(n => !isNaN(n));
+    const nextNum = existingAffIds.length > 0 ? Math.max(...existingAffIds) + 1 : 103;
+    const partnerId = `AFF-${String(nextNum).padStart(6, '0')}`;
+    const referralCode = partnerId;
+
+    // Secure temporary password if none provided
+    const passToUse = password && password.trim() ? password.trim() : `Prop${generateSecureToken(4)}!`;
+    const salt = generateSalt(16);
+    const passwordHash = await hashPassword(passToUse, salt);
+
+    const newUser = {
+      id: `USR-${partnerId}`,
+      name: name.trim(),
+      email: cleanEmail,
+      role: 'AFFILIATE_PARTNER',
+      authMethod: 'PASSWORD',
+      avatar: `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(name.trim())}`,
+      title: company ? `Partner, ${company.trim()}` : 'Real Estate Partner',
+      phone: phone ? phone.trim() : '',
+      affiliateId: partnerId,
+      tier: tier,
+      status: (status === 'Approved' || status === 'Active') ? 'ACTIVE' : status.toUpperCase(),
+      twoFactorEnabled: false,
+      mustChangePassword: !!mustChangePassword,
+      createdDate: new Date().toISOString().substring(0, 10),
+      lastLogin: null,
+      salt,
+      passwordHash,
+      notes,
+      projectAccess
+    };
+
+    this.users.push(newUser);
+    this.saveUsers();
+
+    this.recordSecurityAudit(
+      'Partner Created by Admin', 
+      `Super Admin created partner account ${newUser.name} (${partnerId}) with status ${status}`
+    );
+
+    return {
+      success: true,
+      user: newUser,
+      partnerId,
+      referralCode,
+      temporaryPassword: passToUse
+    };
+  }
+
+  async adminResetPassword(userId, newPassword, mustChangePassword = true) {
+    const user = this.users.find(u => u.id === userId || u.affiliateId === userId);
+    if (!user) return { success: false, message: 'User account not found' };
+
+    const passToUse = newPassword && newPassword.trim() ? newPassword.trim() : `Prop${generateSecureToken(4)}!`;
+    const salt = generateSalt(16);
+    const passwordHash = await hashPassword(passToUse, salt);
+
+    user.salt = salt;
+    user.passwordHash = passwordHash;
+    user.mustChangePassword = !!mustChangePassword;
+    this.saveUsers();
+
+    this.revokeOtherSessions(user.id);
+
+    this.recordSecurityAudit(
+      'Admin Password Reset', 
+      `Super Admin reset password for ${user.email} (Force change on next login: ${mustChangePassword})`
+    );
+
+    return {
+      success: true,
+      message: `Password reset successfully for ${user.name}.`,
+      temporaryPassword: passToUse
+    };
+  }
+
+  adminUpdatePartner(userId, updates) {
+    const user = this.users.find(u => u.id === userId || u.affiliateId === userId);
+    if (!user) return { success: false, message: 'User account not found' };
+
+    if (updates.email && updates.email.trim().toLowerCase() !== user.email.toLowerCase()) {
+      const newEmail = updates.email.trim().toLowerCase();
+      if (this.users.some(u => u.id !== user.id && u.email.toLowerCase() === newEmail)) {
+        return { success: false, message: 'Another user is already registered with this email.' };
+      }
+      user.email = newEmail;
+    }
+
+    if (updates.name) user.name = updates.name.trim();
+    if (updates.phone !== undefined) user.phone = updates.phone.trim();
+    if (updates.status) user.status = updates.status.toUpperCase();
+    if (updates.tier) user.tier = updates.tier;
+    if (updates.mustChangePassword !== undefined) user.mustChangePassword = !!updates.mustChangePassword;
+
+    this.saveUsers();
+    this.recordSecurityAudit('Partner Profile Updated', `Admin updated profile for partner ${user.email}`);
+
+    return { success: true, user };
+  }
+
+  adminDeletePartner(userId) {
+    const index = this.users.findIndex(u => u.id === userId || u.affiliateId === userId);
+    if (index === -1) return { success: false, message: 'Partner not found' };
+
+    const deleted = this.users.splice(index, 1)[0];
+    this.saveUsers();
+    this.revokeAllSessions(deleted.id);
+
+    this.recordSecurityAudit('Partner Removed', `Admin removed user account ${deleted.email} (${deleted.affiliateId})`);
+    return { success: true, message: 'Partner account removed from system.' };
   }
 
   // ==========================================

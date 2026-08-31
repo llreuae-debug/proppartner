@@ -1,6 +1,7 @@
-// Auth Modal Component - Google OAuth, Super Admin (llre.uae@gmail.com), Forgot/Reset Pass & First Login Password Change
+// Auth Modal Component - Google OAuth, Super Admin (llre.uae@gmail.com), Partner Registration, Forgot/Reset Pass & First Login Password Change
 
 import { authStore } from '../../store/authStore.js';
+import { platformStore } from '../../store/platformStore.js';
 import { evaluatePasswordStrength } from '../../store/cryptoUtils.js';
 
 export function openAuthModal(initialTab = 'login', onAuthSuccess, initialData = {}) {
@@ -82,24 +83,13 @@ export function openAuthModal(initialTab = 'login', onAuthSuccess, initialData =
         </div>
       </div>
 
-      <div class="auth-divider"><span>OR SIGN IN WITH</span></div>
-
-      <!-- Google OAuth Button -->
-      <button type="button" class="btn-google-auth" id="google-auth-btn">
-        <svg class="google-svg" viewBox="0 0 24 24" width="20" height="20">
-          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
-          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
-        </svg>
-        <span>Continue with Google</span>
-      </button>
+      <div class="auth-divider"><span>OR SIGN IN WITH EMAIL</span></div>
 
       <!-- Email / Password Form -->
       <form id="email-login-form" class="auth-form">
         <div class="form-group">
           <label class="form-label" for="login-email">Registered Email Address</label>
-          <input type="email" id="login-email" class="form-input" placeholder="e.g. llre.uae@gmail.com" required value="llre.uae@gmail.com">
+          <input type="email" id="login-email" class="form-input" placeholder="e.g. llre.uae@gmail.com" required>
         </div>
 
         <div class="form-group">
@@ -107,13 +97,13 @@ export function openAuthModal(initialTab = 'login', onAuthSuccess, initialData =
             <label class="form-label" for="login-password">Password</label>
             <a href="#forgot-password" class="forgot-link" id="link-forgot-pass">Forgot Password?</a>
           </div>
-          <input type="password" id="login-password" class="form-input" placeholder="••••••••••••" required value="PropPartner2026!">
+          <input type="password" id="login-password" class="form-input" placeholder="••••••••••••" required>
         </div>
 
         <div class="form-group-checkbox" style="margin-bottom:14px;">
           <label style="display:flex; align-items:center; gap:8px; cursor:pointer;">
             <input type="checkbox" id="remember-me" checked>
-            <span class="text-xs text-muted">Remember this workstation</span>
+            <span class="text-xs text-muted">Remember this workstation session</span>
           </label>
         </div>
 
@@ -122,9 +112,22 @@ export function openAuthModal(initialTab = 'login', onAuthSuccess, initialData =
         </button>
       </form>
 
+      <!-- Google OAuth Button -->
+      <div style="margin-top: 14px;">
+        <button type="button" class="btn-google-auth w-full" id="google-auth-btn">
+          <svg class="google-svg" viewBox="0 0 24 24" width="18" height="18">
+            <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+            <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+            <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/>
+            <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/>
+          </svg>
+          <span>Continue with Google</span>
+        </button>
+      </div>
+
       <div class="auth-switch-footer">
-        <span>Don't have a partner account?</span>
-        <button type="button" class="btn-text-link switch-link" id="link-switch-register">Apply to Join →</button>
+        <span>New partner?</span>
+        <button type="button" class="btn-text-link switch-link" id="link-switch-register">Register as Partner →</button>
       </div>
     `;
   }
@@ -133,17 +136,22 @@ export function openAuthModal(initialTab = 'login', onAuthSuccess, initialData =
     return `
       <form id="partner-register-form" class="auth-form">
         <div class="form-group">
-          <label class="form-label">Full Legal Name</label>
+          <label class="form-label">Full Legal Name <span class="text-gold">*</span></label>
           <input type="text" id="reg-fullname" class="form-input" placeholder="e.g. Tariq Mansoor" required>
         </div>
 
         <div class="form-group">
-          <label class="form-label">Email Address</label>
+          <label class="form-label">Email Address (Login ID) <span class="text-gold">*</span></label>
           <input type="email" id="reg-email" class="form-input" placeholder="e.g. tariq@apexwealth.com" required>
         </div>
 
         <div class="form-group">
-          <label class="form-label">Create Password (12+ Characters)</label>
+          <label class="form-label">Phone Number / WhatsApp <span class="text-gold">*</span></label>
+          <input type="tel" id="reg-phone" class="form-input" placeholder="+971 50 123 4567" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Create Password (Minimum 8 Characters) <span class="text-gold">*</span></label>
           <input type="password" id="reg-pass" class="form-input" placeholder="••••••••••••" required>
           <div class="password-strength-container" id="reg-pass-strength" style="margin-top:6px;">
             <div class="strength-bar-track"><div class="strength-bar-fill" id="reg-strength-bar" style="width:0%; background:#EF4444;"></div></div>
@@ -152,22 +160,29 @@ export function openAuthModal(initialTab = 'login', onAuthSuccess, initialData =
         </div>
 
         <div class="form-group">
-          <label class="form-label">WhatsApp / Phone</label>
-          <input type="tel" id="reg-phone" class="form-input" placeholder="+971 50 123 4567" required>
+          <label class="form-label">Confirm Password <span class="text-gold">*</span></label>
+          <input type="password" id="reg-confirm-pass" class="form-input" placeholder="Re-enter password" required>
         </div>
 
         <div class="form-group">
-          <label class="form-label">Profession / Organization</label>
-          <input type="text" id="reg-profession" class="form-input" placeholder="Wealth Advisory / Real Estate Brokerage">
+          <label class="form-label">Organization / Wealth Advisory Firm (Optional)</label>
+          <input type="text" id="reg-company" class="form-input" placeholder="e.g. Apex Wealth Advisors">
         </div>
 
-        <button type="submit" class="btn btn-gold w-full" style="margin-top:8px;">
-          <i data-lucide="user-plus"></i> <span>SUBMIT PARTNER APPLICATION</span>
+        <div class="form-group-checkbox" style="margin: 12px 0 16px 0;">
+          <label style="display:flex; align-items:flex-start; gap:8px; cursor:pointer; font-size:0.78rem; color:#CBD5E1;">
+            <input type="checkbox" id="reg-terms-check" required style="margin-top:2px;">
+            <span>I agree to the <a href="#affiliate-agreement" target="_blank" style="color:#D4AF37;">Partner Agreement</a>, <a href="#commission-policy" target="_blank" style="color:#D4AF37;">Commission Policy</a> and strict anti-spam compliance guidelines.</span>
+          </label>
+        </div>
+
+        <button type="submit" class="btn btn-gold w-full" id="btn-submit-register">
+          <i data-lucide="user-plus"></i> <span>CREATE PARTNER ACCOUNT & GET QR</span>
         </button>
       </form>
 
       <div class="auth-switch-footer">
-        <span>Already approved partner?</span>
+        <span>Already registered partner?</span>
         <button type="button" class="btn-text-link switch-link" id="link-switch-login">Log In →</button>
       </div>
     `;
@@ -235,7 +250,7 @@ export function openAuthModal(initialTab = 'login', onAuthSuccess, initialData =
       <form id="force-change-form" class="auth-form">
         <div class="sec-info-banner warning">
           <i data-lucide="alert-triangle"></i>
-          <span>Welcome, <strong>${user ? user.name : 'Partner'}</strong>! For your account security, you must create a new personal password on your first login before accessing the platform.</span>
+          <span>Welcome, <strong>${user ? user.name : 'User'}</strong>! For your account security, you must create a new personal password before accessing the platform.</span>
         </div>
 
         <div class="form-group">
@@ -332,6 +347,66 @@ export function openAuthModal(initialTab = 'login', onAuthSuccess, initialData =
         } else {
           alert(`❌ Login Failed: ${res.message}`);
         }
+      };
+    }
+
+    // Partner Registration Form
+    const registerForm = modalEl.querySelector('#partner-register-form');
+    if (registerForm) {
+      const regPassInput = modalEl.querySelector('#reg-pass');
+      regPassInput.oninput = (e) => {
+        const str = evaluatePasswordStrength(e.target.value);
+        const bar = modalEl.querySelector('#reg-strength-bar');
+        const lbl = modalEl.querySelector('#reg-strength-label');
+        if (bar) { bar.style.width = `${str.percent}%`; bar.style.background = str.color; }
+        if (lbl) { lbl.textContent = str.label; lbl.style.color = str.color; }
+      };
+
+      registerForm.onsubmit = async (e) => {
+        e.preventDefault();
+        const name = modalEl.querySelector('#reg-fullname').value;
+        const email = modalEl.querySelector('#reg-email').value;
+        const phone = modalEl.querySelector('#reg-phone').value;
+        const pass = modalEl.querySelector('#reg-pass').value;
+        const confirmPass = modalEl.querySelector('#reg-confirm-pass').value;
+        const company = modalEl.querySelector('#reg-company').value;
+        const termsAccepted = modalEl.querySelector('#reg-terms-check').checked;
+
+        if (pass !== confirmPass) {
+          alert('❌ Passwords do not match. Please re-enter your password.');
+          return;
+        }
+
+        const res = await authStore.registerPartner({
+          name,
+          email,
+          phone,
+          password: pass,
+          termsAccepted,
+          referralSource: company || 'Direct Partner Registration'
+        });
+
+        if (!res.success) {
+          alert(`❌ Registration Error: ${res.message}`);
+          return;
+        }
+
+        platformStore.addAffiliate({
+          id: res.partnerId,
+          referralCode: res.referralCode,
+          name,
+          email,
+          phone,
+          company,
+          tier: 'Platinum',
+          status: 'Approved',
+          commissionRate: 3.5,
+          notes: 'Self-registered partner.'
+        });
+
+        alert(`🎉 Welcome to PropPartner Network, ${name}!\n\nYour Unique Partner ID: ${res.partnerId}\nReferral Code: ${res.referralCode}\nYour Referral URL: ${res.referralUrl}\n\nYour live scannable QR Code and Partner Dashboard are now active!`);
+        modalEl.classList.remove('active');
+        if (onAuthSuccess) onAuthSuccess(res.user);
       };
     }
 

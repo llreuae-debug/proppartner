@@ -1113,8 +1113,220 @@ class PlatformStore {
   }
 
   // ==========================================
-  // AFFILIATE MANAGEMENT
+  // AFFILIATE MANAGEMENT & ERP
   // ==========================================
+  addAffiliate(partnerData) {
+    const {
+      id,
+      referralCode,
+      name,
+      email,
+      phone = '',
+      company = '',
+      profession = 'Wealth Advisor & Real Estate Consultant',
+      tier = 'Platinum',
+      status = 'Approved',
+      commissionRate = 3.5,
+      startingBalance = 0,
+      notes = '',
+      projectAccess = 'ALL'
+    } = partnerData;
+
+    if (!name || !email) return { success: false, message: 'Name and email are required.' };
+
+    const cleanEmail = email.trim().toLowerCase();
+    if (this.affiliates.some(a => a.email && a.email.toLowerCase() === cleanEmail)) {
+      return { success: false, message: 'A partner with this email address already exists.' };
+    }
+
+    // Determine ID
+    let partnerId = id;
+    if (!partnerId) {
+      const nums = this.affiliates
+        .filter(a => a.id && a.id.startsWith('AFF-'))
+        .map(a => parseInt(a.id.replace('AFF-', ''), 10))
+        .filter(n => !isNaN(n));
+      const nextNum = nums.length > 0 ? Math.max(...nums) + 1 : 103;
+      partnerId = `AFF-${String(nextNum).padStart(6, '0')}`;
+    }
+
+    const code = referralCode || partnerId;
+
+    const newAffiliate = {
+      id: partnerId,
+      name: name.trim(),
+      email: cleanEmail,
+      phone: phone.trim(),
+      company: company.trim(),
+      profession: profession,
+      avatar: `https://api.dicebear.com/7.x/initials/svg?seed=${encodeURIComponent(name.trim())}`,
+      tier: tier,
+      status: status === 'ACTIVE' ? 'Approved' : status,
+      commissionRate: Number(commissionRate) || 3.5,
+      availableBalance: Number(startingBalance) || 0,
+      referralClicks: 0,
+      referralVisits: 0,
+      qrScans: 0,
+      referralCode: code,
+      referralStatus: 'Active',
+      bankName: 'Standard Chartered / HBL',
+      accountNumber: `PK36SCBL000000${Math.floor(1000000000 + Math.random() * 9000000000)}`,
+      notes: notes,
+      projectAccess: projectAccess,
+      createdDate: new Date().toISOString().substring(0, 10)
+    };
+
+    this.affiliates.unshift(newAffiliate);
+    this.logAudit(
+      'Super Admin',
+      'AFFILIATE_CREATED',
+      `Affiliate #${partnerId} (${newAffiliate.name})`,
+      'N/A',
+      'Created',
+      `Registered partner ${newAffiliate.name} (${cleanEmail})`
+    );
+
+    this.save();
+    return { success: true, affiliate: newAffiliate };
+  }
+
+  updateAffiliate(affiliateId, updates = {}) {
+    const aff = this.affiliates.find(a => a.id === affiliateId);
+    if (!aff) return { success: false, message: 'Partner not found.' };
+
+    if (updates.email && updates.email.trim().toLowerCase() !== (aff.email || '').toLowerCase()) {
+      const newEmail = updates.email.trim().toLowerCase();
+      if (this.affiliates.some(a => a.id !== affiliateId && a.email && a.email.toLowerCase() === newEmail)) {
+        return { success: false, message: 'Another partner is already registered with this email.' };
+      }
+      aff.email = newEmail;
+    }
+
+    if (updates.name) aff.name = updates.name.trim();
+    if (updates.phone !== undefined) aff.phone = updates.phone.trim();
+    if (updates.company !== undefined) aff.company = updates.company.trim();
+    if (updates.tier) aff.tier = updates.tier;
+    if (updates.status) aff.status = updates.status;
+    if (updates.commissionRate !== undefined) aff.commissionRate = Number(updates.commissionRate);
+    if (updates.bankName !== undefined) aff.bankName = updates.bankName.trim();
+    if (updates.accountNumber !== undefined) aff.accountNumber = updates.accountNumber.trim();
+    if (updates.notes !== undefined) aff.notes = updates.notes;
+    if (updates.projectAccess !== undefined) aff.projectAccess = updates.projectAccess;
+
+    this.logAudit(
+      'Super Admin',
+      'AFFILIATE_UPDATED',
+      `Affiliate #${affiliateId} (${aff.name})`,
+      'Previous Profile',
+      'Updated Profile',
+      `Updated settings for ${aff.name}`
+    );
+
+    this.save();
+    return { success: true, affiliate: aff };
+  }
+
+  archiveAffiliate(affiliateId, reason = '') {
+    const aff = this.affiliates.find(a => a.id === affiliateId);
+    if (!aff) return { success: false, message: 'Partner not found' };
+
+    const oldStatus = aff.status;
+    aff.status = 'Archived';
+    aff.referralStatus = 'Disabled';
+
+    this.logAudit(
+      'Super Admin',
+      'AFFILIATE_ARCHIVED',
+      `Affiliate #${affiliateId} (${aff.name})`,
+      oldStatus,
+      'Archived',
+      reason || 'Partner archived by Super Admin'
+    );
+
+    this.save();
+    return { success: true, affiliate: aff };
+  }
+
+  deleteAffiliate(affiliateId) {
+    const aff = this.affiliates.find(a => a.id === affiliateId);
+    if (!aff) return { success: false, message: 'Partner not found' };
+
+    // Check historical data integrity across Leads, Sales, Commissions, Ledger
+    const hasLeads = this.leads.some(l => l.affiliateId === affiliateId);
+    const hasSales = this.sales.some(s => s.affiliateId === affiliateId);
+    const hasCommissions = this.commissions.some(c => c.affiliateId === affiliateId);
+    const hasLedger = this.ledger.some(t => t.affiliateId === affiliateId);
+
+    if (hasLeads || hasSales || hasCommissions || hasLedger) {
+      // Soft-archive to preserve immutable accounting records
+      aff.status = 'Archived';
+      aff.referralStatus = 'Disabled';
+      this.save();
+      return { 
+        success: false, 
+        message: 'Partner has existing financial/lead/ledger records. To preserve audit history, this account has been safely Archived instead of deleted.',
+        archived: true 
+      };
+    }
+
+    // Safe deletion if zero historical relations
+    const index = this.affiliates.findIndex(a => a.id === affiliateId);
+    if (index !== -1) {
+      this.affiliates.splice(index, 1);
+      this.logAudit(
+        'Super Admin',
+        'AFFILIATE_DELETED',
+        `Affiliate #${affiliateId} (${aff.name})`,
+        'Active',
+        'Deleted',
+        'Partner account deleted (no historical financial records)'
+      );
+      this.save();
+    }
+
+    return { success: true, message: 'Partner account deleted successfully.' };
+  }
+
+  getAffiliateProfileFull(affiliateId) {
+    const aff = this.affiliates.find(a => a.id === affiliateId);
+    if (!aff) return null;
+
+    const myLeads = this.leads.filter(l => l.affiliateId === affiliateId);
+    const mySales = this.sales.filter(s => s.affiliateId === affiliateId);
+    const myComms = this.commissions.filter(c => c.affiliateId === affiliateId);
+    const myLedger = this.ledger.filter(t => t.affiliateId === affiliateId);
+    const myAudits = this.auditLogs.filter(l => l.entity && l.entity.includes(affiliateId));
+
+    const totalGrossSales = mySales.reduce((acc, s) => acc + Number(s.salePrice || 0), 0);
+    const totalCommissionsEarned = myComms.reduce((acc, c) => acc + Number(c.netPayable || c.commissionAmount || 0), 0);
+    const pendingCommissions = myComms.filter(c => c.status === 'Pending').reduce((acc, c) => acc + Number(c.netPayable || c.commissionAmount || 0), 0);
+    const payableCommissions = myComms.filter(c => c.status === 'Payable').reduce((acc, c) => acc + Number(c.netPayable || c.commissionAmount || 0), 0);
+    const paidCommissions = myComms.filter(c => c.status === 'Paid').reduce((acc, c) => acc + Number(c.netPayable || c.commissionAmount || 0), 0);
+
+    return {
+      affiliate: aff,
+      leads: myLeads,
+      sales: mySales,
+      commissions: myComms,
+      ledger: myLedger,
+      auditLogs: myAudits,
+      stats: {
+        totalLeads: myLeads.length,
+        qualifiedLeads: myLeads.filter(l => l.status === 'Qualified' || l.status === 'Negotiation' || l.status === 'Contract Sent').length,
+        closedSales: mySales.length,
+        totalGrossSales,
+        totalCommissionsEarned,
+        pendingCommissions,
+        payableCommissions,
+        paidCommissions,
+        availableBalance: aff.availableBalance || 0,
+        qrScans: aff.qrScans || 0,
+        referralClicks: aff.referralClicks || 0,
+        conversionRate: myLeads.length > 0 ? ((mySales.length / myLeads.length) * 100).toFixed(1) + '%' : '0.0%'
+      }
+    };
+  }
+
   updateAffiliateStatus(affiliateId, newStatus, reason = '') {
     const aff = this.affiliates.find(a => a.id === affiliateId);
     if (!aff) return { success: false, message: 'Affiliate not found' };
@@ -1122,7 +1334,7 @@ class PlatformStore {
     aff.status = newStatus;
 
     this.logAudit(
-      'Dilnawaz (Super Admin)',
+      'Super Admin',
       'AFFILIATE_STATUS_CHANGE',
       `Affiliate #${affiliateId} (${aff.name})`,
       oldStatus,
