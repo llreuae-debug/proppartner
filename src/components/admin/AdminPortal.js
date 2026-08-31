@@ -5,6 +5,8 @@ import { platformStore } from '../../store/platformStore.js';
 import { renderMobileHeader, renderMobileBottomBar, openMoreBottomSheet } from '../common/MobileAppNav.js';
 import { openProfileSecurityModal } from '../common/ProfileSecurityModal.js';
 import { renderAdminDashboard } from './AdminDashboard.js';
+import { renderInventoryManager } from './InventoryManager.js';
+import { renderInvestorsManager } from './InvestorsManager.js';
 import { renderAffiliatesManager } from './AffiliatesManager.js';
 import { renderProjectsManager } from './ProjectsManager.js';
 import { renderLeadsCRM } from './LeadsCRM.js';
@@ -12,6 +14,7 @@ import { renderSalesManager } from './SalesManager.js';
 import { renderCommissionsManager } from './CommissionsManager.js';
 import { renderPaymentsManager } from './PaymentsManager.js';
 import { renderLedgersManager } from './LedgersManager.js';
+import { renderDocumentsManager } from './DocumentsManager.js';
 import { renderMarketingManager } from './MarketingManager.js';
 import { renderAuditLogs } from './AuditLogsViewer.js';
 import { renderSettingsCenter } from './SettingsCenter.js';
@@ -50,14 +53,22 @@ export function initAdminPortal(container, onNavigateLanding, onSwitchAffiliateV
               <img src="/assets/proppartner-icon.svg" alt="PropPartner" class="logo-img-icon" width="34" height="34">
               <div class="logo-text">PROP<span>PARTNER</span></div>
             </a>
-            <span class="badge-role-admin">SUPER ADMIN</span>
+            <span class="badge-role-admin">SUPER ADMIN ERP</span>
           </div>
 
           <nav class="sidebar-nav-scroll">
-            <div class="nav-section-title">CORE OPERATIONS</div>
+            <div class="nav-section-title">CORE ERP & OPERATIONS</div>
             <button type="button" class="sidebar-nav-item ${currentSection === 'dashboard' ? 'active' : ''}" data-nav="dashboard">
               <i data-lucide="layout-dashboard"></i>
               <span>Dashboard & BI</span>
+            </button>
+            <button type="button" class="sidebar-nav-item ${currentSection === 'inventory' ? 'active' : ''}" data-nav="inventory">
+              <i data-lucide="store"></i>
+              <span>Commercial Shops / Units</span>
+            </button>
+            <button type="button" class="sidebar-nav-item ${currentSection === 'investors' ? 'active' : ''}" data-nav="investors">
+              <i data-lucide="briefcase"></i>
+              <span>Investors & Buyers</span>
             </button>
             <button type="button" class="sidebar-nav-item ${currentSection === 'affiliates' ? 'active' : ''}" data-nav="affiliates">
               <i data-lucide="users"></i>
@@ -66,7 +77,7 @@ export function initAdminPortal(container, onNavigateLanding, onSwitchAffiliateV
             </button>
             <button type="button" class="sidebar-nav-item ${currentSection === 'projects' ? 'active' : ''}" data-nav="projects">
               <i data-lucide="building-2"></i>
-              <span>Projects & ERP</span>
+              <span>Developments & Projects</span>
             </button>
             <button type="button" class="sidebar-nav-item ${currentSection === 'leads' ? 'active' : ''}" data-nav="leads">
               <i data-lucide="target"></i>
@@ -93,6 +104,10 @@ export function initAdminPortal(container, onNavigateLanding, onSwitchAffiliateV
               <i data-lucide="book-open"></i>
               <span>Financial Ledgers</span>
             </button>
+            <button type="button" class="sidebar-nav-item ${currentSection === 'documents' ? 'active' : ''}" data-nav="documents">
+              <i data-lucide="file-check-2"></i>
+              <span>Document Vault</span>
+            </button>
 
             <div class="nav-section-title">SECURITY & GOVERNANCE</div>
             <button type="button" class="sidebar-nav-item ${currentSection === 'users' ? 'active' : ''}" data-nav="users">
@@ -111,29 +126,16 @@ export function initAdminPortal(container, onNavigateLanding, onSwitchAffiliateV
               <i data-lucide="shield-check"></i>
               <span>Audit Trail</span>
             </button>
-
-            <div class="nav-section-title">MANAGEMENT & ASSETS</div>
-            <button type="button" class="sidebar-nav-item ${currentSection === 'seo' ? 'active' : ''}" data-nav="seo">
-              <i data-lucide="search"></i>
-              <span>SEO & AEO Console</span>
-            </button>
-            <button type="button" class="sidebar-nav-item ${currentSection === 'marketing' ? 'active' : ''}" data-nav="marketing">
-              <i data-lucide="folder"></i>
-              <span>Marketing Assets</span>
-            </button>
             <button type="button" class="sidebar-nav-item ${currentSection === 'settings' ? 'active' : ''}" data-nav="settings">
               <i data-lucide="settings"></i>
               <span>Control Center</span>
             </button>
           </nav>
 
-          <!-- Sidebar Footer with Fast View Switchers -->
+          <!-- Sidebar Footer with View Switcher -->
           <div class="sidebar-footer">
-            <button type="button" class="sidebar-switch-btn" id="btn-switch-landing">
-              <i data-lucide="globe"></i> <span>View Landing Page</span>
-            </button>
             <button type="button" class="sidebar-switch-btn text-gold" id="btn-switch-partner-view">
-              <i data-lucide="user-check"></i> <span>Switch to Partner View</span>
+              <i data-lucide="user-check"></i> <span>Switch to Partner Portal</span>
             </button>
           </div>
         </aside>
@@ -165,7 +167,7 @@ export function initAdminPortal(container, onNavigateLanding, onSwitchAffiliateV
                 ${platformStore.notifications.filter(n => !n.read).length > 0 ? `<span class="icon-badge"></span>` : ''}
               </button>
 
-              <!-- User Profile Menu (Click to open Profile & Password Security) -->
+              <!-- User Profile Menu -->
               <div class="topbar-user-pill" id="topbar-admin-profile-trigger" style="cursor:pointer;" title="Click to manage password & security settings">
                 <img src="${user.avatar || 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=150&q=80'}" alt="${user.name}" class="topbar-avatar">
                 <div class="topbar-user-meta">
@@ -195,6 +197,10 @@ export function initAdminPortal(container, onNavigateLanding, onSwitchAffiliateV
     if (mount) {
       if (currentSection === 'dashboard') {
         renderAdminDashboard(mount, navigateTo);
+      } else if (currentSection === 'inventory') {
+        renderInventoryManager(mount, navigateTo);
+      } else if (currentSection === 'investors') {
+        renderInvestorsManager(mount, navigateTo);
       } else if (currentSection === 'affiliates') {
         renderAffiliatesManager(mount, navigateTo);
       } else if (currentSection === 'projects') {
@@ -209,6 +215,8 @@ export function initAdminPortal(container, onNavigateLanding, onSwitchAffiliateV
         renderPaymentsManager(mount, navigateTo, sectionParams.action);
       } else if (currentSection === 'ledgers') {
         renderLedgersManager(mount, navigateTo, sectionParams);
+      } else if (currentSection === 'documents') {
+        renderDocumentsManager(mount, navigateTo);
       } else if (currentSection === 'users') {
         renderUsersManager(mount, navigateTo);
       } else if (currentSection === 'roles') {
@@ -244,26 +252,7 @@ export function initAdminPortal(container, onNavigateLanding, onSwitchAffiliateV
       };
     }
 
-    // Mobile More bottom sheet trigger
-    const moreBtn = container.querySelector('#btn-open-more-sheet');
-    if (moreBtn) {
-      moreBtn.onclick = () => {
-        openMoreBottomSheet('SUPER_ADMIN', (targetSec) => navigateTo(targetSec), (view) => {
-          if (view === 'landing' && onNavigateLanding) onNavigateLanding();
-          if (view === 'partner' && onSwitchAffiliateView) onSwitchAffiliateView();
-        });
-      };
-    }
-
-    // Mobile drawer button
-    const mobileDrawerBtn = container.querySelector('#mobile-app-drawer-btn');
-    if (mobileDrawerBtn) {
-      mobileDrawerBtn.onclick = () => {
-        const sb = container.querySelector('#admin-sidebar');
-        if (sb) sb.classList.toggle('open');
-      };
-    }
-
+    // Currency selector
     const currSelect = container.querySelector('#admin-topbar-currency');
     if (currSelect) {
       currSelect.onchange = (e) => {
@@ -272,40 +261,27 @@ export function initAdminPortal(container, onNavigateLanding, onSwitchAffiliateV
       };
     }
 
-    const mobileCurrSelect = container.querySelector('#mobile-curr-picker');
-    if (mobileCurrSelect) {
-      mobileCurrSelect.onchange = (e) => {
-        platformStore.setCurrency(e.target.value);
-        render();
-      };
+    // Fast switch to Partner View
+    const switchPartner = container.querySelector('#btn-switch-partner-view');
+    if (switchPartner && onSwitchAffiliateView) {
+      switchPartner.onclick = onSwitchAffiliateView;
     }
 
-    const switchLandingBtn = container.querySelector('#btn-switch-landing');
-    if (switchLandingBtn) {
-      switchLandingBtn.onclick = () => {
-        if (onNavigateLanding) onNavigateLanding();
-      };
-    }
-
-    const switchPartnerBtn = container.querySelector('#btn-switch-partner-view');
-    if (switchPartnerBtn) {
-      switchPartnerBtn.onclick = () => {
-        authStore.loginAs('partnerPlatinum');
-        if (onSwitchAffiliateView) onSwitchAffiliateView();
-      };
-    }
-
+    // Logout
     const logoutBtn = container.querySelector('#btn-admin-logout');
     if (logoutBtn) {
-      logoutBtn.onclick = () => {
+      logoutBtn.onclick = (e) => {
+        e.stopPropagation();
         authStore.logout();
-        if (onNavigateLanding) onNavigateLanding();
+        window.location.hash = '#login';
+        window.location.reload();
       };
     }
 
-    const sidebarToggle = container.querySelector('#admin-toggle-sidebar');
-    if (sidebarToggle) {
-      sidebarToggle.onclick = () => {
+    // Toggle sidebar for mobile
+    const toggleSidebar = container.querySelector('#admin-toggle-sidebar');
+    if (toggleSidebar) {
+      toggleSidebar.onclick = () => {
         const sb = container.querySelector('#admin-sidebar');
         if (sb) sb.classList.toggle('open');
       };
@@ -313,23 +289,27 @@ export function initAdminPortal(container, onNavigateLanding, onSwitchAffiliateV
   }
 
   function getPageTitle(section) {
-    const titles = {
+    const map = {
       dashboard: 'Executive BI Dashboard',
+      inventory: 'Commercial Shops & Units ERP',
+      investors: 'Investors & Commercial Buyers CRM',
       affiliates: 'Affiliate Partner Network',
-      projects: 'Projects & Inventory ERP',
-      leads: 'Leads & Duplicate CRM',
-      sales: 'Verified Closed Sales',
-      commissions: 'Commission Approvals',
-      payments: 'Payment Disbursement',
-      ledgers: 'Master Financial Ledgers',
-      users: 'User Accounts & Access Control',
-      roles: 'Roles & Permissions (RBAC)',
-      security: 'Security Center & Emergency Control',
-      marketing: 'Marketing Asset Center',
-      audit: 'System Audit Trail',
-      settings: 'System Control Center'
+      projects: 'Real Estate Projects & ERP',
+      leads: 'Leads & Attribution CRM',
+      sales: 'Verified Deal Closings',
+      commissions: 'Commission Authorizations',
+      payments: 'Payment & Escrow Center',
+      ledgers: 'Partner & Project Ledgers',
+      documents: 'Secured Document Vault',
+      users: 'User Account Management',
+      roles: 'Roles & RBAC Access Matrix',
+      security: 'Platform Security Center',
+      audit: 'Immutable System Audit Logs',
+      seo: 'SEO & Structured Data Console',
+      marketing: 'Marketing Assets Kit',
+      settings: 'ERP Control Center'
     };
-    return titles[section] || 'Super Admin Portal';
+    return map[section] || 'Super Admin ERP';
   }
 
   render();

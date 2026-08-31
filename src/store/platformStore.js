@@ -32,6 +32,64 @@ export function formatCurrencyValue(amount, currency = 'PKR') {
 // Initial Comprehensive Seed Data
 const INITIAL_PROJECTS = [
   {
+    id: 'gatwala-commercial-hub',
+    slug: 'gatwala-commercial-hub',
+    name: 'Gatwala Commercial Hub',
+    developer: 'PropPartner & Premier Developments',
+    location: 'Gatwala Chowk, Canal Expressway, Sheikhupura Road',
+    city: 'Faisalabad',
+    country: 'Pakistan',
+    type: 'Commercial Retail & Trade Center',
+    description: 'Premier multi-story commercial trade center featuring flagship retail shops, anchor retail outlets, double basement parking, and dedicated food court promenade.',
+    status: 'Active',
+    launchDate: '2024-02-01',
+    completionDate: '2026-09-30',
+    startingPrice: 18500000,
+    commissionModel: 'Percentage',
+    commissionRate: 4.0,
+    commissionTiers: [
+      { minSales: 1, maxSales: 2, rate: 3.5 },
+      { minSales: 3, maxSales: 5, rate: 4.0 },
+      { minSales: 6, maxSales: 999, rate: 5.0 }
+    ],
+    unitsTotal: 140,
+    unitsAvailable: 28,
+    image: 'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1000&q=80',
+    website: 'https://gatwala.proppartner.pro',
+    brochureUrl: '/assets/docs/Gatwala_Commercial_Hub_Brochure.pdf',
+    contactPerson: 'Dilnawaz (Commercial Director)',
+    contactPhone: '+92 322 8654411'
+  },
+  {
+    id: 'dragon-souk-plaza',
+    slug: 'dragon-souk-plaza',
+    name: 'Dragon Souk Commercial Market',
+    developer: 'Dragon Trade Infrastructure Group',
+    location: 'Main Commercial Zone, Gatwala Boulevard',
+    city: 'Faisalabad',
+    country: 'Pakistan',
+    type: 'Wholesale & Retail Mega Market',
+    description: 'Grand wholesale & import mega market designed on the Dubai Dragon Mart wholesale trade corridor model for electronics, textiles, and trade pavilions.',
+    status: 'Active',
+    launchDate: '2024-04-15',
+    completionDate: '2027-03-30',
+    startingPrice: 12500000,
+    commissionModel: 'Percentage',
+    commissionRate: 4.5,
+    commissionTiers: [
+      { minSales: 1, maxSales: 2, rate: 4.0 },
+      { minSales: 3, maxSales: 5, rate: 4.5 },
+      { minSales: 6, maxSales: 999, rate: 5.5 }
+    ],
+    unitsTotal: 180,
+    unitsAvailable: 34,
+    image: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1000&q=80',
+    website: 'https://dragonsouk.proppartner.pro',
+    brochureUrl: '/assets/docs/Dragon_Souk_Market_Plan.pdf',
+    contactPerson: 'Khurram Shehzad (Trade Advisor)',
+    contactPhone: '+92 322 8654411'
+  },
+  {
     id: 'luminary-towers',
     slug: 'luminary-towers',
     name: 'The Luminary Sky Residences',
@@ -378,17 +436,136 @@ const INITIAL_AFFILIATES = [
 ];
 
 const INITIAL_INVENTORY = [
+  // Gatwala Commercial Hub - Commercial Shops & Corporate Suites
+  { unitId: 'GAT-GF-01', projectId: 'gatwala-commercial-hub', block: 'Ground Floor Promenade', floor: 'Ground Floor', unitNumber: 'G-01', type: 'Flagship Retail Shop', size: '480 sq.ft', price: 18500000, discount: 0, finalPrice: 18500000, status: 'Available', buyer: null, affiliateId: null, bookingDate: null, saleDate: null },
+  { unitId: 'GAT-GF-02', projectId: 'gatwala-commercial-hub', block: 'Canal Front Plaza', floor: 'Ground Floor', unitNumber: 'G-02', type: 'Corner Anchor Shop', size: '850 sq.ft', price: 34000000, discount: 500000, finalPrice: 33500000, status: 'Reserved', buyer: 'M. Zubair Chaudhry', affiliateId: 'AFF-000101', bookingDate: '2024-03-15', saleDate: null },
+  { unitId: 'GAT-1F-14', projectId: 'gatwala-commercial-hub', block: 'Mezzanine Galleria', floor: '1st Floor', unitNumber: 'M-14', type: 'Fashion & Apparel Boutique', size: '520 sq.ft', price: 15600000, discount: 0, finalPrice: 15600000, status: 'Available', buyer: null, affiliateId: null, bookingDate: null, saleDate: null },
+  { unitId: 'GAT-2F-08', projectId: 'gatwala-commercial-hub', block: 'Food Court Promenade', floor: '2nd Floor', unitNumber: 'FC-08', type: 'Food Court Restaurant Unit', size: '650 sq.ft', price: 21000000, discount: 0, finalPrice: 21000000, status: 'Sold', buyer: 'M. Zubair Chaudhry', affiliateId: 'AFF-000101', bookingDate: '2024-02-12', saleDate: '2024-02-28' },
+  { unitId: 'GAT-3F-01', projectId: 'gatwala-commercial-hub', block: 'Executive Business Wing', floor: '3rd Floor', unitNumber: 'EX-01', type: 'Corporate Executive Suite', size: '1,200 sq.ft', price: 26400000, discount: 0, finalPrice: 26400000, status: 'Available', buyer: null, affiliateId: null, bookingDate: null, saleDate: null },
+  // Dragon Souk Commercial Market - Wholesale Pavilions
+  { unitId: 'DSK-GF-101', projectId: 'dragon-souk-plaza', block: 'Wholesale Trade Pavilion A', floor: 'Ground Floor', unitNumber: 'A-101', type: 'Wholesale Import Pavilion', size: '600 sq.ft', price: 14500000, discount: 0, finalPrice: 14500000, status: 'Available', buyer: null, affiliateId: null, bookingDate: null, saleDate: null },
+  { unitId: 'DSK-GF-102', projectId: 'dragon-souk-plaza', block: 'Electronics & Tech Hub', floor: 'Ground Floor', unitNumber: 'A-102', type: 'Electronics Trade Outlet', size: '550 sq.ft', price: 13200000, discount: 200000, finalPrice: 13000000, status: 'Sold', buyer: 'Ali Reza Merchant', affiliateId: 'AFF-000101', bookingDate: '2024-02-20', saleDate: '2024-03-05' },
+  { unitId: 'DSK-1F-205', projectId: 'dragon-souk-plaza', block: 'Textile & Garment Pavilion', floor: '1st Floor', unitNumber: 'B-205', type: 'Fabric & Garments Wholesale', size: '750 sq.ft', price: 16500000, discount: 0, finalPrice: 16500000, status: 'Reserved', buyer: 'Farhan Qureshi', affiliateId: 'AFF-000103', bookingDate: '2024-03-22', saleDate: null },
+  // Luminary & Elysium Units
   { unitId: 'LUM-1204', projectId: 'luminary-towers', block: 'Tower A (North)', floor: '12th Floor', unitNumber: 'A-1204', type: '3-Bed Executive Suite', size: '2,450 sq.ft', price: 38500000, discount: 0, finalPrice: 38500000, status: 'Sold', buyer: 'M. Zubair Chaudhry', affiliateId: 'AFF-000101', bookingDate: '2024-02-10', saleDate: '2024-02-25' },
   { unitId: 'LUM-2801', projectId: 'luminary-towers', block: 'Tower A (North)', floor: '28th Floor', unitNumber: 'A-2801', type: '4-Bed Sky Penthouse', size: '4,100 sq.ft', price: 68000000, discount: 1000000, finalPrice: 67000000, status: 'Sold', buyer: 'Sheikh Rashid Bin Khalid', affiliateId: 'AFF-000104', bookingDate: '2024-03-05', saleDate: '2024-03-18' },
   { unitId: 'LUM-1802', projectId: 'luminary-towers', block: 'Tower B (South)', floor: '18th Floor', unitNumber: 'B-1802', type: '2-Bed Ocean View', size: '1,850 sq.ft', price: 29500000, discount: 500000, finalPrice: 29000000, status: 'Sold', buyer: 'Dr. Ayesha Siddiqa', affiliateId: 'AFF-000102', bookingDate: '2024-03-12', saleDate: '2024-03-29' },
-  { unitId: 'LUM-3504', projectId: 'luminary-towers', block: 'Tower B (South)', floor: '35th Floor', unitNumber: 'B-3504', type: '3-Bed Corner Suite', size: '2,650 sq.ft', price: 44500000, discount: 0, finalPrice: 44500000, status: 'Booked', buyer: 'Nadeem Jahangir', affiliateId: 'AFF-000101', bookingDate: '2024-04-01', saleDate: null },
-  { unitId: 'LUM-0902', projectId: 'luminary-towers', block: 'Tower A (North)', floor: '9th Floor', unitNumber: 'A-0902', type: '2-Bed City View', size: '1,750 sq.ft', price: 27500000, discount: 0, finalPrice: 27500000, status: 'Available', buyer: null, affiliateId: null, bookingDate: null, saleDate: null },
   { unitId: 'ELY-V08', projectId: 'elysium-waterfront', block: 'Palm Island Shore', floor: 'Ground + 2', unitNumber: 'Villa 08', type: '5-Bed Beachfront Mansion', size: '7,800 sq.ft', price: 95000000, discount: 2000000, finalPrice: 93000000, status: 'Sold', buyer: 'Ali Reza Merchant', affiliateId: 'AFF-000101', bookingDate: '2024-02-18', saleDate: '2024-03-02' },
-  { unitId: 'ELY-V14', projectId: 'elysium-waterfront', block: 'Lagoon Bay Shore', floor: 'Ground + 2', unitNumber: 'Villa 14', type: '4-Bed Lagoon Villa', size: '6,200 sq.ft', price: 72000000, discount: 0, finalPrice: 72000000, status: 'Sold', buyer: 'Karim Al-Dossary', affiliateId: 'AFF-000104', bookingDate: '2024-03-10', saleDate: '2024-03-24' },
-  { unitId: 'ELY-V22', projectId: 'elysium-waterfront', block: 'Sunset Cove', floor: 'Ground + 2', unitNumber: 'Villa 22', type: '4-Bed Sunset Villa', size: '5,900 sq.ft', price: 68000000, discount: 0, finalPrice: 68000000, status: 'Reserved', buyer: 'Farhan Qureshi', affiliateId: 'AFF-000103', bookingDate: '2024-03-28', saleDate: null },
-  { unitId: 'NEX-0501', projectId: 'nexus-horizon', block: 'West Tech Wing', floor: '5th Floor', unitNumber: 'W-0501', type: 'Commercial Tech Office', size: '3,200 sq.ft', price: 32000000, discount: 500000, finalPrice: 31500000, status: 'Sold', buyer: 'CloudScale Technologies Ltd', affiliateId: 'AFF-000103', bookingDate: '2024-01-15', saleDate: '2024-01-30' },
-  { unitId: 'NEX-1102', projectId: 'nexus-horizon', block: 'East Executive Wing', floor: '11th Floor', unitNumber: 'E-1102', type: 'Executive Corporate Suite', size: '4,500 sq.ft', price: 45000000, discount: 0, finalPrice: 45000000, status: 'Sold', buyer: 'SilkBank Corporate Banking', affiliateId: 'AFF-000101', bookingDate: '2024-02-05', saleDate: '2024-02-20' },
-  { unitId: 'CRES-1403', projectId: 'crescent-bay', block: 'Pearl Tower', floor: '14th Floor', unitNumber: 'P-1403', type: '3-Bed Sea View', size: '2,800 sq.ft', price: 42000000, discount: 0, finalPrice: 42000000, status: 'Sold', buyer: 'Faisal Karim', affiliateId: 'AFF-000102', bookingDate: '2024-02-28', saleDate: '2024-03-14' }
+  { unitId: 'ELY-V22', projectId: 'elysium-waterfront', block: 'Sunset Cove', floor: 'Ground + 2', unitNumber: 'Villa 22', type: '4-Bed Sunset Villa', size: '5,900 sq.ft', price: 68000000, discount: 0, finalPrice: 68000000, status: 'Reserved', buyer: 'Farhan Qureshi', affiliateId: 'AFF-000103', bookingDate: '2024-03-28', saleDate: null }
+];
+
+const INITIAL_INVESTORS = [
+  {
+    id: 'INV-001',
+    name: 'M. Zubair Chaudhry',
+    company: 'Chaudhry Holdings Pvt Ltd',
+    email: 'm.zubair@chaudhryholdings.com',
+    phone: '+92 300 9988112',
+    city: 'Faisalabad / Karachi',
+    cnicOrPassport: '33100-1234567-1',
+    totalInvested: 59500000,
+    unitsOwned: ['LUM-1204', 'GAT-2F-08'],
+    affiliateId: 'AFF-000101',
+    affiliateName: 'Tariq Mansoor',
+    kycStatus: 'Verified',
+    createdDate: '2024-02-10',
+    notes: 'Textile industrialist, priority investor for commercial shops and food court corridors.'
+  },
+  {
+    id: 'INV-002',
+    name: 'Sheikh Rashid Bin Khalid',
+    company: 'Gulf Royal Investments LLC',
+    email: 'rashid.khalid@gulfroyal.ae',
+    phone: '+971 50 123 4567',
+    city: 'Abu Dhabi / Dubai',
+    cnicOrPassport: 'UAE-PASS-908122',
+    totalInvested: 67000000,
+    unitsOwned: ['LUM-2801'],
+    affiliateId: 'AFF-000104',
+    affiliateName: 'Zainab Al-Farsi',
+    kycStatus: 'Verified',
+    createdDate: '2024-03-05',
+    notes: 'Overseas institutional investor portfolio.'
+  },
+  {
+    id: 'INV-003',
+    name: 'Ali Reza Merchant',
+    company: 'Merchant Global Wholesale Traders',
+    email: 'ali.reza@merchantpk.com',
+    phone: '+92 322 7766554',
+    city: 'Faisalabad / Dubai',
+    cnicOrPassport: '33102-9988112-3',
+    totalInvested: 106000000,
+    unitsOwned: ['ELY-V08', 'DSK-GF-102'],
+    affiliateId: 'AFF-000101',
+    affiliateName: 'Tariq Mansoor',
+    kycStatus: 'Verified',
+    createdDate: '2024-02-18',
+    notes: 'High-volume wholesale trader in Dragon Souk and waterfront assets.'
+  },
+  {
+    id: 'INV-004',
+    name: 'Dr. Ayesha Siddiqa',
+    company: 'Medicare UK Consultants',
+    email: 'ayesha.siddiqa@medicare.pk',
+    phone: '+92 333 4411223',
+    city: 'London / Lahore',
+    cnicOrPassport: 'GB-PASS-8819024',
+    totalInvested: 29000000,
+    unitsOwned: ['LUM-1802'],
+    affiliateId: 'AFF-000102',
+    affiliateName: 'Sarah Al-Maktoum Jenkins',
+    kycStatus: 'Verified',
+    createdDate: '2024-03-12',
+    notes: 'Overseas doctor, recurring investor in prime high-rise real estate.'
+  }
+];
+
+const INITIAL_DOCUMENTS = [
+  {
+    id: 'DOC-GAT-001',
+    title: 'Gatwala Commercial Hub - Official Master Title & Approval NOC',
+    category: 'Agreement',
+    projectId: 'gatwala-commercial-hub',
+    accessLevel: 'ALL',
+    fileUrl: '/assets/docs/Gatwala_Commercial_Hub_Title_NOC.pdf',
+    fileSize: '4.2 MB',
+    uploadDate: '2024-02-01',
+    description: 'Approved commercial building plan, FDA NOC, and registered commercial deed structure.'
+  },
+  {
+    id: 'DOC-DSK-002',
+    title: 'Dragon Souk Commercial Market - Wholesale Trade Layout Plan',
+    category: 'FloorPlan',
+    projectId: 'dragon-souk-plaza',
+    accessLevel: 'ALL',
+    fileUrl: '/assets/docs/Dragon_Souk_Market_Plan.pdf',
+    fileSize: '6.8 MB',
+    uploadDate: '2024-04-15',
+    description: 'Detailed shop layout, logistics bays, cargo elevator locations & wholesale corridor maps.'
+  },
+  {
+    id: 'DOC-POL-003',
+    title: 'PropPartner Verified Affiliate Master Commission Protocol 2026',
+    category: 'Agreement',
+    projectId: null,
+    accessLevel: 'PARTNER',
+    fileUrl: '/assets/docs/PropPartner_Affiliate_Protocol_2026.pdf',
+    fileSize: '1.8 MB',
+    uploadDate: '2024-01-01',
+    description: 'Official binding terms governing milestone commission disbursements and partner accreditation.'
+  },
+  {
+    id: 'DOC-STMT-004',
+    title: 'Gatwala Commercial Trade - Escrow & RTGS Disbursement Schedule',
+    category: 'Statement',
+    projectId: 'gatwala-commercial-hub',
+    accessLevel: 'ALL',
+    fileUrl: '/assets/docs/Gatwala_Disbursement_Schedule.pdf',
+    fileSize: '2.1 MB',
+    uploadDate: '2024-03-01',
+    description: 'Bank escrow release criteria and developer milestone clearance procedures.'
+  }
 ];
 
 const INITIAL_LEADS = [
@@ -992,6 +1169,8 @@ class PlatformStore {
     this.projects = [];
     this.affiliates = [];
     this.inventory = [];
+    this.investors = [];
+    this.documents = [];
     this.leads = [];
     this.sales = [];
     this.commissions = [];
@@ -1016,6 +1195,8 @@ class PlatformStore {
           this.projects = parsed.projects || INITIAL_PROJECTS;
           this.affiliates = parsed.affiliates || INITIAL_AFFILIATES;
           this.inventory = parsed.inventory || INITIAL_INVENTORY;
+          this.investors = parsed.investors || INITIAL_INVESTORS;
+          this.documents = parsed.documents || INITIAL_DOCUMENTS;
           this.leads = parsed.leads || INITIAL_LEADS;
           this.sales = parsed.sales || INITIAL_SALES;
           this.commissions = parsed.commissions || INITIAL_COMMISSIONS;
@@ -1043,6 +1224,8 @@ class PlatformStore {
           projects: this.projects,
           affiliates: this.affiliates,
           inventory: this.inventory,
+          investors: this.investors,
+          documents: this.documents,
           leads: this.leads,
           sales: this.sales,
           commissions: this.commissions,
@@ -1066,6 +1249,8 @@ class PlatformStore {
     this.projects = JSON.parse(JSON.stringify(INITIAL_PROJECTS));
     this.affiliates = JSON.parse(JSON.stringify(INITIAL_AFFILIATES));
     this.inventory = JSON.parse(JSON.stringify(INITIAL_INVENTORY));
+    this.investors = JSON.parse(JSON.stringify(INITIAL_INVESTORS));
+    this.documents = JSON.parse(JSON.stringify(INITIAL_DOCUMENTS));
     this.leads = JSON.parse(JSON.stringify(INITIAL_LEADS));
     this.sales = JSON.parse(JSON.stringify(INITIAL_SALES));
     this.commissions = JSON.parse(JSON.stringify(INITIAL_COMMISSIONS));
@@ -2018,6 +2203,229 @@ class PlatformStore {
     if (role === 'admin') ticket.status = 'In Progress';
     this.save();
     return { success: true, ticket };
+  }
+
+  // ==========================================
+  // ERP COMMERCIAL INVENTORY & SHOPS MANAGEMENT
+  // ==========================================
+  getInventory(projectId = 'all', status = 'all') {
+    return this.inventory.filter(u => {
+      if (projectId !== 'all' && u.projectId !== projectId) return false;
+      if (status !== 'all' && u.status.toLowerCase() !== status.toLowerCase()) return false;
+      return true;
+    });
+  }
+
+  reserveInventoryUnit(unitId, buyerName, affiliateId) {
+    const unit = this.inventory.find(u => u.unitId === unitId);
+    if (!unit) return { success: false, message: 'Unit not found in inventory.' };
+    if (unit.status === 'Sold') {
+      return { success: false, message: 'This unit has already been sold and cannot be reserved.' };
+    }
+    const oldStatus = unit.status;
+    unit.status = 'Reserved';
+    unit.buyer = buyerName || unit.buyer;
+    unit.affiliateId = affiliateId || unit.affiliateId;
+    unit.bookingDate = new Date().toISOString().substring(0, 10);
+    this.logAudit('Super Admin', 'UNIT_RESERVED', `Unit #${unitId} (${unit.unitNumber})`, oldStatus, 'Reserved', `Reserved for ${buyerName || 'Buyer'}`);
+    this.save();
+    return { success: true, unit };
+  }
+
+  sellInventoryUnit(unitId, buyerName, affiliateId, salePrice) {
+    const unit = this.inventory.find(u => u.unitId === unitId);
+    if (!unit) return { success: false, message: 'Unit not found.' };
+    if (unit.status === 'Sold') {
+      return { success: false, message: 'Double-Booking Prevented: This unit has already been sold.' };
+    }
+    const oldStatus = unit.status;
+    unit.status = 'Sold';
+    unit.buyer = buyerName || unit.buyer;
+    unit.affiliateId = affiliateId || unit.affiliateId;
+    unit.finalPrice = Number(salePrice) || unit.price;
+    unit.saleDate = new Date().toISOString().substring(0, 10);
+    this.logAudit('Super Admin', 'UNIT_SOLD', `Unit #${unitId} (${unit.unitNumber})`, oldStatus, 'Sold', `Deal closed with ${buyerName || 'Buyer'} for PKR ${unit.finalPrice}`);
+    this.save();
+    return { success: true, unit };
+  }
+
+  // ==========================================
+  // INVESTOR CRM MANAGEMENT
+  // ==========================================
+  getInvestors() {
+    return this.investors;
+  }
+
+  addInvestor(investorData) {
+    const { name, company, email, phone, city, cnicOrPassport, affiliateId, affiliateName, notes } = investorData;
+    if (!name || !phone) return { success: false, message: 'Investor name and contact phone are required.' };
+    const id = `INV-${String(this.investors.length + 1).padStart(3, '0')}`;
+    const newInvestor = {
+      id,
+      name: name.trim(),
+      company: (company || '').trim(),
+      email: (email || '').trim().toLowerCase(),
+      phone: phone.trim(),
+      city: city || 'Faisalabad',
+      cnicOrPassport: cnicOrPassport || '',
+      totalInvested: Number(investorData.totalInvested) || 0,
+      unitsOwned: investorData.unitsOwned || [],
+      affiliateId: affiliateId || null,
+      affiliateName: affiliateName || 'Direct',
+      kycStatus: 'Verified',
+      createdDate: new Date().toISOString().substring(0, 10),
+      notes: notes || ''
+    };
+    this.investors.unshift(newInvestor);
+    this.logAudit('Super Admin', 'INVESTOR_CREATED', `Investor #${id} (${newInvestor.name})`, 'None', 'Active', `Registered investor ${newInvestor.name}`);
+    this.save();
+    return { success: true, investor: newInvestor };
+  }
+
+  updateInvestor(id, updates) {
+    const inv = this.investors.find(i => i.id === id);
+    if (!inv) return { success: false, message: 'Investor not found.' };
+    Object.assign(inv, updates);
+    this.logAudit('Super Admin', 'INVESTOR_UPDATED', `Investor #${id} (${inv.name})`, 'Previous', 'Updated', `Updated investor details`);
+    this.save();
+    return { success: true, investor: inv };
+  }
+
+  deleteInvestor(id) {
+    const index = this.investors.findIndex(i => i.id === id);
+    if (index === -1) return { success: false, message: 'Investor not found.' };
+    const deleted = this.investors.splice(index, 1)[0];
+    this.logAudit('Super Admin', 'INVESTOR_DELETED', `Investor #${id} (${deleted.name})`, 'Active', 'Deleted', `Removed investor record`);
+    this.save();
+    return { success: true, message: 'Investor record removed.' };
+  }
+
+  // ==========================================
+  // SECURED DOCUMENT VAULT
+  // ==========================================
+  getDocuments(user) {
+    if (!user) return [];
+    if (user.role === 'SUPER_ADMIN' || user.role === 'ADMIN') {
+      return this.documents;
+    }
+    // Partner gets public documents + documents tagged ALL or PARTNER
+    return this.documents.filter(d => d.accessLevel === 'ALL' || d.accessLevel === 'PARTNER');
+  }
+
+  addDocument(docData) {
+    const id = `DOC-${Date.now().toString().slice(-6)}`;
+    const newDoc = {
+      id,
+      title: docData.title,
+      category: docData.category || 'Agreement',
+      projectId: docData.projectId || null,
+      accessLevel: docData.accessLevel || 'ALL',
+      fileUrl: docData.fileUrl || '#',
+      fileSize: docData.fileSize || '2.5 MB',
+      uploadDate: new Date().toISOString().substring(0, 10),
+      description: docData.description || ''
+    };
+    this.documents.unshift(newDoc);
+    this.logAudit('Super Admin', 'DOCUMENT_UPLOADED', `Doc #${id} (${newDoc.title})`, 'None', 'Active', `Uploaded document in ${newDoc.category}`);
+    this.save();
+    return { success: true, document: newDoc };
+  }
+
+  deleteDocument(id) {
+    const index = this.documents.findIndex(d => d.id === id);
+    if (index === -1) return { success: false, message: 'Document not found.' };
+    const deleted = this.documents.splice(index, 1)[0];
+    this.logAudit('Super Admin', 'DOCUMENT_DELETED', `Doc #${id} (${deleted.title})`, 'Active', 'Deleted', `Deleted document`);
+    this.save();
+    return { success: true, message: 'Document deleted.' };
+  }
+
+  // ==========================================
+  // STRICT PARTNER-SCOPED DATA ACCESS
+  // ==========================================
+  getPartnerScopedData(partnerId) {
+    const aff = this.affiliates.find(a => a.id === partnerId);
+    const myLeads = this.leads.filter(l => l.affiliateId === partnerId);
+    const mySales = this.sales.filter(s => s.affiliateId === partnerId);
+    const myComms = this.commissions.filter(c => c.affiliateId === partnerId);
+    const myLedger = this.ledger.filter(t => t.affiliateId === partnerId);
+    const myUnits = this.inventory.filter(u => u.affiliateId === partnerId);
+    const myDocs = this.documents.filter(d => d.accessLevel === 'ALL' || d.accessLevel === 'PARTNER');
+
+    const totalGrossSales = mySales.reduce((acc, s) => acc + Number(s.salePrice || 0), 0);
+    const totalCommissions = myComms.reduce((acc, c) => acc + Number(c.netPayable || c.commissionAmount || 0), 0);
+    const pendingCommissions = myComms.filter(c => c.status === 'Pending').reduce((acc, c) => acc + Number(c.netPayable || c.commissionAmount || 0), 0);
+    const payableCommissions = myComms.filter(c => c.status === 'Payable').reduce((acc, c) => acc + Number(c.netPayable || c.commissionAmount || 0), 0);
+    const paidCommissions = myComms.filter(c => c.status === 'Paid').reduce((acc, c) => acc + Number(c.netPayable || c.commissionAmount || 0), 0);
+
+    return {
+      partner: aff,
+      leads: myLeads,
+      sales: mySales,
+      commissions: myComms,
+      ledger: myLedger,
+      units: myUnits,
+      documents: myDocs,
+      stats: {
+        totalLeads: myLeads.length,
+        qualifiedLeads: myLeads.filter(l => ['Qualified', 'Site Visit', 'Negotiation', 'Booked', 'Converted'].includes(l.status)).length,
+        closedSales: mySales.length,
+        totalGrossSales,
+        totalCommissions,
+        pendingCommissions,
+        payableCommissions,
+        paidCommissions,
+        availableBalance: aff ? (aff.availableBalance || 0) : 0,
+        qrScans: aff ? (aff.qrScans || 0) : 0,
+        referralClicks: aff ? (aff.referralClicks || 0) : 0,
+        conversionRate: myLeads.length > 0 ? ((mySales.length / myLeads.length) * 100).toFixed(1) + '%' : '0.0%'
+      }
+    };
+  }
+
+  // ==========================================
+  // SUPER ADMIN ERP OVERVIEW METRICS
+  // ==========================================
+  getERPOverviewMetrics() {
+    const totalProjects = this.projects.length;
+    const totalInventory = this.inventory.length;
+    const availableUnits = this.inventory.filter(u => u.status === 'Available').length;
+    const reservedUnits = this.inventory.filter(u => u.status === 'Reserved' || u.status === 'Booked').length;
+    const soldUnits = this.inventory.filter(u => u.status === 'Sold').length;
+
+    const totalSalesValue = this.sales.reduce((sum, s) => sum + Number(s.salePrice || 0), 0);
+    const totalInvestmentValue = this.inventory
+      .filter(u => u.status === 'Sold' || u.status === 'Reserved')
+      .reduce((sum, u) => sum + Number(u.finalPrice || u.price || 0), 0);
+
+    const pendingCommissions = this.commissions.filter(c => c.status === 'Pending').reduce((sum, c) => sum + Number(c.netPayable || c.commissionAmount || 0), 0);
+    const approvedCommissions = this.commissions.filter(c => c.status === 'Approved').reduce((sum, c) => sum + Number(c.netPayable || c.commissionAmount || 0), 0);
+    const payableCommissions = this.commissions.filter(c => c.status === 'Payable').reduce((sum, c) => sum + Number(c.netPayable || c.commissionAmount || 0), 0);
+    const paidCommissions = this.commissions.filter(c => c.status === 'Paid').reduce((sum, c) => sum + Number(c.netPayable || c.commissionAmount || 0), 0);
+
+    const paidPayments = this.payments.filter(p => p.status === 'Paid' || p.status === 'Completed').reduce((sum, p) => sum + Number(p.amount || 0), 0);
+    const outstandingPayments = this.payments.filter(p => p.status === 'Pending' || p.status === 'Scheduled').reduce((sum, p) => sum + Number(p.amount || 0), 0);
+
+    const totalPartners = this.affiliates.length;
+    const activePartners = this.affiliates.filter(a => a.status === 'Approved' || a.status === 'Active').length;
+
+    return {
+      totalProjects,
+      totalInventory,
+      availableUnits,
+      reservedUnits,
+      soldUnits,
+      totalSalesValue,
+      totalInvestmentValue,
+      pendingCommissions,
+      approvedCommissions,
+      payableCommissions,
+      paidCommissions,
+      paidPayments,
+      outstandingPayments,
+      totalPartners,
+      activePartners
+    };
   }
 
   // ==========================================

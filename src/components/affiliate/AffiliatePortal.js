@@ -102,14 +102,17 @@ export function initAffiliatePortal(container, onNavigateLanding, onSwitchAdminV
             </button>
           </nav>
 
-          <!-- Sidebar Footer Switcher -->
+          <!-- Sidebar Footer -->
           <div class="sidebar-footer">
-            <button type="button" class="sidebar-switch-btn" id="btn-partner-switch-landing">
-              <i data-lucide="globe"></i> <span>View Landing Page</span>
-            </button>
-            <button type="button" class="sidebar-switch-btn text-cyan" id="btn-partner-switch-admin">
-              <i data-lucide="shield-check"></i> <span>Super Admin Mode</span>
-            </button>
+            ${authStore.isSuperAdmin() ? `
+              <button type="button" class="sidebar-switch-btn text-cyan" id="btn-partner-switch-admin">
+                <i data-lucide="shield-check"></i> <span>Super Admin Mode</span>
+              </button>
+            ` : `
+              <div style="font-size: 0.72rem; color: #64748B; text-align: center; padding: 4px;">
+                PropPartner Private Partner Portal
+              </div>
+            `}
           </div>
         </aside>
 
