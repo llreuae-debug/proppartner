@@ -394,28 +394,49 @@ function renderPartnerModule(section, aff, stats, curr, navigateTo) {
           </button>
         </div>
 
-        <!-- Featured Projects -->
+        <!-- Featured Projects Ready to Promote -->
         <div class="table-card glass-card" style="margin-bottom: 24px;">
           <div class="table-card-header">
-            <h4><i data-lucide="building-2"></i> Projects Ready to Promote</h4>
-            <button type="button" class="btn-text-link" id="btn-dash-all-proj">View All →</button>
+            <div>
+              <h4><i data-lucide="building-2"></i> Projects Ready to Promote</h4>
+              <span class="text-xs text-muted">Generate instant scannable QR codes and tracked links for top developments</span>
+            </div>
+            <button type="button" class="btn btn-secondary btn-sm" id="btn-dash-all-proj">
+              <span>View All Projects</span> <i data-lucide="arrow-right"></i>
+            </button>
           </div>
           <div class="partner-proj-cards-grid">
             ${platformStore.projects.slice(0, 3).map(p => `
-              <div class="p-promo-card glass-card">
-                <img src="${p.image}" alt="${p.name}" class="promo-card-thumb" loading="lazy">
+              <div class="p-promo-card">
+                <div class="promo-card-thumb-wrap">
+                  <img src="${p.image}" alt="${p.name}" class="promo-card-thumb" loading="lazy">
+                  <div class="promo-card-top-badges">
+                    <span class="status-pill status-${p.status.toLowerCase().replace(/\s+/g, '-')}">${p.status}</span>
+                    <span class="promo-rate-pill">${p.commissionRate}% Milestone Comm.</span>
+                  </div>
+                </div>
                 <div class="promo-card-body">
-                  <div class="promo-rate-pill">${p.commissionRate}% Base Comm.</div>
-                  <h4 class="promo-card-title">${p.name}</h4>
-                  <p class="text-muted text-xs"><i data-lucide="map-pin"></i> ${p.location}, ${p.city}</p>
-                  <div class="promo-price-row">
-                    <span>Starting:</span>
-                    <strong class="text-gold">${formatCurrencyValue(p.startingPrice, curr)}</strong>
+                  <div>
+                    <h4 class="promo-card-title" title="${p.name}">${p.name}</h4>
+                    <p class="promo-card-loc"><i data-lucide="map-pin"></i> ${p.location}, ${p.city}</p>
+                    <div class="promo-metrics-strip">
+                      <div class="promo-metric-item">
+                        <span>Starting Price</span>
+                        <strong class="text-gold">${formatCurrencyValue(p.startingPrice, curr)}</strong>
+                      </div>
+                      <div class="promo-metric-item">
+                        <span>Est. Commission</span>
+                        <strong class="text-green">${formatCurrencyValue((p.startingPrice * p.commissionRate) / 100, curr)}</strong>
+                      </div>
+                    </div>
                   </div>
                   <div class="promo-actions-row">
                     <button type="button" class="btn btn-gold btn-sm w-full btn-open-proj-qr-modal" data-proj="${p.id}" data-name="${p.name}" data-comm="${p.commissionRate}">
-                      <i data-lucide="qr-code"></i> <span>QR & Referral Link</span>
+                      <i data-lucide="qr-code"></i> <span>Get Link & QR</span>
                     </button>
+                    <a href="/projects/${p.slug || p.id}" target="_blank" class="btn btn-secondary btn-sm" title="Preview Live Public Project Page">
+                      <i data-lucide="external-link"></i>
+                    </a>
                   </div>
                 </div>
               </div>
@@ -516,8 +537,11 @@ function renderPartnerModule(section, aff, stats, curr, navigateTo) {
                   <button type="button" class="btn btn-gold btn-sm w-full btn-open-proj-qr-modal" data-proj="${p.id}" data-name="${p.name}" data-comm="${p.commissionRate}">
                     <i data-lucide="qr-code"></i> <span>QR & Referral Link</span>
                   </button>
-                  <button type="button" class="btn btn-secondary btn-sm" onclick="alert('Downloading Official Lookbook for ${p.name}');">
-                    <i data-lucide="download"></i> <span>Brochure</span>
+                  <a href="/projects/${p.slug || p.id}" target="_blank" class="btn btn-secondary btn-sm" title="Preview Public Page">
+                    <i data-lucide="external-link"></i>
+                  </a>
+                  <button type="button" class="btn btn-secondary btn-sm" onclick="alert('Downloading Official Lookbook for ${p.name}');" title="Download Brochure">
+                    <i data-lucide="download"></i>
                   </button>
                 </div>
               </div>
