@@ -4,10 +4,17 @@ node_modules/
 # Build output
 dist/
 
-# Local env files
+# Local env and secret files
 .env
+.env.*
 .env.local
 .env.*.local
+**/.env
+**/.env.*
+*.pem
+*.key
+*.cert
+*.pfx
 
 # Logs
 npm-debug.log*
