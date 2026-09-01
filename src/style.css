@@ -3118,6 +3118,28 @@ img {
   transform: translateX(-50%);
   z-index: 9999;
   pointer-events: auto;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.platform-mode-dock.collapsed {
+  bottom: 12px;
+}
+
+.platform-mode-dock.collapsed .dock-label,
+.platform-mode-dock.collapsed .dock-btn span {
+  display: none;
+}
+
+.platform-mode-dock.collapsed .dock-pill-bar {
+  padding: 6px 10px;
+  gap: 4px;
+  background: rgba(8, 11, 17, 0.95);
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9);
+}
+
+.platform-mode-dock.collapsed .dock-btn {
+  padding: 6px 8px;
 }
 
 .dock-pill-bar {
@@ -3166,6 +3188,35 @@ img {
 .dock-btn:hover {
   color: #FFFFFF;
   background: rgba(255, 255, 255, 0.08);
+}
+
+.dock-toggle-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: none;
+  color: #94A3B8;
+  padding: 5px 6px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+  margin-left: 2px;
+}
+
+.dock-toggle-btn:hover {
+  color: #FFFFFF;
+  background: rgba(212, 175, 55, 0.2);
+}
+
+/* Global clearance for floating dock across all public and authenticated pages */
+.site-footer,
+.legal-page-layout,
+.contact-page-layout,
+.seo-page-layout,
+.register-section,
+.private-login-wrapper {
+  padding-bottom: 120px !important;
 }
 
 .dock-btn.active {
@@ -3779,9 +3830,10 @@ img {
 .portal-content-body {
   flex: 1;
   min-width: 0;
-  padding: 32px;
+  padding: 32px 32px 140px 32px; /* Generous bottom clearance preventing any floating dock or navigator overlap */
   overflow-x: hidden;
   overflow-y: auto;
+  scroll-behavior: smooth;
 }
 
 /* ==========================================================================

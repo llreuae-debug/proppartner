@@ -152,6 +152,19 @@ function initPlatformDock() {
       }
     };
   }
+
+  const btnCollapse = document.getElementById('dock-btn-collapse');
+  if (btnCollapse) {
+    btnCollapse.onclick = (e) => {
+      e.stopPropagation();
+      dock.classList.toggle('collapsed');
+      const isCollapsed = dock.classList.contains('collapsed');
+      btnCollapse.innerHTML = isCollapsed
+        ? `<i data-lucide="chevron-up" style="width: 14px; height: 14px;"></i>`
+        : `<i data-lucide="chevron-down" style="width: 14px; height: 14px;"></i>`;
+      if (window.lucide) window.lucide.createIcons();
+    };
+  }
 }
 
 /**
