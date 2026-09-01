@@ -662,37 +662,43 @@ function renderPartnerModule(section, aff, stats, curr, navigateTo) {
                 </tr>
               </thead>
               <tbody>
-                ${mySales.map(s => `
-                  <tr>
-                    <td><code>${s.id}</code></td>
-                    <td><strong>${s.customerName}</strong></td>
-                    <td>${s.projectId} - Unit ${s.unitId}</td>
-                    <td><strong class="text-gold">${formatCurrencyValue(s.salePrice, curr)}</strong></td>
-                    <td><strong class="text-green" style="font-size:1.05rem;">${formatCurrencyValue(s.commissionEarned, curr)}</strong></td>
-                    <td><span class="status-pill status-${s.status.toLowerCase()}">${s.status}</span></td>
-                  </tr>
-                `).join('')}
+                ${mySales.map(s => {
+                  const commEarned = s.grossCommission || s.netCommission || (Number(s.salePrice || 0) * (Number(s.commissionRate) || 3.5)) / 100;
+                  return `
+                    <tr>
+                      <td><code>${s.id}</code></td>
+                      <td><strong>${s.customerName}</strong></td>
+                      <td>${s.projectId} - Unit ${s.unitId}</td>
+                      <td><strong class="text-gold">${formatCurrencyValue(s.salePrice, curr)}</strong></td>
+                      <td><strong class="text-green" style="font-size:1.05rem;">${formatCurrencyValue(commEarned, curr)}</strong></td>
+                      <td><span class="status-pill status-${s.status.toLowerCase()}">${s.status}</span></td>
+                    </tr>
+                  `;
+                }).join('')}
               </tbody>
             </table>
           </div>
 
           <!-- Mobile Cards -->
           <div class="mobile-card-list mobile-only-cards">
-            ${mySales.map(s => `
-              <div class="mobile-card-item glass-card">
-                <div class="m-card-top">
-                  <div>
-                    <strong class="m-card-title">${s.customerName}</strong>
-                    <div class="text-muted text-xs">${s.projectId} • Unit ${s.unitId}</div>
+            ${mySales.map(s => {
+              const commEarned = s.grossCommission || s.netCommission || (Number(s.salePrice || 0) * (Number(s.commissionRate) || 3.5)) / 100;
+              return `
+                <div class="mobile-card-item glass-card">
+                  <div class="m-card-top">
+                    <div>
+                      <strong class="m-card-title">${s.customerName}</strong>
+                      <div class="text-muted text-xs">${s.projectId} • Unit ${s.unitId}</div>
+                    </div>
+                    <span class="status-pill status-${s.status.toLowerCase()}">${s.status}</span>
                   </div>
-                  <span class="status-pill status-${s.status.toLowerCase()}">${s.status}</span>
+                  <div class="m-card-details">
+                    <div><span class="text-muted text-xs">Sale:</span> <strong class="text-gold">${formatCurrencyValue(s.salePrice, curr)}</strong></div>
+                    <div><span class="text-muted text-xs">Earned:</span> <strong class="text-green">${formatCurrencyValue(commEarned, curr)}</strong></div>
+                  </div>
                 </div>
-                <div class="m-card-details">
-                  <div><span class="text-muted text-xs">Sale:</span> <strong class="text-gold">${formatCurrencyValue(s.salePrice, curr)}</strong></div>
-                  <div><span class="text-muted text-xs">Earned:</span> <strong class="text-green">${formatCurrencyValue(s.commissionEarned, curr)}</strong></div>
-                </div>
-              </div>
-            `).join('')}
+              `;
+            }).join('')}
           </div>
         </div>
       </div>
@@ -724,36 +730,48 @@ function renderPartnerModule(section, aff, stats, curr, navigateTo) {
                 </tr>
               </thead>
               <tbody>
-                ${myComms.map(c => `
-                  <tr>
-                    <td><code>${c.id}</code></td>
-                    <td><strong>${c.projectName}</strong><br><span class="text-muted">${c.customerName}</span></td>
-                    <td>${formatCurrencyValue(c.baseCommission, curr)}</td>
-                    <td><span class="text-gold">+${formatCurrencyValue(c.bonusAmount, curr)}</span></td>
-                    <td><strong class="text-green" style="font-size:1.1rem;">${formatCurrencyValue(c.netPayable, curr)}</strong></td>
-                    <td><span class="status-pill status-${c.status.toLowerCase()}">${c.status}</span></td>
-                  </tr>
-                `).join('')}
+                ${myComms.map(c => {
+                  const relatedSale = platformStore.sales.find(s => s.id === c.saleId);
+                  const clientName = c.customerName || (relatedSale ? relatedSale.customerName : 'Verified Investor');
+                  const baseComm = c.baseCommission || c.grossCommission || (relatedSale ? relatedSale.grossCommission : c.netPayable);
+                  const bonus = c.bonusAmount || (c.adjustments > 0 ? c.adjustments : 0);
+                  const netPay = c.netPayable || baseComm;
+                  return `
+                    <tr>
+                      <td><code>${c.id}</code></td>
+                      <td><strong>${c.projectName}</strong><br><span class="text-muted text-xs">${clientName}</span></td>
+                      <td>${formatCurrencyValue(baseComm, curr)}</td>
+                      <td><span class="text-gold">+${formatCurrencyValue(bonus, curr)}</span></td>
+                      <td><strong class="text-green" style="font-size:1.1rem;">${formatCurrencyValue(netPay, curr)}</strong></td>
+                      <td><span class="status-pill status-${c.status.toLowerCase()}">${c.status}</span></td>
+                    </tr>
+                  `;
+                }).join('')}
               </tbody>
             </table>
           </div>
 
           <!-- Mobile Cards -->
           <div class="mobile-card-list mobile-only-cards">
-            ${myComms.map(c => `
-              <div class="mobile-card-item glass-card">
-                <div class="m-card-top">
-                  <div>
-                    <strong class="m-card-title">${c.projectName}</strong>
-                    <div class="text-muted text-xs">${c.customerName}</div>
+            ${myComms.map(c => {
+              const relatedSale = platformStore.sales.find(s => s.id === c.saleId);
+              const clientName = c.customerName || (relatedSale ? relatedSale.customerName : 'Verified Investor');
+              const netPay = c.netPayable || c.grossCommission || 0;
+              return `
+                <div class="mobile-card-item glass-card">
+                  <div class="m-card-top">
+                    <div>
+                      <strong class="m-card-title">${c.projectName}</strong>
+                      <div class="text-muted text-xs">${clientName}</div>
+                    </div>
+                    <span class="status-pill status-${c.status.toLowerCase()}">${c.status}</span>
                   </div>
-                  <span class="status-pill status-${c.status.toLowerCase()}">${c.status}</span>
+                  <div class="m-card-details">
+                    <div><span class="text-muted text-xs">Net Payable:</span> <strong class="text-green">${formatCurrencyValue(netPay, curr)}</strong></div>
+                  </div>
                 </div>
-                <div class="m-card-details">
-                  <div><span class="text-muted text-xs">Net Payable:</span> <strong class="text-green">${formatCurrencyValue(c.netPayable, curr)}</strong></div>
-                </div>
-              </div>
-            `).join('')}
+              `;
+            }).join('')}
           </div>
         </div>
       </div>
@@ -1290,7 +1308,7 @@ function attachPartnerSubmoduleEvents(container, aff, navigateTo) {
   if (dashAllProj) dashAllProj.onclick = () => navigateTo('projects');
 
   const mqaAddLead = container.querySelector('#mqa-add-lead');
-  if (mqaAddLead) mqaAddLead.onclick = () => showSubmitLeadPrompt(aff, navigateTo);
+  if (mqaAddLead) mqaAddLead.onclick = () => showSubmitLeadModal(aff, navigateTo);
 
   const mqaViewLedger = container.querySelector('#mqa-view-ledger');
   if (mqaViewLedger) mqaViewLedger.onclick = () => navigateTo('ledger');
@@ -1300,14 +1318,12 @@ function attachPartnerSubmoduleEvents(container, aff, navigateTo) {
 
   const dashSubmitLead = container.querySelector('#btn-dash-submit-lead') || container.querySelector('#btn-partner-submit-lead-modal');
   if (dashSubmitLead) {
-    dashSubmitLead.onclick = () => showSubmitLeadPrompt(aff, navigateTo);
+    dashSubmitLead.onclick = () => showSubmitLeadModal(aff, navigateTo);
   }
 
   const reqPayoutBtn = container.querySelector('#btn-request-payout-modal');
   if (reqPayoutBtn) {
-    reqPayoutBtn.onclick = () => {
-      alert(`✅ Payout Request Submitted!\nYour payable balance will be processed in Friday's batch wire transfer to ${aff.bankName || 'HBL Prestige'}.`);
-    };
+    reqPayoutBtn.onclick = () => showRequestPayoutModal(aff, stats, navigateTo);
   }
 
   const partnerPrintStmtBtn = container.querySelector('#btn-partner-print-stmt');
@@ -1492,27 +1508,191 @@ function showProjectQrModal(project, aff) {
   }
 }
 
-function showSubmitLeadPrompt(aff, navigateTo) {
-  const name = prompt('Enter Client / Buyer Legal Name:');
-  if (!name) return;
-  const phone = prompt('Enter Client Phone / WhatsApp:', '+92 300 1234567');
-  const email = prompt('Enter Client Email:', 'client@domain.com');
-  const budget = prompt('Estimated Budget in PKR:', '35000000');
-
-  const res = platformStore.submitLead({
-    name,
-    phone,
-    email,
-    budget: Number(budget) || 35000000,
-    projectId: platformStore.projects[0].id,
-    affiliateId: aff.id,
-    source: 'Affiliate Partner Portal'
-  });
-
-  if (res.isDuplicate) {
-    alert('⚠️ Note: This client contact was flagged as a potential duplicate and is currently under administrative review.');
+/**
+ * Modal: Submit Client Referral
+ */
+function showSubmitLeadModal(aff, navigateTo) {
+  let modal = document.getElementById('partner-submit-lead-modal');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'partner-submit-lead-modal';
+    modal.className = 'auth-modal-backdrop active';
+    document.body.appendChild(modal);
   } else {
-    alert('✅ Client lead submitted successfully! Our project sales desk has been assigned.');
+    modal.classList.add('active');
   }
-  navigateTo('leads');
+
+  modal.innerHTML = `
+    <div class="auth-modal-dialog glass-card" style="max-width: 560px;">
+      <button type="button" class="auth-modal-close" id="lead-modal-close"><i data-lucide="x"></i></button>
+      <div class="auth-modal-header">
+        <div class="section-eyebrow"><i data-lucide="user-plus"></i> NEW CLIENT REFERRAL</div>
+        <h3 class="auth-modal-title">Introduce Buyer / Investor</h3>
+        <p class="auth-modal-subtitle">Directly register a client lead locked to your partner ID (<code>${aff.id}</code>)</p>
+      </div>
+
+      <form id="partner-lead-form" class="auth-form">
+        <div class="form-row-2">
+          <div class="form-group">
+            <label class="form-label text-xs">Client Legal Name</label>
+            <input type="text" id="lead-name-input" class="form-input" placeholder="e.g. M. Zubair Chaudhry" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label text-xs">Phone / WhatsApp</label>
+            <input type="text" id="lead-phone-input" class="form-input" placeholder="+92 300 1234567" required>
+          </div>
+        </div>
+
+        <div class="form-row-2">
+          <div class="form-group">
+            <label class="form-label text-xs">Email Address</label>
+            <input type="email" id="lead-email-input" class="form-input" placeholder="client@domain.com">
+          </div>
+          <div class="form-group">
+            <label class="form-label text-xs">Target Project Development</label>
+            <select id="lead-proj-select" class="form-input">
+              ${platformStore.projects.map(p => `
+                <option value="${p.id}">${p.name} (${p.commissionRate}% Comm)</option>
+              `).join('')}
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label text-xs">Estimated Purchasing Budget (PKR)</label>
+          <input type="number" id="lead-budget-input" class="form-input" placeholder="35000000" value="35000000" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label text-xs">Specific Requirements / Notes</label>
+          <textarea id="lead-notes-input" class="form-input" rows="2" placeholder="e.g. Interested in ground floor commercial shop, 450 sq.ft..."></textarea>
+        </div>
+
+        <div class="modal-actions-row">
+          <button type="button" class="btn btn-secondary" id="lead-modal-cancel">Cancel</button>
+          <button type="submit" class="btn btn-gold">Lock Attribution & Submit</button>
+        </div>
+      </form>
+    </div>
+  `;
+
+  if (window.lucide) window.lucide.createIcons();
+
+  const close = () => modal.classList.remove('active');
+  modal.querySelector('#lead-modal-close').onclick = close;
+  modal.querySelector('#lead-modal-cancel').onclick = close;
+
+  modal.querySelector('#partner-lead-form').onsubmit = (e) => {
+    e.preventDefault();
+    const name = modal.querySelector('#lead-name-input').value.trim();
+    const phone = modal.querySelector('#lead-phone-input').value.trim();
+    const email = modal.querySelector('#lead-email-input').value.trim();
+    const projectId = modal.querySelector('#lead-proj-select').value;
+    const budget = Number(modal.querySelector('#lead-budget-input').value) || 35000000;
+    const notes = modal.querySelector('#lead-notes-input').value.trim();
+
+    const res = platformStore.submitLead({
+      name,
+      phone,
+      email,
+      projectId,
+      budget,
+      notes,
+      affiliateId: aff.id,
+      source: 'Affiliate Partner Direct Submission'
+    });
+
+    close();
+    if (res.isDuplicate) {
+      alert('⚠️ Note: This client contact was flagged as a potential duplicate and is currently under administrative attribution review.');
+    } else {
+      alert('✅ Client lead registered successfully! Locked to your affiliate code for 90 days.');
+    }
+    navigateTo('leads');
+  };
 }
+
+/**
+ * Modal: Request Commission Payout
+ */
+function showRequestPayoutModal(aff, stats, navigateTo) {
+  let modal = document.getElementById('partner-request-payout-modal');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'partner-request-payout-modal';
+    modal.className = 'auth-modal-backdrop active';
+    document.body.appendChild(modal);
+  } else {
+    modal.classList.add('active');
+  }
+
+  const currentStats = platformStore.getAffiliateStats(aff.id);
+  const payableAmt = (currentStats && currentStats.payableCommission !== undefined) ? currentStats.payableCommission : (stats ? stats.payableCommission : 0);
+
+  modal.innerHTML = `
+    <div class="auth-modal-dialog glass-card" style="max-width: 520px;">
+      <button type="button" class="auth-modal-close" id="payout-modal-close"><i data-lucide="x"></i></button>
+      <div class="auth-modal-header">
+        <div class="section-eyebrow"><i data-lucide="wallet"></i> COMMISSION SETTLEMENT</div>
+        <h3 class="auth-modal-title">Request Bank Wire Payout</h3>
+        <p class="auth-modal-subtitle">Payable Balance: <strong class="text-green">${formatCurrencyValue(payableAmt)}</strong></p>
+      </div>
+
+      <form id="partner-payout-form" class="auth-form">
+        <div class="form-group">
+          <label class="form-label text-xs">Payout Amount (PKR)</label>
+          <input type="number" id="payout-amount-input" class="form-input" value="${payableAmt > 0 ? payableAmt : 500000}" min="1000" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label text-xs">Beneficiary Bank & Account</label>
+          <input type="text" class="form-input" value="${aff.bankName || 'HBL Prestige'} · ${aff.accountNumber || 'PK36HABB00012345678901'}" readonly>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label text-xs">Payout Instructions / Reference Note</label>
+          <input type="text" id="payout-notes-input" class="form-input" placeholder="e.g. Standard weekly batch settlement">
+        </div>
+
+        <div class="modal-actions-row">
+          <button type="button" class="btn btn-secondary" id="payout-modal-cancel">Cancel</button>
+          <button type="submit" class="btn btn-gold">
+            <i data-lucide="send"></i> <span>Submit Payout Request</span>
+          </button>
+        </div>
+      </form>
+    </div>
+  `;
+
+  if (window.lucide) window.lucide.createIcons();
+
+  const close = () => modal.classList.remove('active');
+  modal.querySelector('#payout-modal-close').onclick = close;
+  modal.querySelector('#payout-modal-cancel').onclick = close;
+
+  modal.querySelector('#partner-payout-form').onsubmit = (e) => {
+    e.preventDefault();
+    const amount = Number(modal.querySelector('#payout-amount-input').value) || 500000;
+    const notes = modal.querySelector('#payout-notes-input').value;
+
+    const newPayment = {
+      id: `PAY-${Date.now().toString().slice(-4)}`,
+      affiliateId: aff.id,
+      affiliateName: aff.name,
+      amount: amount,
+      method: 'RTGS / Bank Wire Transfer',
+      reference: `REQ-WIRE-${Math.floor(100000 + Math.random() * 900000)}`,
+      date: new Date().toISOString().split('T')[0],
+      status: 'Pending',
+      notes: notes || 'Partner portal payout request'
+    };
+
+    platformStore.payments.unshift(newPayment);
+    platformStore.save();
+
+    alert(`✅ Payout request for PKR ${amount.toLocaleString()} submitted successfully!\nProcessing via RTGS in Friday's wire batch.`);
+    close();
+    navigateTo('payments');
+  };
+}
+

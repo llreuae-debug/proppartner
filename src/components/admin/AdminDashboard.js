@@ -272,6 +272,8 @@ export function renderAdminDashboard(container, navigateTo) {
   // Render Chart
   const ctx = container.querySelector('#admin-erp-chart');
   if (ctx) {
+    const existing = Chart.getChart(ctx);
+    if (existing) existing.destroy();
     const chart = new Chart(ctx, {
       type: 'bar',
       data: {

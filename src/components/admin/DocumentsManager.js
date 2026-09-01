@@ -8,7 +8,7 @@ export function renderDocumentsManager(container, navigateTo) {
   let projectFilter = 'all';
 
   function render() {
-    const user = authStore.user;
+    const user = authStore.getUser() || authStore.getSuperAdmin();
     let docs = platformStore.getDocuments(user);
 
     if (categoryFilter !== 'all') {

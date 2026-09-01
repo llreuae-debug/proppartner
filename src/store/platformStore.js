@@ -869,6 +869,7 @@ const INITIAL_COMMISSIONS = [
   {
     id: 'COM-2024-001',
     saleId: 'SALE-2024-001',
+    customerName: 'M. Zubair Chaudhry',
     affiliateId: 'AFF-000101',
     affiliateName: 'Tariq Mansoor',
     projectId: 'luminary-towers',
@@ -876,6 +877,8 @@ const INITIAL_COMMISSIONS = [
     grossSale: 38500000,
     eligibleAmount: 38500000,
     rate: 3.5,
+    baseCommission: 1347500,
+    bonusAmount: 0,
     grossCommission: 1347500,
     adjustments: 0,
     netPayable: 1347500,
@@ -889,6 +892,7 @@ const INITIAL_COMMISSIONS = [
   {
     id: 'COM-2024-002',
     saleId: 'SALE-2024-002',
+    customerName: 'Ali Reza Merchant',
     affiliateId: 'AFF-000101',
     affiliateName: 'Tariq Mansoor',
     projectId: 'elysium-waterfront',
@@ -896,6 +900,8 @@ const INITIAL_COMMISSIONS = [
     grossSale: 93000000,
     eligibleAmount: 93000000,
     rate: 4.5,
+    baseCommission: 4185000,
+    bonusAmount: 0,
     grossCommission: 4185000,
     adjustments: -50000, // VIP Marketing Shared Adjustment
     netPayable: 4135000,
@@ -909,6 +915,7 @@ const INITIAL_COMMISSIONS = [
   {
     id: 'COM-2024-003',
     saleId: 'SALE-2024-003',
+    customerName: 'Sheikh Rashid Bin Khalid',
     affiliateId: 'AFF-000104',
     affiliateName: 'Elena Rostova',
     projectId: 'luminary-towers',
@@ -916,6 +923,8 @@ const INITIAL_COMMISSIONS = [
     grossSale: 67000000,
     eligibleAmount: 67000000,
     rate: 4.2,
+    baseCommission: 2814000,
+    bonusAmount: 0,
     grossCommission: 2814000,
     adjustments: 0,
     netPayable: 2814000,
@@ -929,6 +938,7 @@ const INITIAL_COMMISSIONS = [
   {
     id: 'COM-2024-004',
     saleId: 'SALE-2024-004',
+    customerName: 'Dr. Ayesha Siddiqa',
     affiliateId: 'AFF-000102',
     affiliateName: 'Sarah Al-Maktoum Jenkins',
     projectId: 'luminary-towers',
@@ -936,6 +946,8 @@ const INITIAL_COMMISSIONS = [
     grossSale: 29000000,
     eligibleAmount: 29000000,
     rate: 3.5,
+    baseCommission: 1015000,
+    bonusAmount: 0,
     grossCommission: 1015000,
     adjustments: 0,
     netPayable: 1015000,
@@ -949,6 +961,7 @@ const INITIAL_COMMISSIONS = [
   {
     id: 'COM-2024-005',
     saleId: 'SALE-2024-005',
+    customerName: 'Nadeem Jahangir',
     affiliateId: 'AFF-000101',
     affiliateName: 'Tariq Mansoor',
     projectId: 'luminary-towers',
@@ -956,6 +969,8 @@ const INITIAL_COMMISSIONS = [
     grossSale: 44500000,
     eligibleAmount: 44500000,
     rate: 3.5,
+    baseCommission: 1557500,
+    bonusAmount: 0,
     grossCommission: 1557500,
     adjustments: 0,
     netPayable: 1557500,
@@ -2303,13 +2318,12 @@ class PlatformStore {
   // ==========================================
   // SECURED DOCUMENT VAULT
   // ==========================================
-  getDocuments(user) {
-    if (!user) return [];
-    if (user.role === 'SUPER_ADMIN' || user.role === 'ADMIN') {
-      return this.documents;
+  getDocuments(user = null) {
+    if (!user || user.role === 'SUPER_ADMIN' || user.role === 'ADMIN' || !user.role) {
+      return this.documents || [];
     }
     // Partner gets public documents + documents tagged ALL or PARTNER
-    return this.documents.filter(d => d.accessLevel === 'ALL' || d.accessLevel === 'PARTNER');
+    return (this.documents || []).filter(d => d.accessLevel === 'ALL' || d.accessLevel === 'PARTNER');
   }
 
   addDocument(docData) {
