@@ -23,6 +23,7 @@ import { initRegistrationForm } from './components/registrationForm.js';
 import { initDashboardPreview } from './components/dashboardPreview.js';
 import { initNetworkGraph } from './components/networkGraph3d.js';
 import { initMarketingToolkit } from './components/marketingToolkit.js';
+import { initInteractiveSurface } from './components/interactiveSurface.js';
 
 // Public Dedicated Views
 import { renderLegalView } from './components/legal/LegalView.js';
@@ -379,10 +380,41 @@ function initLandingPage() {
     hero3DInstance = initHero3D(heroCanvas);
   }
 
-  // 2. Trust Categories
+  // 2. Interactive 3D Tactile Surface (Sotnichenko Effect)
+  const surfaceMount = document.getElementById('tactile-surface-viewport');
+  if (surfaceMount) {
+    const surfaceInstance = initInteractiveSurface(surfaceMount, {
+      image: "https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?auto=format&fit=crop&w=1600&q=85",
+      depth: 1.0,
+      radius: 300,
+      shadow: 0.85,
+      highlight: 0.95,
+      follow: 0.82
+    });
+
+    const presetButtons = document.querySelectorAll('.surface-preset-btn');
+    const titleSpan = document.getElementById('surface-active-title');
+
+    presetButtons.forEach(btn => {
+      btn.onclick = () => {
+        presetButtons.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const imgUrl = btn.getAttribute('data-img');
+        const name = btn.getAttribute('data-name');
+        if (surfaceInstance && imgUrl) {
+          surfaceInstance.setImage(imgUrl);
+        }
+        if (titleSpan && name) {
+          titleSpan.textContent = name;
+        }
+      };
+    });
+  }
+
+  // 3. Trust Categories
   renderTrustCategories();
 
-  // 3. Process Timeline
+  // 4. Process Timeline
   renderProcessTimeline();
 
   // 4. Featured Projects Showcase with 3D Tilt
