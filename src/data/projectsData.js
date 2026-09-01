@@ -127,6 +127,38 @@ export const initialProjects = [
     videoTourUrl: "#video-elysium",
     targetAudience: "HNW Investors, C-Suite Executives, Luxury Home Seekers",
     averageConversionTime: "18 Days",
-    marketingAssetsCount: 34
   }
 ];
+
+export function formatCurrency(amount, currency = 'PKR') {
+  if (typeof amount !== 'number') amount = Number(amount) || 0;
+  if (currency === 'USD') {
+    const usdAmount = amount / 278;
+    return `$${Math.round(usdAmount).toLocaleString()}`;
+  }
+  if (currency === 'AED') {
+    const aedAmount = amount / 75.5;
+    return `AED ${Math.round(aedAmount).toLocaleString()}`;
+  }
+  return `PKR ${Math.round(amount).toLocaleString()}`;
+}
+
+export function formatCompactCurrency(amount, currency = 'PKR') {
+  if (typeof amount !== 'number') amount = Number(amount) || 0;
+  if (currency === 'USD') {
+    const usd = amount / 278;
+    if (usd >= 1000000) return `$${(usd / 1000000).toFixed(1)}M`;
+    if (usd >= 1000) return `$${(usd / 1000).toFixed(0)}K`;
+    return `$${Math.round(usd)}`;
+  }
+  if (currency === 'AED') {
+    const aed = amount / 75.5;
+    if (aed >= 1000000) return `AED ${(aed / 1000000).toFixed(1)}M`;
+    if (aed >= 1000) return `AED ${(aed / 1000).toFixed(0)}K`;
+    return `AED ${Math.round(aed)}`;
+  }
+  if (amount >= 10000000) return `PKR ${(amount / 10000000).toFixed(2)} Cr`;
+  if (amount >= 100000) return `PKR ${(amount / 100000).toFixed(1)} Lac`;
+  return `PKR ${Math.round(amount).toLocaleString()}`;
+}
+

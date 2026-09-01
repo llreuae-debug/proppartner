@@ -24,6 +24,14 @@ export function renderLoginPage(container, onLoginSuccess) {
       <div class="private-login-wrapper" style="min-height: 100vh; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 50% 10%, rgba(212, 175, 55, 0.08), #080B11 75%); padding: 24px;">
         <div class="login-card-dialog glass-card" style="width: 100%; max-width: 480px; padding: 36px; border-radius: 16px; border: 1px solid rgba(212, 175, 55, 0.25); box-shadow: 0 20px 50px rgba(0,0,0,0.6); position: relative;">
           
+          <!-- Back to Home Navigation -->
+          <div style="margin-bottom: 16px;">
+            <a href="#home" id="login-back-home-link" style="display: inline-flex; align-items: center; gap: 6px; color: #94A3B8; text-decoration: none; font-size: 0.82rem; font-weight: 500; transition: color 0.15s ease;">
+              <i data-lucide="arrow-left" style="width: 15px; height: 15px;"></i>
+              <span>← Back to Home Website</span>
+            </a>
+          </div>
+
           <!-- Brand Badge -->
           <div style="text-align: center; margin-bottom: 24px;">
             <div style="display: inline-flex; align-items: center; justify-content: center; width: 64px; height: 64px; border-radius: 16px; background: rgba(212, 175, 55, 0.1); border: 1px solid rgba(212, 175, 55, 0.3); margin-bottom: 12px;">

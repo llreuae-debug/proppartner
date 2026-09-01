@@ -135,6 +135,9 @@ export function initAdminPortal(container, onNavigateLanding, onSwitchAffiliateV
 
           <!-- Sidebar Footer with View Switcher -->
           <div class="sidebar-footer">
+            <button type="button" class="sidebar-switch-btn" id="btn-admin-nav-home" style="margin-bottom: 8px;">
+              <i data-lucide="globe"></i> <span>Visit Home Website</span>
+            </button>
             <button type="button" class="sidebar-switch-btn text-gold" id="btn-switch-partner-view">
               <i data-lucide="user-check"></i> <span>Switch to Partner Portal</span>
             </button>
@@ -155,6 +158,12 @@ export function initAdminPortal(container, onNavigateLanding, onSwitchAffiliateV
             </div>
 
             <div class="topbar-right">
+              <!-- Home Website Quick Link -->
+              <a href="#home" class="btn btn-secondary btn-sm" id="btn-admin-home" title="Visit Public Landing Page" style="display: inline-flex; align-items: center; gap: 6px; text-decoration: none; font-size: 0.8rem; padding: 6px 12px; border-radius: 8px;">
+                <i data-lucide="globe" style="width: 14px; height: 14px;"></i>
+                <span>Home Website</span>
+              </a>
+
               <!-- Currency Switcher -->
               <select id="admin-topbar-currency" class="form-select-sm" title="Active Ledger Currency">
                 <option value="PKR" ${platformStore.currency === 'PKR' ? 'selected' : ''}>PKR (₨)</option>
@@ -274,6 +283,22 @@ export function initAdminPortal(container, onNavigateLanding, onSwitchAffiliateV
       logoutBtn.onclick = (e) => {
         e.stopPropagation();
         openLogoutConfirmationModal({ triggerElement: logoutBtn });
+      };
+    }
+
+    // Home Website Navigation
+    const homeBtn = container.querySelector('#btn-admin-home');
+    if (homeBtn) {
+      homeBtn.onclick = (e) => {
+        e.preventDefault();
+        window.location.hash = '#home';
+      };
+    }
+    const homeSidebarBtn = container.querySelector('#btn-admin-nav-home');
+    if (homeSidebarBtn) {
+      homeSidebarBtn.onclick = (e) => {
+        e.preventDefault();
+        window.location.hash = '#home';
       };
     }
 

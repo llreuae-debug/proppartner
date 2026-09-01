@@ -105,6 +105,9 @@ export function initAffiliatePortal(container, onNavigateLanding, onSwitchAdminV
 
           <!-- Sidebar Footer -->
           <div class="sidebar-footer">
+            <button type="button" class="sidebar-switch-btn" id="btn-partner-nav-home" style="margin-bottom: 8px;">
+              <i data-lucide="globe"></i> <span>Visit Home Website</span>
+            </button>
             ${authStore.isSuperAdmin() ? `
               <button type="button" class="sidebar-switch-btn text-cyan" id="btn-partner-switch-admin">
                 <i data-lucide="shield-check"></i> <span>Super Admin Mode</span>
@@ -131,6 +134,12 @@ export function initAffiliatePortal(container, onNavigateLanding, onSwitchAdminV
             </div>
 
             <div class="topbar-right">
+              <!-- Home Website Quick Link -->
+              <a href="#home" class="btn btn-secondary btn-sm" id="btn-partner-home" title="Visit Public Landing Page" style="display: inline-flex; align-items: center; gap: 6px; text-decoration: none; font-size: 0.8rem; padding: 6px 12px; border-radius: 8px;">
+                <i data-lucide="globe" style="width: 14px; height: 14px;"></i>
+                <span>Home Website</span>
+              </a>
+
               <!-- Fast Referral Link Copy Pill -->
               <div class="topbar-ref-pill">
                 <span class="ref-pill-label">Referral:</span>
@@ -258,6 +267,22 @@ export function initAffiliatePortal(container, onNavigateLanding, onSwitchAdminV
     if (logoutBtn) {
       logoutBtn.onclick = () => {
         openLogoutConfirmationModal({ triggerElement: logoutBtn });
+      };
+    }
+
+    // Home Website Navigation
+    const homeBtn = container.querySelector('#btn-partner-home');
+    if (homeBtn) {
+      homeBtn.onclick = (e) => {
+        e.preventDefault();
+        window.location.hash = '#home';
+      };
+    }
+    const homeSidebarBtn = container.querySelector('#btn-partner-nav-home');
+    if (homeSidebarBtn) {
+      homeSidebarBtn.onclick = (e) => {
+        e.preventDefault();
+        window.location.hash = '#home';
       };
     }
 
