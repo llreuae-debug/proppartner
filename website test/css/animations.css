@@ -1,0 +1,223 @@
+/**
+ * The Blade & Crown - Animations & Micro-Interactions
+ */
+
+/* Custom Scissor Cursor & Particles */
+.custom-cursor-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.cursor-dot {
+  position: absolute;
+  top: -4px;
+  left: -4px;
+  width: 8px;
+  height: 8px;
+  background: var(--gold-400);
+  border-radius: 50%;
+  box-shadow: 0 0 12px var(--gold-400), 0 0 24px var(--gold-glow);
+  transform: translate3d(-100px, -100px, 0);
+  transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease;
+  pointer-events: none;
+}
+
+.cursor-shears {
+  position: absolute;
+  top: -11px;
+  left: -11px;
+  width: 22px;
+  height: 22px;
+  color: var(--gold-400);
+  transform: translate3d(-100px, -100px, 0);
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  filter: drop-shadow(0 0 8px var(--gold-glow));
+}
+
+.shear-blade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 12px 12px;
+  transition: transform 0.12s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Snip Click Animation */
+.custom-cursor-container.snip .blade-left {
+  transform: rotate(26deg);
+}
+
+.custom-cursor-container.snip .blade-right {
+  transform: rotate(-26deg);
+}
+
+.custom-cursor-container.hovering .cursor-dot {
+  width: 14px;
+  height: 14px;
+  top: -7px;
+  left: -7px;
+  background: var(--gold-300);
+  box-shadow: 0 0 16px var(--gold-400);
+}
+
+/* Snip Gold Dust Particles */
+.snip-particle {
+  position: fixed;
+  width: 4px;
+  height: 4px;
+  background: linear-gradient(45deg, var(--gold-300), var(--gold-600));
+  border-radius: 1px;
+  pointer-events: none;
+  z-index: 9998;
+  transform: translate(-50%, -50%);
+  animation: snipParticleFly 0.65s cubic-bezier(0.1, 0.9, 0.2, 1) forwards;
+}
+
+@keyframes snipParticleFly {
+  0% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1) rotate(0deg);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--tx)), calc(-50% + var(--ty))) scale(0.2) rotate(var(--rot));
+  }
+}
+
+/* Barber Pole Animated Widget */
+.barber-pole-widget {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(18, 20, 26, 0.85);
+  border: 1px solid var(--border-gold);
+  padding: 8px 16px;
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.barber-pole-cylinder {
+  width: 14px;
+  height: 38px;
+  border-radius: 7px;
+  border: 1.5px solid var(--gold-400);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 0 10px var(--gold-glow);
+  background: repeating-linear-gradient(
+    -45deg,
+    #b91c1c,
+    #b91c1c 6px,
+    #f8fafc 6px,
+    #f8fafc 12px,
+    #1d4ed8 12px,
+    #1d4ed8 18px,
+    #f8fafc 18px,
+    #f8fafc 24px
+  );
+  background-size: 200% 200%;
+  animation: barberPoleScroll 2.8s linear infinite;
+}
+
+@keyframes barberPoleScroll {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 48px;
+  }
+}
+
+/* Scroll Reveal Classes */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.scroll-reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.delay-1 { transition-delay: 0.12s; }
+.delay-2 { transition-delay: 0.24s; }
+.delay-3 { transition-delay: 0.36s; }
+.delay-4 { transition-delay: 0.48s; }
+
+/* Glowing Live Dot */
+.live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.live-dot.pulse {
+  background: #10b981;
+  box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  animation: liveDotPulse 1.8s infinite;
+}
+
+.live-dot.night {
+  background: var(--amber-neon);
+  box-shadow: 0 0 8px var(--amber-neon);
+}
+
+@keyframes liveDotPulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(16, 185, 129, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+  }
+}
+
+/* Shimmer Gold Line */
+.shimmer-line {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(90deg, transparent 0%, var(--gold-500) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmerMove 4s ease-in-out infinite;
+}
+
+@keyframes shimmerMove {
+  0% { background-position: -100% 0; }
+  100% { background-position: 100% 0; }
+}
+
+/* Floating Card Animation */
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+.floating-elem {
+  animation: floatSlow 5s ease-in-out infinite;
+}
+
+/* Neon Glow Ambient */
+@keyframes amberNeonGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 15px rgba(255, 157, 0, 0.5)) drop-shadow(0 0 35px rgba(212, 175, 55, 0.3));
+  }
+  50% {
+    filter: drop-shadow(0 0 25px rgba(255, 157, 0, 0.8)) drop-shadow(0 0 50px rgba(212, 175, 55, 0.5));
+  }
+}
+
+.neon-glow-active {
+  animation: amberNeonGlow 3s ease-in-out infinite;
+}

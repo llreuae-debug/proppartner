@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FlyingScissor — The Best Hair Cutting Saloon in Faisalabad</title>
+  <meta name="description" content="FlyingScissor — Hair salon · Hair stylist · Beauty, cosmetic & personal care. The Best Hair Cutting Saloon in Faisalabad with master scissor craftsmanship and modern VIP styling.">
+  <meta name="keywords" content="FlyingScissor, FlyingScissor Faisalabad, best hair cutting saloon in Faisalabad, hair salon Faisalabad, hair stylist Faisalabad, beauty cosmetic personal care">
+
+  <!-- Preconnect & Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/index.css">
+  <link rel="stylesheet" href="css/animations.css">
+  <link rel="stylesheet" href="css/hero.css">
+  <link rel="stylesheet" href="css/interactive.css">
+  <link rel="stylesheet" href="css/booking.css">
+</head>
+<body>
+
+  <!-- Site Header / Navbar -->
+  <header class="site-header">
+    <div class="container nav-container">
+      <a href="#" class="brand-logo-group" aria-label="FlyingScissor Homepage">
+        <svg class="brand-icon-crown" viewBox="0 0 24 24" width="32" height="32" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="6" cy="18" r="3"/>
+          <path d="M8.5 15.5L20 4"/>
+          <circle cx="18" cy="18" r="3"/>
+          <path d="M15.5 15.5L4 4"/>
+        </svg>
+        <div class="brand-text-block">
+          <span class="brand-title">FLYINGSCISSOR</span>
+          <span class="brand-subtitle">Hair Salon · Faisalabad</span>
+        </div>
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="nav-links-desktop" aria-label="Main Navigation">
+        <a href="#services" class="nav-link">Hair & Shave</a>
+        <a href="#studio" class="nav-link">Style Studio</a>
+        <a href="#barbers" class="nav-link">Master Stylists</a>
+        <a href="#apothecary" class="nav-link">Products</a>
+        <a href="#lounge" class="nav-link">VIP Lounge</a>
+      </nav>
+
+      <!-- Nav Actions -->
+      <div class="nav-actions">
+        <!-- Ambient Sound Player Toggle -->
+        <button type="button" class="audio-toggle-btn" id="btnToggleAudio" aria-label="Toggle Salon Soundscape" title="Play Salon Lounge Ambience">
+          <span class="eq-bars-visualizer">
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+            <span class="eq-bar"></span>
+          </span>
+          <span class="audio-label">Salon Audio</span>
+        </button>
+
+        <button type="button" class="btn-gold open-booking-modal" id="navBookBtn">
+          <span>Book Chair</span>
+        </button>
+
+        <!-- Mobile Toggle -->
+        <button type="button" class="mobile-toggle-btn" id="mobileNavToggle" aria-label="Open mobile menu" aria-expanded="false">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Drawer -->
+  <div class="mobile-drawer" id="mobileNavDrawer">
+    <ul class="mobile-nav-links">
+      <li><a href="#services">Hair & Shave</a></li>
+      <li><a href="#studio">Style Studio</a></li>
+      <li><a href="#barbers">Master Stylists</a></li>
+      <li><a href="#apothecary">Grooming Products</a></li>
+      <li><a href="#lounge">VIP Amenities</a></li>
+    </ul>
+    <button type="button" class="btn-gold open-booking-modal" style="width: 100%;">
+      <span>Reserve VIP Chair</span>
+    </button>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero-section" id="home">
+    <div class="hero-background-wrapper">
+      <img src="assets/images/hero-lounge.jpg" alt="FlyingScissor Luxury Saloon in Faisalabad" class="hero-bg-img">
+      <div class="hero-overlay-gradient"></div>
+    </div>
+
+    <div class="container hero-content-grid">
+      <!-- Hero Left Text -->
+      <div class="hero-text-block scroll-reveal">
+        <div class="hero-badge-row">
+          <div class="hero-live-pill" id="liveLoungeStatus">
+            <span class="live-dot pulse"></span>
+            <span class="status-txt">Saloon Open • 3 Master Chairs Active in Faisalabad</span>
+          </div>
+
+          <div class="barber-pole-widget">
+            <div class="barber-pole-cylinder"></div>
+            <span style="font-size: 0.78rem; font-weight: 700; color: var(--gold-400); letter-spacing: 0.08em;">FLYING SCISSOR</span>
+          </div>
+        </div>
+
+        <h1 class="hero-title">
+          THE BEST HAIR CUTTING <br>
+          <span class="title-accent">SALOON IN FAISALABAD</span>
+        </h1>
+
+        <p class="hero-description">
+          <strong>Hair salon · Hair stylist · Beauty, cosmetic & personal care.</strong><br>
+          Experience signature flying scissor cuts, skin fades, beard architecture, and relaxing VIP lounge hospitality led by Shahzad and master artists.
+        </p>
+
+        <div class="hero-cta-group">
+          <button type="button" class="btn-gold open-booking-modal" id="heroBookCta">
+            <span>Book Your Chair</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </button>
+          <a href="#studio" class="btn-dark-glass">
+            <span>Explore Style Studio</span>
+          </a>
+          <a href="https://www.instagram.com/flying_scissorofficial/" target="_blank" rel="noopener noreferrer" class="btn-dark-glass" style="color: var(--gold-300);">
+            <span>@flying_scissorofficial</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Hero Right 3D Visual Card -->
+      <div class="hero-visual-card scroll-reveal delay-1 interactive-tilt">
+        <span class="hero-floating-badge">✂️ Faisalabad's #1 Salon</span>
+        <div class="hero-visual-header">
+          <div class="hero-artisan-chip">
+            <img src="assets/images/master-barber-shave.jpg" alt="Shahzad Master Stylist" class="hero-artisan-thumb">
+            <div class="hero-artisan-meta">
+              <h4>Shahzad</h4>
+              <span>Founder & Master Stylist • Chair 01</span>
+            </div>
+          </div>
+          <span class="service-badge-pill">On Duty Now</span>
+        </div>
+
+        <div class="hero-visual-preview">
+          <img src="assets/images/master-barber-shave.jpg" alt="Precision FlyingScissor Cut and Shave">
+          <div class="preview-glow-tag">
+            <span>🔥 Flying Scissor Precision Technique</span>
+          </div>
+        </div>
+
+        <div class="hero-stats-row">
+          <div class="hero-stat-box">
+            <span class="stat-number">20,000+</span>
+            <span class="stat-label">Cuts in Faisalabad</span>
+          </div>
+          <div class="hero-stat-box">
+            <span class="stat-number">4.99 ★</span>
+            <span class="stat-label">Client Rating</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Style Studio & Before / After Transformation Slider -->
+  <section class="section-wrapper" id="studio">
+    <div class="container">
+      <div class="section-header scroll-reveal">
+        <span class="section-tag">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="18" r="3"/><path d="M8.5 15.5L20 4"/></svg>
+          Precision Transformation
+        </span>
+        <h2 class="section-title">The <span class="text-gold-gradient">FlyingScissor Style Studio</span></h2>
+        <p class="section-subtitle">
+          Slide to witness how our bespoke scissor work and razor-sharp beard sculpting elevate facial symmetry and masculine presence.
+        </p>
+      </div>
+
+      <div class="studio-wrapper scroll-reveal delay-1">
+        <div class="studio-grid">
+          <!-- Left: Draggable Before / After Split Slider -->
+          <div class="before-after-container">
+            <!-- Before Layer (Background) -->
+            <div class="ba-image-layer ba-before-layer">
+              <img src="assets/images/before-cut.jpg" alt="Before Haircut Makeover">
+              <span class="ba-badge before">Before / Unruly Growth</span>
+            </div>
+
+            <!-- After Layer (Clipped Overlay) -->
+            <div class="ba-image-layer ba-after-layer">
+              <img src="assets/images/after-cut.jpg" alt="After Precision FlyingScissor Makeover">
+              <span class="ba-badge after">After / FlyingScissor Cut</span>
+            </div>
+
+            <!-- Draggable Handle Divider -->
+            <div class="ba-handle" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <polyline points="8 17 3 12 8 7"/>
+                <polyline points="16 7 21 12 16 17"/>
+              </svg>
+            </div>
+
+            <!-- Accessible Native Range Controller -->
+            <input type="range" min="0" max="100" value="50" class="ba-range-input" aria-label="Drag to compare before and after transformation">
+          </div>
+
+          <!-- Right: Hairstyle Selector & Specs -->
+          <div class="studio-details-col">
+            <div class="style-tabs-row" role="tablist">
+              <button type="button" class="style-tab-btn active" data-style-id="style-fade-beard">
+                High Fade & Beard
+              </button>
+              <button type="button" class="style-tab-btn" data-style-id="style-pompadour">
+                Executive Pompadour
+              </button>
+              <button type="button" class="style-tab-btn" data-style-id="style-crop">
+                French Textured Crop
+              </button>
+            </div>
+
+            <div class="style-details-card">
+              <!-- Dynamically populated by style-studio.js -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Signature Services Menu -->
+  <section class="section-wrapper" id="services">
+    <div class="container">
+      <div class="section-header scroll-reveal">
+        <span class="section-tag">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+          Beauty, Cosmetic & Personal Care
+        </span>
+        <h2 class="section-title">FlyingScissor <span class="text-gold-gradient">Services & Menu</span></h2>
+        <p class="section-subtitle">
+          Every session includes hair diagnosis, steam cleansing, precision cut, hot towel therapy, and complimentary espresso service.
+        </p>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="services-filter-nav scroll-reveal delay-1">
+        <button type="button" class="service-filter-btn active" data-filter="all">All Services</button>
+        <button type="button" class="service-filter-btn" data-filter="haircraft">Hair & Styling</button>
+        <button type="button" class="service-filter-btn" data-filter="shave">Beard & Shave</button>
+        <button type="button" class="service-filter-btn" data-filter="vip">VIP Packages</button>
+        <button type="button" class="service-filter-btn" data-filter="rituals">Facials & Care</button>
+      </div>
+
+      <!-- Menu Grid -->
+      <div class="services-menu-grid scroll-reveal delay-2" id="servicesMenuGrid">
+        <!-- Dynamically rendered by app.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Master Barbers / Artisans -->
+  <section class="section-wrapper" id="barbers">
+    <div class="container">
+      <div class="section-header scroll-reveal">
+        <span class="section-tag">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          The Master Stylists
+        </span>
+        <h2 class="section-title">Meet Our <span class="text-gold-gradient">Hair Stylists</span></h2>
+        <p class="section-subtitle">
+          Led by Shahzad, our team brings decades of mastery, high precision scissor skills, and personal care expertise to Faisalabad.
+        </p>
+      </div>
+
+      <div class="barbers-roster-grid scroll-reveal delay-1" id="barbersRosterGrid">
+        <!-- Dynamically rendered by app.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Apothecary & Grooming Products -->
+  <section class="section-wrapper" id="apothecary">
+    <div class="container">
+      <div class="section-header scroll-reveal">
+        <span class="section-tag">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+          Beauty & Personal Care
+        </span>
+        <h2 class="section-title">FlyingScissor <span class="text-gold-gradient">Care Products</span></h2>
+        <p class="section-subtitle">
+          Premium matte waxes, Moroccan argan beard oils, and skin conditioning treatments available in-salon.
+        </p>
+      </div>
+
+      <div class="apothecary-grid scroll-reveal delay-1" id="apothecaryGrid">
+        <!-- Dynamically rendered by app.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- The Lounge Experience & Amenities -->
+  <section class="section-wrapper" id="lounge">
+    <div class="container">
+      <div class="section-header scroll-reveal">
+        <span class="section-tag">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 22h8M12 15v7M19 3H5l2 8a5 5 0 0 0 10 0l2-8z"/></svg>
+          VIP Atmosphere
+        </span>
+        <h2 class="section-title">The <span class="text-gold-gradient">Saloon Experience</span></h2>
+        <p class="section-subtitle">
+          Enjoy unmatched cleanliness, comfortable reclining chairs, complimentary espresso, and a relaxing acoustic environment.
+        </p>
+      </div>
+
+      <div class="lounge-amenities-grid scroll-reveal delay-1" id="loungeAmenitiesGrid">
+        <!-- Dynamically rendered by app.js -->
+      </div>
+
+      <!-- Verified Reviews Wall -->
+      <div class="section-header scroll-reveal" style="margin-top: 80px;">
+        <span class="section-tag">Client Testimonials</span>
+        <h3 class="section-title">Reviews from <span class="text-gold-gradient">Faisalabad</span></h3>
+      </div>
+      <div class="reviews-masonry-grid scroll-reveal delay-1" id="reviewsMasonryGrid">
+        <!-- Dynamically rendered by app.js -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand-logo-group">
+            <svg class="brand-icon-crown" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="6" cy="18" r="3"/>
+              <path d="M8.5 15.5L20 4"/>
+              <circle cx="18" cy="18" r="3"/>
+              <path d="M15.5 15.5L4 4"/>
+            </svg>
+            <span class="brand-title">FLYINGSCISSOR</span>
+          </div>
+          <p>
+            <strong>The Best Hair Cutting Saloon in Faisalabad.</strong><br>
+            Hair salon · Hair stylist · Beauty, cosmetic & personal care.
+          </p>
+          <div style="margin-top: 20px;">
+            <button type="button" class="btn-gold-outline open-booking-modal">
+              <span>Reserve Your Chair</span>
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Saloon Hours</h4>
+          <ul class="footer-links">
+            <li>Mon – Fri: 10:00 AM – 11:00 PM</li>
+            <li>Saturday: 10:00 AM – 11:30 PM</li>
+            <li>Sunday: 11:00 AM – 10:00 PM</li>
+            <li style="color: var(--gold-400); margin-top: 8px;">Dedicated VIP Parking</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Quick Links</h4>
+          <ul class="footer-links">
+            <li><a href="#services">Services & Pricing</a></li>
+            <li><a href="#studio">Style Studio</a></li>
+            <li><a href="#barbers">Master Stylists</a></li>
+            <li><a href="#apothecary">Care Products</a></li>
+            <li><a href="https://www.instagram.com/flying_scissorofficial/" target="_blank" rel="noopener noreferrer">Instagram @flying_scissorofficial</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-col-title">Location & Contact</h4>
+          <ul class="footer-links">
+            <li>Main Boulevard, D-Ground / Kohinoor City</li>
+            <li>Faisalabad, Punjab, Pakistan</li>
+            <li>+92 300 7654321</li>
+            <li>contact@flyingscissor.com</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 FlyingScissor Saloon Faisalabad. All rights reserved.</p>
+        <p>The Best Hair Cutting Saloon in Faisalabad.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- 5-Step VIP Booking Wizard Modal -->
+  <div class="booking-modal-overlay" id="bookingModal" role="dialog" aria-modal="true" aria-labelledby="bookingModalTitle">
+    <div class="modal-backdrop"></div>
+    <div class="wizard-modal-box">
+      <!-- Modal Header -->
+      <div class="wizard-header">
+        <div class="wizard-header-left">
+          <svg class="wizard-crown-icon" viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="6" cy="18" r="3"/>
+            <path d="M8.5 15.5L20 4"/>
+            <circle cx="18" cy="18" r="3"/>
+            <path d="M15.5 15.5L4 4"/>
+          </svg>
+          <div>
+            <h3 class="wizard-title" id="bookingModalTitle">FLYINGSCISSOR</h3>
+            <span class="wizard-subtitle">VIP Saloon Chair Reservation • Faisalabad</span>
+          </div>
+        </div>
+        <button type="button" class="modal-close-btn" aria-label="Close Reservation Modal">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </button>
+      </div>
+
+      <!-- Step Indicator Bar -->
+      <div class="wizard-progress-bar">
+        <div class="step-indicator-item active" data-step="1">
+          <span class="step-circle">1</span>
+          <span>Services</span>
+        </div>
+        <div class="step-indicator-item" data-step="2">
+          <span class="step-circle">2</span>
+          <span>Stylist</span>
+        </div>
+        <div class="step-indicator-item" data-step="3">
+          <span class="step-circle">3</span>
+          <span>Time</span>
+        </div>
+        <div class="step-indicator-item" data-step="4">
+          <span class="step-circle">4</span>
+          <span>Details</span>
+        </div>
+        <div class="step-indicator-item" data-step="5">
+          <span class="step-circle">5</span>
+          <span>VIP Pass</span>
+        </div>
+      </div>
+
+      <!-- Modal Body (Panes) -->
+      <div class="wizard-body">
+        <!-- Step 1: Select Rituals & Services -->
+        <div class="wizard-step-pane active" data-pane="1">
+          <h3 class="step-heading">Select Hair & Grooming Services</h3>
+          <p class="step-subheading">Choose one or more tailored services for your salon session.</p>
+          
+          <div class="services-select-grid" id="servicesSelectionGrid"></div>
+
+          <h4 class="addons-section-title">VIP Amenities & Add-Ons</h4>
+          <div class="addons-select-grid" id="addonsSelectionGrid"></div>
+        </div>
+
+        <!-- Step 2: Choose Master Artisan -->
+        <div class="wizard-step-pane" data-pane="2">
+          <h3 class="step-heading">Select Your Hair Stylist</h3>
+          <p class="step-subheading">Choose Shahzad, our master artists, or select first available chair.</p>
+          <div class="barber-select-grid" id="barberSelectionGrid"></div>
+        </div>
+
+        <!-- Step 3: Date & Chair Time -->
+        <div class="wizard-step-pane" data-pane="3">
+          <h3 class="step-heading">Select Date & Chair Time</h3>
+          <p class="step-subheading">Live seat availability in Faisalabad updated in real time.</p>
+          
+          <label class="form-label" style="margin-bottom: 12px; display: block;">Upcoming Dates</label>
+          <div class="date-chips-scroller" id="dateSelectionChips"></div>
+
+          <label class="form-label" style="margin-bottom: 12px; display: block;">Available Chair Slots</label>
+          <div class="time-slots-grid" id="timeSlotsGrid"></div>
+        </div>
+
+        <!-- Step 4: Client Information -->
+        <div class="wizard-step-pane" data-pane="4">
+          <h3 class="step-heading">Client Details</h3>
+          <p class="step-subheading">Enter your information for SMS confirmation & VIP pass generation.</p>
+          
+          <div class="booking-form-grid">
+            <div class="form-field">
+              <label class="form-label" for="clientNameInput">Full Name *</label>
+              <input type="text" id="clientNameInput" class="form-input" placeholder="e.g. Hamza Tariq" required>
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="clientEmailInput">Email Address *</label>
+              <input type="email" id="clientEmailInput" class="form-input" placeholder="hamza@gmail.com" required>
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="clientPhoneInput">Mobile / WhatsApp Number</label>
+              <input type="tel" id="clientPhoneInput" class="form-input" placeholder="+92 300 1234567">
+            </div>
+            <div class="form-field">
+              <label class="form-label" for="clientWhiskeySelect">Complimentary Beverage</label>
+              <select id="clientWhiskeySelect" class="form-select">
+                <option value="Fresh Italian Espresso">Fresh Italian Espresso</option>
+                <option value="Special Karak Chai">Special Karak Chai</option>
+                <option value="Artisan Green Tea">Artisan Green Tea</option>
+                <option value="Fresh Mint Lemonade">Fresh Mint Lemonade</option>
+                <option value="Chilled Mineral Water">Chilled Mineral Water</option>
+              </select>
+            </div>
+            <div class="form-field full-width">
+              <label class="form-label" for="clientNotesInput">Styling Notes or Haircut Requests</label>
+              <textarea id="clientNotesInput" class="form-textarea" rows="2" placeholder="e.g. Low drop fade, textured top, sharp beard lineup..."></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 5: Digital VIP Pass Output -->
+        <div class="wizard-step-pane" data-pane="5">
+          <div id="vipTicketContainer"></div>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="wizard-footer">
+        <div class="wizard-summary-pill">
+          <div>
+            <span class="summary-duration" id="summaryTotalDuration">45 Mins</span>
+            <span style="color: var(--border-gold); margin: 0 8px;">•</span>
+            <span class="summary-price" id="summaryTotalPrice">Rs. 2,500</span>
+          </div>
+        </div>
+
+        <div class="wizard-nav-btns">
+          <button type="button" class="btn-dark-glass" id="btnPrevStep" style="visibility: hidden;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+            <span>Back</span>
+          </button>
+          <button type="button" class="btn-gold" id="btnNextStep">
+            <span>Next Step</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>
