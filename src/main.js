@@ -23,7 +23,7 @@ import { initRegistrationForm } from './components/registrationForm.js';
 import { initDashboardPreview } from './components/dashboardPreview.js';
 import { initNetworkGraph } from './components/networkGraph3d.js';
 import { initMarketingToolkit } from './components/marketingToolkit.js';
-import { initInteractiveSurface } from './components/interactiveSurface.js';
+import { initInteractiveSurface } from './components/tactileSurface.js';
 
 // Public Dedicated Views
 import { renderLegalView } from './components/legal/LegalView.js';
