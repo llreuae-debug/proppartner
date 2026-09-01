@@ -33,8 +33,10 @@ import { renderAffiliateProgramView } from './components/public/AffiliateProgram
 import { renderHowItWorksView } from './components/public/HowItWorksView.js';
 import { renderAboutView } from './components/public/AboutView.js';
 import { renderResourcesHubView } from './components/public/ResourcesHubView.js';
-import { renderResourceArticleView } from './components/public/ResourceArticleView.js';
 import { renderNotFoundView } from './components/public/NotFoundView.js';
+
+// Public Affiliate Content & Datasets
+import { trustCategories, processSteps, whyJoinFeatures, personas, testimonials } from './data/affiliateData.js';
 
 // Global state tracking
 let currentView = 'landing';
@@ -240,6 +242,109 @@ export function updateHeaderAuthActions() {
 }
 
 /**
+ * Landing Page Dynamic Section Renderers
+ */
+function renderTrustCategories() {
+  const grid = document.getElementById('trust-categories-grid');
+  if (!grid) return;
+  grid.innerHTML = trustCategories.map(cat => `
+    <div class="trust-persona-card glass-card">
+      <div class="persona-icon"><i data-lucide="${cat.icon}"></i></div>
+      <div class="persona-info">
+        <h4>${cat.title}</h4>
+        <p>${cat.description}</p>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderProcessTimeline() {
+  const grid = document.getElementById('timeline-steps-grid');
+  if (!grid) return;
+  grid.innerHTML = processSteps.map(step => `
+    <div class="timeline-step-card glass-card tilt-target-3d">
+      <div>
+        <div class="step-card-top">
+          <span class="step-num-badge">${step.step}</span>
+          <div class="step-icon-wrap"><i data-lucide="${step.icon}"></i></div>
+        </div>
+        <h3 class="step-title">${step.title}</h3>
+        <span class="step-subtitle">${step.subtitle}</span>
+        <p class="step-desc">${step.description}</p>
+      </div>
+      <div class="step-pill-highlight">
+        <i data-lucide="check-circle" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle;"></i>
+        ${step.highlight}
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderWhyJoin() {
+  const grid = document.getElementById('why-join-grid');
+  if (!grid) return;
+  grid.innerHTML = whyJoinFeatures.map(feat => `
+    <div class="why-card glass-card tilt-target-3d">
+      <div class="why-top-row">
+        <span class="why-num">${feat.number}</span>
+        <div class="why-icon"><i data-lucide="${feat.icon}"></i></div>
+      </div>
+      <h3 class="why-title">${feat.title}</h3>
+      <p class="why-desc">${feat.description}</p>
+    </div>
+  `).join('');
+}
+
+function renderPersonas() {
+  const grid = document.getElementById('personas-grid-mount');
+  if (!grid) return;
+  grid.innerHTML = personas.map(p => `
+    <div class="persona-profile-card glass-card tilt-target-3d">
+      <div class="p-card-top">
+        <div class="p-card-icon"><i data-lucide="${p.icon}"></i></div>
+        <h3 class="p-card-role">${p.role}</h3>
+      </div>
+      <div class="p-card-headline">${p.headline}</div>
+      <p class="p-card-desc">${p.description}</p>
+      <div class="p-card-earning-pill">
+        <span>Earning Target:</span>
+        <strong>${p.earningsPotential}</strong>
+      </div>
+      <div class="p-card-strategy">
+        <strong>Playbook:</strong> <span>${p.strategy}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderTestimonials() {
+  const grid = document.getElementById('stories-grid-mount');
+  if (!grid) return;
+  grid.innerHTML = testimonials.map(item => `
+    <div class="story-card glass-card tilt-target-3d">
+      <div>
+        <div class="story-tag-pill">
+          <i data-lucide="award" style="width: 14px; height: 14px;"></i>
+          ${item.tag}
+        </div>
+        <p class="story-quote">"${item.quote}"</p>
+      </div>
+      <div class="story-footer">
+        <img src="${item.avatar}" alt="${item.name}" class="story-avatar" loading="lazy">
+        <div class="story-user-meta">
+          <h4>${item.name}</h4>
+          <span>${item.role} • ${item.city}</span>
+          <div class="story-comm-pill">
+            <i data-lucide="check-check" style="width: 12px; height: 12px; display: inline-block; vertical-align: middle; color: #10B981;"></i>
+            ${item.referrals} Closed Sales • ${item.commissionEarned} Paid
+          </div>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+/**
  * Initializes Public Landing Page components once
  */
 function initLandingPage() {
@@ -252,8 +357,14 @@ function initLandingPage() {
     hero3DInstance = initHero3D(heroCanvas);
   }
 
-  // 2. Featured Projects Showcase with 3D Tilt
-  const showcaseMount = document.getElementById('projects-container');
+  // 2. Trust Categories
+  renderTrustCategories();
+
+  // 3. Process Timeline
+  renderProcessTimeline();
+
+  // 4. Featured Projects Showcase with 3D Tilt
+  const showcaseMount = document.getElementById('projects-showcase-mount') || document.getElementById('projects-container');
   if (showcaseMount) {
     showcaseInstance = initProjectShowcase(showcaseMount, (action, data) => {
       if (action === 'project-detail' && data?.slug) {
@@ -269,44 +380,53 @@ function initLandingPage() {
     }, platformStore.currency);
   }
 
-  // 3. Commission Calculator
-  const calcMount = document.getElementById('calc-container');
+  // 5. Commission Calculator
+  const calcMount = document.getElementById('commission-calc-mount') || document.getElementById('calc-container');
   if (calcMount) {
     calcInstance = initCommissionCalculator(calcMount, platformStore.currency);
   }
 
-  // 4. Network Graph
-  const networkMount = document.getElementById('network-graph-canvas');
-  if (networkMount) {
-    initNetworkGraph(networkMount, document.getElementById('network-tooltip'));
-  }
+  // 6. Why Join Grid
+  renderWhyJoin();
 
-  // 5. Dashboard Preview
-  const previewMount = document.getElementById('dashboard-preview-container');
+  // 7. Dashboard Preview
+  const previewMount = document.getElementById('dashboard-preview-mount') || document.getElementById('dashboard-preview-container');
   if (previewMount) {
     previewInstance = initDashboardPreview(previewMount, platformStore.currency);
   }
 
-  // 6. Marketing Toolkit
-  const toolkitMount = document.getElementById('marketing-toolkit-container');
+  // 8. Personas Grid
+  renderPersonas();
+
+  // 9. Marketing Toolkit
+  const toolkitMount = document.getElementById('toolkit-mount') || document.getElementById('marketing-toolkit-container');
   if (toolkitMount) {
     initMarketingToolkit(toolkitMount);
   }
 
-  // 7. FAQ Accordion
-  const faqMount = document.getElementById('faq-accordion-container');
+  // 10. Stories / Testimonials
+  renderTestimonials();
+
+  // 11. 3D Referral Network Visualization Canvas (Connects to #network-canvas-wrap)
+  const networkMount = document.getElementById('network-canvas-wrap') || document.getElementById('network-graph-canvas');
+  if (networkMount) {
+    initNetworkGraph(networkMount, document.getElementById('network-tooltip'));
+  }
+
+  // 12. FAQ Accordion
+  const faqMount = document.getElementById('faq-mount') || document.getElementById('faq-accordion-container');
   if (faqMount) {
     initFAQ(faqMount);
   }
 
-  // 8. Affiliate Registration Form
-  const regForm = document.getElementById('affiliate-registration-form');
-  const regSuccess = document.getElementById('registration-success-card');
+  // 13. Affiliate Registration Form
+  const regForm = document.getElementById('affiliate-reg-form') || document.getElementById('affiliate-registration-form');
+  const regSuccess = document.getElementById('reg-success-modal') || document.getElementById('registration-success-card');
   if (regForm) {
     initRegistrationForm(regForm, regSuccess);
   }
 
-  // 9. Global Currency Picker
+  // 14. Global Currency Picker
   const currPicker = document.getElementById('global-currency-picker');
   if (currPicker) {
     currPicker.value = platformStore.currency;
@@ -316,7 +436,7 @@ function initLandingPage() {
     });
   }
 
-  // 10. Mobile Navigation Toggle
+  // 15. Mobile Navigation Toggle
   const mobileToggle = document.getElementById('mobile-toggle-btn');
   const navMenu = document.getElementById('nav-menu');
   if (mobileToggle && navMenu) {
@@ -325,6 +445,7 @@ function initLandingPage() {
     });
   }
 
+  if (window.lucide) window.lucide.createIcons();
   updateHeaderAuthActions();
 }
 
