@@ -11,6 +11,7 @@ import { renderLoginPage } from './components/auth/LoginPage.js';
 import { initAdminPortal } from './components/admin/AdminPortal.js';
 import { initAffiliatePortal } from './components/affiliate/AffiliatePortal.js';
 import { openLogoutConfirmationModal } from './components/common/LogoutConfirmationModal.js';
+import { openAllPagesModal } from './components/common/AllPagesModal.js';
 import { ReferralTracker } from './utils/referralTracker.js';
 
 // Public Landing Components
@@ -91,6 +92,7 @@ function initPlatformDock() {
   dock.style.display = 'block';
 
   const btnLanding = document.getElementById('dock-btn-landing');
+  const btnAllPages = document.getElementById('dock-btn-all-pages');
   const btnAdmin = document.getElementById('dock-btn-admin');
   const btnPartner = document.getElementById('dock-btn-partner');
   const btnAuth = document.getElementById('dock-btn-auth');
@@ -99,6 +101,12 @@ function initPlatformDock() {
     btnLanding.onclick = () => {
       window.location.hash = '#home';
       switchView('landing');
+    };
+  }
+
+  if (btnAllPages) {
+    btnAllPages.onclick = () => {
+      openAllPagesModal();
     };
   }
 
@@ -154,11 +162,12 @@ function updateDockState(view) {
   if (!dock) return;
 
   const btnLanding = document.getElementById('dock-btn-landing');
+  const btnAllPages = document.getElementById('dock-btn-all-pages');
   const btnAdmin = document.getElementById('dock-btn-admin');
   const btnPartner = document.getElementById('dock-btn-partner');
   const btnAuth = document.getElementById('dock-btn-auth');
 
-  [btnLanding, btnAdmin, btnPartner, btnAuth].forEach(b => b?.classList.remove('active'));
+  [btnLanding, btnAllPages, btnAdmin, btnPartner, btnAuth].forEach(b => b?.classList.remove('active'));
 
   if (view === 'landing') btnLanding?.classList.add('active');
   else if (view === 'admin') btnAdmin?.classList.add('active');
@@ -443,6 +452,15 @@ function initLandingPage() {
     mobileToggle.addEventListener('click', () => {
       navMenu.classList.toggle('active');
     });
+  }
+
+  // 16. Header All Pages Directory Trigger
+  const navAllPagesBtn = document.getElementById('nav-btn-all-pages');
+  if (navAllPagesBtn) {
+    navAllPagesBtn.onclick = (e) => {
+      e.preventDefault();
+      openAllPagesModal();
+    };
   }
 
   if (window.lucide) window.lucide.createIcons();
