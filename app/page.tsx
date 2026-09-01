@@ -2,8 +2,8 @@
 "use client";
 
 import React, { useState } from "react";
-import AntiGravityCanvas from "@/components/AntiGravityCanvas";
-import AntiGravityCard from "@/components/ProjectCard";
+import AntiGravityCanvas from "../components/AntiGravityCanvas";
+import AntiGravityCard from "../components/ProjectCard";
 
 const featuredDevelopments = [
   {
