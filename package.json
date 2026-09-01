@@ -9,11 +9,22 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@react-three/drei": "^10.7.8",
+    "@react-three/fiber": "^9.7.0",
+    "@supabase/auth-helpers-nextjs": "^0.15.0",
+    "@supabase/ssr": "^0.12.5",
+    "@supabase/supabase-js": "^2.112.4",
+    "@types/react": "^19.2.18",
+    "@types/react-dom": "^19.2.5",
+    "@types/three": "^0.185.4",
     "canvas-confetti": "^1.9.2",
     "chart.js": "^4.5.1",
+    "framer-motion": "^13.1.1",
     "lucide": "^0.323.0",
     "qrcode": "^1.5.4",
-    "three": "^0.160.0"
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "three": "^0.160.1"
   },
   "devDependencies": {
     "vite": "^5.1.0"
