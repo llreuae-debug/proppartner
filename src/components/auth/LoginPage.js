@@ -10,6 +10,15 @@ export function renderLoginPage(container, onLoginSuccess) {
   let errorMessage = '';
   let successMessage = '';
 
+  // Check for logout flash confirmation
+  try {
+    const flashLogout = sessionStorage.getItem('proppartner_logout_msg');
+    if (flashLogout) {
+      successMessage = flashLogout;
+      sessionStorage.removeItem('proppartner_logout_msg');
+    }
+  } catch (e) {}
+
   function render() {
     container.innerHTML = `
       <div class="private-login-wrapper" style="min-height: 100vh; display: flex; align-items: center; justify-content: center; background: radial-gradient(circle at 50% 10%, rgba(212, 175, 55, 0.08), #080B11 75%); padding: 24px;">

@@ -1,6 +1,7 @@
 import { authStore } from '../../store/authStore.js';
 import { platformStore } from '../../store/platformStore.js';
 import { openProfileSecurityModal } from './ProfileSecurityModal.js';
+import { openLogoutConfirmationModal } from './LogoutConfirmationModal.js';
 
 let deferredPrompt = null;
 
@@ -227,12 +228,12 @@ export function openMoreBottomSheet(role, onNavigate, onSwitchView) {
         `}
       </div>
 
-      <div class="bottom-sheet-actions">
-        <button type="button" class="btn btn-secondary w-full" id="sheet-btn-landing">
-          <i data-lucide="globe"></i> <span>View Public Landing Page</span>
-        </button>
+      <div class="bottom-sheet-actions" style="display: flex; flex-direction: column; gap: 8px;">
         <button type="button" class="btn btn-gold w-full" id="sheet-btn-switch-role">
           <i data-lucide="shuffle"></i> <span>Switch to ${isAdmin ? 'Affiliate View' : 'Super Admin View'}</span>
+        </button>
+        <button type="button" class="btn btn-secondary w-full" id="sheet-btn-logout" style="border-color: rgba(239, 68, 68, 0.4); color: #FCA5A5;">
+          <i data-lucide="log-out"></i> <span>Sign Out</span>
         </button>
       </div>
     </div>
@@ -252,11 +253,11 @@ export function openMoreBottomSheet(role, onNavigate, onSwitchView) {
     };
   });
 
-  const landingBtn = sheet.querySelector('#sheet-btn-landing');
-  if (landingBtn) {
-    landingBtn.onclick = () => {
+  const logoutBtn = sheet.querySelector('#sheet-btn-logout');
+  if (logoutBtn) {
+    logoutBtn.onclick = () => {
       close();
-      if (onSwitchView) onSwitchView('landing');
+      openLogoutConfirmationModal({ triggerElement: logoutBtn });
     };
   }
 

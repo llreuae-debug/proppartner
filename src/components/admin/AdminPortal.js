@@ -22,6 +22,7 @@ import { renderUsersManager } from './UsersManager.js';
 import { renderRolesPermissionsManager } from './RolesPermissionsManager.js';
 import { renderSecurityCenter } from './SecurityCenter.js';
 import { renderSEOManager } from './SEOManager.js';
+import { openLogoutConfirmationModal } from '../common/LogoutConfirmationModal.js';
 
 export function initAdminPortal(container, onNavigateLanding, onSwitchAffiliateView) {
   let currentSection = 'dashboard';
@@ -272,9 +273,7 @@ export function initAdminPortal(container, onNavigateLanding, onSwitchAffiliateV
     if (logoutBtn) {
       logoutBtn.onclick = (e) => {
         e.stopPropagation();
-        authStore.logout();
-        window.location.hash = '#login';
-        window.location.reload();
+        openLogoutConfirmationModal({ triggerElement: logoutBtn });
       };
     }
 

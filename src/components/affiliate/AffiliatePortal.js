@@ -11,6 +11,7 @@ import {
   validateQrEncoding 
 } from '../../utils/qrCodeGenerator.js';
 import { printLedgerStatement, exportLedgerCSV } from '../../utils/statementGenerator.js';
+import { openLogoutConfirmationModal } from '../common/LogoutConfirmationModal.js';
 
 export function initAffiliatePortal(container, onNavigateLanding, onSwitchAdminView) {
   let currentSection = 'dashboard';
@@ -256,8 +257,7 @@ export function initAffiliatePortal(container, onNavigateLanding, onSwitchAdminV
     const logoutBtn = container.querySelector('#btn-partner-logout');
     if (logoutBtn) {
       logoutBtn.onclick = () => {
-        authStore.logout();
-        if (onNavigateLanding) onNavigateLanding();
+        openLogoutConfirmationModal({ triggerElement: logoutBtn });
       };
     }
 
