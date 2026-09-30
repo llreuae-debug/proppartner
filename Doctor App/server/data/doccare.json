@@ -1,0 +1,3426 @@
+{
+  "users": [
+    {
+      "id": "user-doc-1",
+      "email": "dr.ayesha@doccare.pk",
+      "phone": "+92 300 8472910",
+      "name": "Dr. Ayesha Siddiqui",
+      "passwordHash": "7dea2466af260845e03a69ae77d892d65cd8f50faabfb43a847d4a20c2ab5fd20272b4e4bcafd49ccaaa9e9e74ef999c7a9471f8c62e892813f7c0c16f5d3661",
+      "salt": "0354104e7a1e0f5c7465af636a6f57e9",
+      "role": "doctor",
+      "doctorId": "doc-1",
+      "patientId": null,
+      "city": "Lahore",
+      "specialty": "Consultant Physician & Diabetologist",
+      "pmdcNumber": "49821-P",
+      "clinicName": "Shifa Executive Clinic & Diagnostic Center",
+      "avatarUrl": "https://images.unsplash.com/photo-1594824813590-78c0053e16b9?auto=format&fit=crop&q=80&w=400",
+      "googleId": null,
+      "createdAt": "2026-09-30T23:03:24.593Z"
+    },
+    {
+      "id": "user-doc-2",
+      "email": "dr.tariq@doccare.pk",
+      "phone": "+92 321 9928172",
+      "name": "Dr. Muhammad Tariq Khan",
+      "passwordHash": "f7278036e5394469bd37fe5ab987cd303ca185b2b99b496abad40ac2445dfe9e5abd18d74bc8fa5baf2a15c5ed9764724c84a815ab803285b917c583a8b3ee10",
+      "salt": "4200371d20489ce45f36aaae97f13228",
+      "role": "doctor",
+      "doctorId": "doc-2",
+      "patientId": null,
+      "city": "Karachi",
+      "specialty": "Consultant Cardiologist & Heart Specialist",
+      "pmdcNumber": "34102-S",
+      "clinicName": "Karachi Heart Institute & Clinic",
+      "avatarUrl": "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=400",
+      "googleId": null,
+      "createdAt": "2026-09-30T23:03:24.594Z"
+    },
+    {
+      "id": "user-doc-3",
+      "email": "dr.fatima@doccare.pk",
+      "phone": "+92 333 5519823",
+      "name": "Dr. Fatima Noor",
+      "passwordHash": "e1a95ed96285864431e51aa52caab35f65d3f301787c071d8bc4d88afcd55456829bb17b18c4f896c91363dffc2762611f8be51cd01b14c537684cd881f57086",
+      "salt": "8847bf2fa417167259f7d1d0e05c9bf9",
+      "role": "doctor",
+      "doctorId": "doc-3",
+      "patientId": null,
+      "city": "Islamabad",
+      "specialty": "Consultant Pediatrician & Child Specialist",
+      "pmdcNumber": "61284-F",
+      "clinicName": "Little Angels Child Health Care",
+      "avatarUrl": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=400",
+      "googleId": null,
+      "createdAt": "2026-09-30T23:03:24.594Z"
+    },
+    {
+      "id": "user-doc-4",
+      "email": "dr.bilal@doccare.pk",
+      "phone": "+92 334 1289045",
+      "name": "Dr. Bilal Ansari",
+      "passwordHash": "3006b0c631b1353a2bd439e8facd63965b9e4935e9afde5e5a251e7ba84c1178dce0bc5a872a1936886e2bf6489bdfa8995013ccb253b1fca5eb29c2cb3aeea2",
+      "salt": "f5f8bb924fc8bc71efbcb868c058d600",
+      "role": "doctor",
+      "doctorId": "doc-4",
+      "patientId": null,
+      "city": "Islamabad",
+      "specialty": "Consultant Dermatologist & Cosmetologist",
+      "pmdcNumber": "52190-P",
+      "clinicName": "DermaCare Skin & Laser Clinic",
+      "avatarUrl": "https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&q=80&w=400",
+      "googleId": null,
+      "createdAt": "2026-09-30T23:03:24.594Z"
+    },
+    {
+      "id": "user-doc-5",
+      "email": "dr.maryam@doccare.pk",
+      "phone": "+92 302 6781290",
+      "name": "Dr. Maryam Zafar",
+      "passwordHash": "b002db9f9eaf819edfbe34601ce580592d3a8a3a38a41db7baadb8d82264e9f927b649a1917c34ca21cffed8fd56e2f3227013c591518f0f582ba99088081c1f",
+      "salt": "f345cfdf950aecabfb200291eb8ee671",
+      "role": "doctor",
+      "doctorId": "doc-5",
+      "patientId": null,
+      "city": "Rawalpindi",
+      "specialty": "Consultant Gynecologist & Obstetrician",
+      "pmdcNumber": "48109-P",
+      "clinicName": "Maternal Wellness Center & Hospital",
+      "avatarUrl": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&q=80&w=400",
+      "googleId": null,
+      "createdAt": "2026-09-30T23:03:24.594Z"
+    },
+    {
+      "id": "user-doc-6",
+      "email": "dr.usman@doccare.pk",
+      "phone": "+92 300 7812903",
+      "name": "Dr. Usman Chaudhry",
+      "passwordHash": "4da95e5c3718ae4eed5492c6bc0169abe6d209d4f2cdefd3a0e0427c2fe297dac35496b7d30369085fbbf955abf42fe4d6aa7329ad7f26a4f56d9e731bdbef5d",
+      "salt": "5fd17917a8b653366ad822be6ec149e5",
+      "role": "doctor",
+      "doctorId": "doc-6",
+      "patientId": null,
+      "city": "Lahore",
+      "specialty": "Consultant Orthopedic & Joint Replacement Surgeon",
+      "pmdcNumber": "41982-P",
+      "clinicName": "Orthocare Bone & Joint Center",
+      "avatarUrl": "https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&q=80&w=400",
+      "googleId": null,
+      "createdAt": "2026-09-30T23:03:24.595Z"
+    },
+    {
+      "id": "user-pat-1",
+      "email": "kamran.ali@gmail.com",
+      "phone": "0300-4829103",
+      "name": "Kamran Ali",
+      "passwordHash": "1ac3986c04e0417b73e268c373af299892efdd0779d7b7319731a13fc46d8ce285e412ac1f74db27c9dcdb2c10b78567b61b48ecc5a024744a3e7c9d1161a69e",
+      "salt": "0b7f5114928aae02426c78a821eb2962",
+      "role": "patient",
+      "doctorId": null,
+      "patientId": "pat-1",
+      "city": "Lahore",
+      "avatarUrl": "https://api.dicebear.com/7.x/avataaars/svg?seed=Kamran%20Ali",
+      "googleId": null,
+      "createdAt": "2026-09-30T23:03:24.595Z"
+    },
+    {
+      "id": "user-pat-2",
+      "email": "zainab.bibi@gmail.com",
+      "phone": "0322-7183904",
+      "name": "Zainab Bibi",
+      "passwordHash": "d968c0c1169d2df4ccd090c8720a79cda518345caea559cbc4728c7b1b245b9acfafc70c88ef91698708c3c8cd0bce448c688c21e0adc675ddd7865c2f3e4640",
+      "salt": "28316b566606a8fea5b9a33d603d9bb7",
+      "role": "patient",
+      "doctorId": null,
+      "patientId": "pat-2",
+      "city": "Lahore",
+      "avatarUrl": "https://api.dicebear.com/7.x/avataaars/svg?seed=Zainab%20Bibi",
+      "googleId": null,
+      "createdAt": "2026-09-30T23:03:24.595Z"
+    },
+    {
+      "id": "user-pat-demo",
+      "email": "patient@doccare.pk",
+      "phone": "0300-4829103",
+      "name": "Demo Patient (Kamran Ali)",
+      "passwordHash": "3cb105d3557cb1acb1cc469ec95632eaa6344e024cfe0b965b5db2cf2238b67fe7a4b00ad3bf580d5773d628ca33a054d0af4c18e8ea4543461ce6f3943e281a",
+      "salt": "444b31773985566d274a354284a3035b",
+      "role": "patient",
+      "doctorId": null,
+      "patientId": "pat-1",
+      "city": "Lahore",
+      "avatarUrl": "https://api.dicebear.com/7.x/avataaars/svg?seed=Demo%20Patient%20(Kamran%20Ali)",
+      "googleId": null,
+      "createdAt": "2026-09-30T23:03:24.595Z"
+    },
+    {
+      "id": "user-g-1790809437538-osnw",
+      "email": "dr.google.test@gmail.com",
+      "phone": "+92 300 0000000",
+      "name": "Dr. Zulfiqar Google",
+      "passwordHash": "5210fc87122cd38f0d02691ba096ca14b0a6088ef8d8efaff7c5834a4732d549e8070d1f4559c40a897be0a5be9c9f887a088d510acc6051fbf131993fa7bd66",
+      "salt": "1179027bb03e6afd790f31ff365f0886",
+      "role": "doctor",
+      "doctorId": "doc-1790809437538",
+      "patientId": null,
+      "city": "Lahore",
+      "specialty": "General Physician",
+      "pmdcNumber": "35276-P",
+      "clinicName": "DocCare Executive Medical Clinic",
+      "avatarUrl": "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=400",
+      "googleId": "g-101",
+      "createdAt": "2026-09-30T23:03:57.539Z"
+    },
+    {
+      "id": "user-g-1790809542809-4xj8",
+      "email": "patient.google.2792@gmail.com",
+      "phone": "+92 300 9876543",
+      "name": "Zubair Google",
+      "passwordHash": "5d2a5be7448958abecb13db1bd5311187322a467784d4045496bcd2d3f301b940002e5f12ba1f3eb0d16ab06b3815dcdb338b6463889957ef409996721bd3d86",
+      "salt": "35d6add2e238283b7f3a361c7ff4006d",
+      "role": "patient",
+      "doctorId": null,
+      "patientId": "pat-1790809542809",
+      "city": "Lahore",
+      "avatarUrl": "https://api.dicebear.com/7.x/avataaars/svg?seed=Zubair%20Google",
+      "googleId": "google-uid-1790809542792",
+      "createdAt": "2026-09-30T23:05:42.812Z"
+    },
+    {
+      "id": "user-g-1790811388189-ttmj",
+      "email": "dr.google.8174@gmail.com",
+      "phone": "+92 300 9876543",
+      "name": "Dr. Tariq Google",
+      "passwordHash": "7da49a3bbebee4ffe27804f6cbc58787180bef00ea9fff8caef73157567c49721d2863bfdae78c6253060e4892a9cfd2b3a1e3d0b602d2aa26b57c9d27f375ed",
+      "salt": "9b5051f0920552775938972e8aaff4ee",
+      "role": "doctor",
+      "doctorId": "doc-1790811388189",
+      "patientId": null,
+      "city": "Lahore",
+      "specialty": "Consultant Specialist",
+      "pmdcNumber": "70226-P",
+      "clinicName": "Google Health Partner Clinic",
+      "avatarUrl": "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=400",
+      "googleId": "google-uid-1790811388174",
+      "createdAt": "2026-09-30T23:36:28.192Z"
+    }
+  ],
+  "sessions": [
+    {
+      "token": "dck_df24ecd7399220420d92b8a5173fa0c7b3ca5f43d0aee86de88768f0c42f639c",
+      "userId": "user-pat-1",
+      "role": "patient",
+      "doctorId": null,
+      "patientId": "pat-1",
+      "createdAt": "2026-09-30T23:03:47.427Z",
+      "expiresAt": "2026-10-30T23:03:47.427Z"
+    },
+    {
+      "token": "dck_3be75e8e7937b299b3e38dd32c47fc252771e1eb8483993a4fce1077a4a321a7",
+      "userId": "user-g-1790809437538-osnw",
+      "role": "doctor",
+      "doctorId": "doc-1790809437538",
+      "patientId": null,
+      "createdAt": "2026-09-30T23:03:57.540Z",
+      "expiresAt": "2026-10-30T23:03:57.540Z"
+    },
+    {
+      "token": "dck_3438e16e3677ad4b720a7461a1c15e5e5b9866e096c8e9f85cad8b81b146c8d4",
+      "userId": "user-g-1790811388189-ttmj",
+      "role": "doctor",
+      "doctorId": "doc-1790811388189",
+      "patientId": null,
+      "createdAt": "2026-09-30T23:36:28.194Z",
+      "expiresAt": "2026-10-30T23:36:28.194Z"
+    }
+  ],
+  "passwordResets": [
+    {
+      "token": "fb02b3920e46ca152fac91461a8e04e286c308a37dff5790783a1c15f09fb44d",
+      "email": "dr.ayesha@doccare.pk",
+      "userId": "user-doc-1",
+      "role": "doctor",
+      "expiresAt": "2026-09-30T23:18:57.551Z",
+      "used": true,
+      "createdAt": "2026-09-30T23:03:57.551Z"
+    },
+    {
+      "token": "87500b3e58db2e1c6e78a2fccb7d20024e087dcc2d83ac649b4a51a0d128bcde",
+      "email": "dr.ayesha@doccare.pk",
+      "userId": "user-doc-1",
+      "role": "doctor",
+      "expiresAt": "2026-09-30T23:19:12.458Z",
+      "used": true,
+      "createdAt": "2026-09-30T23:04:12.458Z"
+    }
+  ],
+  "doctors": [
+    {
+      "id": "doc-1",
+      "slug": "dr-ayesha-siddiqui",
+      "name": "Dr. Ayesha Siddiqui",
+      "email": "dr.ayesha@doccare.pk",
+      "phone": "+92 300 8472910",
+      "whatsapp": "+92 300 8472910",
+      "specialization": "Consultant Physician & Diabetologist",
+      "qualifications": "MBBS (KEMU), FCPS (Internal Medicine), MRCP (UK)",
+      "pmdcNumber": "49821-P",
+      "experienceYears": 12,
+      "languages": [
+        "English",
+        "Urdu",
+        "Punjabi"
+      ],
+      "services": [
+        "Type 2 Diabetes Management & Insulin Titration",
+        "Hypertension & Cardiovascular Risk Assessment",
+        "Thyroid & Endocrine Disorders",
+        "Infectious Diseases & Fever Management",
+        "Executive Preventive Health Checkup"
+      ],
+      "consultationFee": 2500,
+      "followUpFee": 1500,
+      "onlineFee": 2000,
+      "emergencyFee": 4000,
+      "rating": 4.9,
+      "reviewCount": 142,
+      "slotDurationMinutes": 15,
+      "clinicName": "Shifa Executive Clinic & Diagnostic Center",
+      "address": "Suite 402, 4th Floor, Al-Hafeez Executive Tower, Gulberg III",
+      "city": "Lahore",
+      "province": "Punjab",
+      "country": "Pakistan",
+      "mapLink": "https://maps.google.com/?q=31.5126,74.3436",
+      "coordinates": {
+        "lat": 31.5126,
+        "lng": 74.3436
+      },
+      "profileImage": "https://images.unsplash.com/photo-1594824813590-78c0053e16b9?auto=format&fit=crop&q=80&w=400",
+      "signatureImage": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='70' viewBox='0 0 200 70'><path d='M15 50 Q 40 10, 60 45 T 100 35 T 140 40 T 180 20' fill='none' stroke='%230f766e' stroke-width='2.5' stroke-linecap='round'/><text x='110' y='60' font-family='sans-serif' font-size='10' fill='%23666'>Dr. A. Siddiqui</text></svg>",
+      "stampImage": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><circle cx='60' cy='60' r='54' fill='none' stroke='%230f766e' stroke-width='2' stroke-dasharray='4,3'/><circle cx='60' cy='60' r='46' fill='none' stroke='%230f766e' stroke-width='1'/><text x='60' y='42' font-family='sans-serif' font-size='8' text-anchor='middle' font-weight='bold' fill='%230f766e'>DR. AYESHA SIDDIQUI</text><text x='60' y='55' font-family='sans-serif' font-size='7' text-anchor='middle' fill='%230f766e'>PMDC # 49821-P</text><text x='60' y='68' font-family='sans-serif' font-size='7' text-anchor='middle' fill='%230f766e'>FCPS INTERNAL MED</text><text x='60' y='82' font-family='sans-serif' font-size='6.5' text-anchor='middle' fill='%230f766e'>SHIFA CLINIC LHR</text></svg>",
+      "bio": "Dr. Ayesha Siddiqui is a seasoned Consultant Physician specializing in diabetes management, endocrine disorders, hypertension, and infectious diseases with over 12 years of clinical excellence.",
+      "availableDays": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "timeSlots": [
+        "04:00 PM - 04:15 PM",
+        "04:15 PM - 04:30 PM",
+        "04:30 PM - 04:45 PM",
+        "04:45 PM - 05:00 PM",
+        "05:00 PM - 05:15 PM",
+        "05:15 PM - 05:30 PM",
+        "05:30 PM - 05:45 PM",
+        "05:45 PM - 06:00 PM",
+        "06:00 PM - 06:15 PM",
+        "06:15 PM - 06:30 PM",
+        "06:30 PM - 06:45 PM",
+        "06:45 PM - 07:00 PM"
+      ],
+      "working_sessions": {
+        "morning": {
+          "enabled": false,
+          "start": "09:00 AM",
+          "end": "01:00 PM"
+        },
+        "evening": {
+          "enabled": true,
+          "start": "04:00 PM",
+          "end": "07:00 PM"
+        }
+      },
+      "public_profile_settings": {
+        "show_profile_publicly": true,
+        "show_photo": true,
+        "show_specialty": true,
+        "show_qualifications": true,
+        "show_experience": true,
+        "show_pmdc": true,
+        "show_clinic": true,
+        "show_address": true,
+        "show_fee": true,
+        "show_public_contact": true,
+        "allow_online_booking": true
+      },
+      "auto_confirm_appointments": false,
+      "headerColor": "#0f766e",
+      "accentColor": "#0284c7",
+      "disclaimerText": "This digital prescription is generated electronically and verified by the attending physician. Please take medications strictly as prescribed.",
+      "whatsappEnabled": true,
+      "whatsapp_message_template": "Hello [Patient Name], your prescription from Dr. [Doctor Name] ([Clinic Name]) is ready. View or download it here: [Link]. This link expires on [Expiry Date]. Get well soon.",
+      "default_link_expiry_days": 7
+    },
+    {
+      "id": "doc-2",
+      "slug": "dr-tariq-khan",
+      "name": "Dr. Muhammad Tariq Khan",
+      "email": "dr.tariq@doccare.pk",
+      "phone": "+92 321 9928172",
+      "whatsapp": "+92 321 9928172",
+      "specialization": "Consultant Cardiologist & Heart Specialist",
+      "qualifications": "MBBS (DMC), FCPS (Cardiology), Fellow Interventional Cardiology",
+      "pmdcNumber": "34102-S",
+      "experienceYears": 18,
+      "languages": [
+        "English",
+        "Urdu",
+        "Sindhi"
+      ],
+      "services": [
+        "Coronary Angiography & Stenting Consultation",
+        "Echocardiography & ECG Review",
+        "Post-Infarction Cardiac Rehab",
+        "Hypertension & Heart Failure Clinic",
+        "Lipid & Cholesterol Management"
+      ],
+      "consultationFee": 3500,
+      "followUpFee": 2000,
+      "onlineFee": 2800,
+      "emergencyFee": 5000,
+      "rating": 4.95,
+      "reviewCount": 210,
+      "slotDurationMinutes": 15,
+      "clinicName": "Karachi Heart Institute & Clinic",
+      "address": "Ground Floor, National Medical Plaza, Block 4, Clifton",
+      "city": "Karachi",
+      "province": "Sindh",
+      "country": "Pakistan",
+      "mapLink": "https://maps.google.com/?q=24.8236,67.0305",
+      "coordinates": {
+        "lat": 24.8236,
+        "lng": 67.0305
+      },
+      "profileImage": "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=400",
+      "signatureImage": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='70' viewBox='0 0 200 70'><path d='M10 40 C 35 15, 70 65, 110 30 S 170 50, 190 20' fill='none' stroke='%230284c7' stroke-width='2.5' stroke-linecap='round'/><text x='115' y='60' font-family='sans-serif' font-size='10' fill='%23666'>Dr. M. Tariq Khan</text></svg>",
+      "stampImage": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><circle cx='60' cy='60' r='54' fill='none' stroke='%230284c7' stroke-width='2'/><circle cx='60' cy='60' r='46' fill='none' stroke='%230284c7' stroke-width='1'/><text x='60' y='42' font-family='sans-serif' font-size='8' text-anchor='middle' font-weight='bold' fill='%230284c7'>DR. M. TARIQ KHAN</text><text x='60' y='55' font-family='sans-serif' font-size='7' text-anchor='middle' fill='%230284c7'>PMDC # 34102-S</text><text x='60' y='68' font-family='sans-serif' font-size='7' text-anchor='middle' fill='%230284c7'>FCPS CARDIOLOGY</text><text x='60' y='82' font-family='sans-serif' font-size='6.5' text-anchor='middle' fill='%230284c7'>CLIFTON KARACHI</text></svg>",
+      "bio": "Senior interventional cardiologist with extensive experience in ischemic heart disease, preventive cardiology, and lipidology.",
+      "availableDays": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "timeSlots": [
+        "05:00 PM - 05:15 PM",
+        "05:15 PM - 05:30 PM",
+        "05:30 PM - 05:45 PM",
+        "05:45 PM - 06:00 PM",
+        "06:00 PM - 06:15 PM",
+        "06:15 PM - 06:30 PM",
+        "06:30 PM - 06:45 PM",
+        "06:45 PM - 07:00 PM"
+      ],
+      "working_sessions": {
+        "morning": {
+          "enabled": false,
+          "start": "10:00 AM",
+          "end": "01:00 PM"
+        },
+        "evening": {
+          "enabled": true,
+          "start": "05:00 PM",
+          "end": "07:00 PM"
+        }
+      },
+      "public_profile_settings": {
+        "show_profile_publicly": true,
+        "show_photo": true,
+        "show_specialty": true,
+        "show_qualifications": true,
+        "show_experience": true,
+        "show_pmdc": true,
+        "show_clinic": true,
+        "show_address": true,
+        "show_fee": true,
+        "show_public_contact": true,
+        "allow_online_booking": true
+      },
+      "auto_confirm_appointments": true,
+      "headerColor": "#0369a1",
+      "accentColor": "#059669",
+      "disclaimerText": "Emergency patients must proceed immediately to the Emergency Room.",
+      "whatsappEnabled": true,
+      "whatsapp_message_template": "Hello [Patient Name], your prescription from Dr. [Doctor Name] ([Clinic Name]) is ready. View or download it here: [Link]. This link expires on [Expiry Date]. Get well soon.",
+      "default_link_expiry_days": 7
+    },
+    {
+      "id": "doc-3",
+      "slug": "dr-fatima-noor",
+      "name": "Dr. Fatima Noor",
+      "email": "dr.fatima@doccare.pk",
+      "phone": "+92 333 5519823",
+      "whatsapp": "+92 333 5519823",
+      "specialization": "Consultant Pediatrician & Child Specialist",
+      "qualifications": "MBBS (RMC), MCPS (Pediatrics), DCH (Glasgow)",
+      "pmdcNumber": "61284-F",
+      "experienceYears": 9,
+      "languages": [
+        "English",
+        "Urdu",
+        "Pashto"
+      ],
+      "services": [
+        "Newborn Care & Development Milestones Assessment",
+        "Childhood Asthma & Allergy Clinic",
+        "Routine & Travel Immunization / Vaccination",
+        "Pediatric Nutrition & Growth Tracking",
+        "Acute Pediatric Infections Management"
+      ],
+      "consultationFee": 2000,
+      "followUpFee": 1200,
+      "onlineFee": 1600,
+      "emergencyFee": 3000,
+      "rating": 4.88,
+      "reviewCount": 96,
+      "slotDurationMinutes": 15,
+      "clinicName": "Little Angels Child Health Care",
+      "address": "Plaza 18, F-10 Markaz",
+      "city": "Islamabad",
+      "province": "Federal Capital",
+      "country": "Pakistan",
+      "mapLink": "https://maps.google.com/?q=33.6938,73.0163",
+      "coordinates": {
+        "lat": 33.6938,
+        "lng": 73.0163
+      },
+      "profileImage": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=400",
+      "signatureImage": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='70' viewBox='0 0 200 70'><path d='M20 45 C 50 15, 80 55, 120 25 T 180 35' fill='none' stroke='%237c3aed' stroke-width='2.5' stroke-linecap='round'/><text x='110' y='60' font-family='sans-serif' font-size='10' fill='%23666'>Dr. Fatima Noor</text></svg>",
+      "stampImage": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><circle cx='60' cy='60' r='54' fill='none' stroke='%237c3aed' stroke-width='2'/><circle cx='60' cy='60' r='46' fill='none' stroke='%237c3aed' stroke-width='1'/><text x='60' y='42' font-family='sans-serif' font-size='8' text-anchor='middle' font-weight='bold' fill='%237c3aed'>DR. FATIMA NOOR</text><text x='60' y='55' font-family='sans-serif' font-size='7' text-anchor='middle' fill='%237c3aed'>PMDC # 61284-F</text><text x='60' y='68' font-family='sans-serif' font-size='7' text-anchor='middle' fill='%237c3aed'>PEDIATRICIAN</text><text x='60' y='82' font-family='sans-serif' font-size='6.5' text-anchor='middle' fill='%237c3aed'>F-10 ISLAMABAD</text></svg>",
+      "bio": "Dedicated child healthcare specialist focusing on newborn care, pediatric nutrition, and respiratory conditions.",
+      "availableDays": [
+        "Monday",
+        "Wednesday",
+        "Thursday",
+        "Saturday",
+        "Sunday"
+      ],
+      "timeSlots": [
+        "10:00 AM - 10:15 AM",
+        "10:15 AM - 10:30 AM",
+        "10:30 AM - 10:45 AM",
+        "10:45 AM - 11:00 AM",
+        "05:00 PM - 05:15 PM",
+        "05:15 PM - 05:30 PM"
+      ],
+      "working_sessions": {
+        "morning": {
+          "enabled": true,
+          "start": "10:00 AM",
+          "end": "11:00 AM"
+        },
+        "evening": {
+          "enabled": true,
+          "start": "05:00 PM",
+          "end": "06:00 PM"
+        }
+      },
+      "public_profile_settings": {
+        "show_profile_publicly": true,
+        "show_photo": true,
+        "show_specialty": true,
+        "show_qualifications": true,
+        "show_experience": true,
+        "show_pmdc": true,
+        "show_clinic": true,
+        "show_address": true,
+        "show_fee": true,
+        "show_public_contact": true,
+        "allow_online_booking": true
+      },
+      "auto_confirm_appointments": false,
+      "headerColor": "#7c3aed",
+      "accentColor": "#0d9488",
+      "disclaimerText": "Always follow pediatric dosages strictly.",
+      "whatsappEnabled": true,
+      "whatsapp_message_template": "Hello [Patient Name], your prescription from Dr. [Doctor Name] ([Clinic Name]) is ready. View or download it here: [Link]. This link expires on [Expiry Date]. Get well soon.",
+      "default_link_expiry_days": 7
+    },
+    {
+      "id": "doc-4",
+      "slug": "dr-bilal-ansari",
+      "name": "Dr. Bilal Ansari",
+      "email": "dr.bilal@doccare.pk",
+      "phone": "+92 334 1289045",
+      "whatsapp": "+92 334 1289045",
+      "specialization": "Consultant Dermatologist & Cosmetologist",
+      "qualifications": "MBBS (AIMC), FCPS (Dermatology), Board Certified Aesthetics",
+      "pmdcNumber": "52190-P",
+      "experienceYears": 10,
+      "languages": [
+        "English",
+        "Urdu",
+        "Punjabi"
+      ],
+      "services": [
+        "Acne & Eczema Treatment",
+        "Psoriasis & Hair Fall Therapy",
+        "Chemical Peels & Laser Skin Resurfacing",
+        "Skin Biopsy & Mole Removal",
+        "Pigmentation & Anti-Aging Clinic"
+      ],
+      "consultationFee": 3000,
+      "followUpFee": 1800,
+      "onlineFee": 2500,
+      "emergencyFee": 4500,
+      "rating": 4.92,
+      "reviewCount": 115,
+      "slotDurationMinutes": 20,
+      "clinicName": "DermaCare Skin & Laser Clinic",
+      "address": "2nd Floor, Executive Heights, Sector F-7 Markaz",
+      "city": "Islamabad",
+      "province": "Federal Capital",
+      "country": "Pakistan",
+      "mapLink": "https://maps.google.com/?q=33.7215,73.0560",
+      "coordinates": {
+        "lat": 33.7215,
+        "lng": 73.056
+      },
+      "profileImage": "https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&q=80&w=400",
+      "signatureImage": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='70' viewBox='0 0 200 70'><path d='M15 40 Q 45 10, 85 45 T 140 25 T 185 35' fill='none' stroke='%230284c7' stroke-width='2.5' stroke-linecap='round'/><text x='110' y='60' font-family='sans-serif' font-size='10' fill='%23666'>Dr. Bilal Ansari</text></svg>",
+      "stampImage": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><circle cx='60' cy='60' r='54' fill='none' stroke='%230284c7' stroke-width='2'/><circle cx='60' cy='60' r='46' fill='none' stroke='%230284c7' stroke-width='1'/><text x='60' y='42' font-family='sans-serif' font-size='8' text-anchor='middle' font-weight='bold' fill='%230284c7'>DR. BILAL ANSARI</text><text x='60' y='55' font-family='sans-serif' font-size='7' text-anchor='middle' fill='%230284c7'>PMDC # 52190-P</text><text x='60' y='68' font-family='sans-serif' font-size='7' text-anchor='middle' fill='%230284c7'>DERMATOLOGY</text><text x='60' y='82' font-family='sans-serif' font-size='6.5' text-anchor='middle' fill='%230284c7'>ISLAMABAD</text></svg>",
+      "bio": "Board-certified dermatologist providing evidence-based medical dermatology, acne management, and cosmetic dermatology.",
+      "availableDays": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "timeSlots": [
+        "03:00 PM - 03:20 PM",
+        "03:20 PM - 03:40 PM",
+        "03:40 PM - 04:00 PM",
+        "04:00 PM - 04:20 PM",
+        "04:20 PM - 04:40 PM",
+        "04:40 PM - 05:00 PM"
+      ],
+      "working_sessions": {
+        "morning": {
+          "enabled": false,
+          "start": "10:00 AM",
+          "end": "01:00 PM"
+        },
+        "evening": {
+          "enabled": true,
+          "start": "03:00 PM",
+          "end": "05:00 PM"
+        }
+      },
+      "public_profile_settings": {
+        "show_profile_publicly": true,
+        "show_photo": true,
+        "show_specialty": true,
+        "show_qualifications": true,
+        "show_experience": true,
+        "show_pmdc": true,
+        "show_clinic": true,
+        "show_address": true,
+        "show_fee": true,
+        "show_public_contact": true,
+        "allow_online_booking": true
+      },
+      "auto_confirm_appointments": true,
+      "headerColor": "#0284c7",
+      "accentColor": "#f59e0b",
+      "disclaimerText": "Avoid sun exposure post chemical peels.",
+      "whatsappEnabled": true,
+      "whatsapp_message_template": "Hello [Patient Name], your prescription from Dr. [Doctor Name] ([Clinic Name]) is ready. View or download it here: [Link]. This link expires on [Expiry Date]. Get well soon.",
+      "default_link_expiry_days": 7
+    },
+    {
+      "id": "doc-5",
+      "slug": "dr-maryam-zafar",
+      "name": "Dr. Maryam Zafar",
+      "email": "dr.maryam@doccare.pk",
+      "phone": "+92 302 6781290",
+      "whatsapp": "+92 302 6781290",
+      "specialization": "Consultant Gynecologist & Obstetrician",
+      "qualifications": "MBBS (KEMU), FCPS (Obs & Gynae), MRCOG-1 (UK)",
+      "pmdcNumber": "48109-P",
+      "experienceYears": 14,
+      "languages": [
+        "English",
+        "Urdu",
+        "Punjabi"
+      ],
+      "services": [
+        "Antenatal & High-Risk Pregnancy Care",
+        "Infertility Workup & Ovulation Induction",
+        "PCOS & Hormonal Imbalance Clinic",
+        "Postnatal Checkup & Family Planning",
+        "Gynecological Ultrasound & Screening"
+      ],
+      "consultationFee": 2800,
+      "followUpFee": 1600,
+      "onlineFee": 2200,
+      "emergencyFee": 4000,
+      "rating": 4.96,
+      "reviewCount": 180,
+      "slotDurationMinutes": 20,
+      "clinicName": "Maternal Wellness Center & Hospital",
+      "address": "Westridge 1, Peshawar Road",
+      "city": "Rawalpindi",
+      "province": "Punjab",
+      "country": "Pakistan",
+      "mapLink": "https://maps.google.com/?q=33.5975,73.0441",
+      "coordinates": {
+        "lat": 33.5975,
+        "lng": 73.0441
+      },
+      "profileImage": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&q=80&w=400",
+      "signatureImage": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='70' viewBox='0 0 200 70'><path d='M10 50 C 40 20, 70 60, 110 30 S 170 40, 190 20' fill='none' stroke='%23db2777' stroke-width='2.5' stroke-linecap='round'/><text x='110' y='60' font-family='sans-serif' font-size='10' fill='%23666'>Dr. Maryam Zafar</text></svg>",
+      "stampImage": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><circle cx='60' cy='60' r='54' fill='none' stroke='%23db2777' stroke-width='2'/><circle cx='60' cy='60' r='46' fill='none' stroke='%23db2777' stroke-width='1'/><text x='60' y='42' font-family='sans-serif' font-size='8' text-anchor='middle' font-weight='bold' fill='%23db2777'>DR. MARYAM ZAFAR</text><text x='60' y='55' font-family='sans-serif' font-size='7' text-anchor='middle' fill='%23db2777'>PMDC # 48109-P</text><text x='60' y='68' font-family='sans-serif' font-size='7' text-anchor='middle' fill='%23db2777'>FCPS OBS & GYNAE</text><text x='60' y='82' font-family='sans-serif' font-size='6.5' text-anchor='middle' fill='%23db2777'>RAWALPINDI</text></svg>",
+      "bio": "Senior consultant gynecologist dedicated to compassionate women's healthcare, high-risk obstetrics, and fertility solutions.",
+      "availableDays": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Friday",
+        "Saturday"
+      ],
+      "timeSlots": [
+        "11:00 AM - 11:20 AM",
+        "11:20 AM - 11:40 AM",
+        "11:40 AM - 12:00 PM",
+        "05:00 PM - 05:20 PM",
+        "05:20 PM - 05:40 PM",
+        "05:40 PM - 06:00 PM"
+      ],
+      "working_sessions": {
+        "morning": {
+          "enabled": true,
+          "start": "11:00 AM",
+          "end": "12:00 PM"
+        },
+        "evening": {
+          "enabled": true,
+          "start": "05:00 PM",
+          "end": "06:00 PM"
+        }
+      },
+      "public_profile_settings": {
+        "show_profile_publicly": true,
+        "show_photo": true,
+        "show_specialty": true,
+        "show_qualifications": true,
+        "show_experience": true,
+        "show_pmdc": true,
+        "show_clinic": true,
+        "show_address": true,
+        "show_fee": true,
+        "show_public_contact": true,
+        "allow_online_booking": true
+      },
+      "auto_confirm_appointments": false,
+      "headerColor": "#db2777",
+      "accentColor": "#4f46e5",
+      "disclaimerText": "Emergency labor patients please report immediately to the labor ward.",
+      "whatsappEnabled": true,
+      "whatsapp_message_template": "Hello [Patient Name], your prescription from Dr. [Doctor Name] ([Clinic Name]) is ready. View or download it here: [Link]. This link expires on [Expiry Date]. Get well soon.",
+      "default_link_expiry_days": 7
+    },
+    {
+      "id": "doc-6",
+      "slug": "dr-usman-chaudhry",
+      "name": "Dr. Usman Chaudhry",
+      "email": "dr.usman@doccare.pk",
+      "phone": "+92 300 7812903",
+      "whatsapp": "+92 300 7812903",
+      "specialization": "Consultant Orthopedic & Joint Replacement Surgeon",
+      "qualifications": "MBBS (KEMU), FCPS (Orthopedics), AO Spine Fellow",
+      "pmdcNumber": "41982-P",
+      "experienceYears": 16,
+      "languages": [
+        "English",
+        "Urdu",
+        "Punjabi"
+      ],
+      "services": [
+        "Knee & Hip Arthritis Conservative & Surgical Management",
+        "Spine & Disc Prolapse Rehabilitation",
+        "Sports Injuries & Arthroscopic Surgery",
+        "Fracture Fixation & Trauma Care",
+        "Osteoporosis & Bone Density Screening"
+      ],
+      "consultationFee": 3000,
+      "followUpFee": 1800,
+      "onlineFee": 2500,
+      "emergencyFee": 4500,
+      "rating": 4.91,
+      "reviewCount": 165,
+      "slotDurationMinutes": 15,
+      "clinicName": "Orthocare Bone & Joint Center",
+      "address": "Al-Razi Healthcare, MM Alam Road, Gulberg III",
+      "city": "Lahore",
+      "province": "Punjab",
+      "country": "Pakistan",
+      "mapLink": "https://maps.google.com/?q=31.5204,74.3587",
+      "coordinates": {
+        "lat": 31.5204,
+        "lng": 74.3587
+      },
+      "profileImage": "https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&q=80&w=400",
+      "signatureImage": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='70' viewBox='0 0 200 70'><path d='M10 40 L 40 20 L 70 50 L 120 15 L 180 30' fill='none' stroke='%230f766e' stroke-width='2.5' stroke-linecap='round'/><text x='110' y='60' font-family='sans-serif' font-size='10' fill='%23666'>Dr. Usman Chaudhry</text></svg>",
+      "stampImage": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><circle cx='60' cy='60' r='54' fill='none' stroke='%230f766e' stroke-width='2'/><circle cx='60' cy='60' r='46' fill='none' stroke='%230f766e' stroke-width='1'/><text x='60' y='42' font-family='sans-serif' font-size='8' text-anchor='middle' font-weight='bold' fill='%230f766e'>DR. USMAN CHAUDHRY</text><text x='60' y='55' font-family='sans-serif' font-size='7' text-anchor='middle' fill='%230f766e'>PMDC # 41982-P</text><text x='60' y='68' font-family='sans-serif' font-size='7' text-anchor='middle' fill='%230f766e'>FCPS ORTHOPEDIC</text><text x='60' y='82' font-family='sans-serif' font-size='6.5' text-anchor='middle' fill='%230f766e'>LAHORE</text></svg>",
+      "bio": "Renowned orthopedic and spine specialist managing complex joint disorders, degenerative arthritis, and athletic trauma.",
+      "availableDays": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "timeSlots": [
+        "06:00 PM - 06:15 PM",
+        "06:15 PM - 06:30 PM",
+        "06:30 PM - 06:45 PM",
+        "06:45 PM - 07:00 PM",
+        "07:00 PM - 07:15 PM",
+        "07:15 PM - 07:30 PM"
+      ],
+      "working_sessions": {
+        "morning": {
+          "enabled": false,
+          "start": "10:00 AM",
+          "end": "01:00 PM"
+        },
+        "evening": {
+          "enabled": true,
+          "start": "06:00 PM",
+          "end": "07:30 PM"
+        }
+      },
+      "public_profile_settings": {
+        "show_profile_publicly": true,
+        "show_photo": true,
+        "show_specialty": true,
+        "show_qualifications": true,
+        "show_experience": true,
+        "show_pmdc": true,
+        "show_clinic": true,
+        "show_address": true,
+        "show_fee": true,
+        "show_public_contact": true,
+        "allow_online_booking": true
+      },
+      "auto_confirm_appointments": true,
+      "headerColor": "#0f766e",
+      "accentColor": "#0284c7",
+      "disclaimerText": "Bring previous MRI/X-Ray films on the appointment date.",
+      "whatsappEnabled": true,
+      "whatsapp_message_template": "Hello [Patient Name], your prescription from Dr. [Doctor Name] ([Clinic Name]) is ready. View or download it here: [Link]. This link expires on [Expiry Date]. Get well soon.",
+      "default_link_expiry_days": 7
+    },
+    {
+      "id": "doc-1790809437538",
+      "slug": "dr--zulfiqar-google",
+      "name": "Dr. Zulfiqar Google",
+      "email": "dr.google.test@gmail.com",
+      "phone": "+92 300 0000000",
+      "whatsapp": "+92 300 0000000",
+      "specialization": "General Physician",
+      "qualifications": "MBBS",
+      "pmdcNumber": "35276-P",
+      "experienceYears": 5,
+      "languages": [
+        "English",
+        "Urdu"
+      ],
+      "services": [
+        "General Medical Consultation",
+        "Preventive Care"
+      ],
+      "consultationFee": 2000,
+      "followUpFee": 1000,
+      "onlineFee": 1500,
+      "emergencyFee": 3000,
+      "rating": 5,
+      "reviewCount": 1,
+      "slotDurationMinutes": 15,
+      "clinicName": "DocCare Executive Medical Clinic",
+      "address": "Medical Complex, Main Boulevard",
+      "city": "Lahore",
+      "province": "Punjab",
+      "country": "Pakistan",
+      "mapLink": "https://maps.google.com/?q=31.5204,74.3587",
+      "profileImage": "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=400",
+      "signatureImage": "",
+      "stampImage": "",
+      "bio": "Consultant physician providing evidence-based healthcare.",
+      "availableDays": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "timeSlots": [
+        "05:00 PM - 05:15 PM",
+        "05:15 PM - 05:30 PM",
+        "05:30 PM - 05:45 PM",
+        "05:45 PM - 06:00 PM",
+        "06:00 PM - 06:15 PM",
+        "06:15 PM - 06:30 PM",
+        "06:30 PM - 06:45 PM",
+        "06:45 PM - 07:00 PM"
+      ],
+      "working_sessions": {
+        "morning": {
+          "enabled": false,
+          "start": "09:00 AM",
+          "end": "01:00 PM"
+        },
+        "evening": {
+          "enabled": true,
+          "start": "05:00 PM",
+          "end": "07:00 PM"
+        }
+      },
+      "public_profile_settings": {
+        "show_profile_publicly": true,
+        "show_photo": true,
+        "show_specialty": true,
+        "show_qualifications": true,
+        "show_experience": true,
+        "show_pmdc": true,
+        "show_clinic": true,
+        "show_address": true,
+        "show_fee": true,
+        "show_public_contact": true,
+        "allow_online_booking": true
+      },
+      "auto_confirm_appointments": false,
+      "headerColor": "#0f766e",
+      "accentColor": "#0284c7",
+      "disclaimerText": "Consultation is valid for 7 days.",
+      "whatsappEnabled": true,
+      "whatsapp_message_template": "Hello [Patient Name], your prescription from Dr. [Doctor Name] is ready: [Link]",
+      "default_link_expiry_days": 7
+    },
+    {
+      "id": "doc-1790811388189",
+      "slug": "dr--tariq-google",
+      "name": "Dr. Tariq Google",
+      "email": "dr.google.8174@gmail.com",
+      "phone": "+92 300 9876543",
+      "whatsapp": "+92 300 9876543",
+      "specialization": "Consultant Specialist",
+      "qualifications": "MBBS",
+      "pmdcNumber": "70226-P",
+      "experienceYears": 5,
+      "languages": [
+        "English",
+        "Urdu"
+      ],
+      "services": [
+        "General Medical Consultation",
+        "Preventive Care"
+      ],
+      "consultationFee": 2000,
+      "followUpFee": 1000,
+      "onlineFee": 1500,
+      "emergencyFee": 3000,
+      "rating": 5,
+      "reviewCount": 1,
+      "slotDurationMinutes": 15,
+      "clinicName": "Google Health Partner Clinic",
+      "address": "Medical Complex, Main Boulevard",
+      "city": "Lahore",
+      "province": "Punjab",
+      "country": "Pakistan",
+      "mapLink": "https://maps.google.com/?q=31.5204,74.3587",
+      "profileImage": "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=400",
+      "signatureImage": "",
+      "stampImage": "",
+      "bio": "Consultant physician providing evidence-based healthcare.",
+      "availableDays": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "timeSlots": [
+        "05:00 PM - 05:15 PM",
+        "05:15 PM - 05:30 PM",
+        "05:30 PM - 05:45 PM",
+        "05:45 PM - 06:00 PM",
+        "06:00 PM - 06:15 PM",
+        "06:15 PM - 06:30 PM",
+        "06:30 PM - 06:45 PM",
+        "06:45 PM - 07:00 PM"
+      ],
+      "working_sessions": {
+        "morning": {
+          "enabled": false,
+          "start": "09:00 AM",
+          "end": "01:00 PM"
+        },
+        "evening": {
+          "enabled": true,
+          "start": "05:00 PM",
+          "end": "07:00 PM"
+        }
+      },
+      "public_profile_settings": {
+        "show_profile_publicly": true,
+        "show_photo": true,
+        "show_specialty": true,
+        "show_qualifications": true,
+        "show_experience": true,
+        "show_pmdc": true,
+        "show_clinic": true,
+        "show_address": true,
+        "show_fee": true,
+        "show_public_contact": true,
+        "allow_online_booking": true
+      },
+      "auto_confirm_appointments": false,
+      "headerColor": "#0f766e",
+      "accentColor": "#0284c7",
+      "disclaimerText": "Consultation is valid for 7 days.",
+      "whatsappEnabled": true,
+      "whatsapp_message_template": "Hello [Patient Name], your prescription from Dr. [Doctor Name] is ready: [Link]",
+      "default_link_expiry_days": 7
+    }
+  ],
+  "patients": [
+    {
+      "id": "pat-1",
+      "doctor_id": "doc-1",
+      "name": "Kamran Ali",
+      "age": 42,
+      "gender": "Male",
+      "phone": "0301-4458921",
+      "whatsapp": "0301-4458921",
+      "allergies": "Penicillin, Amoxicillin",
+      "chronic_conditions": "Type 2 Diabetes (5 years), Hypertension",
+      "current_medicines": "Glucophage 500mg BD, Norvasc 5mg OD",
+      "reason_for_visit": "Routine 3-month diabetes follow-up and intermittent morning dizziness",
+      "consent_given": true,
+      "private_notes": "Patient is compliant with medication. Recommended checking fasting blood sugar every Sunday.",
+      "created_at": "2026-08-31T23:03:24.591Z"
+    },
+    {
+      "id": "pat-2",
+      "doctor_id": "doc-1",
+      "name": "Zainab Bibi",
+      "age": 29,
+      "gender": "Female",
+      "phone": "0322-7183904",
+      "whatsapp": "0322-7183904",
+      "allergies": "Sulfa drugs, Dust mite allergy",
+      "chronic_conditions": "Bronchial Asthma",
+      "current_medicines": "Ventolin Inhaler SOS, Montiget 10mg OD",
+      "reason_for_visit": "Persistent dry cough for 4 days, night-time wheezing after dust exposure",
+      "consent_given": true,
+      "private_notes": "Needs inhaler technique review with spacer.",
+      "created_at": "2026-09-10T23:03:24.592Z"
+    },
+    {
+      "id": "pat-3",
+      "doctor_id": "doc-1",
+      "name": "Farhan Saeed",
+      "age": 56,
+      "gender": "Male",
+      "phone": "0334-9012384",
+      "whatsapp": "0334-9012384",
+      "allergies": "Aspirin (causes gastric bleeding)",
+      "chronic_conditions": "Ischemic Heart Disease (Post-Stent 2023), Dyslipidemia",
+      "current_medicines": "Concor 5mg OD, Lipiget 20mg HS, Risek 20mg OD",
+      "reason_for_visit": "Cardio review and lipid profile verification",
+      "consent_given": true,
+      "private_notes": "ECG normal in last visit. Check lipid profile in 2 months.",
+      "created_at": "2026-09-15T23:03:24.592Z"
+    },
+    {
+      "id": "pat-4",
+      "doctor_id": "doc-3",
+      "name": "Ayan Tariq (Child)",
+      "age": 6,
+      "gender": "Male",
+      "phone": "0300-1239847",
+      "whatsapp": "0300-1239847",
+      "allergies": "None known",
+      "chronic_conditions": "None",
+      "current_medicines": "None",
+      "reason_for_visit": "High grade fever 102 F, throat pain, difficulty swallowing solids",
+      "consent_given": true,
+      "private_notes": "Parent brought vaccination record. Fully vaccinated.",
+      "created_at": "2026-09-20T23:03:24.592Z"
+    },
+    {
+      "id": "pat-5",
+      "doctor_id": "doc-1",
+      "name": "Maryam Nawazish",
+      "age": 34,
+      "gender": "Female",
+      "phone": "0312-8874102",
+      "whatsapp": "0312-8874102",
+      "allergies": "NSAIDs (gastritis trigger)",
+      "chronic_conditions": "Acid Peptic Disease (GERD), Migraine",
+      "current_medicines": "Gaviscon Syrup SOS",
+      "reason_for_visit": "Severe retrosternal burning and nausea after wedding dinner",
+      "consent_given": true,
+      "private_notes": "Advised upper GI endoscopy if symptoms persist after 2 weeks of PPI.",
+      "created_at": "2026-09-25T23:03:24.592Z"
+    },
+    {
+      "id": "pat-6",
+      "doctor_id": "doc-1",
+      "name": "Muhammad Usman",
+      "age": 48,
+      "gender": "Male",
+      "phone": "0302-6671829",
+      "whatsapp": "0302-6671829",
+      "allergies": "Ciprofloxacin",
+      "chronic_conditions": "Hyperuricemia (Gout), Stage 1 Hypertension",
+      "current_medicines": "Zyloric 100mg OD",
+      "reason_for_visit": "Acute severe pain and swelling in right big toe joint",
+      "consent_given": true,
+      "private_notes": "Serum uric acid was 8.4 mg/dL. Strict red meat avoidance advised.",
+      "created_at": "2026-09-22T23:03:24.592Z"
+    },
+    {
+      "id": "pat-7",
+      "doctor_id": "doc-1",
+      "name": "Sobia Rehman",
+      "age": 26,
+      "gender": "Female",
+      "phone": "0345-1198302",
+      "whatsapp": "0345-1198302",
+      "allergies": "None known",
+      "chronic_conditions": "Iron Deficiency Anemia",
+      "current_medicines": "Fefol-Vit Capsule OD",
+      "reason_for_visit": "Fatigue, shortness of breath on climbing stairs, hair fall",
+      "consent_given": true,
+      "private_notes": "Hb was 9.8 g/dL. Continue iron supplementation for 3 months.",
+      "created_at": "2026-09-18T23:03:24.592Z"
+    },
+    {
+      "id": "pat-8",
+      "doctor_id": "doc-2",
+      "name": "Chaudhry Bilal",
+      "age": 63,
+      "gender": "Male",
+      "phone": "0300-9821473",
+      "whatsapp": "0300-9821473",
+      "allergies": "ACE Inhibitors (causes persistent severe dry cough)",
+      "chronic_conditions": "Benign Prostatic Hyperplasia (BPH), Hypertension",
+      "current_medicines": "Xatral 10mg OD, Exforge 5/80mg OD",
+      "reason_for_visit": "Nocturia, weak urinary stream, morning blood pressure 155/95",
+      "consent_given": true,
+      "private_notes": "Advised PSA test and urology ultrasound.",
+      "created_at": "2026-09-05T23:03:24.592Z"
+    },
+    {
+      "id": "pat-9",
+      "doctor_id": "doc-1",
+      "name": "Hina Danish",
+      "age": 38,
+      "gender": "Female",
+      "phone": "0331-4509182",
+      "whatsapp": "0331-4509182",
+      "allergies": "Latex, Metronidazole",
+      "chronic_conditions": "Hypothyroidism (Hashimoto's)",
+      "current_medicines": "Thyroxine 50mcg OD (Fasting)",
+      "reason_for_visit": "Weight gain despite low appetite, cold intolerance, neck fullness",
+      "consent_given": true,
+      "private_notes": "TSH elevated at 6.2 uIU/mL. Increased Thyroxine dose to 75mcg.",
+      "created_at": "2026-09-12T23:03:24.592Z"
+    },
+    {
+      "id": "pat-10",
+      "doctor_id": "doc-1",
+      "name": "Taimoor Shah",
+      "age": 19,
+      "gender": "Male",
+      "phone": "0315-7782910",
+      "whatsapp": "0315-7782910",
+      "allergies": "None",
+      "chronic_conditions": "Acne Vulgaris",
+      "current_medicines": "None",
+      "reason_for_visit": "Severe pustular facial acne and painful cystic lesions on forehead",
+      "consent_given": true,
+      "private_notes": "Advised gentle foaming cleanser, oral doxycycline, and sun protection.",
+      "created_at": "2026-09-28T23:03:24.592Z"
+    },
+    {
+      "id": "pat-1790809542809",
+      "doctor_id": "doc-1",
+      "name": "Zubair Google",
+      "age": 30,
+      "gender": "Male",
+      "phone": "+92 300 9876543",
+      "whatsapp": "+92 300 9876543",
+      "allergies": "None",
+      "chronic_conditions": "None",
+      "current_medicines": "None",
+      "reason_for_visit": "General Consultation",
+      "consent_given": true,
+      "created_at": "2026-09-30T23:05:42.809Z"
+    }
+  ],
+  "appointments": [
+    {
+      "id": "apt-101",
+      "doctor_id": "doc-1",
+      "patient_id": "pat-1",
+      "date": "2026-09-30",
+      "start_time": "04:00 PM",
+      "end_time": "04:15 PM",
+      "status": "confirmed",
+      "source": "manual",
+      "notes": "Patient called clinic to confirm fasting blood sugar check.",
+      "created_at": "2026-09-30T15:03:24.592Z"
+    },
+    {
+      "id": "apt-102",
+      "doctor_id": "doc-1",
+      "patient_id": "pat-2",
+      "date": "2026-09-30",
+      "start_time": "04:15 PM",
+      "end_time": "04:30 PM",
+      "status": "pending",
+      "source": "online",
+      "notes": "Booked via public link. Has acute dry cough and wheezing.",
+      "created_at": "2026-09-30T19:03:24.592Z"
+    },
+    {
+      "id": "apt-103",
+      "doctor_id": "doc-1",
+      "patient_id": "pat-5",
+      "date": "2026-09-30",
+      "start_time": "04:30 PM",
+      "end_time": "04:45 PM",
+      "status": "completed",
+      "source": "online",
+      "notes": "Consultation completed. Prescribed PPI therapy.",
+      "created_at": "2026-09-30T11:03:24.592Z"
+    }
+  ],
+  "medicines": [
+    {
+      "id": "med-dak-01",
+      "brand_name": "Daktarin Cream",
+      "generic_name": "Miconazole Nitrate",
+      "active_ingredients": [
+        "Miconazole Nitrate 20 mg/g (2%)"
+      ],
+      "strength": "2%",
+      "strength_unit": "%",
+      "dosage_form": "Cream",
+      "route": "Topical",
+      "manufacturer": "Janssen / Johnson & Johnson Pakistan",
+      "pack_size": "20g Tube",
+      "therapeutic_class": "Dermatological Antifungal",
+      "drug_class": "Imidazole Antifungal",
+      "available_strengths": [
+        "2% (20 mg/g)"
+      ],
+      "default_dose": "Apply thin layer",
+      "default_frequency": "BD — Twice daily",
+      "default_duration": "14 Days",
+      "form_instructions": [
+        "Apply thin layer to affected area",
+        "External use only",
+        "Wash and dry skin before applying",
+        "Continue for 7 days after lesions disappear"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan / Janssen Formulary",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-dak-02",
+      "brand_name": "Daktarin Oral Gel",
+      "generic_name": "Miconazole",
+      "active_ingredients": [
+        "Miconazole 20 mg/g (20mg/g)"
+      ],
+      "strength": "20 mg/g (2%)",
+      "strength_unit": "mg/g",
+      "dosage_form": "Oral gel",
+      "route": "Oral",
+      "manufacturer": "Janssen / Johnson & Johnson Pakistan",
+      "pack_size": "40g Tube with measuring spoon",
+      "therapeutic_class": "Oral Antifungal (Candidiasis)",
+      "drug_class": "Imidazole Antifungal",
+      "available_strengths": [
+        "20 mg/g (2%)"
+      ],
+      "default_dose": "1/2 measuring spoon (1.25 mL)",
+      "default_frequency": "QID — Four times daily",
+      "default_duration": "7-14 Days",
+      "form_instructions": [
+        "Hold in mouth as long as possible before swallowing",
+        "Apply after meals",
+        "Do not give to infants < 6 months due to choking risk"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan / Janssen Formulary",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-dak-03",
+      "brand_name": "Daktarin Powder",
+      "generic_name": "Miconazole Nitrate",
+      "active_ingredients": [
+        "Miconazole Nitrate 2% w/w"
+      ],
+      "strength": "2%",
+      "strength_unit": "%",
+      "dosage_form": "Powder",
+      "route": "Topical",
+      "manufacturer": "Janssen / Johnson & Johnson Pakistan",
+      "pack_size": "20g Bottle",
+      "therapeutic_class": "Topical Antifungal",
+      "drug_class": "Imidazole Antifungal",
+      "available_strengths": [
+        "2%"
+      ],
+      "default_dose": "Dust lightly",
+      "default_frequency": "BD — Twice daily",
+      "default_duration": "14 Days",
+      "form_instructions": [
+        "Dust lightly on affected areas and inside socks/shoes",
+        "Keep area dry"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-dak-04",
+      "brand_name": "Daktacort Cream",
+      "generic_name": "Miconazole Nitrate + Hydrocortisone",
+      "active_ingredients": [
+        "Miconazole Nitrate 2%",
+        "Hydrocortisone 1%"
+      ],
+      "strength": "2% + 1%",
+      "strength_unit": "%",
+      "dosage_form": "Cream",
+      "route": "Topical",
+      "manufacturer": "Janssen / Johnson & Johnson Pakistan",
+      "pack_size": "15g Tube",
+      "therapeutic_class": "Antifungal with Corticosteroid",
+      "drug_class": "Imidazole + Mild Steroid",
+      "available_strengths": [
+        "2% / 1%"
+      ],
+      "default_dose": "Apply sparingly",
+      "default_frequency": "BD — Twice daily",
+      "default_duration": "7 Days",
+      "form_instructions": [
+        "Apply sparingly to inflamed fungal lesion",
+        "Do not use on broken skin or face for prolonged duration"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-can-01",
+      "brand_name": "Canesten Cream",
+      "generic_name": "Clotrimazole",
+      "active_ingredients": [
+        "Clotrimazole 1% w/w"
+      ],
+      "strength": "1%",
+      "strength_unit": "%",
+      "dosage_form": "Cream",
+      "route": "Topical",
+      "manufacturer": "Bayer Pakistan",
+      "pack_size": "20g Tube",
+      "therapeutic_class": "Topical Antifungal",
+      "drug_class": "Azole Antifungal",
+      "available_strengths": [
+        "1%",
+        "2%"
+      ],
+      "default_dose": "Apply thin film",
+      "default_frequency": "BD — Twice daily",
+      "default_duration": "14 Days",
+      "form_instructions": [
+        "Rub gently into affected skin",
+        "Apply after bathing and drying skin thoroughly"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-can-02",
+      "brand_name": "Canesten Vaginal Tablet",
+      "generic_name": "Clotrimazole",
+      "active_ingredients": [
+        "Clotrimazole 100 mg / 500 mg"
+      ],
+      "strength": "500 mg",
+      "strength_unit": "mg",
+      "dosage_form": "Vaginal tablet",
+      "route": "Vaginal",
+      "manufacturer": "Bayer Pakistan",
+      "pack_size": "1 Tablet with applicator",
+      "therapeutic_class": "Gynecological Antifungal",
+      "drug_class": "Azole Antifungal",
+      "available_strengths": [
+        "100 mg (6-day)",
+        "500 mg (Single dose)"
+      ],
+      "default_dose": "1 Vaginal Tablet",
+      "default_frequency": "STAT — Immediately at bedtime",
+      "default_duration": "Single dose",
+      "form_instructions": [
+        "Insert deeply into vagina at bedtime using applicator",
+        "Do not use during menstruation"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-aug-01",
+      "brand_name": "Augmentin",
+      "generic_name": "Co-Amoxiclav (Amoxicillin + Clavulanic Acid)",
+      "active_ingredients": [
+        "Amoxicillin Trihydrate 500 mg",
+        "Clavulanate Potassium 125 mg"
+      ],
+      "strength": "625 mg",
+      "strength_unit": "mg",
+      "dosage_form": "Film-coated tablet",
+      "route": "Oral",
+      "manufacturer": "GSK (GlaxoSmithKline) Pakistan",
+      "pack_size": "2 x 7 Tablets (14s)",
+      "therapeutic_class": "Broad-Spectrum Antibacterial",
+      "drug_class": "Penicillin + Beta-Lactamase Inhibitor",
+      "available_strengths": [
+        "375 mg",
+        "625 mg",
+        "1 g (1000 mg)"
+      ],
+      "default_dose": "1 tablet",
+      "default_frequency": "BD — Twice daily",
+      "default_duration": "5-7 Days",
+      "form_instructions": [
+        "Take at the start of a meal to reduce GI discomfort",
+        "Swallow whole with a glass of water",
+        "Complete the full prescribed course"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-aug-02",
+      "brand_name": "Augmentin DS Suspension",
+      "generic_name": "Co-Amoxiclav",
+      "active_ingredients": [
+        "Amoxicillin 400 mg / 5mL",
+        "Clavulanic Acid 57 mg / 5mL"
+      ],
+      "strength": "312.5 mg / 5mL",
+      "strength_unit": "mg/5mL",
+      "dosage_form": "Oral suspension",
+      "route": "Oral",
+      "manufacturer": "GSK Pakistan",
+      "pack_size": "70mL Bottle (Dry Powder)",
+      "therapeutic_class": "Pediatric Antibacterial",
+      "drug_class": "Penicillin + Beta-Lactamase Inhibitor",
+      "available_strengths": [
+        "156.25 mg / 5mL",
+        "312.5 mg / 5mL",
+        "457 mg / 5mL (ES)"
+      ],
+      "default_dose": "5 mL",
+      "default_frequency": "BD — Twice daily",
+      "default_duration": "5 Days",
+      "form_instructions": [
+        "Shake well before each use",
+        "Store reconstituted suspension in refrigerator",
+        "Discard after 7 days"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-amox-01",
+      "brand_name": "Amoxil",
+      "generic_name": "Amoxicillin",
+      "active_ingredients": [
+        "Amoxicillin Trihydrate 500 mg"
+      ],
+      "strength": "500 mg",
+      "strength_unit": "mg",
+      "dosage_form": "Capsule",
+      "route": "Oral",
+      "manufacturer": "GSK Pakistan",
+      "pack_size": "10 x 10s (100 Capsules)",
+      "therapeutic_class": "Antibacterial",
+      "drug_class": "Aminopenicillin",
+      "available_strengths": [
+        "250 mg",
+        "500 mg",
+        "125 mg/5mL syrup",
+        "250 mg/5mL syrup"
+      ],
+      "default_dose": "1 capsule",
+      "default_frequency": "TDS — Three times daily",
+      "default_duration": "5-7 Days",
+      "form_instructions": [
+        "Take with or without food",
+        "Drink plenty of fluids",
+        "Complete prescribed antibiotic course"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-nov-01",
+      "brand_name": "Novidat",
+      "generic_name": "Ciprofloxacin",
+      "active_ingredients": [
+        "Ciprofloxacin Hydrochloride 500 mg"
+      ],
+      "strength": "500 mg",
+      "strength_unit": "mg",
+      "dosage_form": "Film-coated tablet",
+      "route": "Oral",
+      "manufacturer": "Sami Pharmaceuticals",
+      "pack_size": "10 Tablets",
+      "therapeutic_class": "Fluoroquinolone Antibacterial",
+      "drug_class": "Fluoroquinolone",
+      "available_strengths": [
+        "250 mg",
+        "500 mg",
+        "750 mg",
+        "250 mg/5mL syrup"
+      ],
+      "default_dose": "1 tablet",
+      "default_frequency": "BD — Twice daily",
+      "default_duration": "5 Days",
+      "form_instructions": [
+        "Do not take with dairy products or antacids at the same time",
+        "Drink 6-8 glasses of water daily",
+        "Avoid excessive sunlight exposure"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-crav-01",
+      "brand_name": "Cravit",
+      "generic_name": "Levofloxacin",
+      "active_ingredients": [
+        "Levofloxacin Hemihydrate 500 mg"
+      ],
+      "strength": "500 mg",
+      "strength_unit": "mg",
+      "dosage_form": "Film-coated tablet",
+      "route": "Oral",
+      "manufacturer": "Getz Pharma",
+      "pack_size": "10 Tablets",
+      "therapeutic_class": "Respiratory Fluoroquinolone",
+      "drug_class": "Fluoroquinolone",
+      "available_strengths": [
+        "250 mg",
+        "500 mg",
+        "750 mg",
+        "500 mg/100mL IV"
+      ],
+      "default_dose": "1 tablet",
+      "default_frequency": "OD — Once daily",
+      "default_duration": "5-7 Days",
+      "form_instructions": [
+        "Take 2 hours before or 2 hours after iron or antacids",
+        "Stay well hydrated"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-kla-01",
+      "brand_name": "Klaricid / Claritek",
+      "generic_name": "Clarithromycin",
+      "active_ingredients": [
+        "Clarithromycin 500 mg"
+      ],
+      "strength": "500 mg",
+      "strength_unit": "mg",
+      "dosage_form": "Film-coated tablet",
+      "route": "Oral",
+      "manufacturer": "Abbott Laboratories Pakistan / Getz Pharma",
+      "pack_size": "10 Tablets",
+      "therapeutic_class": "Macrolide Antibacterial",
+      "drug_class": "Macrolide",
+      "available_strengths": [
+        "250 mg",
+        "500 mg",
+        "125 mg/5mL syrup",
+        "250 mg/5mL syrup"
+      ],
+      "default_dose": "1 tablet",
+      "default_frequency": "BD — Twice daily",
+      "default_duration": "7 Days",
+      "form_instructions": [
+        "Take with or after food",
+        "Swallow whole with water"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-azom-01",
+      "brand_name": "Azomax",
+      "generic_name": "Azithromycin",
+      "active_ingredients": [
+        "Azithromycin Dihydrate 500 mg"
+      ],
+      "strength": "500 mg",
+      "strength_unit": "mg",
+      "dosage_form": "Capsule",
+      "route": "Oral",
+      "manufacturer": "Getz Pharma",
+      "pack_size": "6 Capsules / 3 Capsules",
+      "therapeutic_class": "Azalide Antibacterial",
+      "drug_class": "Macrolide / Azalide",
+      "available_strengths": [
+        "250 mg",
+        "500 mg",
+        "200 mg/5mL syrup"
+      ],
+      "default_dose": "1 capsule (500mg)",
+      "default_frequency": "OD — Once daily",
+      "default_duration": "3-5 Days",
+      "form_instructions": [
+        "Take 1 hour before or 2 hours after meals with full glass of water"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-cefi-01",
+      "brand_name": "Cefspan",
+      "generic_name": "Cefixime",
+      "active_ingredients": [
+        "Cefixime Trihydrate 400 mg"
+      ],
+      "strength": "400 mg",
+      "strength_unit": "mg",
+      "dosage_form": "Capsule",
+      "route": "Oral",
+      "manufacturer": "Sami Pharmaceuticals",
+      "pack_size": "5 Capsules",
+      "therapeutic_class": "3rd Gen Cephalosporin",
+      "drug_class": "Cephalosporin",
+      "available_strengths": [
+        "200 mg",
+        "400 mg",
+        "100 mg/5mL suspension",
+        "200 mg/5mL DS"
+      ],
+      "default_dose": "1 capsule",
+      "default_frequency": "OD — Once daily",
+      "default_duration": "5 Days",
+      "form_instructions": [
+        "Take with or after food",
+        "Complete full antibiotic course"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-fla-01",
+      "brand_name": "Flagyl",
+      "generic_name": "Metronidazole",
+      "active_ingredients": [
+        "Metronidazole 400 mg"
+      ],
+      "strength": "400 mg",
+      "strength_unit": "mg",
+      "dosage_form": "Film-coated tablet",
+      "route": "Oral",
+      "manufacturer": "Sanofi-Aventis Pakistan",
+      "pack_size": "20 x 10s Tablets",
+      "therapeutic_class": "Antiprotozoal & Anaerobic Antibacterial",
+      "drug_class": "Nitroimidazole",
+      "available_strengths": [
+        "200 mg",
+        "400 mg",
+        "200 mg/5mL suspension",
+        "500 mg/100mL IV"
+      ],
+      "default_dose": "1 tablet",
+      "default_frequency": "TDS — Three times daily",
+      "default_duration": "5-7 Days",
+      "form_instructions": [
+        "Take with or strictly after meals",
+        "Do not consume alcohol during therapy and for 48h after",
+        "May cause metallic taste or dark urine"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-pan-01",
+      "brand_name": "Panadol",
+      "generic_name": "Paracetamol",
+      "active_ingredients": [
+        "Paracetamol 500 mg"
+      ],
+      "strength": "500 mg",
+      "strength_unit": "mg",
+      "dosage_form": "Tablet",
+      "route": "Oral",
+      "manufacturer": "Haleon / GSK Pakistan",
+      "pack_size": "20 x 10s (200 Tablets)",
+      "therapeutic_class": "Analgesic & Antipyretic",
+      "drug_class": "Para-aminophenol Derivative",
+      "available_strengths": [
+        "250 mg",
+        "500 mg",
+        "650 mg (Extend)",
+        "1000 mg (IV)"
+      ],
+      "default_dose": "1-2 tablets",
+      "default_frequency": "TDS — Three times daily",
+      "default_duration": "3-5 Days",
+      "form_instructions": [
+        "Take with water",
+        "Do not exceed 4000 mg (8 tablets) in 24 hours",
+        "Avoid taking with other paracetamol-containing products"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-pan-02",
+      "brand_name": "Panadol Extra",
+      "generic_name": "Paracetamol + Caffeine",
+      "active_ingredients": [
+        "Paracetamol 500 mg",
+        "Caffeine 65 mg"
+      ],
+      "strength": "500 mg + 65 mg",
+      "strength_unit": "mg",
+      "dosage_form": "Tablet",
+      "route": "Oral",
+      "manufacturer": "Haleon / GSK Pakistan",
+      "pack_size": "10 x 10s (100 Tablets)",
+      "therapeutic_class": "Enhanced Analgesic for Headaches",
+      "drug_class": "Paracetamol Combination",
+      "available_strengths": [
+        "500 mg + 65 mg"
+      ],
+      "default_dose": "1-2 tablets",
+      "default_frequency": "BD — Twice daily",
+      "default_duration": "3 Days",
+      "form_instructions": [
+        "Take with water",
+        "Do not take late in evening if sensitive to caffeine",
+        "Do not exceed 8 tablets in 24 hours"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-pan-03",
+      "brand_name": "Calpol Syrup",
+      "generic_name": "Paracetamol",
+      "active_ingredients": [
+        "Paracetamol 120 mg / 5mL"
+      ],
+      "strength": "120 mg / 5mL",
+      "strength_unit": "mg/5mL",
+      "dosage_form": "Syrup",
+      "route": "Oral",
+      "manufacturer": "GSK Pakistan",
+      "pack_size": "60mL / 120mL Bottle",
+      "therapeutic_class": "Pediatric Antipyretic",
+      "drug_class": "Para-aminophenol Derivative",
+      "available_strengths": [
+        "120 mg/5mL",
+        "250 mg/5mL (Calpol 6 Plus)"
+      ],
+      "default_dose": "5-10 mL according to age/weight",
+      "default_frequency": "TDS — Three times daily",
+      "default_duration": "3 Days",
+      "form_instructions": [
+        "Shake bottle before measuring",
+        "Use measuring spoon or syringe for precise pediatric dosing"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-bru-01",
+      "brand_name": "Brufen",
+      "generic_name": "Ibuprofen",
+      "active_ingredients": [
+        "Ibuprofen 400 mg"
+      ],
+      "strength": "400 mg",
+      "strength_unit": "mg",
+      "dosage_form": "Film-coated tablet",
+      "route": "Oral",
+      "manufacturer": "Abbott Laboratories Pakistan",
+      "pack_size": "30 x 10s Tablets",
+      "therapeutic_class": "Non-Steroidal Anti-Inflammatory Drug (NSAID)",
+      "drug_class": "Propionic Acid Derivative NSAID",
+      "available_strengths": [
+        "200 mg",
+        "400 mg",
+        "600 mg (Brufen DS)",
+        "100 mg/5mL syrup"
+      ],
+      "default_dose": "1 tablet",
+      "default_frequency": "TDS — Three times daily",
+      "default_duration": "3-5 Days",
+      "form_instructions": [
+        "Always take with or immediately after food or milk",
+        "Do not take if patient has active peptic ulcer"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-volt-01",
+      "brand_name": "Voltral",
+      "generic_name": "Diclofenac Sodium",
+      "active_ingredients": [
+        "Diclofenac Sodium 50 mg"
+      ],
+      "strength": "50 mg",
+      "strength_unit": "mg",
+      "dosage_form": "Enteric-coated tablet",
+      "route": "Oral",
+      "manufacturer": "Novartis Pakistan",
+      "pack_size": "20 Tablets",
+      "therapeutic_class": "Potent Anti-Inflammatory & Analgesic",
+      "drug_class": "Acetic Acid Derivative NSAID",
+      "available_strengths": [
+        "50 mg",
+        "75 mg SR",
+        "100 mg SR",
+        "75 mg/3mL Injection",
+        "12.5 mg / 50 mg Suppository"
+      ],
+      "default_dose": "1 tablet",
+      "default_frequency": "BD — Twice daily",
+      "default_duration": "3-5 Days",
+      "form_instructions": [
+        "Take strictly after meals with water",
+        "Swallow whole; do not crush or chew"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-volt-02",
+      "brand_name": "Voltral Emulgel",
+      "generic_name": "Diclofenac Diethylamine",
+      "active_ingredients": [
+        "Diclofenac Diethylamine 1.16% w/w (equivalent to 1% Diclofenac Sodium)"
+      ],
+      "strength": "1%",
+      "strength_unit": "%",
+      "dosage_form": "Gel",
+      "route": "Topical",
+      "manufacturer": "GSK Consumer Healthcare Pakistan",
+      "pack_size": "20g / 50g Tube",
+      "therapeutic_class": "Topical NSAID Analgesic",
+      "drug_class": "NSAID Gel",
+      "available_strengths": [
+        "1%",
+        "2.32% (Voltral 12h)"
+      ],
+      "default_dose": "Apply cherry-sized amount",
+      "default_frequency": "TDS — Three times daily",
+      "default_duration": "7 Days",
+      "form_instructions": [
+        "Gently rub into painful joint/muscle area",
+        "Wash hands after application",
+        "External use only; do not apply to open cuts"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-syn-01",
+      "brand_name": "Synflex",
+      "generic_name": "Naproxen Sodium",
+      "active_ingredients": [
+        "Naproxen Sodium 550 mg"
+      ],
+      "strength": "550 mg",
+      "strength_unit": "mg",
+      "dosage_form": "Film-coated tablet",
+      "route": "Oral",
+      "manufacturer": "Martin Dow Pharmaceuticals",
+      "pack_size": "20 Tablets",
+      "therapeutic_class": "Long-Acting NSAID Analgesic",
+      "drug_class": "NSAID",
+      "available_strengths": [
+        "275 mg",
+        "550 mg"
+      ],
+      "default_dose": "1 tablet",
+      "default_frequency": "BD — Twice daily",
+      "default_duration": "5 Days",
+      "form_instructions": [
+        "Take with a full meal",
+        "Do not take on empty stomach"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-tram-01",
+      "brand_name": "Tramal",
+      "generic_name": "Tramadol Hydrochloride",
+      "active_ingredients": [
+        "Tramadol Hydrochloride 50 mg"
+      ],
+      "strength": "50 mg",
+      "strength_unit": "mg",
+      "dosage_form": "Capsule",
+      "route": "Oral",
+      "manufacturer": "Searle Pakistan",
+      "pack_size": "10 Capsules",
+      "therapeutic_class": "Centrally Acting Opioid Analgesic",
+      "drug_class": "Opioid Analgesic",
+      "available_strengths": [
+        "50 mg",
+        "100 mg SR",
+        "100 mg/2mL Injection"
+      ],
+      "default_dose": "1 capsule",
+      "default_frequency": "PRN — As required (max 4/day)",
+      "default_duration": "3 Days",
+      "form_instructions": [
+        "Take strictly for moderate to severe pain",
+        "May cause drowsiness; avoid driving"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-ris-01",
+      "brand_name": "Risek",
+      "generic_name": "Omeprazole",
+      "active_ingredients": [
+        "Omeprazole 20 mg"
+      ],
+      "strength": "20 mg",
+      "strength_unit": "mg",
+      "dosage_form": "Capsule",
+      "route": "Oral",
+      "manufacturer": "Getz Pharma",
+      "pack_size": "14 Capsules",
+      "therapeutic_class": "Proton Pump Inhibitor (PPI)",
+      "drug_class": "Substituted Benzimidazole",
+      "available_strengths": [
+        "20 mg",
+        "40 mg",
+        "40 mg IV Injection",
+        "20 mg Sachet (Risek Insta)"
+      ],
+      "default_dose": "1 capsule",
+      "default_frequency": "OD — Once daily (Morning)",
+      "default_duration": "14 Days",
+      "form_instructions": [
+        "Take 30 minutes before breakfast on an empty stomach",
+        "Swallow capsule whole with water"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-nex-01",
+      "brand_name": "Nexum",
+      "generic_name": "Esomeprazole",
+      "active_ingredients": [
+        "Esomeprazole Magnesium 40 mg"
+      ],
+      "strength": "40 mg",
+      "strength_unit": "mg",
+      "dosage_form": "Delayed-release capsule",
+      "route": "Oral",
+      "manufacturer": "Getz Pharma",
+      "pack_size": "14 Capsules",
+      "therapeutic_class": "Potent Proton Pump Inhibitor",
+      "drug_class": "S-isomer PPI",
+      "available_strengths": [
+        "20 mg",
+        "40 mg",
+        "40 mg IV Vial",
+        "10 mg Sachet"
+      ],
+      "default_dose": "1 capsule",
+      "default_frequency": "OD — Once daily (Morning)",
+      "default_duration": "14-28 Days",
+      "form_instructions": [
+        "Take 30-60 minutes before morning meal",
+        "Swallow whole; do not chew pellets inside"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-gav-01",
+      "brand_name": "Gaviscon Liquid",
+      "generic_name": "Sodium Alginate + Sodium Bicarbonate + Calcium Carbonate",
+      "active_ingredients": [
+        "Sodium Alginate 500 mg / 10mL",
+        "Sodium Bicarbonate 267 mg / 10mL"
+      ],
+      "strength": "Original Mint",
+      "strength_unit": "Suspension",
+      "dosage_form": "Oral suspension",
+      "route": "Oral",
+      "manufacturer": "Reckitt Benckiser Pakistan",
+      "pack_size": "120mL Bottle",
+      "therapeutic_class": "Antacid & Reflux Barrier",
+      "drug_class": "Alginate Antacid",
+      "available_strengths": [
+        "Original Liquid",
+        "Double Action Liquid",
+        "Chewable Tablets"
+      ],
+      "default_dose": "10-20 mL",
+      "default_frequency": "TDS — After meals & bedtime",
+      "default_duration": "7 Days",
+      "form_instructions": [
+        "Shake well before use",
+        "Take strictly after meals and at bedtime",
+        "Do not drink water immediately after to preserve reflux raft barrier"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-mot-01",
+      "brand_name": "Motilium",
+      "generic_name": "Domperidone",
+      "active_ingredients": [
+        "Domperidone Maleate 10 mg"
+      ],
+      "strength": "10 mg",
+      "strength_unit": "mg",
+      "dosage_form": "Film-coated tablet",
+      "route": "Oral",
+      "manufacturer": "Janssen / Johnson & Johnson Pakistan",
+      "pack_size": "5 x 10s Tablets",
+      "therapeutic_class": "Prokinetic & Anti-emetic",
+      "drug_class": "Dopamine D2 Receptor Antagonist",
+      "available_strengths": [
+        "10 mg",
+        "5 mg/5mL suspension",
+        "30 mg Suppository"
+      ],
+      "default_dose": "1 tablet",
+      "default_frequency": "TDS — 15-30 min Before meals",
+      "default_duration": "5 Days",
+      "form_instructions": [
+        "Take 15 to 30 minutes before meals",
+        "Do not exceed 30 mg daily"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-grav-01",
+      "brand_name": "Gravinate",
+      "generic_name": "Dimenhydrinate",
+      "active_ingredients": [
+        "Dimenhydrinate 50 mg"
+      ],
+      "strength": "50 mg",
+      "strength_unit": "mg",
+      "dosage_form": "Tablet",
+      "route": "Oral",
+      "manufacturer": "Searle Pakistan",
+      "pack_size": "20 x 10s Tablets",
+      "therapeutic_class": "Antiemetic & Motion Sickness",
+      "drug_class": "Antihistamine Antiemetic",
+      "available_strengths": [
+        "50 mg",
+        "15 mg/5mL syrup",
+        "50 mg/mL Injection"
+      ],
+      "default_dose": "1 tablet",
+      "default_frequency": "PRN — Before travel / When nauseous",
+      "default_duration": "3 Days",
+      "form_instructions": [
+        "Take 30 minutes before travel for motion sickness",
+        "May cause marked drowsiness"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-ven-01",
+      "brand_name": "Ventolin Inhaler",
+      "generic_name": "Salbutamol",
+      "active_ingredients": [
+        "Salbutamol Sulfate 100 mcg per actuation"
+      ],
+      "strength": "100 mcg / puff",
+      "strength_unit": "mcg/puff",
+      "dosage_form": "Metered-dose inhaler",
+      "route": "Inhaled",
+      "manufacturer": "GSK Pakistan",
+      "pack_size": "200 Puffs Canister with actuator",
+      "therapeutic_class": "Short-Acting Beta-2 Agonist (SABA) Bronchodilator",
+      "drug_class": "Bronchodilator (Reliever)",
+      "available_strengths": [
+        "100 mcg/puff",
+        "2 mg/5mL syrup",
+        "2.5 mg/2.5mL Respules",
+        "5 mg/mL Nebulizer Solution"
+      ],
+      "default_dose": "1-2 puffs",
+      "default_frequency": "PRN — As required for shortness of breath",
+      "default_duration": "Ongoing",
+      "form_instructions": [
+        "Shake inhaler well before use",
+        "Breathe out fully, seal lips on mouthpiece, inhale deeply while pressing canister, hold breath 10 sec",
+        "Use spacer device if advised"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-ser-01",
+      "brand_name": "Seretide Evohaler",
+      "generic_name": "Salmeterol + Fluticasone Propionate",
+      "active_ingredients": [
+        "Salmeterol 25 mcg",
+        "Fluticasone Propionate 125 mcg per actuation"
+      ],
+      "strength": "25 / 125 mcg",
+      "strength_unit": "mcg/puff",
+      "dosage_form": "Metered-dose inhaler",
+      "route": "Inhaled",
+      "manufacturer": "GSK Pakistan",
+      "pack_size": "120 Puffs Canister",
+      "therapeutic_class": "LABA + Inhaled Corticosteroid (Controller)",
+      "drug_class": "Asthma Controller",
+      "available_strengths": [
+        "25/50 mcg",
+        "25/125 mcg",
+        "25/250 mcg",
+        "Accuhaler 50/250 mcg"
+      ],
+      "default_dose": "2 puffs",
+      "default_frequency": "BD — Twice daily (Morning & Night)",
+      "default_duration": "1 Month (Until review)",
+      "form_instructions": [
+        "Use regularly every 12 hours",
+        "Rinse mouth and gargle with water after inhalation to prevent oral thrush",
+        "Do not stop abruptly"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-zyr-01",
+      "brand_name": "Zyrtec",
+      "generic_name": "Cetirizine Dihydrochloride",
+      "active_ingredients": [
+        "Cetirizine Dihydrochloride 10 mg"
+      ],
+      "strength": "10 mg",
+      "strength_unit": "mg",
+      "dosage_form": "Film-coated tablet",
+      "route": "Oral",
+      "manufacturer": "GSK Pakistan",
+      "pack_size": "10 x 10s Tablets",
+      "therapeutic_class": "2nd Generation Non-Sedating Antihistamine",
+      "drug_class": "H1 Antihistamine",
+      "available_strengths": [
+        "10 mg",
+        "5 mg/5mL syrup",
+        "10 mg/mL Oral drops"
+      ],
+      "default_dose": "1 tablet",
+      "default_frequency": "OD — Once daily (Night)",
+      "default_duration": "7-14 Days",
+      "form_instructions": [
+        "Take in evening or before bed",
+        "May be taken with or without food"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-fex-01",
+      "brand_name": "Fexet",
+      "generic_name": "Fexofenadine Hydrochloride",
+      "active_ingredients": [
+        "Fexofenadine Hydrochloride 120 mg"
+      ],
+      "strength": "120 mg",
+      "strength_unit": "mg",
+      "dosage_form": "Film-coated tablet",
+      "route": "Oral",
+      "manufacturer": "Getz Pharma",
+      "pack_size": "10 Tablets",
+      "therapeutic_class": "Non-Sedating Antihistamine",
+      "drug_class": "H1 Antihistamine",
+      "available_strengths": [
+        "60 mg",
+        "120 mg",
+        "180 mg",
+        "30 mg/5mL suspension"
+      ],
+      "default_dose": "1 tablet",
+      "default_frequency": "OD — Once daily",
+      "default_duration": "10 Days",
+      "form_instructions": [
+        "Take with water",
+        "Avoid taking with fruit juices (grapefruit/orange) as they reduce absorption"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-hyd-01",
+      "brand_name": "Hydryllin Syrup",
+      "generic_name": "Diphenhydramine + Aminophylline + Ammonium Chloride + Menthol",
+      "active_ingredients": [
+        "Diphenhydramine HCl 14mg/5ml",
+        "Aminophylline 32mg/5ml",
+        "Ammonium Chloride 135mg/5ml",
+        "Menthol 1.1mg/5ml"
+      ],
+      "strength": "Compound Expectorant",
+      "strength_unit": "Syrup",
+      "dosage_form": "Syrup",
+      "route": "Oral",
+      "manufacturer": "Searle Pakistan",
+      "pack_size": "120mL Bottle",
+      "therapeutic_class": "Cough Expectorant & Bronchodilator",
+      "drug_class": "Cough Syrup",
+      "available_strengths": [
+        "Standard Syrup",
+        "Hydryllin DM (Sugar Free)"
+      ],
+      "default_dose": "10 mL (2 teaspoons)",
+      "default_frequency": "TDS — Three times daily",
+      "default_duration": "5 Days",
+      "form_instructions": [
+        "Shake well before use",
+        "Causes drowsiness; do not drive or operate machinery after taking"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-tob-01",
+      "brand_name": "Tobrex Eye Drops",
+      "generic_name": "Tobramycin",
+      "active_ingredients": [
+        "Tobramycin 0.3% w/v (3 mg/mL)"
+      ],
+      "strength": "0.3%",
+      "strength_unit": "%",
+      "dosage_form": "Eye drops",
+      "route": "Ophthalmic",
+      "manufacturer": "Novartis / Alcon Pakistan",
+      "pack_size": "5mL Dropper Bottle",
+      "therapeutic_class": "Ophthalmic Antibiotic",
+      "drug_class": "Aminoglycoside",
+      "available_strengths": [
+        "0.3% drops",
+        "0.3% Eye Ointment"
+      ],
+      "default_dose": "1-2 drops in affected eye(s)",
+      "default_frequency": "Q4H — Every 4 hours",
+      "default_duration": "7 Days",
+      "form_instructions": [
+        "Instill 1-2 drops into conjunctival sac of affected eye",
+        "Remove contact lenses before instillation and wait 15 min before reinserting",
+        "Discard bottle 28 days after first opening"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-tob-02",
+      "brand_name": "Tobradex Eye Drops",
+      "generic_name": "Tobramycin + Dexamethasone",
+      "active_ingredients": [
+        "Tobramycin 0.3%",
+        "Dexamethasone 0.1%"
+      ],
+      "strength": "0.3% + 0.1%",
+      "strength_unit": "%",
+      "dosage_form": "Eye suspension",
+      "route": "Ophthalmic",
+      "manufacturer": "Novartis / Alcon Pakistan",
+      "pack_size": "5mL Dropper Bottle",
+      "therapeutic_class": "Ophthalmic Antibacterial & Steroid",
+      "drug_class": "Antibiotic + Corticosteroid",
+      "available_strengths": [
+        "0.3% / 0.1% Drops",
+        "0.3% / 0.1% Ointment"
+      ],
+      "default_dose": "1-2 drops in affected eye",
+      "default_frequency": "QID — Four times daily",
+      "default_duration": "5-7 Days",
+      "form_instructions": [
+        "Shake well before instilling",
+        "Do not touch dropper tip to eye or skin",
+        "Discard 4 weeks after opening"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-bet-01",
+      "brand_name": "Betnesol-N Drops",
+      "generic_name": "Betamethasone Sodium Phosphate + Neomycin Sulfate",
+      "active_ingredients": [
+        "Betamethasone 0.1%",
+        "Neomycin Sulfate 0.5%"
+      ],
+      "strength": "0.1% + 0.5%",
+      "strength_unit": "%",
+      "dosage_form": "Ear drops",
+      "route": "Otic",
+      "manufacturer": "GSK Pakistan",
+      "pack_size": "10mL Dropper Bottle",
+      "therapeutic_class": "Anti-inflammatory & Antibacterial for Ear / Eye / Nose",
+      "drug_class": "Corticosteroid + Aminoglycoside",
+      "available_strengths": [
+        "0.1% / 0.5%"
+      ],
+      "default_dose": "2-3 drops in affected ear",
+      "default_frequency": "TDS — Three times daily",
+      "default_duration": "5-7 Days",
+      "form_instructions": [
+        "Warm bottle in hands before instilling to avoid vertigo",
+        "Tilt head for 2-3 minutes after instilling in ear canal"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-otr-01",
+      "brand_name": "Otrivin Adult Nasal Drops",
+      "generic_name": "Xylometazoline Hydrochloride",
+      "active_ingredients": [
+        "Xylometazoline Hydrochloride 0.1% w/v"
+      ],
+      "strength": "0.1%",
+      "strength_unit": "%",
+      "dosage_form": "Nasal drops",
+      "route": "Intranasal",
+      "manufacturer": "GSK Consumer Healthcare Pakistan",
+      "pack_size": "10mL Bottle",
+      "therapeutic_class": "Nasal Decongestant",
+      "drug_class": "Alpha-Adrenergic Agonist",
+      "available_strengths": [
+        "0.05% (Pediatric)",
+        "0.1% (Adult Drops)",
+        "0.1% (Nasal Spray)"
+      ],
+      "default_dose": "2-3 drops in each nostril",
+      "default_frequency": "TDS — Three times daily",
+      "default_duration": "3-5 Days (Do NOT exceed 5 days)",
+      "form_instructions": [
+        "Blow nose gently before use",
+        "Do NOT use for more than 5 consecutive days to prevent rebound congestion (rhinitis medicamentosa)"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-fly-01",
+      "brand_name": "Avamys / Flynise Nasal Spray",
+      "generic_name": "Fluticasone Furoate",
+      "active_ingredients": [
+        "Fluticasone Furoate 27.5 mcg per spray"
+      ],
+      "strength": "27.5 mcg / spray",
+      "strength_unit": "mcg/spray",
+      "dosage_form": "Nasal spray",
+      "route": "Intranasal",
+      "manufacturer": "GSK Pakistan / Getz Pharma",
+      "pack_size": "120 Sprays Device",
+      "therapeutic_class": "Intranasal Corticosteroid for Allergic Rhinitis",
+      "drug_class": "Intranasal Steroid",
+      "available_strengths": [
+        "27.5 mcg/spray",
+        "50 mcg/spray"
+      ],
+      "default_dose": "2 sprays in each nostril",
+      "default_frequency": "OD — Once daily (Morning)",
+      "default_duration": "14-30 Days",
+      "form_instructions": [
+        "Shake vigorously before each use",
+        "Aim away from nasal septum (towards ear)",
+        "Breathe in gently through nose while spraying"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-gluc-01",
+      "brand_name": "Glucophage",
+      "generic_name": "Metformin Hydrochloride",
+      "active_ingredients": [
+        "Metformin Hydrochloride 500 mg"
+      ],
+      "strength": "500 mg",
+      "strength_unit": "mg",
+      "dosage_form": "Film-coated tablet",
+      "route": "Oral",
+      "manufacturer": "Merck / Martin Dow Pakistan",
+      "pack_size": "5 x 10s Tablets",
+      "therapeutic_class": "Oral Antidiabetic",
+      "drug_class": "Biguanide",
+      "available_strengths": [
+        "500 mg",
+        "850 mg",
+        "1000 mg",
+        "500 mg XR",
+        "1000 mg XR"
+      ],
+      "default_dose": "1 tablet",
+      "default_frequency": "BD — Twice daily (With meals)",
+      "default_duration": "1 Month (Ongoing)",
+      "form_instructions": [
+        "Take strictly with or immediately after meals to reduce stomach upset",
+        "Swallow whole"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-getr-01",
+      "brand_name": "Getryl",
+      "generic_name": "Glimepiride",
+      "active_ingredients": [
+        "Glimepiride 2 mg"
+      ],
+      "strength": "2 mg",
+      "strength_unit": "mg",
+      "dosage_form": "Tablet",
+      "route": "Oral",
+      "manufacturer": "Getz Pharma",
+      "pack_size": "20 Tablets",
+      "therapeutic_class": "Oral Antidiabetic",
+      "drug_class": "2nd Gen Sulfonylurea",
+      "available_strengths": [
+        "1 mg",
+        "2 mg",
+        "3 mg",
+        "4 mg"
+      ],
+      "default_dose": "1 tablet",
+      "default_frequency": "OD — Once daily (Before breakfast)",
+      "default_duration": "1 Month",
+      "form_instructions": [
+        "Take immediately before or during first main meal of day",
+        "Keep fast-acting sugar or candy available in case of hypoglycemia symptoms"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-con-01",
+      "brand_name": "Concor",
+      "generic_name": "Bisoprolol Fumarate",
+      "active_ingredients": [
+        "Bisoprolol Fumarate 5 mg"
+      ],
+      "strength": "5 mg",
+      "strength_unit": "mg",
+      "dosage_form": "Film-coated tablet",
+      "route": "Oral",
+      "manufacturer": "Merck / Martin Dow Pakistan",
+      "pack_size": "14 Tablets",
+      "therapeutic_class": "Antihypertensive & Antiarrhythmic",
+      "drug_class": "Cardioselective Beta-1 Blocker",
+      "available_strengths": [
+        "2.5 mg",
+        "5 mg",
+        "10 mg"
+      ],
+      "default_dose": "1 tablet",
+      "default_frequency": "OD — Once daily (Morning)",
+      "default_duration": "1 Month",
+      "form_instructions": [
+        "Take in morning with or without food",
+        "Do not stop taking abruptly without doctor's consultation"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-nor-01",
+      "brand_name": "Norvasc",
+      "generic_name": "Amlodipine Besylate",
+      "active_ingredients": [
+        "Amlodipine Besylate 5 mg"
+      ],
+      "strength": "5 mg",
+      "strength_unit": "mg",
+      "dosage_form": "Tablet",
+      "route": "Oral",
+      "manufacturer": "Pfizer Pakistan",
+      "pack_size": "30 Tablets",
+      "therapeutic_class": "Antihypertensive",
+      "drug_class": "Dihydropyridine Calcium Channel Blocker",
+      "available_strengths": [
+        "5 mg",
+        "10 mg"
+      ],
+      "default_dose": "1 tablet",
+      "default_frequency": "OD — Once daily",
+      "default_duration": "1 Month",
+      "form_instructions": [
+        "Take at same time each day",
+        "Report any ankle swelling to doctor"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-exf-01",
+      "brand_name": "Exforge",
+      "generic_name": "Amlodipine + Valsartan",
+      "active_ingredients": [
+        "Amlodipine 5 mg",
+        "Valsartan 80 mg"
+      ],
+      "strength": "5 / 80 mg",
+      "strength_unit": "mg",
+      "dosage_form": "Film-coated tablet",
+      "route": "Oral",
+      "manufacturer": "Novartis Pakistan",
+      "pack_size": "28 Tablets",
+      "therapeutic_class": "Dual Antihypertensive Combination",
+      "drug_class": "CCB + ARB",
+      "available_strengths": [
+        "5/80 mg",
+        "5/160 mg",
+        "10/160 mg"
+      ],
+      "default_dose": "1 tablet",
+      "default_frequency": "OD — Once daily (Morning)",
+      "default_duration": "1 Month",
+      "form_instructions": [
+        "Take with water",
+        "Monitor blood pressure regularly"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-lop-01",
+      "brand_name": "Loprin",
+      "generic_name": "Low-Dose Aspirin (Acetylsalicylic Acid)",
+      "active_ingredients": [
+        "Aspirin 75 mg"
+      ],
+      "strength": "75 mg",
+      "strength_unit": "mg",
+      "dosage_form": "Enteric-coated tablet",
+      "route": "Oral",
+      "manufacturer": "Highnoon Laboratories",
+      "pack_size": "30 Tablets",
+      "therapeutic_class": "Antiplatelet Cardioprotective",
+      "drug_class": "Antiplatelet Agent",
+      "available_strengths": [
+        "75 mg",
+        "150 mg"
+      ],
+      "default_dose": "1 tablet",
+      "default_frequency": "OD — Once daily (After lunch)",
+      "default_duration": "1 Month (Ongoing)",
+      "form_instructions": [
+        "Take strictly after meals with water",
+        "Swallow whole; do not break enteric coating"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-der-01",
+      "brand_name": "Dermovate Cream",
+      "generic_name": "Clobetasol Propionate",
+      "active_ingredients": [
+        "Clobetasol Propionate 0.05% w/w (0.5 mg/g)"
+      ],
+      "strength": "0.05%",
+      "strength_unit": "%",
+      "dosage_form": "Cream",
+      "route": "Topical",
+      "manufacturer": "GSK Pakistan",
+      "pack_size": "20g Tube",
+      "therapeutic_class": "Super-High Potency Topical Corticosteroid",
+      "drug_class": "Class I Topical Steroid",
+      "available_strengths": [
+        "0.05% Cream",
+        "0.05% Ointment",
+        "0.05% Scalp Application"
+      ],
+      "default_dose": "Apply thin layer",
+      "default_frequency": "OD — Once daily",
+      "default_duration": "5-7 Days (Short term)",
+      "form_instructions": [
+        "Apply very sparingly to affected skin only",
+        "Do not apply to face, groin, or axillae unless specifically instructed",
+        "Do not use for more than 14 consecutive days"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-fus-01",
+      "brand_name": "Fucidin / Fucicort",
+      "generic_name": "Fusidic Acid + Betamethasone",
+      "active_ingredients": [
+        "Fusidic Acid 2%",
+        "Betamethasone Dipropionate 0.1%"
+      ],
+      "strength": "2% + 0.1%",
+      "strength_unit": "%",
+      "dosage_form": "Cream",
+      "route": "Topical",
+      "manufacturer": "LEO Pharma / Sami Pharmaceuticals",
+      "pack_size": "15g Tube",
+      "therapeutic_class": "Topical Antibacterial & Anti-inflammatory",
+      "drug_class": "Steroid-Antibacterial Combination",
+      "available_strengths": [
+        "2% (Fucidin)",
+        "2% + 0.1% (Fucicort)"
+      ],
+      "default_dose": "Apply thin layer",
+      "default_frequency": "BD — Twice daily",
+      "default_duration": "7 Days",
+      "form_instructions": [
+        "Apply to affected infected lesion",
+        "Clean and dry skin prior to application"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-hyd-c01",
+      "brand_name": "Hydrocortisone Cream",
+      "generic_name": "Hydrocortisone Acetate",
+      "active_ingredients": [
+        "Hydrocortisone 1% w/w"
+      ],
+      "strength": "1%",
+      "strength_unit": "%",
+      "dosage_form": "Cream",
+      "route": "Topical",
+      "manufacturer": "Getz Pharma / Reckitt",
+      "pack_size": "15g Tube",
+      "therapeutic_class": "Mild Topical Corticosteroid",
+      "drug_class": "Class VII Mild Steroid",
+      "available_strengths": [
+        "1%",
+        "2.5%"
+      ],
+      "default_dose": "Apply sparingly",
+      "default_frequency": "BD — Twice daily",
+      "default_duration": "7 Days",
+      "form_instructions": [
+        "Rub gently into affected area",
+        "Safe for facial or flexural dermatitis for short periods"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-rof-01",
+      "brand_name": "Rocephin / Ceftriaxone",
+      "generic_name": "Ceftriaxone Sodium",
+      "active_ingredients": [
+        "Ceftriaxone Sodium 1g"
+      ],
+      "strength": "1 g",
+      "strength_unit": "g",
+      "dosage_form": "IM injection",
+      "route": "IM",
+      "manufacturer": "Roche / Getz Pharma",
+      "pack_size": "1 Vial with Lidocaine solvent",
+      "therapeutic_class": "3rd Gen Cephalosporin Injectable",
+      "drug_class": "Parenteral Cephalosporin",
+      "available_strengths": [
+        "250 mg",
+        "500 mg",
+        "1 g (IM/IV)",
+        "2 g (IV)"
+      ],
+      "default_dose": "1 g reconstituted with 3.5mL 1% Lidocaine",
+      "default_frequency": "OD — Once daily",
+      "default_duration": "3-5 Days",
+      "form_instructions": [
+        "For deep intramuscular administration into gluteal muscle",
+        "Skin test mandatory before first administration to rule out penicillin/cephalosporin hypersensitivity"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-cle-01",
+      "brand_name": "Clexane",
+      "generic_name": "Enoxaparin Sodium",
+      "active_ingredients": [
+        "Enoxaparin Sodium 40 mg (4000 IU) / 0.4 mL"
+      ],
+      "strength": "40 mg / 0.4 mL",
+      "strength_unit": "mg",
+      "dosage_form": "SC injection",
+      "route": "SC",
+      "manufacturer": "Sanofi-Aventis Pakistan",
+      "pack_size": "2 Pre-filled Syringes",
+      "therapeutic_class": "Low Molecular Weight Heparin (LMWH)",
+      "drug_class": "Anticoagulant",
+      "available_strengths": [
+        "20 mg / 0.2 mL",
+        "40 mg / 0.4 mL",
+        "60 mg / 0.6 mL",
+        "80 mg / 0.8 mL"
+      ],
+      "default_dose": "1 pre-filled syringe (40mg)",
+      "default_frequency": "OD — Once daily",
+      "default_duration": "7 Days",
+      "form_instructions": [
+        "Inject subcutaneously into anterolateral or posterolateral abdominal wall",
+        "Do not rub injection site after administration",
+        "Do not expel air bubble from syringe before injection"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    },
+    {
+      "id": "med-pyr-01",
+      "brand_name": "Pyodine Solution",
+      "generic_name": "Povidone Iodine",
+      "active_ingredients": [
+        "Povidone Iodine 10% w/v"
+      ],
+      "strength": "10%",
+      "strength_unit": "%",
+      "dosage_form": "Solution",
+      "route": "Topical",
+      "manufacturer": "Brookes Pharma",
+      "pack_size": "60mL / 450mL Bottle",
+      "therapeutic_class": "Broad-Spectrum Antiseptic & Disinfectant",
+      "drug_class": "Iodophore Antiseptic",
+      "available_strengths": [
+        "7.5% Surgical Scrub",
+        "10% Solution",
+        "10% Ointment",
+        "1% Mouthwash/Gargle"
+      ],
+      "default_dose": "Apply with sterile gauze",
+      "default_frequency": "BD — Twice daily dressing",
+      "default_duration": "5 Days",
+      "form_instructions": [
+        "Clean wound with saline then apply Pyodine solution with sterile cotton/gauze",
+        "Allow to dry for full antiseptic effect"
+      ],
+      "status": "active",
+      "source": "DRAP Pakistan",
+      "last_updated": "2026-09-30T12:00:00.000Z"
+    }
+  ],
+  "favoriteMedicines": [
+    {
+      "id": "fav-1",
+      "doctor_id": "doc-1",
+      "medicine_id": "med-pan-01"
+    },
+    {
+      "id": "fav-2",
+      "doctor_id": "doc-1",
+      "medicine_id": "med-aug-01"
+    },
+    {
+      "id": "fav-3",
+      "doctor_id": "doc-1",
+      "medicine_id": "med-ris-01"
+    },
+    {
+      "id": "fav-4",
+      "doctor_id": "doc-1",
+      "medicine_id": "med-dak-01"
+    },
+    {
+      "id": "fav-5",
+      "doctor_id": "doc-1",
+      "medicine_id": "med-ven-01"
+    }
+  ],
+  "prescriptions": [
+    {
+      "id": "rx-901",
+      "doctor_id": "doc-1",
+      "patient_id": "pat-5",
+      "appointment_id": "apt-103",
+      "prescription_no": "RX-2026-00001",
+      "diagnosis": "Severe Acute Gastroesophageal Reflux (GERD) & Acid Dyspepsia",
+      "symptoms": "Retrosternal chest burning, acid regurgitation, nausea after food",
+      "items": [
+        {
+          "id": "item-1",
+          "prescription_id": "rx-901",
+          "medicine_id": "med-39",
+          "medicine_name": "Nexum (Esomeprazole 40mg)",
+          "strength": "40 mg",
+          "form": "tablet",
+          "dose": "1 tab",
+          "frequency": "1+0+0 (Morning before breakfast)",
+          "duration": "14 Days",
+          "instructions": "Take 30 minutes before breakfast on empty stomach",
+          "sort_order": 1
+        },
+        {
+          "id": "item-2",
+          "prescription_id": "rx-901",
+          "medicine_id": "med-42",
+          "medicine_name": "Motilium (Domperidone 10mg)",
+          "strength": "10 mg",
+          "form": "tablet",
+          "dose": "1 tab",
+          "frequency": "1+1+1 (TDS before meals)",
+          "duration": "5 Days",
+          "instructions": "Take 15-20 minutes before meals",
+          "sort_order": 2
+        },
+        {
+          "id": "item-3",
+          "prescription_id": "rx-901",
+          "medicine_id": "med-41",
+          "medicine_name": "Gaviscon Syrup",
+          "strength": "250 mg / 10ml",
+          "form": "syrup",
+          "dose": "10 ml",
+          "frequency": "1+1+1 (TDS after meals)",
+          "duration": "10 Days",
+          "instructions": "Take after meals and at bedtime",
+          "sort_order": 3
+        }
+      ],
+      "tests_advised": "H. Pylori Stool Antigen Test, Ultrasound Abdomen",
+      "advice": "Strict avoidance of spicy/fried foods, tea, and citrus fruits. Elevate bed head 6 inches. Avoid NSAID painkillers.",
+      "follow_up_date": "2026-10-14",
+      "status": "final",
+      "created_at": "2026-09-29T23:03:24.592Z",
+      "finalized_at": "2026-09-29T23:03:24.592Z",
+      "verification_token": "vtok_gerd_901_pk",
+      "pdf_url": "/api/prescriptions/rx-901/pdf",
+      "pdf_generated_at": "2026-09-29T23:03:24.592Z"
+    },
+    {
+      "id": "rx-902",
+      "doctor_id": "doc-1",
+      "patient_id": "pat-1",
+      "appointment_id": "apt-101",
+      "prescription_no": "RX-2026-00002",
+      "diagnosis": "Type 2 Diabetes Mellitus with Essential Hypertension Review",
+      "symptoms": "Fasting blood sugar 160 mg/dL, morning dizziness",
+      "items": [
+        {
+          "id": "item-4",
+          "prescription_id": "rx-902",
+          "medicine_id": "med-75",
+          "medicine_name": "Glucophage (Metformin 500mg)",
+          "strength": "500 mg",
+          "form": "tablet",
+          "dose": "1 tab",
+          "frequency": "1+0+1 (BD with meals)",
+          "duration": "30 Days",
+          "instructions": "Take in the middle of breakfast and dinner",
+          "sort_order": 1
+        },
+        {
+          "id": "item-5",
+          "prescription_id": "rx-902",
+          "medicine_id": "med-69",
+          "medicine_name": "Norvasc (Amlodipine 5mg)",
+          "strength": "5 mg",
+          "form": "tablet",
+          "dose": "1 tab",
+          "frequency": "1+0+0 (Morning)",
+          "duration": "30 Days",
+          "instructions": "Take once daily in the morning with water",
+          "sort_order": 2
+        },
+        {
+          "id": "item-6",
+          "prescription_id": "rx-902",
+          "medicine_id": "med-65",
+          "medicine_name": "Lipiget (Atorvastatin 20mg)",
+          "strength": "20 mg",
+          "form": "tablet",
+          "dose": "1 tab",
+          "frequency": "0+0+1 (Night)",
+          "duration": "30 Days",
+          "instructions": "Take once daily at bedtime",
+          "sort_order": 3
+        }
+      ],
+      "tests_advised": "HbA1c, Fasting Lipid Profile, Serum Creatinine & eGFR",
+      "advice": "Daily brisk walk 35-45 minutes. Strict diabetic diet: Cut refined sugar, bakery items, juices. Maintain home BP and Fasting Sugar log.",
+      "follow_up_date": "2026-10-30",
+      "status": "final",
+      "created_at": "2026-09-28T23:03:24.592Z",
+      "finalized_at": "2026-09-28T23:03:24.592Z",
+      "verification_token": "vtok_dm2_902_pk",
+      "pdf_url": "/api/prescriptions/rx-902/pdf",
+      "pdf_generated_at": "2026-09-28T23:03:24.592Z"
+    }
+  ],
+  "prescriptionTemplates": [
+    {
+      "id": "tpl-1",
+      "doctor_id": "doc-1",
+      "name": "Fever / Viral Pyrexia",
+      "diagnosis": "Acute Viral Pyrexia with Generalized Myalgia",
+      "items": [
+        {
+          "medicine_name": "Panadol (Paracetamol 500mg)",
+          "strength": "500 mg",
+          "form": "tablet",
+          "dose": "1-2 tabs",
+          "frequency": "1+1+1 (TDS)",
+          "duration": "5 Days",
+          "instructions": "Take after meals if temperature > 99.5 F or bodyache occurs. Max 8 tabs/day."
+        },
+        {
+          "medicine_name": "Softin (Loratadine 10mg)",
+          "strength": "10 mg",
+          "form": "tablet",
+          "dose": "1 tab",
+          "frequency": "0+0+1 (Night)",
+          "duration": "5 Days",
+          "instructions": "Take at bedtime with water."
+        },
+        {
+          "medicine_name": "Surbex-Z",
+          "strength": "High Potency",
+          "form": "tablet",
+          "dose": "1 tab",
+          "frequency": "1+0+0 (Morning)",
+          "duration": "10 Days",
+          "instructions": "Take daily after breakfast."
+        }
+      ],
+      "tests_advised": "Complete Blood Count (CBC) with Platelets, Dengue NS1 (if high continuous fever)",
+      "advice": "Drink 2.5 - 3 liters of warm water & soups daily. Cold sponging if temp > 102 F. Complete rest."
+    },
+    {
+      "id": "tpl-2",
+      "doctor_id": "doc-1",
+      "name": "Gastritis / GERD / Acid Dyspepsia",
+      "diagnosis": "Acute Acid Peptic Disease (GERD) with Non-Ulcer Dyspepsia",
+      "items": [
+        {
+          "medicine_name": "Nexum (Esomeprazole 40mg)",
+          "strength": "40 mg",
+          "form": "tablet",
+          "dose": "1 tab",
+          "frequency": "1+0+0 (Morning before breakfast)",
+          "duration": "14 Days",
+          "instructions": "Take 30 minutes before breakfast on empty stomach with water."
+        },
+        {
+          "medicine_name": "Gaviscon Syrup",
+          "strength": "250 mg / 10ml",
+          "form": "syrup",
+          "dose": "10 ml (2 tsp)",
+          "frequency": "1+1+1 (TDS after meals)",
+          "duration": "10 Days",
+          "instructions": "Take 10 minutes after main meals and right before sleeping."
+        },
+        {
+          "medicine_name": "Motilium (Domperidone 10mg)",
+          "strength": "10 mg",
+          "form": "tablet",
+          "dose": "1 tab",
+          "frequency": "1+0+1 (BD before meals)",
+          "duration": "7 Days",
+          "instructions": "Take 15-20 minutes before meals."
+        }
+      ],
+      "tests_advised": "H. Pylori Stool Antigen Test (if symptoms persist), Ultrasound Abdomen",
+      "advice": "Strict avoidance of spicy/fried foods, tea, coffee, and late night snacking. Elevate head of bed 6 inches. Never lie down flat within 2 hours of eating."
+    },
+    {
+      "id": "tpl-3",
+      "doctor_id": "doc-1",
+      "name": "Common Cold / Flu / Acute URTI",
+      "diagnosis": "Acute Upper Respiratory Tract Infection (URTI) / Rhinopharyngitis",
+      "items": [
+        {
+          "medicine_name": "Panadol CF",
+          "strength": "Cold & Flu",
+          "form": "tablet",
+          "dose": "1 tab",
+          "frequency": "1+1+1 (TDS)",
+          "duration": "5 Days",
+          "instructions": "Take after meals for sinus congestion, headache, and fever."
+        },
+        {
+          "medicine_name": "Hydryllin Syrup",
+          "strength": "Expectorant",
+          "form": "syrup",
+          "dose": "10 ml",
+          "frequency": "1+1+1 (TDS)",
+          "duration": "5 Days",
+          "instructions": "Sip warm water after taking syrup."
+        },
+        {
+          "medicine_name": "Softin (Loratadine 10mg)",
+          "strength": "10 mg",
+          "form": "tablet",
+          "dose": "1 tab",
+          "frequency": "0+0+1 (Night)",
+          "duration": "5 Days",
+          "instructions": "Take at night before sleeping."
+        }
+      ],
+      "tests_advised": "Complete Blood Picture (CBC) (if fever > 3 days)",
+      "advice": "Steam inhalation twice daily with menthol. Warm salt water gargles. Honey with lukewarm water. Complete vocal rest."
+    }
+  ],
+  "doctorPdfSettings": [
+    {
+      "id": "pdf-set-doc-1",
+      "doctor_id": "doc-1",
+      "header_layout": "left-logo",
+      "primary_color": "#0F766E",
+      "secondary_color": "#0284C7",
+      "font": "Helvetica",
+      "logo_url": "",
+      "signature_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='70' viewBox='0 0 200 70'><path d='M15 50 Q 40 10, 60 45 T 100 35 T 140 40 T 180 20' fill='none' stroke='%230f766e' stroke-width='2.5' stroke-linecap='round'/><text x='110' y='60' font-family='sans-serif' font-size='10' fill='%23666'>Dr. A. Siddiqui</text></svg>",
+      "stamp_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><circle cx='60' cy='60' r='54' fill='none' stroke='%230f766e' stroke-width='2' stroke-dasharray='4,3'/><circle cx='60' cy='60' r='46' fill='none' stroke='%230f766e' stroke-width='1'/><text x='60' y='42' font-family='sans-serif' font-size='8' text-anchor='middle' font-weight='bold' fill='%230f766e'>DR. AYESHA SIDDIQUI</text><text x='60' y='55' font-family='sans-serif' font-size='7' text-anchor='middle' fill='%230f766e'>PMDC # 49821-P</text><text x='60' y='68' font-family='sans-serif' font-size='7' text-anchor='middle' fill='%230f766e'>FCPS INTERNAL MED</text><text x='60' y='82' font-family='sans-serif' font-size='6.5' text-anchor='middle' fill='%230f766e'>SHIFA CLINIC LHR</text></svg>",
+      "footer_text": "Emergency patients must proceed immediately to the Emergency Room / ER.",
+      "show_qr": true,
+      "show_photo": true,
+      "paper_margin": "normal",
+      "language": "both",
+      "updated_at": "2026-09-30T23:03:24.592Z"
+    },
+    {
+      "id": "pdf-set-doc-2",
+      "doctor_id": "doc-2",
+      "header_layout": "centered",
+      "primary_color": "#0369A1",
+      "secondary_color": "#059669",
+      "font": "Noto Sans",
+      "logo_url": "",
+      "signature_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='70' viewBox='0 0 200 70'><path d='M10 40 C 35 15, 70 65, 110 30 S 170 50, 190 20' fill='none' stroke='%230284c7' stroke-width='2.5' stroke-linecap='round'/><text x='115' y='60' font-family='sans-serif' font-size='10' fill='%23666'>Dr. M. Tariq Khan</text></svg>",
+      "stamp_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><circle cx='60' cy='60' r='54' fill='none' stroke='%230284c7' stroke-width='2'/><circle cx='60' cy='60' r='46' fill='none' stroke='%230284c7' stroke-width='1'/><text x='60' y='42' font-family='sans-serif' font-size='8' text-anchor='middle' font-weight='bold' fill='%230284c7'>DR. M. TARIQ KHAN</text><text x='60' y='55' font-family='sans-serif' font-size='7' text-anchor='middle' fill='%230284c7'>PMDC # 34102-S</text><text x='60' y='68' font-family='sans-serif' font-size='7' text-anchor='middle' fill='%230284c7'>FCPS CARDIOLOGY</text><text x='60' y='82' font-family='sans-serif' font-size='6.5' text-anchor='middle' fill='%230284c7'>CLIFTON KARACHI</text></svg>",
+      "footer_text": "Cardiology follow-ups require latest lipid profile and ECG records.",
+      "show_qr": true,
+      "show_photo": true,
+      "paper_margin": "normal",
+      "language": "en",
+      "updated_at": "2026-09-30T23:03:24.592Z"
+    },
+    {
+      "id": "pdf-set-doc-3",
+      "doctor_id": "doc-3",
+      "header_layout": "right-logo",
+      "primary_color": "#7C3AED",
+      "secondary_color": "#0D9488",
+      "font": "Noto Nastaliq Urdu",
+      "logo_url": "",
+      "signature_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='70' viewBox='0 0 200 70'><path d='M20 45 C 50 15, 80 55, 120 25 T 180 35' fill='none' stroke='%237c3aed' stroke-width='2.5' stroke-linecap='round'/><text x='110' y='60' font-family='sans-serif' font-size='10' fill='%23666'>Dr. Fatima Noor</text></svg>",
+      "stamp_url": "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'><circle cx='60' cy='60' r='54' fill='none' stroke='%237c3aed' stroke-width='2'/><circle cx='60' cy='60' r='46' fill='none' stroke='%237c3aed' stroke-width='1'/><text x='60' y='42' font-family='sans-serif' font-size='8' text-anchor='middle' font-weight='bold' fill='%237c3aed'>DR. FATIMA NOOR</text><text x='60' y='55' font-family='sans-serif' font-size='7' text-anchor='middle' fill='%237c3aed'>PMDC # 61284-F</text><text x='60' y='68' font-family='sans-serif' font-size='7' text-anchor='middle' fill='%237c3aed'>PEDIATRICIAN</text><text x='60' y='82' font-family='sans-serif' font-size='6.5' text-anchor='middle' fill='%237c3aed'>F-10 ISLAMABAD</text></svg>",
+      "footer_text": "Always administer pediatric medicines with calibrated oral syringe or measuring spoon.",
+      "show_qr": true,
+      "show_photo": true,
+      "paper_margin": "wide",
+      "language": "ur",
+      "updated_at": "2026-09-30T23:03:24.592Z"
+    }
+  ],
+  "prescriptionShares": [
+    {
+      "id": "share-101",
+      "prescription_id": "rx-901",
+      "doctor_id": "doc-1",
+      "patient_id": "pat-1",
+      "share_token": "7f8a9b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a",
+      "expires_at": "2026-10-06T23:03:24.592Z",
+      "max_downloads": 10,
+      "download_count": 3,
+      "revoked": false,
+      "created_at": "2026-09-29T23:03:24.592Z",
+      "last_downloaded_at": "2026-09-30T19:03:24.592Z"
+    },
+    {
+      "id": "share-102",
+      "prescription_id": "rx-902",
+      "doctor_id": "doc-1",
+      "patient_id": "pat-2",
+      "share_token": "1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b",
+      "expires_at": "2026-10-05T23:03:24.592Z",
+      "max_downloads": null,
+      "download_count": 1,
+      "revoked": false,
+      "created_at": "2026-09-28T23:03:24.592Z",
+      "last_downloaded_at": "2026-09-30T11:03:24.592Z"
+    },
+    {
+      "id": "share-103",
+      "prescription_id": "rx-903",
+      "doctor_id": "doc-1",
+      "patient_id": "pat-3",
+      "share_token": "3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c",
+      "expires_at": "2026-09-27T23:03:24.592Z",
+      "max_downloads": 5,
+      "download_count": 2,
+      "revoked": false,
+      "created_at": "2026-09-20T23:03:24.592Z",
+      "last_downloaded_at": "2026-09-26T23:03:24.592Z"
+    }
+  ],
+  "messageLogs": [
+    {
+      "id": "msg-1",
+      "prescription_id": "rx-901",
+      "share_id": "share-101",
+      "appointment_id": null,
+      "doctor_id": "doc-1",
+      "patient_id": "pat-1",
+      "type": "prescription",
+      "channel": "wa_link",
+      "to_number": "923014458921",
+      "message_text": "Hello Kamran Ali, your prescription from Dr. Ayesha Siddiqui (Shifa Executive Clinic & Diagnostic Center) is ready. View or download it here: http://localhost:5173/rx/7f8a9b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a. This link expires on 2026-10-06. Get well soon.",
+      "status": "opened",
+      "provider_message_id": null,
+      "error": null,
+      "created_at": "2026-09-29T23:03:24.592Z",
+      "updated_at": "2026-09-29T23:03:24.592Z"
+    },
+    {
+      "id": "msg-2",
+      "prescription_id": null,
+      "share_id": null,
+      "appointment_id": "apt-101",
+      "doctor_id": "doc-1",
+      "patient_id": "pat-2",
+      "type": "reminder",
+      "channel": "wa_link",
+      "to_number": "923005518293",
+      "message_text": "Hello Zainab Bibi, this is a reminder of your appointment with Dr. Ayesha Siddiqui on 2026-09-30 at 04:30 PM, Suite 402, 4th Floor, Al-Hafeez Executive Tower, Gulberg III, Lahore.",
+      "status": "delivered",
+      "provider_message_id": null,
+      "error": null,
+      "created_at": "2026-09-30T17:03:24.592Z",
+      "updated_at": "2026-09-30T17:03:24.592Z"
+    },
+    {
+      "id": "msg-3",
+      "prescription_id": null,
+      "share_id": null,
+      "appointment_id": "apt-102",
+      "doctor_id": "doc-1",
+      "patient_id": "pat-3",
+      "type": "confirmation",
+      "channel": "wa_cloud_api",
+      "to_number": "923219928172",
+      "message_text": "Hello Usman Tariq, your appointment with Dr. Ayesha Siddiqui at Shifa Executive Clinic & Diagnostic Center has been confirmed for 2026-10-01 at 05:00 PM.",
+      "status": "read",
+      "provider_message_id": "wamid.HBgMOTIzMjE5OTI4MTcyFQIAERgSMzNBQjBGMDAyNDU1MDk4MTcy",
+      "error": null,
+      "created_at": "2026-09-30T05:03:24.592Z",
+      "updated_at": "2026-09-30T06:03:24.592Z"
+    }
+  ],
+  "ledgerEntries": [
+    {
+      "id": "led-101",
+      "doctor_id": "doc-1",
+      "patient_id": "pat-1",
+      "patient_name": "Muhammad Ali",
+      "patient_code": "PAT-00124",
+      "patient_phone": "0300-8472910",
+      "visit_id": "rx-1",
+      "appointment_id": "apt-101",
+      "transaction_id": "TXN-2026-001",
+      "entry_type": "cash_in",
+      "type": "Consultation Fee",
+      "category": "Consultation",
+      "description": "General clinical consultation & diabetes checkup",
+      "amount": 2500,
+      "payment_method": "Cash",
+      "reference": "REC-1001",
+      "remarks": "Received full payment at front desk",
+      "transaction_date": "2026-09-30",
+      "transaction_time": "10:30 AM",
+      "status": "completed",
+      "created_by": "Dr. Ayesha Siddiqui",
+      "created_at": "2026-09-30T21:03:24.592Z",
+      "updated_at": "2026-09-30T21:03:24.592Z",
+      "audit_history": []
+    },
+    {
+      "id": "led-102",
+      "doctor_id": "doc-1",
+      "patient_id": "pat-2",
+      "patient_name": "Zainab Bibi",
+      "patient_code": "PAT-00125",
+      "patient_phone": "0300-5518293",
+      "visit_id": null,
+      "appointment_id": "apt-102",
+      "transaction_id": "TXN-2026-002",
+      "entry_type": "cash_in",
+      "type": "Follow-up Fee",
+      "category": "Consultation",
+      "description": "Hypertension follow-up visit & blood pressure review",
+      "amount": 1500,
+      "payment_method": "JazzCash",
+      "reference": "JC-8829102",
+      "remarks": "Paid via JazzCash mobile account",
+      "transaction_date": "2026-09-30",
+      "transaction_time": "11:45 AM",
+      "status": "completed",
+      "created_by": "Dr. Ayesha Siddiqui",
+      "created_at": "2026-09-30T22:03:24.592Z",
+      "updated_at": "2026-09-30T22:03:24.592Z",
+      "audit_history": []
+    },
+    {
+      "id": "led-103",
+      "doctor_id": "doc-1",
+      "patient_id": "pat-3",
+      "patient_name": "Usman Tariq",
+      "patient_code": "PAT-00126",
+      "patient_phone": "0321-9928172",
+      "visit_id": null,
+      "appointment_id": null,
+      "transaction_id": "TXN-2026-003",
+      "entry_type": "cash_in",
+      "type": "Procedure Fee",
+      "category": "Procedure",
+      "description": "Minor skin excision & local dressing",
+      "amount": 5000,
+      "payment_method": "Bank Transfer",
+      "reference": "FT-MBL-92817",
+      "remarks": "Meezan Bank online transfer confirmed",
+      "transaction_date": "2026-09-29",
+      "transaction_time": "03:15 PM",
+      "status": "completed",
+      "created_by": "Dr. Ayesha Siddiqui",
+      "created_at": "2026-09-29T23:03:24.592Z",
+      "updated_at": "2026-09-29T23:03:24.592Z",
+      "audit_history": []
+    },
+    {
+      "id": "led-104",
+      "doctor_id": "doc-1",
+      "patient_id": null,
+      "patient_name": "Clinic Supplies & Consumables",
+      "patient_code": null,
+      "patient_phone": null,
+      "visit_id": null,
+      "appointment_id": null,
+      "transaction_id": "TXN-2026-004",
+      "entry_type": "cash_out",
+      "type": "Medical Supplies",
+      "category": "Supplies",
+      "description": "Sterile gloves, disposable syringes, gauze pads & cotton rolls",
+      "amount": 4500,
+      "payment_method": "Cash",
+      "reference": "SUP-4019",
+      "remarks": "Purchased from Al-Razi Surgical Gulberg",
+      "transaction_date": "2026-09-29",
+      "transaction_time": "05:00 PM",
+      "status": "completed",
+      "created_by": "Dr. Ayesha Siddiqui",
+      "created_at": "2026-09-29T23:03:24.592Z",
+      "updated_at": "2026-09-29T23:03:24.592Z",
+      "audit_history": []
+    },
+    {
+      "id": "led-105",
+      "doctor_id": "doc-1",
+      "patient_id": "pat-4",
+      "patient_name": "Fatima Noor",
+      "patient_code": "PAT-00127",
+      "patient_phone": "0333-4129841",
+      "visit_id": null,
+      "appointment_id": null,
+      "transaction_id": "TXN-2026-005",
+      "entry_type": "cash_in",
+      "type": "Injection Fee",
+      "category": "Procedure",
+      "description": "IM Rocephin administration & monitoring",
+      "amount": 800,
+      "payment_method": "Easypaisa",
+      "reference": "EP-910283",
+      "remarks": "Direct Easypaisa scan QR at clinic counter",
+      "transaction_date": "2026-09-28",
+      "transaction_time": "02:20 PM",
+      "status": "completed",
+      "created_by": "Dr. Ayesha Siddiqui",
+      "created_at": "2026-09-28T23:03:24.592Z",
+      "updated_at": "2026-09-28T23:03:24.592Z",
+      "audit_history": []
+    },
+    {
+      "id": "led-106",
+      "doctor_id": "doc-1",
+      "patient_id": null,
+      "patient_name": "LESCO Electricity & Utilities",
+      "patient_code": null,
+      "patient_phone": null,
+      "visit_id": null,
+      "appointment_id": null,
+      "transaction_id": "TXN-2026-006",
+      "entry_type": "cash_out",
+      "type": "Electricity",
+      "category": "Utilities",
+      "description": "Monthly clinic electricity bill (Suite 402, Al-Hafeez Tower)",
+      "amount": 18500,
+      "payment_method": "Bank Transfer",
+      "reference": "BILL-LESCO-0926",
+      "remarks": "Paid online through HBL mobile banking",
+      "transaction_date": "2026-09-25",
+      "transaction_time": "12:00 PM",
+      "status": "completed",
+      "created_by": "Dr. Ayesha Siddiqui",
+      "created_at": "2026-09-25T23:03:24.592Z",
+      "updated_at": "2026-09-25T23:03:24.592Z",
+      "audit_history": []
+    },
+    {
+      "id": "led-107",
+      "doctor_id": "doc-1",
+      "patient_id": "pat-1",
+      "patient_name": "Muhammad Ali",
+      "patient_code": "PAT-00124",
+      "patient_phone": "0300-8472910",
+      "visit_id": null,
+      "appointment_id": null,
+      "transaction_id": "TXN-2026-007",
+      "entry_type": "cash_out",
+      "type": "Refund",
+      "category": "Refund",
+      "description": "Partial refund for cancelled follow-up lab test",
+      "amount": 1000,
+      "payment_method": "Cash",
+      "reference": "REF-0012",
+      "remarks": "Patient rescheduled lab test with external hospital",
+      "transaction_date": "2026-09-24",
+      "transaction_time": "04:30 PM",
+      "status": "completed",
+      "created_by": "Dr. Ayesha Siddiqui",
+      "created_at": "2026-09-24T23:03:24.592Z",
+      "updated_at": "2026-09-24T23:03:24.592Z",
+      "audit_history": []
+    },
+    {
+      "id": "led-108",
+      "doctor_id": "doc-1",
+      "patient_id": "pat-5",
+      "patient_name": "Ahmed Hassan",
+      "patient_code": "PAT-00128",
+      "patient_phone": "0345-6789012",
+      "visit_id": null,
+      "appointment_id": null,
+      "transaction_id": "TXN-2026-008",
+      "entry_type": "cash_in",
+      "type": "Consultation Fee",
+      "category": "Consultation",
+      "description": "Executive cardiac & general physical checkup",
+      "amount": 3000,
+      "payment_method": "Card",
+      "reference": "POS-VISA-7718",
+      "remarks": "Bank Alfalah POS terminal swipe",
+      "transaction_date": "2026-09-22",
+      "transaction_time": "06:15 PM",
+      "status": "completed",
+      "created_by": "Dr. Ayesha Siddiqui",
+      "created_at": "2026-09-22T23:03:24.592Z",
+      "updated_at": "2026-09-22T23:03:24.592Z",
+      "audit_history": []
+    }
+  ],
+  "auditLogs": [
+    {
+      "id": "audit-1790809447770-65hn",
+      "doctor_id": "doc-1",
+      "action": "AUTH_LOGIN_SUCCESS",
+      "details": "Doctor Dr. Ayesha Siddiqui logged in securely",
+      "timestamp": "2026-09-30T23:04:07.770Z"
+    },
+    {
+      "id": "audit-1790809423107-61ud",
+      "doctor_id": "doc-1",
+      "action": "AUTH_LOGIN_SUCCESS",
+      "details": "Doctor Dr. Ayesha Siddiqui logged in securely",
+      "timestamp": "2026-09-30T23:03:43.107Z"
+    },
+    {
+      "id": "audit-1",
+      "doctor_id": "doc-1",
+      "action": "PRACTICE_SYSTEM_INITIALIZED",
+      "details": "DocCare clinical practice suite initialized with Pakistan Formulary Live Medicine Database & Dual-Role Auth",
+      "timestamp": "2026-09-30T23:03:24.595Z"
+    }
+  ]
+}

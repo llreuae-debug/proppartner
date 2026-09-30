@@ -1,0 +1,209 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+.urdu-text {
+  font-family: 'Noto Nastaliq Urdu', 'Jameel Noori Nastaleeq', 'Urdu Typesetting', serif;
+  line-height: 2.2 !important;
+}
+
+/* Glassmorphism & Custom Surfaces */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(203, 213, 225, 0.5);
+}
+
+.dark .glass-panel {
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(51, 65, 85, 0.5);
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #334155;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Medical Atmosphere Floating Keyframes & Effects */
+@keyframes medFloatSlow1 {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(12px, -24px, 0) rotate(4deg);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+}
+
+@keyframes medFloatSlow2 {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(-16px, -32px, 0) rotate(-6deg);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+}
+
+@keyframes medFloatSlow3 {
+  0% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(18px, -18px, 0) scale(1.05);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+}
+
+@keyframes medPulseAmbient {
+  0%, 100% {
+    opacity: 0.35;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.65;
+    transform: scale(1.08);
+  }
+}
+
+.animate-med-float-1 {
+  animation: medFloatSlow1 16s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-med-float-2 {
+  animation: medFloatSlow2 22s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-med-float-3 {
+  animation: medFloatSlow3 18s ease-in-out infinite;
+  will-change: transform;
+}
+
+.animate-med-ambient {
+  animation: medPulseAmbient 14s ease-in-out infinite;
+  will-change: opacity, transform;
+}
+
+/* Accessibility: Respect prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .animate-med-float-1,
+  .animate-med-float-2,
+  .animate-med-float-3,
+  .animate-med-ambient,
+  .animate-logo-heartbeat,
+  .animate-logo-entrance,
+  .animate-logo-shimmer {
+    animation: none !important;
+  }
+}
+
+/* DocCare Logo Pulse, Shimmer & Entrance Animations */
+@keyframes logoHeartbeat {
+  0% { transform: scale(1); }
+  14% { transform: scale(1.06); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.04); }
+  70% { transform: scale(1); }
+  100% { transform: scale(1); }
+}
+
+@keyframes logoEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(6px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes logoShimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-logo-heartbeat {
+  animation: logoHeartbeat 3.5s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.animate-logo-entrance {
+  animation: logoEntrance 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.logo-glow-hover {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.logo-glow-hover:hover {
+  transform: translateY(-1px) scale(1.02);
+  filter: drop-shadow(0 4px 12px rgba(13, 148, 136, 0.25));
+}
+
+/* Print Stylesheet for A4 Prescription */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  
+  #printable-prescription,
+  #printable-prescription * {
+    visibility: visible;
+  }
+  
+  #printable-prescription {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 210mm;
+    min-height: 297mm;
+    margin: 0;
+    padding: 15mm;
+    background: white !important;
+    color: #1e293b !important;
+    box-shadow: none !important;
+    border: none !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+}
+
