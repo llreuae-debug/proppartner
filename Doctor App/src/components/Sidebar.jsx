@@ -15,7 +15,8 @@ import {
   BarChart3,
   Globe,
   Stethoscope,
-  Shield
+  Shield,
+  Pill
 } from 'lucide-react';
 import { useLanguage } from '../context/LanguageContext';
 import { useAuth } from '../context/AuthContext';
@@ -38,6 +39,7 @@ export default function Sidebar({ activeTab, onSelectTab, onOpenQR }) {
     { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { id: 'patients', label: 'Patients Directory', icon: Users },
     { id: 'prescriptions', label: 'Visits & Prescriptions', icon: FileText },
+    { id: 'formulary', label: 'Pakistan Formulary', icon: Pill },
     { id: 'appointments', label: 'Appointments', icon: CalendarClock },
     { id: 'ledger', label: 'Doctor Ledger', icon: Wallet },
     { id: 'reports', label: 'Practice Reports', icon: BarChart3 },

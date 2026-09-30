@@ -5,8 +5,8 @@
       "email": "dr.ayesha@doccare.pk",
       "phone": "+92 300 8472910",
       "name": "Dr. Ayesha Siddiqui",
-      "passwordHash": "7dea2466af260845e03a69ae77d892d65cd8f50faabfb43a847d4a20c2ab5fd20272b4e4bcafd49ccaaa9e9e74ef999c7a9471f8c62e892813f7c0c16f5d3661",
-      "salt": "0354104e7a1e0f5c7465af636a6f57e9",
+      "passwordHash": "5404638ce62f28f3ae7e8657c37345eb5586a35b750e6063fa489d35d31f35a2a35e2f4189621951c2bb64e7abe52e231c1a1f5b0da84e0f351eb5e9f946c847",
+      "salt": "64378bfdff517ac57bb4fbf791097044",
       "role": "doctor",
       "doctorId": "doc-1",
       "patientId": null,
@@ -16,15 +16,15 @@
       "clinicName": "Shifa Executive Clinic & Diagnostic Center",
       "avatarUrl": "https://images.unsplash.com/photo-1594824813590-78c0053e16b9?auto=format&fit=crop&q=80&w=400",
       "googleId": null,
-      "createdAt": "2026-09-30T23:03:24.593Z"
+      "createdAt": "2026-09-30T23:50:03.490Z"
     },
     {
       "id": "user-doc-2",
       "email": "dr.tariq@doccare.pk",
       "phone": "+92 321 9928172",
       "name": "Dr. Muhammad Tariq Khan",
-      "passwordHash": "f7278036e5394469bd37fe5ab987cd303ca185b2b99b496abad40ac2445dfe9e5abd18d74bc8fa5baf2a15c5ed9764724c84a815ab803285b917c583a8b3ee10",
-      "salt": "4200371d20489ce45f36aaae97f13228",
+      "passwordHash": "2121ae2e6c04fa752492d6e8daf3be3610b210a08bb63217738f3620bec5d9e8524d14dbd9848927ba9192c336ee7c5115d0e63ae3634ef54f192fea5a3744e2",
+      "salt": "4fb8e2c20661c919e5d0dbe79b5fed0c",
       "role": "doctor",
       "doctorId": "doc-2",
       "patientId": null,
@@ -34,15 +34,15 @@
       "clinicName": "Karachi Heart Institute & Clinic",
       "avatarUrl": "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=400",
       "googleId": null,
-      "createdAt": "2026-09-30T23:03:24.594Z"
+      "createdAt": "2026-09-30T23:50:03.490Z"
     },
     {
       "id": "user-doc-3",
       "email": "dr.fatima@doccare.pk",
       "phone": "+92 333 5519823",
       "name": "Dr. Fatima Noor",
-      "passwordHash": "e1a95ed96285864431e51aa52caab35f65d3f301787c071d8bc4d88afcd55456829bb17b18c4f896c91363dffc2762611f8be51cd01b14c537684cd881f57086",
-      "salt": "8847bf2fa417167259f7d1d0e05c9bf9",
+      "passwordHash": "3c5edd77fdd8c821c3390a109cbb8828c7a29551206825b067bed3122c8bfa96255dae1bfc615968da4a5ec6f5fa4cb10294de62ac19b55a23196335ca33244e",
+      "salt": "4ac7951eba493206739a3706b8d5d414",
       "role": "doctor",
       "doctorId": "doc-3",
       "patientId": null,
@@ -52,15 +52,15 @@
       "clinicName": "Little Angels Child Health Care",
       "avatarUrl": "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=400",
       "googleId": null,
-      "createdAt": "2026-09-30T23:03:24.594Z"
+      "createdAt": "2026-09-30T23:50:03.490Z"
     },
     {
       "id": "user-doc-4",
       "email": "dr.bilal@doccare.pk",
       "phone": "+92 334 1289045",
       "name": "Dr. Bilal Ansari",
-      "passwordHash": "3006b0c631b1353a2bd439e8facd63965b9e4935e9afde5e5a251e7ba84c1178dce0bc5a872a1936886e2bf6489bdfa8995013ccb253b1fca5eb29c2cb3aeea2",
-      "salt": "f5f8bb924fc8bc71efbcb868c058d600",
+      "passwordHash": "6b6789416c14339232a406c5b8f9a8fab3e26568eb5b62e9491cad12c68367d9a37a3c31c4885b994db81acc6cedcf0cb5c40a59948cac3e66b357a7f50146c0",
+      "salt": "c416cb25bd610e9bd1e40f0205e6f6b8",
       "role": "doctor",
       "doctorId": "doc-4",
       "patientId": null,
@@ -70,15 +70,15 @@
       "clinicName": "DermaCare Skin & Laser Clinic",
       "avatarUrl": "https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&q=80&w=400",
       "googleId": null,
-      "createdAt": "2026-09-30T23:03:24.594Z"
+      "createdAt": "2026-09-30T23:50:03.491Z"
     },
     {
       "id": "user-doc-5",
       "email": "dr.maryam@doccare.pk",
       "phone": "+92 302 6781290",
       "name": "Dr. Maryam Zafar",
-      "passwordHash": "b002db9f9eaf819edfbe34601ce580592d3a8a3a38a41db7baadb8d82264e9f927b649a1917c34ca21cffed8fd56e2f3227013c591518f0f582ba99088081c1f",
-      "salt": "f345cfdf950aecabfb200291eb8ee671",
+      "passwordHash": "e1a6440d4ebe65fbd21314663a02b71a19244c6fa20af5cd0ad4608d6c0a3b9b92850cd67f1e58ac418cd59555c180b7809c1ceb2ee11c1abb3b4a26abbe00b7",
+      "salt": "39fd168f6715a3ec17bfbe0e6ddc0082",
       "role": "doctor",
       "doctorId": "doc-5",
       "patientId": null,
@@ -88,15 +88,15 @@
       "clinicName": "Maternal Wellness Center & Hospital",
       "avatarUrl": "https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&q=80&w=400",
       "googleId": null,
-      "createdAt": "2026-09-30T23:03:24.594Z"
+      "createdAt": "2026-09-30T23:50:03.491Z"
     },
     {
       "id": "user-doc-6",
       "email": "dr.usman@doccare.pk",
       "phone": "+92 300 7812903",
       "name": "Dr. Usman Chaudhry",
-      "passwordHash": "4da95e5c3718ae4eed5492c6bc0169abe6d209d4f2cdefd3a0e0427c2fe297dac35496b7d30369085fbbf955abf42fe4d6aa7329ad7f26a4f56d9e731bdbef5d",
-      "salt": "5fd17917a8b653366ad822be6ec149e5",
+      "passwordHash": "2a4a7dd6993709c254514b331006972ee3ac3a8cd72d6227e442113b5632010d0dc32f1988ca21833d12113beab3ce0e0fe025c987f330f2c4b40ab636105ec7",
+      "salt": "72de4013ab066c5be3622e941254bdfc",
       "role": "doctor",
       "doctorId": "doc-6",
       "patientId": null,
@@ -106,154 +106,56 @@
       "clinicName": "Orthocare Bone & Joint Center",
       "avatarUrl": "https://images.unsplash.com/photo-1582750433449-648ed127bb54?auto=format&fit=crop&q=80&w=400",
       "googleId": null,
-      "createdAt": "2026-09-30T23:03:24.595Z"
+      "createdAt": "2026-09-30T23:50:03.491Z"
     },
     {
       "id": "user-pat-1",
       "email": "kamran.ali@gmail.com",
       "phone": "0300-4829103",
       "name": "Kamran Ali",
-      "passwordHash": "1ac3986c04e0417b73e268c373af299892efdd0779d7b7319731a13fc46d8ce285e412ac1f74db27c9dcdb2c10b78567b61b48ecc5a024744a3e7c9d1161a69e",
-      "salt": "0b7f5114928aae02426c78a821eb2962",
+      "passwordHash": "4c2daeee7d2a4debf19790f6061867d79e4eb0c0f1380db0ec3b1e4f43bd2203ec2a575d5e3d07987f416b309107abd936708441f614f621ef5bd851bc811f3f",
+      "salt": "3346a3f7a9680e501b06073a8b6c9486",
       "role": "patient",
       "doctorId": null,
       "patientId": "pat-1",
       "city": "Lahore",
       "avatarUrl": "https://api.dicebear.com/7.x/avataaars/svg?seed=Kamran%20Ali",
       "googleId": null,
-      "createdAt": "2026-09-30T23:03:24.595Z"
+      "createdAt": "2026-09-30T23:50:03.492Z"
     },
     {
       "id": "user-pat-2",
       "email": "zainab.bibi@gmail.com",
       "phone": "0322-7183904",
       "name": "Zainab Bibi",
-      "passwordHash": "d968c0c1169d2df4ccd090c8720a79cda518345caea559cbc4728c7b1b245b9acfafc70c88ef91698708c3c8cd0bce448c688c21e0adc675ddd7865c2f3e4640",
-      "salt": "28316b566606a8fea5b9a33d603d9bb7",
+      "passwordHash": "9462dbba4ae66a03e7035be7ac1abcf833f3671d9a222a55a77d0804fa28b67fcbd3839809b247ce9a209a200ef28d30c639af403eebd65ff64f17b329d68d00",
+      "salt": "36c4b4e5cd4114d62f9b92f726726315",
       "role": "patient",
       "doctorId": null,
       "patientId": "pat-2",
       "city": "Lahore",
       "avatarUrl": "https://api.dicebear.com/7.x/avataaars/svg?seed=Zainab%20Bibi",
       "googleId": null,
-      "createdAt": "2026-09-30T23:03:24.595Z"
+      "createdAt": "2026-09-30T23:50:03.492Z"
     },
     {
       "id": "user-pat-demo",
       "email": "patient@doccare.pk",
       "phone": "0300-4829103",
       "name": "Demo Patient (Kamran Ali)",
-      "passwordHash": "3cb105d3557cb1acb1cc469ec95632eaa6344e024cfe0b965b5db2cf2238b67fe7a4b00ad3bf580d5773d628ca33a054d0af4c18e8ea4543461ce6f3943e281a",
-      "salt": "444b31773985566d274a354284a3035b",
+      "passwordHash": "c3c53e7474823483d3517c3cb53cd6bf89deec07b6d4edccefbe5acf7d3330c45438294b5f5ac7c01630d5626d7ba7a3d84d04bf715cb0cbd56c49354888c6de",
+      "salt": "7ee40427a580e303b5b553dfd6b7d2e3",
       "role": "patient",
       "doctorId": null,
       "patientId": "pat-1",
       "city": "Lahore",
       "avatarUrl": "https://api.dicebear.com/7.x/avataaars/svg?seed=Demo%20Patient%20(Kamran%20Ali)",
       "googleId": null,
-      "createdAt": "2026-09-30T23:03:24.595Z"
-    },
-    {
-      "id": "user-g-1790809437538-osnw",
-      "email": "dr.google.test@gmail.com",
-      "phone": "+92 300 0000000",
-      "name": "Dr. Zulfiqar Google",
-      "passwordHash": "5210fc87122cd38f0d02691ba096ca14b0a6088ef8d8efaff7c5834a4732d549e8070d1f4559c40a897be0a5be9c9f887a088d510acc6051fbf131993fa7bd66",
-      "salt": "1179027bb03e6afd790f31ff365f0886",
-      "role": "doctor",
-      "doctorId": "doc-1790809437538",
-      "patientId": null,
-      "city": "Lahore",
-      "specialty": "General Physician",
-      "pmdcNumber": "35276-P",
-      "clinicName": "DocCare Executive Medical Clinic",
-      "avatarUrl": "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=400",
-      "googleId": "g-101",
-      "createdAt": "2026-09-30T23:03:57.539Z"
-    },
-    {
-      "id": "user-g-1790809542809-4xj8",
-      "email": "patient.google.2792@gmail.com",
-      "phone": "+92 300 9876543",
-      "name": "Zubair Google",
-      "passwordHash": "5d2a5be7448958abecb13db1bd5311187322a467784d4045496bcd2d3f301b940002e5f12ba1f3eb0d16ab06b3815dcdb338b6463889957ef409996721bd3d86",
-      "salt": "35d6add2e238283b7f3a361c7ff4006d",
-      "role": "patient",
-      "doctorId": null,
-      "patientId": "pat-1790809542809",
-      "city": "Lahore",
-      "avatarUrl": "https://api.dicebear.com/7.x/avataaars/svg?seed=Zubair%20Google",
-      "googleId": "google-uid-1790809542792",
-      "createdAt": "2026-09-30T23:05:42.812Z"
-    },
-    {
-      "id": "user-g-1790811388189-ttmj",
-      "email": "dr.google.8174@gmail.com",
-      "phone": "+92 300 9876543",
-      "name": "Dr. Tariq Google",
-      "passwordHash": "7da49a3bbebee4ffe27804f6cbc58787180bef00ea9fff8caef73157567c49721d2863bfdae78c6253060e4892a9cfd2b3a1e3d0b602d2aa26b57c9d27f375ed",
-      "salt": "9b5051f0920552775938972e8aaff4ee",
-      "role": "doctor",
-      "doctorId": "doc-1790811388189",
-      "patientId": null,
-      "city": "Lahore",
-      "specialty": "Consultant Specialist",
-      "pmdcNumber": "70226-P",
-      "clinicName": "Google Health Partner Clinic",
-      "avatarUrl": "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=400",
-      "googleId": "google-uid-1790811388174",
-      "createdAt": "2026-09-30T23:36:28.192Z"
+      "createdAt": "2026-09-30T23:50:03.492Z"
     }
   ],
-  "sessions": [
-    {
-      "token": "dck_df24ecd7399220420d92b8a5173fa0c7b3ca5f43d0aee86de88768f0c42f639c",
-      "userId": "user-pat-1",
-      "role": "patient",
-      "doctorId": null,
-      "patientId": "pat-1",
-      "createdAt": "2026-09-30T23:03:47.427Z",
-      "expiresAt": "2026-10-30T23:03:47.427Z"
-    },
-    {
-      "token": "dck_3be75e8e7937b299b3e38dd32c47fc252771e1eb8483993a4fce1077a4a321a7",
-      "userId": "user-g-1790809437538-osnw",
-      "role": "doctor",
-      "doctorId": "doc-1790809437538",
-      "patientId": null,
-      "createdAt": "2026-09-30T23:03:57.540Z",
-      "expiresAt": "2026-10-30T23:03:57.540Z"
-    },
-    {
-      "token": "dck_3438e16e3677ad4b720a7461a1c15e5e5b9866e096c8e9f85cad8b81b146c8d4",
-      "userId": "user-g-1790811388189-ttmj",
-      "role": "doctor",
-      "doctorId": "doc-1790811388189",
-      "patientId": null,
-      "createdAt": "2026-09-30T23:36:28.194Z",
-      "expiresAt": "2026-10-30T23:36:28.194Z"
-    }
-  ],
-  "passwordResets": [
-    {
-      "token": "fb02b3920e46ca152fac91461a8e04e286c308a37dff5790783a1c15f09fb44d",
-      "email": "dr.ayesha@doccare.pk",
-      "userId": "user-doc-1",
-      "role": "doctor",
-      "expiresAt": "2026-09-30T23:18:57.551Z",
-      "used": true,
-      "createdAt": "2026-09-30T23:03:57.551Z"
-    },
-    {
-      "token": "87500b3e58db2e1c6e78a2fccb7d20024e087dcc2d83ac649b4a51a0d128bcde",
-      "email": "dr.ayesha@doccare.pk",
-      "userId": "user-doc-1",
-      "role": "doctor",
-      "expiresAt": "2026-09-30T23:19:12.458Z",
-      "used": true,
-      "createdAt": "2026-09-30T23:04:12.458Z"
-    }
-  ],
+  "sessions": [],
+  "passwordResets": [],
   "doctors": [
     {
       "id": "doc-1",
@@ -815,178 +717,6 @@
       "whatsappEnabled": true,
       "whatsapp_message_template": "Hello [Patient Name], your prescription from Dr. [Doctor Name] ([Clinic Name]) is ready. View or download it here: [Link]. This link expires on [Expiry Date]. Get well soon.",
       "default_link_expiry_days": 7
-    },
-    {
-      "id": "doc-1790809437538",
-      "slug": "dr--zulfiqar-google",
-      "name": "Dr. Zulfiqar Google",
-      "email": "dr.google.test@gmail.com",
-      "phone": "+92 300 0000000",
-      "whatsapp": "+92 300 0000000",
-      "specialization": "General Physician",
-      "qualifications": "MBBS",
-      "pmdcNumber": "35276-P",
-      "experienceYears": 5,
-      "languages": [
-        "English",
-        "Urdu"
-      ],
-      "services": [
-        "General Medical Consultation",
-        "Preventive Care"
-      ],
-      "consultationFee": 2000,
-      "followUpFee": 1000,
-      "onlineFee": 1500,
-      "emergencyFee": 3000,
-      "rating": 5,
-      "reviewCount": 1,
-      "slotDurationMinutes": 15,
-      "clinicName": "DocCare Executive Medical Clinic",
-      "address": "Medical Complex, Main Boulevard",
-      "city": "Lahore",
-      "province": "Punjab",
-      "country": "Pakistan",
-      "mapLink": "https://maps.google.com/?q=31.5204,74.3587",
-      "profileImage": "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=400",
-      "signatureImage": "",
-      "stampImage": "",
-      "bio": "Consultant physician providing evidence-based healthcare.",
-      "availableDays": [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday"
-      ],
-      "timeSlots": [
-        "05:00 PM - 05:15 PM",
-        "05:15 PM - 05:30 PM",
-        "05:30 PM - 05:45 PM",
-        "05:45 PM - 06:00 PM",
-        "06:00 PM - 06:15 PM",
-        "06:15 PM - 06:30 PM",
-        "06:30 PM - 06:45 PM",
-        "06:45 PM - 07:00 PM"
-      ],
-      "working_sessions": {
-        "morning": {
-          "enabled": false,
-          "start": "09:00 AM",
-          "end": "01:00 PM"
-        },
-        "evening": {
-          "enabled": true,
-          "start": "05:00 PM",
-          "end": "07:00 PM"
-        }
-      },
-      "public_profile_settings": {
-        "show_profile_publicly": true,
-        "show_photo": true,
-        "show_specialty": true,
-        "show_qualifications": true,
-        "show_experience": true,
-        "show_pmdc": true,
-        "show_clinic": true,
-        "show_address": true,
-        "show_fee": true,
-        "show_public_contact": true,
-        "allow_online_booking": true
-      },
-      "auto_confirm_appointments": false,
-      "headerColor": "#0f766e",
-      "accentColor": "#0284c7",
-      "disclaimerText": "Consultation is valid for 7 days.",
-      "whatsappEnabled": true,
-      "whatsapp_message_template": "Hello [Patient Name], your prescription from Dr. [Doctor Name] is ready: [Link]",
-      "default_link_expiry_days": 7
-    },
-    {
-      "id": "doc-1790811388189",
-      "slug": "dr--tariq-google",
-      "name": "Dr. Tariq Google",
-      "email": "dr.google.8174@gmail.com",
-      "phone": "+92 300 9876543",
-      "whatsapp": "+92 300 9876543",
-      "specialization": "Consultant Specialist",
-      "qualifications": "MBBS",
-      "pmdcNumber": "70226-P",
-      "experienceYears": 5,
-      "languages": [
-        "English",
-        "Urdu"
-      ],
-      "services": [
-        "General Medical Consultation",
-        "Preventive Care"
-      ],
-      "consultationFee": 2000,
-      "followUpFee": 1000,
-      "onlineFee": 1500,
-      "emergencyFee": 3000,
-      "rating": 5,
-      "reviewCount": 1,
-      "slotDurationMinutes": 15,
-      "clinicName": "Google Health Partner Clinic",
-      "address": "Medical Complex, Main Boulevard",
-      "city": "Lahore",
-      "province": "Punjab",
-      "country": "Pakistan",
-      "mapLink": "https://maps.google.com/?q=31.5204,74.3587",
-      "profileImage": "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=400",
-      "signatureImage": "",
-      "stampImage": "",
-      "bio": "Consultant physician providing evidence-based healthcare.",
-      "availableDays": [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday",
-        "Friday"
-      ],
-      "timeSlots": [
-        "05:00 PM - 05:15 PM",
-        "05:15 PM - 05:30 PM",
-        "05:30 PM - 05:45 PM",
-        "05:45 PM - 06:00 PM",
-        "06:00 PM - 06:15 PM",
-        "06:15 PM - 06:30 PM",
-        "06:30 PM - 06:45 PM",
-        "06:45 PM - 07:00 PM"
-      ],
-      "working_sessions": {
-        "morning": {
-          "enabled": false,
-          "start": "09:00 AM",
-          "end": "01:00 PM"
-        },
-        "evening": {
-          "enabled": true,
-          "start": "05:00 PM",
-          "end": "07:00 PM"
-        }
-      },
-      "public_profile_settings": {
-        "show_profile_publicly": true,
-        "show_photo": true,
-        "show_specialty": true,
-        "show_qualifications": true,
-        "show_experience": true,
-        "show_pmdc": true,
-        "show_clinic": true,
-        "show_address": true,
-        "show_fee": true,
-        "show_public_contact": true,
-        "allow_online_booking": true
-      },
-      "auto_confirm_appointments": false,
-      "headerColor": "#0f766e",
-      "accentColor": "#0284c7",
-      "disclaimerText": "Consultation is valid for 7 days.",
-      "whatsappEnabled": true,
-      "whatsapp_message_template": "Hello [Patient Name], your prescription from Dr. [Doctor Name] is ready: [Link]",
-      "default_link_expiry_days": 7
     }
   ],
   "patients": [
@@ -1004,7 +734,7 @@
       "reason_for_visit": "Routine 3-month diabetes follow-up and intermittent morning dizziness",
       "consent_given": true,
       "private_notes": "Patient is compliant with medication. Recommended checking fasting blood sugar every Sunday.",
-      "created_at": "2026-08-31T23:03:24.591Z"
+      "created_at": "2026-08-31T23:50:03.488Z"
     },
     {
       "id": "pat-2",
@@ -1020,7 +750,7 @@
       "reason_for_visit": "Persistent dry cough for 4 days, night-time wheezing after dust exposure",
       "consent_given": true,
       "private_notes": "Needs inhaler technique review with spacer.",
-      "created_at": "2026-09-10T23:03:24.592Z"
+      "created_at": "2026-09-10T23:50:03.489Z"
     },
     {
       "id": "pat-3",
@@ -1036,7 +766,7 @@
       "reason_for_visit": "Cardio review and lipid profile verification",
       "consent_given": true,
       "private_notes": "ECG normal in last visit. Check lipid profile in 2 months.",
-      "created_at": "2026-09-15T23:03:24.592Z"
+      "created_at": "2026-09-15T23:50:03.489Z"
     },
     {
       "id": "pat-4",
@@ -1052,7 +782,7 @@
       "reason_for_visit": "High grade fever 102 F, throat pain, difficulty swallowing solids",
       "consent_given": true,
       "private_notes": "Parent brought vaccination record. Fully vaccinated.",
-      "created_at": "2026-09-20T23:03:24.592Z"
+      "created_at": "2026-09-20T23:50:03.489Z"
     },
     {
       "id": "pat-5",
@@ -1068,7 +798,7 @@
       "reason_for_visit": "Severe retrosternal burning and nausea after wedding dinner",
       "consent_given": true,
       "private_notes": "Advised upper GI endoscopy if symptoms persist after 2 weeks of PPI.",
-      "created_at": "2026-09-25T23:03:24.592Z"
+      "created_at": "2026-09-25T23:50:03.489Z"
     },
     {
       "id": "pat-6",
@@ -1084,7 +814,7 @@
       "reason_for_visit": "Acute severe pain and swelling in right big toe joint",
       "consent_given": true,
       "private_notes": "Serum uric acid was 8.4 mg/dL. Strict red meat avoidance advised.",
-      "created_at": "2026-09-22T23:03:24.592Z"
+      "created_at": "2026-09-22T23:50:03.489Z"
     },
     {
       "id": "pat-7",
@@ -1100,7 +830,7 @@
       "reason_for_visit": "Fatigue, shortness of breath on climbing stairs, hair fall",
       "consent_given": true,
       "private_notes": "Hb was 9.8 g/dL. Continue iron supplementation for 3 months.",
-      "created_at": "2026-09-18T23:03:24.592Z"
+      "created_at": "2026-09-18T23:50:03.489Z"
     },
     {
       "id": "pat-8",
@@ -1116,7 +846,7 @@
       "reason_for_visit": "Nocturia, weak urinary stream, morning blood pressure 155/95",
       "consent_given": true,
       "private_notes": "Advised PSA test and urology ultrasound.",
-      "created_at": "2026-09-05T23:03:24.592Z"
+      "created_at": "2026-09-05T23:50:03.489Z"
     },
     {
       "id": "pat-9",
@@ -1132,7 +862,7 @@
       "reason_for_visit": "Weight gain despite low appetite, cold intolerance, neck fullness",
       "consent_given": true,
       "private_notes": "TSH elevated at 6.2 uIU/mL. Increased Thyroxine dose to 75mcg.",
-      "created_at": "2026-09-12T23:03:24.592Z"
+      "created_at": "2026-09-12T23:50:03.489Z"
     },
     {
       "id": "pat-10",
@@ -1148,22 +878,7 @@
       "reason_for_visit": "Severe pustular facial acne and painful cystic lesions on forehead",
       "consent_given": true,
       "private_notes": "Advised gentle foaming cleanser, oral doxycycline, and sun protection.",
-      "created_at": "2026-09-28T23:03:24.592Z"
-    },
-    {
-      "id": "pat-1790809542809",
-      "doctor_id": "doc-1",
-      "name": "Zubair Google",
-      "age": 30,
-      "gender": "Male",
-      "phone": "+92 300 9876543",
-      "whatsapp": "+92 300 9876543",
-      "allergies": "None",
-      "chronic_conditions": "None",
-      "current_medicines": "None",
-      "reason_for_visit": "General Consultation",
-      "consent_given": true,
-      "created_at": "2026-09-30T23:05:42.809Z"
+      "created_at": "2026-09-28T23:50:03.489Z"
     }
   ],
   "appointments": [
@@ -1177,7 +892,7 @@
       "status": "confirmed",
       "source": "manual",
       "notes": "Patient called clinic to confirm fasting blood sugar check.",
-      "created_at": "2026-09-30T15:03:24.592Z"
+      "created_at": "2026-09-30T15:50:03.489Z"
     },
     {
       "id": "apt-102",
@@ -1189,7 +904,7 @@
       "status": "pending",
       "source": "online",
       "notes": "Booked via public link. Has acute dry cough and wheezing.",
-      "created_at": "2026-09-30T19:03:24.592Z"
+      "created_at": "2026-09-30T19:50:03.489Z"
     },
     {
       "id": "apt-103",
@@ -1201,10 +916,47 @@
       "status": "completed",
       "source": "online",
       "notes": "Consultation completed. Prescribed PPI therapy.",
-      "created_at": "2026-09-30T11:03:24.592Z"
+      "created_at": "2026-09-30T11:50:03.489Z"
     }
   ],
   "medicines": [
+    {
+      "id": "med-1790812207732-b96id",
+      "brand_name": "DocPan Forte",
+      "generic_name": "Paracetamol + Orphenadrine",
+      "active_ingredient": "Paracetamol 450mg, Orphenadrine Citrate 35mg",
+      "active_ingredients": [
+        "Paracetamol 450mg, Orphenadrine Citrate 35mg"
+      ],
+      "strength": "450 mg + 35 mg",
+      "strength_unit": "mg",
+      "available_strengths": [
+        "450 mg + 35 mg"
+      ],
+      "dosage_form": "Tablet",
+      "form": "Tablet",
+      "route": "Oral",
+      "manufacturer": "GlaxoSmithKline (GSK) Pakistan",
+      "pack_size": "30 Tablets (3 x 10s Blister)",
+      "therapeutic_class": "Analgesics & Antipyretics",
+      "indication": "Tension headache and muscle spasm pain",
+      "prescription_status": "Rx Only",
+      "registration_reference": "DRAP-PK-088192",
+      "source": "DocCare Clinical Formulary (Dr. Ayesha Siddiqui)",
+      "source_record_id": null,
+      "status": "inactive",
+      "default_dose": "As directed",
+      "default_frequency": "BD — Twice daily",
+      "default_duration": "5 Days",
+      "form_instructions": [
+        "Take after meals with water"
+      ],
+      "notes": "Muscle relaxant and analgesic combination",
+      "created_by": "doc-1",
+      "created_at": "2026-09-30T23:50:07.732Z",
+      "updated_at": "2026-09-30T23:50:07.747Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
+    },
     {
       "id": "med-dak-01",
       "brand_name": "Daktarin Cream",
@@ -1234,7 +986,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan / Janssen Formulary",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-dak-02",
@@ -1264,7 +1018,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan / Janssen Formulary",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-dak-03",
@@ -1293,7 +1049,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-dak-04",
@@ -1323,7 +1081,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-can-01",
@@ -1353,7 +1113,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-can-02",
@@ -1383,7 +1145,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-aug-01",
@@ -1416,7 +1180,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-aug-02",
@@ -1449,7 +1215,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-amox-01",
@@ -1482,7 +1250,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-nov-01",
@@ -1515,7 +1285,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-crav-01",
@@ -1547,7 +1319,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-kla-01",
@@ -1579,7 +1353,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-azom-01",
@@ -1609,7 +1385,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-cefi-01",
@@ -1641,7 +1419,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-fla-01",
@@ -1674,7 +1454,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-pan-01",
@@ -1707,7 +1489,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-pan-02",
@@ -1738,7 +1522,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-pan-03",
@@ -1768,7 +1554,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-bru-01",
@@ -1800,7 +1588,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-volt-01",
@@ -1833,7 +1623,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-volt-02",
@@ -1864,7 +1656,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-syn-01",
@@ -1894,7 +1688,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-tram-01",
@@ -1925,7 +1721,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-ris-01",
@@ -1957,7 +1755,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-nex-01",
@@ -1989,7 +1789,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-gav-01",
@@ -2022,7 +1824,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-mot-01",
@@ -2053,7 +1857,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-grav-01",
@@ -2084,7 +1890,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-ven-01",
@@ -2117,7 +1925,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-ser-01",
@@ -2151,7 +1961,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-zyr-01",
@@ -2182,7 +1994,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-fex-01",
@@ -2214,7 +2028,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-hyd-01",
@@ -2247,7 +2063,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-tob-01",
@@ -2278,7 +2096,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-tob-02",
@@ -2310,7 +2130,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-bet-01",
@@ -2340,7 +2162,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-otr-01",
@@ -2371,7 +2195,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-fly-01",
@@ -2402,7 +2228,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-gluc-01",
@@ -2435,7 +2263,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-getr-01",
@@ -2467,7 +2297,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-con-01",
@@ -2498,7 +2330,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-nor-01",
@@ -2528,7 +2362,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-exf-01",
@@ -2560,7 +2396,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-lop-01",
@@ -2590,7 +2428,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-der-01",
@@ -2622,7 +2462,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-fus-01",
@@ -2653,7 +2495,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-hyd-c01",
@@ -2683,7 +2527,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-rof-01",
@@ -2715,7 +2561,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-cle-01",
@@ -2748,7 +2596,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     },
     {
       "id": "med-pyr-01",
@@ -2780,7 +2630,9 @@
       ],
       "status": "active",
       "source": "DRAP Pakistan",
-      "last_updated": "2026-09-30T12:00:00.000Z"
+      "last_updated": "2026-09-30T12:00:00.000Z",
+      "updated_at": "2026-09-30T23:50:07.739Z",
+      "last_synced_at": "2026-09-30T23:50:07.739Z"
     }
   ],
   "favoriteMedicines": [
@@ -2864,11 +2716,11 @@
       "advice": "Strict avoidance of spicy/fried foods, tea, and citrus fruits. Elevate bed head 6 inches. Avoid NSAID painkillers.",
       "follow_up_date": "2026-10-14",
       "status": "final",
-      "created_at": "2026-09-29T23:03:24.592Z",
-      "finalized_at": "2026-09-29T23:03:24.592Z",
+      "created_at": "2026-09-29T23:50:03.489Z",
+      "finalized_at": "2026-09-29T23:50:03.489Z",
       "verification_token": "vtok_gerd_901_pk",
       "pdf_url": "/api/prescriptions/rx-901/pdf",
-      "pdf_generated_at": "2026-09-29T23:03:24.592Z"
+      "pdf_generated_at": "2026-09-29T23:50:03.489Z"
     },
     {
       "id": "rx-902",
@@ -2923,11 +2775,11 @@
       "advice": "Daily brisk walk 35-45 minutes. Strict diabetic diet: Cut refined sugar, bakery items, juices. Maintain home BP and Fasting Sugar log.",
       "follow_up_date": "2026-10-30",
       "status": "final",
-      "created_at": "2026-09-28T23:03:24.592Z",
-      "finalized_at": "2026-09-28T23:03:24.592Z",
+      "created_at": "2026-09-28T23:50:03.489Z",
+      "finalized_at": "2026-09-28T23:50:03.489Z",
       "verification_token": "vtok_dm2_902_pk",
       "pdf_url": "/api/prescriptions/rx-902/pdf",
-      "pdf_generated_at": "2026-09-28T23:03:24.592Z"
+      "pdf_generated_at": "2026-09-28T23:50:03.489Z"
     }
   ],
   "prescriptionTemplates": [
@@ -3059,7 +2911,7 @@
       "show_photo": true,
       "paper_margin": "normal",
       "language": "both",
-      "updated_at": "2026-09-30T23:03:24.592Z"
+      "updated_at": "2026-09-30T23:50:03.489Z"
     },
     {
       "id": "pdf-set-doc-2",
@@ -3076,7 +2928,7 @@
       "show_photo": true,
       "paper_margin": "normal",
       "language": "en",
-      "updated_at": "2026-09-30T23:03:24.592Z"
+      "updated_at": "2026-09-30T23:50:03.489Z"
     },
     {
       "id": "pdf-set-doc-3",
@@ -3093,7 +2945,7 @@
       "show_photo": true,
       "paper_margin": "wide",
       "language": "ur",
-      "updated_at": "2026-09-30T23:03:24.592Z"
+      "updated_at": "2026-09-30T23:50:03.489Z"
     }
   ],
   "prescriptionShares": [
@@ -3103,12 +2955,12 @@
       "doctor_id": "doc-1",
       "patient_id": "pat-1",
       "share_token": "7f8a9b1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a",
-      "expires_at": "2026-10-06T23:03:24.592Z",
+      "expires_at": "2026-10-06T23:50:03.489Z",
       "max_downloads": 10,
       "download_count": 3,
       "revoked": false,
-      "created_at": "2026-09-29T23:03:24.592Z",
-      "last_downloaded_at": "2026-09-30T19:03:24.592Z"
+      "created_at": "2026-09-29T23:50:03.489Z",
+      "last_downloaded_at": "2026-09-30T19:50:03.489Z"
     },
     {
       "id": "share-102",
@@ -3116,12 +2968,12 @@
       "doctor_id": "doc-1",
       "patient_id": "pat-2",
       "share_token": "1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b",
-      "expires_at": "2026-10-05T23:03:24.592Z",
+      "expires_at": "2026-10-05T23:50:03.489Z",
       "max_downloads": null,
       "download_count": 1,
       "revoked": false,
-      "created_at": "2026-09-28T23:03:24.592Z",
-      "last_downloaded_at": "2026-09-30T11:03:24.592Z"
+      "created_at": "2026-09-28T23:50:03.489Z",
+      "last_downloaded_at": "2026-09-30T11:50:03.489Z"
     },
     {
       "id": "share-103",
@@ -3129,12 +2981,12 @@
       "doctor_id": "doc-1",
       "patient_id": "pat-3",
       "share_token": "3b4c5d6e7f8a9b0c1d2e3f4a5b6c7d8e9f0a1b2c3d4e5f6a7b8c9d0e1f2a3b4c",
-      "expires_at": "2026-09-27T23:03:24.592Z",
+      "expires_at": "2026-09-27T23:50:03.489Z",
       "max_downloads": 5,
       "download_count": 2,
       "revoked": false,
-      "created_at": "2026-09-20T23:03:24.592Z",
-      "last_downloaded_at": "2026-09-26T23:03:24.592Z"
+      "created_at": "2026-09-20T23:50:03.489Z",
+      "last_downloaded_at": "2026-09-26T23:50:03.489Z"
     }
   ],
   "messageLogs": [
@@ -3152,8 +3004,8 @@
       "status": "opened",
       "provider_message_id": null,
       "error": null,
-      "created_at": "2026-09-29T23:03:24.592Z",
-      "updated_at": "2026-09-29T23:03:24.592Z"
+      "created_at": "2026-09-29T23:50:03.489Z",
+      "updated_at": "2026-09-29T23:50:03.489Z"
     },
     {
       "id": "msg-2",
@@ -3169,8 +3021,8 @@
       "status": "delivered",
       "provider_message_id": null,
       "error": null,
-      "created_at": "2026-09-30T17:03:24.592Z",
-      "updated_at": "2026-09-30T17:03:24.592Z"
+      "created_at": "2026-09-30T17:50:03.489Z",
+      "updated_at": "2026-09-30T17:50:03.489Z"
     },
     {
       "id": "msg-3",
@@ -3186,8 +3038,8 @@
       "status": "read",
       "provider_message_id": "wamid.HBgMOTIzMjE5OTI4MTcyFQIAERgSMzNBQjBGMDAyNDU1MDk4MTcy",
       "error": null,
-      "created_at": "2026-09-30T05:03:24.592Z",
-      "updated_at": "2026-09-30T06:03:24.592Z"
+      "created_at": "2026-09-30T05:50:03.489Z",
+      "updated_at": "2026-09-30T06:50:03.489Z"
     }
   ],
   "ledgerEntries": [
@@ -3213,8 +3065,8 @@
       "transaction_time": "10:30 AM",
       "status": "completed",
       "created_by": "Dr. Ayesha Siddiqui",
-      "created_at": "2026-09-30T21:03:24.592Z",
-      "updated_at": "2026-09-30T21:03:24.592Z",
+      "created_at": "2026-09-30T21:50:03.489Z",
+      "updated_at": "2026-09-30T21:50:03.489Z",
       "audit_history": []
     },
     {
@@ -3239,8 +3091,8 @@
       "transaction_time": "11:45 AM",
       "status": "completed",
       "created_by": "Dr. Ayesha Siddiqui",
-      "created_at": "2026-09-30T22:03:24.592Z",
-      "updated_at": "2026-09-30T22:03:24.592Z",
+      "created_at": "2026-09-30T22:50:03.489Z",
+      "updated_at": "2026-09-30T22:50:03.489Z",
       "audit_history": []
     },
     {
@@ -3265,8 +3117,8 @@
       "transaction_time": "03:15 PM",
       "status": "completed",
       "created_by": "Dr. Ayesha Siddiqui",
-      "created_at": "2026-09-29T23:03:24.592Z",
-      "updated_at": "2026-09-29T23:03:24.592Z",
+      "created_at": "2026-09-29T23:50:03.489Z",
+      "updated_at": "2026-09-29T23:50:03.489Z",
       "audit_history": []
     },
     {
@@ -3291,8 +3143,8 @@
       "transaction_time": "05:00 PM",
       "status": "completed",
       "created_by": "Dr. Ayesha Siddiqui",
-      "created_at": "2026-09-29T23:03:24.592Z",
-      "updated_at": "2026-09-29T23:03:24.592Z",
+      "created_at": "2026-09-29T23:50:03.489Z",
+      "updated_at": "2026-09-29T23:50:03.489Z",
       "audit_history": []
     },
     {
@@ -3317,8 +3169,8 @@
       "transaction_time": "02:20 PM",
       "status": "completed",
       "created_by": "Dr. Ayesha Siddiqui",
-      "created_at": "2026-09-28T23:03:24.592Z",
-      "updated_at": "2026-09-28T23:03:24.592Z",
+      "created_at": "2026-09-28T23:50:03.489Z",
+      "updated_at": "2026-09-28T23:50:03.489Z",
       "audit_history": []
     },
     {
@@ -3343,8 +3195,8 @@
       "transaction_time": "12:00 PM",
       "status": "completed",
       "created_by": "Dr. Ayesha Siddiqui",
-      "created_at": "2026-09-25T23:03:24.592Z",
-      "updated_at": "2026-09-25T23:03:24.592Z",
+      "created_at": "2026-09-25T23:50:03.489Z",
+      "updated_at": "2026-09-25T23:50:03.489Z",
       "audit_history": []
     },
     {
@@ -3369,8 +3221,8 @@
       "transaction_time": "04:30 PM",
       "status": "completed",
       "created_by": "Dr. Ayesha Siddiqui",
-      "created_at": "2026-09-24T23:03:24.592Z",
-      "updated_at": "2026-09-24T23:03:24.592Z",
+      "created_at": "2026-09-24T23:50:03.489Z",
+      "updated_at": "2026-09-24T23:50:03.489Z",
       "audit_history": []
     },
     {
@@ -3395,32 +3247,86 @@
       "transaction_time": "06:15 PM",
       "status": "completed",
       "created_by": "Dr. Ayesha Siddiqui",
-      "created_at": "2026-09-22T23:03:24.592Z",
-      "updated_at": "2026-09-22T23:03:24.592Z",
+      "created_at": "2026-09-22T23:50:03.489Z",
+      "updated_at": "2026-09-22T23:50:03.489Z",
       "audit_history": []
     }
   ],
   "auditLogs": [
     {
-      "id": "audit-1790809447770-65hn",
+      "id": "audit-1790812207748-pwru",
       "doctor_id": "doc-1",
-      "action": "AUTH_LOGIN_SUCCESS",
-      "details": "Doctor Dr. Ayesha Siddiqui logged in securely",
-      "timestamp": "2026-09-30T23:04:07.770Z"
+      "action": "MEDICINE_DEACTIVATED",
+      "details": "Deactivated medicine: DocPan Forte (med-1790812207732-b96id)",
+      "timestamp": "2026-09-30T23:50:07.748Z"
     },
     {
-      "id": "audit-1790809423107-61ud",
+      "id": "audit-1790812207740-t5ma",
+      "doctor_id": "system",
+      "action": "FORMULARY_SYNC_COMPLETED",
+      "details": "Formulary synchronized: +0 added, ~51 updated, !0 failed.",
+      "timestamp": "2026-09-30T23:50:07.740Z"
+    },
+    {
+      "id": "audit-1790812207733-b53v",
       "doctor_id": "doc-1",
-      "action": "AUTH_LOGIN_SUCCESS",
-      "details": "Doctor Dr. Ayesha Siddiqui logged in securely",
-      "timestamp": "2026-09-30T23:03:43.107Z"
+      "action": "MEDICINE_ADDED",
+      "details": "Added medicine: DocPan Forte (450 mg + 35 mg, Tablet) by GlaxoSmithKline (GSK) Pakistan",
+      "timestamp": "2026-09-30T23:50:07.733Z"
+    },
+    {
+      "id": "audit-1790812203520-zdih",
+      "doctor_id": "system",
+      "action": "FORMULARY_SYNC_COMPLETED",
+      "details": "Formulary synchronized: +0 added, ~50 updated, !0 failed.",
+      "timestamp": "2026-09-30T23:50:03.520Z"
     },
     {
       "id": "audit-1",
       "doctor_id": "doc-1",
       "action": "PRACTICE_SYSTEM_INITIALIZED",
       "details": "DocCare clinical practice suite initialized with Pakistan Formulary Live Medicine Database & Dual-Role Auth",
-      "timestamp": "2026-09-30T23:03:24.595Z"
+      "timestamp": "2026-09-30T23:50:03.492Z"
+    }
+  ],
+  "formularyMeta": {
+    "source": "DRAP Live Sync QA Test",
+    "last_updated": "2026-09-30T23:50:07.739Z",
+    "last_synced_at": "2026-09-30T23:50:07.739Z",
+    "last_successful_sync": "2026-09-30T23:50:07.739Z",
+    "status": "up_to_date",
+    "version": "2026.10.1-PK-DRAP",
+    "sync_frequency": "Every 24 hours (Daily)",
+    "total_medicines": 51,
+    "active_medicines": 51,
+    "inactive_medicines": 0
+  },
+  "medicineSyncLogs": [
+    {
+      "id": "sync-1790812207739",
+      "started_at": "2026-09-30T23:50:07.739Z",
+      "completed_at": "2026-09-30T23:50:07.739Z",
+      "status": "success",
+      "source": "DRAP Live Sync QA Test",
+      "records_processed": 51,
+      "records_added": 0,
+      "records_updated": 51,
+      "records_deactivated": 0,
+      "records_failed": 0,
+      "error_log": null
+    },
+    {
+      "id": "sync-1790812203518",
+      "started_at": "2026-09-30T23:50:03.518Z",
+      "completed_at": "2026-09-30T23:50:03.519Z",
+      "status": "success",
+      "source": "DRAP / Pakistan National Formulary Automated Boot Feed",
+      "records_processed": 50,
+      "records_added": 0,
+      "records_updated": 50,
+      "records_deactivated": 0,
+      "records_failed": 0,
+      "error_log": null
     }
   ]
 }

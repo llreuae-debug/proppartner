@@ -15,6 +15,7 @@ import DoctorReportsPage from './pages/DoctorReportsPage';
 import PDFSettingsPage from './pages/PDFSettingsPage';
 import DoctorProfilePage from './pages/DoctorProfilePage';
 import WhatsAppAuditPage from './pages/WhatsAppAuditPage';
+import FormularyManagementPage from './pages/FormularyManagementPage';
 import FindDoctorPage from './pages/FindDoctorPage';
 import PublicDoctorProfile from './pages/PublicDoctorProfile';
 import PublicVerifyPrescription from './pages/PublicVerifyPrescription';
@@ -339,6 +340,10 @@ export default function App() {
               <PatientsDirectoryPage
                 onWritePrescription={handleWritePrescriptionFromExternal}
               />
+            )}
+
+            {activeTab === 'formulary' && (
+              <FormularyManagementPage />
             )}
 
             {activeTab === 'messages' && (

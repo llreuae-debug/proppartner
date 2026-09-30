@@ -76,24 +76,39 @@ export const api = {
   getPatientDetail: (id) => request(`/patients/${id}`),
   updatePatient: (id, data) => request(`/patients/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
 
-  // --- MEDICINE DATABASE & AUTOCOMPLETE (STEP 3) ---
-  getMedicines: (q = '', limit = 10) => {
-    let url = `/medicines?limit=${limit}`;
-    if (q) url += `&q=${encodeURIComponent(q)}`;
-    return request(url);
+  // --- PAKISTAN FORMULARY & MEDICINE DATABASE (CONTINUOUS LIVE UPDATE) ---
+  getMedicines: (params = {}) => {
+    if (typeof params === 'string') {
+      return request(`/medicines?limit=50&q=${encodeURIComponent(params)}`);
+    }
+    const query = new URLSearchParams(params).toString();
+    return request(`/medicines${query ? `?${query}` : ''}`);
   },
   searchMedicines: (q = '', options = {}) => {
     const params = new URLSearchParams();
     if (q) params.set('q', q);
     if (options.limit) params.set('limit', options.limit);
-    if (options.form) params.set('form', options.form);
+    if (options.form || options.dosage_form) params.set('form', options.form || options.dosage_form);
     if (options.route) params.set('route', options.route);
+    if (options.category || options.therapeutic_class) params.set('category', options.category || options.therapeutic_class);
+    if (options.manufacturer) params.set('manufacturer', options.manufacturer);
+    if (options.status) params.set('status', options.status);
     return request(`/medicines/search?${params.toString()}`);
   },
   getMedicinesMeta: () => request('/medicines/meta'),
-  getFavoriteMedicines: () => request('/medicines/favorites'),
-  toggleFavoriteMedicine: (medicineId) => request('/medicines/favorites/toggle', { method: 'POST', body: JSON.stringify({ medicineId }) }),
+  getFormularySyncStatus: () => request('/medicines/sync-status'),
+  getMedicineById: (id) => request(`/medicines/${id}`),
+  addMedicine: (data) => request('/medicines', { method: 'POST', body: JSON.stringify(data) }),
   createCustomMedicine: (data) => request('/medicines', { method: 'POST', body: JSON.stringify(data) }),
+  updateMedicine: (id, data) => request(`/medicines/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+  toggleMedicineStatus: (id, status) => request(`/medicines/${id}/status`, { method: 'PATCH', body: JSON.stringify({ status }) }),
+  deleteMedicine: (id) => request(`/medicines/${id}`, { method: 'DELETE' }),
+  syncPakistanFormulary: (source = null, incomingData = null) => request('/medicines/sync', { method: 'POST', body: JSON.stringify({ source, incomingData }) }),
+  getMedicineSyncLogs: (limit = 30) => request(`/medicines/sync-logs?limit=${limit}`),
+  importMedicines: (medicines, source = null) => request('/medicines/import', { method: 'POST', body: JSON.stringify({ medicines, source }) }),
+  getExportMedicinesUrl: () => '/api/medicines/export',
+  getFavoriteMedicines: () => request('/medicines/favorites'),
+  toggleFavoriteMedicine: (medicine_id) => request('/medicines/favorites/toggle', { method: 'POST', body: JSON.stringify({ medicine_id }) }),
 
   // --- PRESCRIPTIONS CRUD & LIFECYCLE (STEP 3 & 4) ---
   getPrescriptions: (params = {}) => {

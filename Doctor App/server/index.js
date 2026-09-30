@@ -987,35 +987,47 @@ app.put('/api/patients/:id', requireDoctorAuth, (req, res) => {
 // ==========================================
 // 5. LIVE MEDICINES DATABASE & AUTOCOMPLETE (PAKISTAN FORMULARY)
 // ==========================================
+// ==========================================
+// 5. LIVE MEDICINES DATABASE & AUTOCOMPLETE (PAKISTAN FORMULARY)
+// ==========================================
 app.get('/api/medicines/meta', (req, res) => {
   const meta = db.getMedicinesMeta();
   res.json({ success: true, meta });
 });
 
+app.get('/api/medicines/sync-status', (req, res) => {
+  const meta = db.getFormularyMeta();
+  const logs = db.getMedicineSyncLogs(5);
+  res.json({ success: true, meta, recent_logs: logs });
+});
+
 app.get('/api/medicines', requireDoctorAuth, (req, res) => {
-  const { q, category, form, route, limit } = req.query;
-  const numLimit = parseInt(limit, 10) || 30;
+  const { q, category, therapeutic_class, form, dosage_form, route, manufacturer, status, limit, offset } = req.query;
+  const numLimit = parseInt(limit, 10) || 100;
   const medicines = db.searchMedicines(q, {
-    category,
-    form,
+    category: category || therapeutic_class,
+    form: form || dosage_form,
     route,
+    manufacturer,
+    status: status || 'all',
     doctorId: req.doctorId,
     limit: numLimit
   });
-  res.json({ medicines });
+  res.json({ medicines, total: medicines.length });
 });
 
 app.get('/api/medicines/search', requireDoctorAuth, (req, res) => {
-  const { q, category, form, route, limit } = req.query;
-  const numLimit = parseInt(limit, 10) || 30;
+  const { q, category, therapeutic_class, form, dosage_form, route, manufacturer, status, limit } = req.query;
+  const numLimit = parseInt(limit, 10) || 50;
   const medicines = db.searchMedicines(q, {
-    category,
-    form,
+    category: category || therapeutic_class,
+    form: form || dosage_form,
     route,
+    manufacturer,
+    status: status || 'active',
     doctorId: req.doctorId,
     limit: numLimit
   });
-  console.log('[DEBUG /api/medicines/search]', { q, numLimit, doctorId: req.doctorId, found: medicines.length });
   res.json({ medicines, total: medicines.length });
 });
 
@@ -1031,6 +1043,43 @@ app.post('/api/medicines/favorites/toggle', requireDoctorAuth, (req, res) => {
   res.json({ success: true, ...result });
 });
 
+app.get('/api/medicines/sync-logs', requireDoctorAuth, (req, res) => {
+  const limit = parseInt(req.query.limit, 10) || 30;
+  const logs = db.getMedicineSyncLogs(limit);
+  res.json({ success: true, logs });
+});
+
+app.get('/api/medicines/export', requireDoctorAuth, (req, res) => {
+  const allMeds = db.getAllMedicines(req.doctorId, true);
+  const meta = db.getFormularyMeta();
+  res.setHeader('Content-Type', 'application/json');
+  res.setHeader('Content-Disposition', `attachment; filename="doccare-pakistan-formulary-${new Date().toISOString().split('T')[0]}.json"`);
+  res.json({ meta, export_timestamp: new Date().toISOString(), medicines: allMeds });
+});
+
+app.post('/api/medicines/sync', requireDoctorAuth, (req, res) => {
+  try {
+    const { source, incomingData } = req.body || {};
+    const result = db.syncPakistanFormulary(source || "DRAP / Pakistan National Formulary Live Sync", incomingData);
+    res.json(result);
+  } catch (err) {
+    res.status(500).json({ error: "Synchronization failed: " + err.message });
+  }
+});
+
+app.post('/api/medicines/import', requireDoctorAuth, (req, res) => {
+  try {
+    const { medicines, source } = req.body;
+    if (!Array.isArray(medicines) || medicines.length === 0) {
+      return res.status(400).json({ error: "Valid medicines array is required for import." });
+    }
+    const result = db.syncPakistanFormulary(source || "Administrator Batch Import", medicines);
+    res.json({ success: true, message: `Imported ${medicines.length} records successfully.`, result });
+  } catch (err) {
+    res.status(400).json({ error: "Import failed: " + err.message });
+  }
+});
+
 app.get('/api/medicines/:id', requireDoctorAuth, (req, res) => {
   const med = db.getMedicineById(req.params.id);
   if (!med) return res.status(404).json({ error: "Medicine record not found" });
@@ -1041,44 +1090,114 @@ app.post('/api/medicines', requireDoctorAuth, (req, res) => {
   const {
     brand_name,
     generic_name,
+    active_ingredient,
     active_ingredients,
     strength,
     strength_unit,
-    form,
     dosage_form,
-    default_dose,
-    default_frequency,
+    form,
     route,
-    category,
-    therapeutic_class,
     manufacturer,
     pack_size,
-    available_strengths,
-    form_instructions
+    therapeutic_class,
+    category,
+    indication,
+    prescription_status,
+    registration_reference,
+    notes,
+    status
   } = req.body;
 
-  if (!brand_name) {
-    return res.status(400).json({ error: "Brand name is required for custom medicine." });
+  // Validation of mandatory fields
+  if (!brand_name || !brand_name.trim()) {
+    return res.status(400).json({ error: "Brand Name is required." });
+  }
+  if (!generic_name || !generic_name.trim()) {
+    return res.status(400).json({ error: "Generic Name is required." });
+  }
+  const activeIng = (active_ingredient || (Array.isArray(active_ingredients) ? active_ingredients.join(', ') : '') || generic_name).trim();
+  if (!activeIng) {
+    return res.status(400).json({ error: "Active Ingredient is required." });
+  }
+  if (!strength || !strength.trim()) {
+    return res.status(400).json({ error: "Strength (e.g., 500 mg, 10 mg/5ml) is required." });
+  }
+  const resolvedDosageForm = (dosage_form || form || '').trim();
+  if (!resolvedDosageForm) {
+    return res.status(400).json({ error: "Dosage Form (e.g., Tablet, Capsule, Syrup) is required." });
   }
 
-  const newMed = db.createCustomMedicine(req.doctorId, {
+  // Check duplicate
+  const duplicate = db.findDuplicateMedicine({
     brand_name: sanitizeInput(brand_name),
-    generic_name: sanitizeInput(generic_name) || sanitizeInput(brand_name),
-    active_ingredients: active_ingredients || [sanitizeInput(generic_name) || sanitizeInput(brand_name)],
-    strength: sanitizeInput(strength) || "Standard",
-    strength_unit: sanitizeInput(strength_unit) || "mg",
-    dosage_form: sanitizeInput(dosage_form || form) || "Tablet",
-    default_dose: sanitizeInput(default_dose) || "1 tab",
-    default_frequency: sanitizeInput(default_frequency) || "BD — Twice daily",
-    route: sanitizeInput(route) || "Oral",
-    therapeutic_class: sanitizeInput(therapeutic_class || category) || "Custom / Specialty",
-    manufacturer: sanitizeInput(manufacturer) || "Custom Formulary Item",
-    pack_size: sanitizeInput(pack_size) || "Standard",
-    available_strengths: available_strengths || [sanitizeInput(strength) || "Standard"],
-    form_instructions: form_instructions || ["Take as directed by doctor"]
+    strength: sanitizeInput(strength),
+    dosage_form: sanitizeInput(resolvedDosageForm),
+    manufacturer: sanitizeInput(manufacturer) || ''
   });
 
-  res.json({ success: true, medicine: newMed });
+  if (duplicate) {
+    return res.status(409).json({ 
+      error: `A medicine with the same Brand (${duplicate.brand_name}), Strength (${duplicate.strength}), Dosage Form (${duplicate.dosage_form || duplicate.form}) and Manufacturer (${duplicate.manufacturer}) already exists in the Pakistan Formulary.`,
+      duplicateId: duplicate.id
+    });
+  }
+
+  const newMed = db.addMedicine({
+    brand_name: sanitizeInput(brand_name),
+    generic_name: sanitizeInput(generic_name),
+    active_ingredient: sanitizeInput(activeIng),
+    active_ingredients: [sanitizeInput(activeIng)],
+    strength: sanitizeInput(strength),
+    strength_unit: sanitizeInput(strength_unit) || (strength.match(/[a-zA-Z]+/g) || ['mg'])[0],
+    dosage_form: sanitizeInput(resolvedDosageForm),
+    form: sanitizeInput(resolvedDosageForm),
+    route: sanitizeInput(route) || 'Oral',
+    manufacturer: sanitizeInput(manufacturer) || 'Pharmaceuticals Pakistan',
+    pack_size: sanitizeInput(pack_size) || 'Standard Pack',
+    therapeutic_class: sanitizeInput(therapeutic_class || category) || 'General Formulary',
+    category: sanitizeInput(therapeutic_class || category) || 'General Formulary',
+    indication: sanitizeInput(indication) || 'As clinically indicated',
+    prescription_status: prescription_status || 'Rx Only',
+    registration_reference: sanitizeInput(registration_reference) || `DRAP-PK-MAN-${Date.now().toString().slice(-6)}`,
+    notes: sanitizeInput(notes) || '',
+    status: status || 'active',
+    source: `DocCare Clinical Formulary (${req.doctor?.name || 'Dr. Practice'})`
+  }, req.doctorId);
+
+  res.json({ success: true, message: "Medicine added to Pakistan Formulary successfully", medicine: newMed });
+});
+
+app.put('/api/medicines/:id', requireDoctorAuth, (req, res) => {
+  try {
+    const updated = db.updateMedicine(req.params.id, req.body, req.doctorId);
+    res.json({ success: true, message: "Medicine updated successfully", medicine: updated });
+  } catch (err) {
+    res.status(400).json({ error: err.message || "Failed to update medicine" });
+  }
+});
+
+app.patch('/api/medicines/:id/status', requireDoctorAuth, (req, res) => {
+  try {
+    const { status } = req.body;
+    let med;
+    if (status === 'inactive') {
+      med = db.deactivateMedicine(req.params.id, req.doctorId);
+    } else {
+      med = db.reactivateMedicine(req.params.id, req.doctorId);
+    }
+    res.json({ success: true, message: `Medicine marked as ${status}`, medicine: med });
+  } catch (err) {
+    res.status(400).json({ error: err.message || "Failed to change status" });
+  }
+});
+
+app.delete('/api/medicines/:id', requireDoctorAuth, (req, res) => {
+  try {
+    const result = db.deleteMedicine(req.params.id, req.doctorId);
+    res.json({ success: true, ...result });
+  } catch (err) {
+    res.status(400).json({ error: err.message || "Failed to delete medicine" });
+  }
 });
 
 // ==========================================
@@ -2358,6 +2477,30 @@ if (fs.existsSync(distPath)) {
   });
 }
 
+// ==========================================
+// AUTOMATED 24-HOUR DAILY PAKISTAN FORMULARY SYNCHRONIZATION ENGINE
+// ==========================================
+const SYNC_INTERVAL_MS = 24 * 60 * 60 * 1000; // 24 hours
+
+// Initial check & sync on server boot
+try {
+  console.log('[Pakistan Formulary] Initializing Pakistan National Formulary & DRAP Sync Engine...');
+  db.syncPakistanFormulary('DRAP / Pakistan National Formulary Automated Boot Feed');
+} catch (bootSyncErr) {
+  console.error('[Pakistan Formulary] Boot sync notice:', bootSyncErr.message);
+}
+
+// Recurring daily 24-hour sync timer
+setInterval(() => {
+  try {
+    console.log(`[Pakistan Formulary] Running automated daily 24-hour sync at ${new Date().toISOString()}...`);
+    db.syncPakistanFormulary('DRAP / Pakistan National Formulary Automated Daily Feed');
+  } catch (err) {
+    console.error('[Pakistan Formulary] Scheduled daily sync error:', err.message);
+  }
+}, SYNC_INTERVAL_MS);
+
 app.listen(PORT, () => {
   console.log(`DocCare Step 4 Server running at http://localhost:${PORT}`);
 });
+
