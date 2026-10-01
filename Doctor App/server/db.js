@@ -879,62 +879,180 @@ class Database {
   }
 
   // ==========================================
-  // PRESCRIPTIONS ENGINE (STEPS 3 & 4)
+  // PRESCRIPTIONS ENGINE (STEPS 3, 4 & 5)
   // ==========================================
   generatePrescriptionNumber() {
     const year = new Date().getFullYear();
-    const count = this.data.prescriptions.length + 1;
+    const count = (this.data.prescriptions || []).length + 1;
     const padded = String(count).padStart(5, '0');
-    return `RX-${year}-${padded}`;
+    return `DC-RX-${year}-${padded}`;
   }
 
   generateVerificationToken() {
     return `vtok_${Math.random().toString(36).substr(2, 6)}_${Math.random().toString(36).substr(2, 6)}`;
   }
 
+  normalizePrescriptionItem(item, idx = 0) {
+    const brandName = item.brand_name || item.brand_name_snapshot || item.medicine_name || item.name || 'Prescribed Medicine';
+    const genericName = item.generic_name || item.generic_name_snapshot || item.generic || '';
+    const activeIng = item.active_ingredient || item.active_ingredient_snapshot || (Array.isArray(item.active_ingredients) ? item.active_ingredients.join(', ') : genericName) || '';
+    const strength = item.strength || item.strength_snapshot || 'Standard';
+    const dosageForm = item.dosage_form || item.dosage_form_snapshot || item.form || 'Tablet';
+    const route = item.route || item.route_snapshot || 'Oral';
+    const dose = item.dose || '1 tab';
+    const frequency = item.frequency || '1+0+1 (Twice daily)';
+    const duration = item.duration || '5 Days';
+    const quantity = Number(item.quantity) || 1;
+    const instructions = item.instructions || 'After meals';
+
+    return {
+      id: item.id || `item-${Date.now()}-${idx}`,
+      medicine_id: item.medicine_id || null,
+      medicine_name: brandName,
+      brand_name: brandName,
+      brand_name_snapshot: brandName,
+      generic_name: genericName,
+      generic_name_snapshot: genericName,
+      active_ingredient: activeIng,
+      active_ingredient_snapshot: activeIng,
+      strength: strength,
+      strength_snapshot: strength,
+      dosage_form: dosageForm,
+      dosage_form_snapshot: dosageForm,
+      form: dosageForm,
+      route: route,
+      route_snapshot: route,
+      dose: dose,
+      frequency: frequency,
+      duration: duration,
+      quantity: quantity,
+      instructions: instructions,
+      notes: item.notes || '',
+      sort_order: idx + 1
+    };
+  }
+
   getPrescriptionsByDoctor(doctorId, options = {}) {
-    let list = this.data.prescriptions.filter(p => p.doctor_id === doctorId);
+    let list = (this.data.prescriptions || []).filter(p => !doctorId || p.doctor_id === doctorId);
 
     if (options.patient_id) {
       list = list.filter(p => p.patient_id === options.patient_id);
     }
-    if (options.status) {
+    if (options.status && options.status !== 'all') {
       list = list.filter(p => p.status === options.status);
+    }
+    if (options.startDate) {
+      list = list.filter(p => (p.created_at || p.date || '') >= options.startDate);
+    }
+    if (options.endDate) {
+      list = list.filter(p => (p.created_at || p.date || '') <= `${options.endDate}T23:59:59.999Z`);
     }
     if (options.q) {
       const query = options.q.toLowerCase().trim();
       list = list.filter(p => {
-        const pat = this.data.patients.find(pt => pt.id === p.patient_id);
-        const patName = pat?.name?.toLowerCase() || '';
+        const pat = (this.data.patients || []).find(pt => pt.id === p.patient_id);
+        const patName = (pat?.name || p.patient_name || '').toLowerCase();
+        const patPhone = (pat?.phone || p.patient_phone || '').toLowerCase();
+        const patId = (pat?.id || p.patient_id || '').toLowerCase();
         const diag = (p.diagnosis || '').toLowerCase();
         const rxNo = (p.prescription_no || '').toLowerCase();
-        return patName.includes(query) || diag.includes(query) || rxNo.includes(query);
+        const medMatch = (p.items || []).some(m => 
+          (m.medicine_name || m.brand_name || '').toLowerCase().includes(query) ||
+          (m.generic_name || '').toLowerCase().includes(query)
+        );
+        return patName.includes(query) || patPhone.includes(query) || patId.includes(query) || diag.includes(query) || rxNo.includes(query) || medMatch;
       });
     }
 
+    const sortOrder = options.sort === 'oldest' ? 1 : -1;
+
     return list.map(rx => {
-      const patient = this.data.patients.find(pt => pt.id === rx.patient_id);
+      const patient = (this.data.patients || []).find(pt => pt.id === rx.patient_id);
+      const doctor = (this.data.doctors || []).find(d => d.id === rx.doctor_id);
       return {
         ...rx,
-        patient_name: patient?.name || "Patient Record",
-        patient_phone: patient?.phone || "",
-        patient_age: patient?.age || 30,
-        patient_gender: patient?.gender || "Male",
-        patient_allergies: patient?.allergies || "None",
+        patient_name: patient?.name || rx.patient_name || "Patient Record",
+        patient_phone: patient?.phone || rx.patient_phone || "",
+        patient_age: patient?.age || rx.patient_age || 30,
+        patient_gender: patient?.gender || rx.patient_gender || "Male",
+        patient_allergies: patient?.allergies || rx.patient_allergies || "None",
+        doctor_name: doctor?.name || "Attending Doctor",
+        doctor_specialization: doctor?.specialization || "Physician",
+        clinic_name: doctor?.clinicName || "Medical Clinic",
         items_count: Array.isArray(rx.items) ? rx.items.length : 0
       };
-    }).sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+    }).sort((a, b) => sortOrder * (new Date(b.created_at || b.date || 0) - new Date(a.created_at || a.date || 0)));
+  }
+
+  getPatientPrescriptions(patientId, email = null, phone = null) {
+    if (!patientId && !email && !phone) return [];
+
+    let matchingPatientIds = new Set();
+    if (patientId) matchingPatientIds.add(patientId);
+
+    const normPhone = phone ? phone.replace(/[^0-9]/g, '') : null;
+    (this.data.patients || []).forEach(p => {
+      if (p.id === patientId) matchingPatientIds.add(p.id);
+      if (email && p.email && p.email.toLowerCase() === email.toLowerCase()) matchingPatientIds.add(p.id);
+      if (normPhone && p.phone && p.phone.replace(/[^0-9]/g, '').endsWith(normPhone.slice(-9))) matchingPatientIds.add(p.id);
+    });
+
+    const prescriptions = (this.data.prescriptions || [])
+      .filter(p => matchingPatientIds.has(p.patient_id) || (p.patient_phone && normPhone && p.patient_phone.replace(/[^0-9]/g, '').endsWith(normPhone.slice(-9))))
+      .map(rx => {
+        const doc = (this.data.doctors || []).find(d => d.id === rx.doctor_id) || {};
+        const pat = (this.data.patients || []).find(pt => pt.id === rx.patient_id) || {};
+
+        // Security check: strictly omit doctor private notes, financial ledger, internal credentials
+        return {
+          id: rx.id,
+          prescription_no: rx.prescription_no,
+          date: rx.date || (rx.created_at ? rx.created_at.split('T')[0] : new Date().toISOString().split('T')[0]),
+          created_at: rx.created_at,
+          status: rx.status,
+          diagnosis: rx.diagnosis || 'Clinical Consultation',
+          symptoms: rx.symptoms || '',
+          items: (rx.items || []).map(item => this.normalizePrescriptionItem(item)),
+          tests_advised: rx.tests_advised || '',
+          advice: rx.advice || '',
+          follow_up_date: rx.follow_up_date || null,
+          verification_token: rx.verification_token,
+          pdf_url: rx.pdf_url || `/api/prescriptions/${rx.id}/pdf`,
+          doctor: {
+            id: doc.id,
+            name: doc.name || 'Attending Physician',
+            specialization: doc.specialization || 'Medical Specialist',
+            qualifications: doc.qualifications || 'MBBS',
+            pmdcNumber: doc.pmdcNumber || 'Verified',
+            clinicName: doc.clinicName || 'DocCare Medical Clinic',
+            address: doc.address || doc.city || 'Pakistan',
+            city: doc.city || 'Pakistan',
+            phone: doc.phone || ''
+          },
+          patient: {
+            id: pat.id || rx.patient_id,
+            name: pat.name || rx.patient_name || 'Patient',
+            age: pat.age || 30,
+            gender: pat.gender || 'Male',
+            phone: pat.phone || ''
+          }
+        };
+      })
+      .sort((a, b) => new Date(b.created_at || b.date) - new Date(a.created_at || a.date));
+
+    return prescriptions;
   }
 
   getPrescriptionById(doctorId, prescriptionId) {
-    const rx = this.data.prescriptions.find(p => (p.id === prescriptionId || p.prescription_no === prescriptionId) && (doctorId ? p.doctor_id === doctorId : true));
+    const rx = (this.data.prescriptions || []).find(p => (p.id === prescriptionId || p.prescription_no === prescriptionId) && (doctorId ? p.doctor_id === doctorId : true));
     if (!rx) return null;
 
-    const patient = this.data.patients.find(pt => pt.id === rx.patient_id);
-    const doctor = this.data.doctors.find(d => d.id === rx.doctor_id);
+    const patient = (this.data.patients || []).find(pt => pt.id === rx.patient_id);
+    const doctor = (this.data.doctors || []).find(d => d.id === rx.doctor_id);
 
     return {
       ...rx,
+      items: (rx.items || []).map((item, idx) => this.normalizePrescriptionItem(item, idx)),
       patient: patient || null,
       doctor: doctor || null
     };
@@ -943,44 +1061,73 @@ class Database {
   findPrescriptionByVerificationToken(token) {
     if (!token) return null;
     const cleanToken = token.trim();
-    const rx = this.data.prescriptions.find(p => p.verification_token === cleanToken || p.id === cleanToken);
+    const rx = (this.data.prescriptions || []).find(p => p.verification_token === cleanToken || p.id === cleanToken || p.prescription_no === cleanToken);
     if (!rx) return null;
 
-    const patient = this.data.patients.find(pt => pt.id === rx.patient_id);
-    const doctor = this.data.doctors.find(d => d.id === rx.doctor_id);
+    const patient = (this.data.patients || []).find(pt => pt.id === rx.patient_id);
+    const doctor = (this.data.doctors || []).find(d => d.id === rx.doctor_id);
 
     return {
       ...rx,
+      items: (rx.items || []).map((item, idx) => this.normalizePrescriptionItem(item, idx)),
       patient: patient || null,
       doctor: doctor || null
     };
   }
 
+  addPrescriptionAuditEvent(prescriptionId, eventData) {
+    const rx = (this.data.prescriptions || []).find(p => p.id === prescriptionId || p.prescription_no === prescriptionId);
+    if (!rx) return null;
+
+    if (!rx.audit_trail) rx.audit_trail = [];
+
+    const eventName = eventData.event || eventData.event_type || 'viewed';
+    const auditEntry = {
+      id: `aud-${Date.now()}-${Math.random().toString(36).substr(2, 4)}`,
+      event: eventName,
+      event_type: eventName,
+      timestamp: new Date().toISOString(),
+      actor_id: eventData.actor_id || null,
+      actor_role: eventData.actor_role || 'doctor',
+      actor_name: eventData.actor_name || 'System User',
+      details: eventData.details || eventData.notes || ''
+    };
+
+    rx.audit_trail.push(auditEntry);
+    this.save();
+    return auditEntry;
+  }
+
   savePrescriptionDraft(doctorId, data) {
     let rx = null;
     if (data.id) {
-      rx = this.data.prescriptions.find(p => p.id === data.id && p.doctor_id === doctorId);
+      rx = (this.data.prescriptions || []).find(p => p.id === data.id && p.doctor_id === doctorId);
       if (rx && rx.status === 'final') {
-        const err = new Error("Finalized prescriptions are permanently locked and cannot be edited. Duplicate it to create a new draft.");
+        const err = new Error("Finalized prescriptions are permanently locked. Duplicate to create a new revision.");
         err.statusCode = 403;
         throw err;
       }
     }
 
-    const normalizedItems = (data.items || []).map((item, idx) => ({
-      id: item.id || `item-${Date.now()}-${idx}`,
-      medicine_id: item.medicine_id || null,
-      medicine_name: item.medicine_name || item.name || '',
-      strength: item.strength || '',
-      form: item.form || 'tablet',
-      dose: item.dose || '1 tab',
-      frequency: item.frequency || '1+0+1',
-      duration: item.duration || '5 Days',
-      instructions: item.instructions || 'After meals',
-      sort_order: idx + 1
-    }));
+    const normalizedItems = (data.items || []).map((item, idx) => this.normalizePrescriptionItem(item, idx));
+    const now = new Date().toISOString();
 
     if (rx) {
+      // Archive previous version if items or diagnosis changed
+      if (!rx.versions) rx.versions = [];
+      rx.versions.push({
+        version_number: rx.versions.length + 1,
+        updated_at: now,
+        updated_by: doctorId,
+        snapshot: {
+          diagnosis: rx.diagnosis,
+          items: JSON.parse(JSON.stringify(rx.items || [])),
+          advice: rx.advice,
+          tests_advised: rx.tests_advised,
+          follow_up_date: rx.follow_up_date
+        }
+      });
+
       rx.patient_id = data.patient_id || rx.patient_id;
       rx.appointment_id = data.appointment_id !== undefined ? data.appointment_id : rx.appointment_id;
       rx.diagnosis = data.diagnosis !== undefined ? data.diagnosis : rx.diagnosis;
@@ -989,39 +1136,77 @@ class Database {
       rx.tests_advised = data.tests_advised !== undefined ? data.tests_advised : rx.tests_advised;
       rx.advice = data.advice !== undefined ? data.advice : rx.advice;
       rx.follow_up_date = data.follow_up_date !== undefined ? data.follow_up_date : rx.follow_up_date;
-      rx.updated_at = new Date().toISOString();
+      rx.updated_at = now;
       if (!rx.verification_token) rx.verification_token = this.generateVerificationToken();
+
+      this.addPrescriptionAuditEvent(rx.id, {
+        event: 'updated',
+        actor_id: doctorId,
+        actor_role: 'doctor',
+        details: `Updated prescription draft with ${normalizedItems.length} items`
+      });
+
       this.save();
       return rx;
     } else {
+      const rxId = `rx-${Date.now()}-${Math.random().toString(36).substr(2, 4)}`;
+      const rxNo = this.generatePrescriptionNumber();
+      const vTok = this.generateVerificationToken();
+
+      const isFinal = data.status === 'final';
       const newDraft = {
-        id: `rx-${Date.now()}-${Math.random().toString(36).substr(2, 4)}`,
+        id: rxId,
         doctor_id: doctorId,
         patient_id: data.patient_id,
         appointment_id: data.appointment_id || null,
-        prescription_no: this.generatePrescriptionNumber(),
+        prescription_no: rxNo,
+        date: data.date || now.split('T')[0],
         diagnosis: data.diagnosis || '',
         symptoms: data.symptoms || '',
         items: normalizedItems,
         tests_advised: data.tests_advised || '',
         advice: data.advice || '',
         follow_up_date: data.follow_up_date || null,
-        status: 'draft',
-        verification_token: this.generateVerificationToken(),
-        pdf_url: null,
-        pdf_generated_at: null,
-        created_at: new Date().toISOString(),
-        finalized_at: null
+        status: isFinal ? 'final' : 'draft',
+        verification_token: vTok,
+        pdf_url: `/api/prescriptions/${rxId}/pdf`,
+        pdf_generated_at: isFinal ? now : null,
+        created_at: now,
+        updated_at: now,
+        finalized_at: isFinal ? now : null,
+        versions: [],
+        audit_trail: [
+          {
+            id: `aud-${Date.now()}-1`,
+            event: 'created',
+            event_type: 'created',
+            timestamp: now,
+            actor_id: doctorId,
+            actor_role: 'doctor',
+            details: `Prescription ${rxNo} created`
+          },
+          ...(isFinal ? [{
+            id: `aud-${Date.now()}-2`,
+            event: 'finalized',
+            event_type: 'finalized',
+            timestamp: now,
+            actor_id: doctorId,
+            actor_role: 'doctor',
+            details: `Prescription ${rxNo} finalized into patient history`
+          }] : [])
+        ]
       };
 
+      if (!this.data.prescriptions) this.data.prescriptions = [];
       this.data.prescriptions.unshift(newDraft);
       this.save();
+      this.logAudit(doctorId, isFinal ? "PRESCRIPTION_FINALIZED" : "PRESCRIPTION_CREATED", `${isFinal ? 'Finalized' : 'Created'} prescription ${rxNo} for patient ${data.patient_id}`);
       return newDraft;
     }
   }
 
   finalizePrescription(doctorId, prescriptionId, finalData = {}) {
-    let rx = this.data.prescriptions.find(p => p.id === prescriptionId && p.doctor_id === doctorId);
+    let rx = (this.data.prescriptions || []).find(p => p.id === prescriptionId && p.doctor_id === doctorId);
     if (!rx) {
       rx = this.savePrescriptionDraft(doctorId, { ...finalData, id: prescriptionId });
     }
@@ -1033,28 +1218,26 @@ class Database {
     if (finalData.diagnosis !== undefined) rx.diagnosis = finalData.diagnosis;
     if (finalData.symptoms !== undefined) rx.symptoms = finalData.symptoms;
     if (finalData.items) {
-      rx.items = finalData.items.map((item, idx) => ({
-        id: item.id || `item-${Date.now()}-${idx}`,
-        medicine_id: item.medicine_id || null,
-        medicine_name: item.medicine_name || item.name || '',
-        strength: item.strength || '',
-        form: item.form || 'tablet',
-        dose: item.dose || '1 tab',
-        frequency: item.frequency || '1+0+1',
-        duration: item.duration || '5 Days',
-        instructions: item.instructions || 'After meals',
-        sort_order: idx + 1
-      }));
+      rx.items = finalData.items.map((item, idx) => this.normalizePrescriptionItem(item, idx));
     }
     if (finalData.tests_advised !== undefined) rx.tests_advised = finalData.tests_advised;
     if (finalData.advice !== undefined) rx.advice = finalData.advice;
     if (finalData.follow_up_date !== undefined) rx.follow_up_date = finalData.follow_up_date;
 
+    const now = new Date().toISOString();
     rx.status = 'final';
-    rx.finalized_at = new Date().toISOString();
+    rx.finalized_at = now;
+    rx.updated_at = now;
     if (!rx.verification_token) rx.verification_token = this.generateVerificationToken();
     rx.pdf_url = `/api/prescriptions/${rx.id}/pdf`;
-    rx.pdf_generated_at = new Date().toISOString();
+    rx.pdf_generated_at = now;
+
+    this.addPrescriptionAuditEvent(rx.id, {
+      event: 'finalized',
+      actor_id: doctorId,
+      actor_role: 'doctor',
+      details: `Prescription ${rx.prescription_no} finalized and permanently locked into patient medical record`
+    });
 
     this.save();
     this.logAudit(doctorId, "PRESCRIPTION_FINALIZED", `Finalized prescription ${rx.prescription_no} with verification token ${rx.verification_token}`);
@@ -1067,7 +1250,7 @@ class Database {
   }
 
   updatePrescriptionPdfMetadata(prescriptionId, pdfUrl) {
-    const rx = this.data.prescriptions.find(p => p.id === prescriptionId);
+    const rx = (this.data.prescriptions || []).find(p => p.id === prescriptionId);
     if (!rx) return null;
     rx.pdf_url = pdfUrl;
     rx.pdf_generated_at = new Date().toISOString();
@@ -1076,37 +1259,51 @@ class Database {
   }
 
   duplicatePrescription(doctorId, prescriptionId) {
-    const original = this.data.prescriptions.find(p => p.id === prescriptionId && p.doctor_id === doctorId);
+    const original = (this.data.prescriptions || []).find(p => p.id === prescriptionId && p.doctor_id === doctorId);
     if (!original) return null;
 
+    const now = new Date().toISOString();
+    const rxId = `rx-${Date.now()}-${Math.random().toString(36).substr(2, 4)}`;
+    const rxNo = this.generatePrescriptionNumber();
+
     const duplicatedDraft = {
-      id: `rx-${Date.now()}-${Math.random().toString(36).substr(2, 4)}`,
+      id: rxId,
       doctor_id: doctorId,
       patient_id: original.patient_id,
       appointment_id: null,
-      prescription_no: this.generatePrescriptionNumber(),
+      prescription_no: rxNo,
+      date: now.split('T')[0],
       diagnosis: original.diagnosis,
       symptoms: original.symptoms || '',
-      items: (original.items || []).map((item, idx) => ({
-        ...item,
-        id: `item-${Date.now()}-${idx}`,
-        sort_order: idx + 1
-      })),
+      items: (original.items || []).map((item, idx) => this.normalizePrescriptionItem(item, idx)),
       tests_advised: original.tests_advised || '',
       advice: original.advice || '',
       follow_up_date: null,
       status: 'draft',
       verification_token: this.generateVerificationToken(),
-      pdf_url: null,
+      pdf_url: `/api/prescriptions/${rxId}/pdf`,
       pdf_generated_at: null,
-      created_at: new Date().toISOString(),
+      created_at: now,
+      updated_at: now,
       finalized_at: null,
-      duplicated_from: original.prescription_no
+      duplicated_from: original.prescription_no,
+      versions: [],
+      audit_trail: [
+        {
+          id: `aud-${Date.now()}`,
+          event: 'created',
+          timestamp: now,
+          actor_id: doctorId,
+          actor_role: 'doctor',
+          details: `Duplicated from past prescription ${original.prescription_no}`
+        }
+      ]
     };
 
+    if (!this.data.prescriptions) this.data.prescriptions = [];
     this.data.prescriptions.unshift(duplicatedDraft);
     this.save();
-    this.logAudit(doctorId, "PRESCRIPTION_DUPLICATED", `Duplicated past Rx ${original.prescription_no} into new draft ${duplicatedDraft.prescription_no}`);
+    this.logAudit(doctorId, "PRESCRIPTION_DUPLICATED", `Duplicated past Rx ${original.prescription_no} into new draft ${rxNo}`);
     return duplicatedDraft;
   }
 

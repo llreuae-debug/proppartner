@@ -119,6 +119,18 @@ export const api = {
   savePrescriptionDraft: (data) => request('/prescriptions', { method: 'POST', body: JSON.stringify(data) }),
   finalizePrescription: (id, data = {}) => request(`/prescriptions/${id}/finalize`, { method: 'POST', body: JSON.stringify(data) }),
   duplicatePrescription: (id) => request(`/prescriptions/${id}/duplicate`, { method: 'POST' }),
+  logPrescriptionAuditEvent: (id, event, details = '') => request(`/prescriptions/${id}/audit-event`, { method: 'POST', body: JSON.stringify({ event, details }) }),
+
+  // --- PATIENT PORTAL (ROLE: PATIENT ONLY) ---
+  getPatientDashboard: () => request('/patient/dashboard-data'),
+  getPatientPrescriptions: (params = {}) => {
+    const query = new URLSearchParams(params).toString();
+    return request(`/patient/prescriptions${query ? `?${query}` : ''}`);
+  },
+  getPatientPrescription: (id) => request(`/patient/prescriptions/${id}`),
+  logPatientPrescriptionAuditEvent: (id, event, details = '') => request(`/patient/prescriptions/${id}/audit-event`, { method: 'POST', body: JSON.stringify({ event, details }) }),
+  cancelPatientAppointment: (id, reason) => request(`/patient/appointments/${id}/cancel`, { method: 'PATCH', body: JSON.stringify({ reason }) }),
+  updatePatientProfile: (data) => request('/patient/profile', { method: 'PUT', body: JSON.stringify(data) }),
 
   // --- PRESCRIPTION TEMPLATES (STEP 3) ---
   getTemplates: () => request('/templates'),

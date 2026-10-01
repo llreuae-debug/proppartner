@@ -458,6 +458,65 @@ app.put('/api/patient/profile', requirePatientAuth, (req, res) => {
   }
 });
 
+// 2D. Patient Prescriptions History (Strict Privacy: Sanitized, Zero Doctor Private Notes)
+app.get('/api/patient/prescriptions', requirePatientAuth, (req, res) => {
+  try {
+    const prescriptions = db.getPatientPrescriptions(req.user.patientId, req.user.email, req.user.phone);
+    res.json({ success: true, prescriptions, total: prescriptions.length });
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch patient prescriptions: " + err.message });
+  }
+});
+
+// 2E. Patient Single Prescription Details
+app.get('/api/patient/prescriptions/:id', requirePatientAuth, (req, res) => {
+  try {
+    const all = db.getPatientPrescriptions(req.user.patientId, req.user.email, req.user.phone);
+    const rx = all.find(p => p.id === req.params.id || p.prescription_no === req.params.id);
+    if (!rx) {
+      return res.status(404).json({ error: "Prescription record not found or access denied." });
+    }
+
+    // Log view audit event
+    db.addPrescriptionAuditEvent(rx.id, {
+      event: 'viewed',
+      actor_id: req.user.patientId,
+      actor_role: 'patient',
+      actor_name: req.user.name,
+      details: "Patient opened prescription details view"
+    });
+
+    res.json({ success: true, prescription: rx });
+  } catch (err) {
+    res.status(500).json({ error: "Failed to fetch prescription details: " + err.message });
+  }
+});
+
+// 2F. Patient Prescription Audit Event (Print / Download)
+app.post('/api/patient/prescriptions/:id/audit-event', requirePatientAuth, (req, res) => {
+  try {
+    const eventType = req.body.event || req.body.event_type || req.body.action || 'downloaded';
+    const details = req.body.details || `Patient triggered ${eventType}`;
+    const all = db.getPatientPrescriptions(req.user.patientId, req.user.email, req.user.phone);
+    const rx = all.find(p => p.id === req.params.id || p.prescription_no === req.params.id);
+    if (!rx) {
+      return res.status(404).json({ error: "Prescription not found or unauthorized." });
+    }
+
+    const auditEntry = db.addPrescriptionAuditEvent(rx.id, {
+      event: eventType,
+      actor_id: req.user.patientId,
+      actor_role: 'patient',
+      actor_name: req.user.name,
+      details: details
+    });
+
+    res.json({ success: true, audit: auditEntry });
+  } catch (err) {
+    res.status(400).json({ error: "Failed to log audit event: " + err.message });
+  }
+});
+
 // ==========================================
 // 3. DOCTOR CLINICAL WORKSPACE & PROFILE
 // ==========================================
@@ -1204,15 +1263,44 @@ app.delete('/api/medicines/:id', requireDoctorAuth, (req, res) => {
 // 6. PRESCRIPTIONS CRUD & LIFECYCLE (STEPS 3 & 4)
 // ==========================================
 app.get('/api/prescriptions', requireDoctorAuth, (req, res) => {
-  const { patient_id, status, q } = req.query;
-  const prescriptions = db.getPrescriptionsByDoctor(req.doctorId, { patient_id, status, q });
-  res.json({ prescriptions });
+  const { patient_id, status, q, startDate, endDate, sort } = req.query;
+  const prescriptions = db.getPrescriptionsByDoctor(req.doctorId, {
+    patient_id,
+    status,
+    q,
+    startDate,
+    endDate,
+    sort
+  });
+  res.json({ success: true, count: prescriptions.length, prescriptions });
 });
 
 app.get('/api/prescriptions/:id', requireDoctorAuth, (req, res) => {
   const prescription = db.getPrescriptionById(req.doctorId, req.params.id);
   if (!prescription) return res.status(404).json({ error: "Prescription not found or unauthorized" });
-  res.json({ prescription });
+  res.json({ success: true, prescription });
+});
+
+// Doctor Prescription Audit Event (Print / Download / Reprint)
+app.post('/api/prescriptions/:id/audit-event', requireDoctorAuth, (req, res) => {
+  try {
+    const eventType = req.body.event || req.body.event_type || req.body.action || 'printed';
+    const details = req.body.details || `Doctor triggered ${eventType}`;
+    const rx = db.getPrescriptionById(req.doctorId, req.params.id);
+    if (!rx) return res.status(404).json({ error: "Prescription not found or unauthorized" });
+
+    const auditEntry = db.addPrescriptionAuditEvent(rx.id, {
+      event: eventType,
+      actor_id: req.doctorId,
+      actor_role: 'doctor',
+      actor_name: req.doctor?.name || 'Dr. Practice',
+      details: details
+    });
+
+    res.json({ success: true, audit: auditEntry });
+  } catch (err) {
+    res.status(400).json({ error: "Failed to log prescription event: " + err.message });
+  }
 });
 
 // Save or Auto-save Draft Prescription

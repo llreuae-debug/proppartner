@@ -178,7 +178,23 @@
 }
 
 /* Print Stylesheet for A4 Prescription */
+@page {
+  size: A4 portrait;
+  margin: 8mm 10mm;
+}
+
 @media print {
+  html, body {
+    width: 210mm;
+    min-height: 297mm;
+    background: #ffffff !important;
+    color: #0f172a !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
   body * {
     visibility: hidden;
   }
@@ -192,18 +208,45 @@
     position: absolute;
     left: 0;
     top: 0;
-    width: 210mm;
-    min-height: 297mm;
-    margin: 0;
-    padding: 15mm;
-    background: white !important;
-    color: #1e293b !important;
+    width: 100% !important;
+    max-width: 210mm !important;
+    min-height: 280mm;
+    margin: 0 auto !important;
+    padding: 10mm 12mm !important;
+    background: #ffffff !important;
+    color: #0f172a !important;
     box-shadow: none !important;
     border: none !important;
+    font-size: 12pt;
+    line-height: 1.4;
   }
 
-  .no-print {
+  .no-print,
+  nav,
+  aside,
+  header,
+  footer,
+  .modal-backdrop,
+  button,
+  .floating-capsule {
     display: none !important;
+  }
+
+  /* Prevent awkward page splits on medicine rows, headers and signatures */
+  .print-avoid-break,
+  tr,
+  table,
+  .rx-header,
+  .rx-patient-info,
+  .rx-footer,
+  .rx-med-row {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* Ensure text colors remain crisp on grayscale */
+  * {
+    -webkit-text-size-adjust: 100%;
   }
 }
 

@@ -42,10 +42,14 @@ import AIClinicalAssistantModal from '../components/AIClinicalAssistantModal';
 import MedicineRowCard from '../components/prescriptions/MedicineRowCard';
 import FavoritesAndTemplatesBar from '../components/prescriptions/FavoritesAndTemplatesBar';
 import PrescriptionSafetyAlerts from '../components/prescriptions/PrescriptionSafetyAlerts';
+import PrescriptionHistoryTab from '../components/prescriptions/PrescriptionHistoryTab';
 
 export default function PrescriptionWriterPage({ prefillAppointment, onResetPrefill, initialPrescriptionId = null }) {
   const { currentDoctor } = useAuth();
   const { t } = useLanguage();
+
+  // Sub-Tab Navigation: 'writer' | 'history'
+  const [subTab, setSubTab] = useState('writer');
 
   // Patients & Templates & Meta Data
   const [patients, setPatients] = useState([]);
@@ -643,19 +647,82 @@ export default function PrescriptionWriterPage({ prefillAppointment, onResetPref
     }
   };
 
-  // Custom Medicine Submission
-  const handleCreateCustomMedicine = async (e) => {
-    e.preventDefault();
-    try {
-      const res = await api.createCustomMedicine(customMed);
-      if (res.success) {
-        setIsCustomMedModalOpen(false);
-        handleSelectFavorite(res.medicine);
-        alert(`Added "${customMed.brand_name}" to doctor formulary!`);
+  // Load an existing prescription from history into the writer workstation
+  const handleLoadPrescriptionForEdit = (rx) => {
+    if (!rx) return;
+    setPrescriptionId(rx.id);
+    setPrescriptionNo(rx.prescription_no || '');
+    setStatus(rx.status || 'draft');
+    setFinalizedAt(rx.finalized_at || null);
+    setSelectedPatientId(rx.patient_id || '');
+    setPatientName(rx.patient_name || rx.patient?.name || '');
+    setPatientAge(rx.patient_age || rx.patient?.age || '');
+    setPatientGender(rx.patient_gender || rx.patient?.gender || 'Male');
+    setPatientPhone(rx.patient_phone || rx.patient?.phone || '');
+    setPatientAllergies(rx.patient_allergies || rx.patient?.allergies || 'None documented');
+    setDiagnosis(rx.diagnosis || '');
+    setSymptoms(rx.symptoms || '');
+    setMedicines(Array.isArray(rx.items) && rx.items.length > 0 ? rx.items : [
+      {
+        id: 'med-row-1',
+        medicine_name: '',
+        name: '',
+        generic_name: '',
+        strength: '',
+        form: 'Tablet',
+        dose: '1 tab',
+        frequency: 'BD — Twice daily',
+        duration: '5 Days',
+        instructions: 'After meals'
       }
-    } catch (err) {
-      alert("Failed to add custom medicine: " + err.message);
+    ]);
+    if (rx.tests_advised) {
+      setLabTests(typeof rx.tests_advised === 'string' ? rx.tests_advised.split(',').map(s => s.trim()).filter(Boolean) : rx.tests_advised);
     }
+    if (rx.advice) setAdvice(rx.advice);
+    if (rx.follow_up_date) setFollowUpDate(rx.follow_up_date);
+    setSubTab('writer');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleResetToNew = () => {
+    setPrescriptionId(null);
+    setPrescriptionNo('');
+    setStatus('draft');
+    setFinalizedAt(null);
+    setSelectedPatientId('');
+    setSelectedPatient(null);
+    setPatientName('');
+    setPatientAge('');
+    setPatientGender('Male');
+    setPatientPhone('');
+    setPatientAllergies('None documented');
+    setChronicConditions('None');
+    setCurrentMedicines('None');
+    setDiagnosis('');
+    setSymptoms('');
+    setMedicines([
+      {
+        id: 'med-row-1',
+        medicine_name: '',
+        name: '',
+        generic_name: '',
+        strength: '',
+        form: 'Tablet',
+        dose: '1 tab',
+        frequency: 'BD — Twice daily',
+        duration: '5 Days',
+        instructions: 'After meals'
+      }
+    ]);
+    setLabTests([]);
+    setAdvice('Take medications strictly on time. Drink plenty of water and get adequate rest.');
+    const d = new Date();
+    d.setDate(d.getDate() + 7);
+    setFollowUpDate(d.toISOString().split('T')[0]);
+    if (onResetPrefill) onResetPrefill();
+    setSubTab('writer');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   const commonLabPresets = [
@@ -675,9 +742,64 @@ export default function PrescriptionWriterPage({ prefillAppointment, onResetPref
 
   return (
     <div className="space-y-6 pb-20 max-w-7xl mx-auto">
-      
-      {/* Top Header & Workstation Controls */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
+
+      {/* Top Module Sub-Tab Switcher: Writer vs History */}
+      <div className="flex items-center justify-between bg-slate-100 dark:bg-slate-850 p-1.5 rounded-2xl border border-slate-200 dark:border-slate-800">
+        <div className="flex items-center gap-1">
+          <button
+            onClick={() => setSubTab('writer')}
+            className={`px-4 py-2 text-xs font-bold rounded-xl transition-all flex items-center gap-2 ${
+              subTab === 'writer'
+                ? 'bg-white dark:bg-slate-900 text-teal-800 dark:text-teal-300 shadow-sm'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+            }`}
+          >
+            <FileText className="w-4 h-4 text-teal-600" />
+            <span>✍️ Prescription Workstation</span>
+          </button>
+
+          <button
+            onClick={() => setSubTab('history')}
+            className={`px-4 py-2 text-xs font-bold rounded-xl transition-all flex items-center gap-2 ${
+              subTab === 'history'
+                ? 'bg-white dark:bg-slate-900 text-teal-800 dark:text-teal-300 shadow-sm'
+                : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+            }`}
+          >
+            <History className="w-4 h-4 text-teal-600" />
+            <span>📋 Prescription History</span>
+          </button>
+        </div>
+
+        {subTab === 'writer' ? (
+          <button
+            onClick={handleResetToNew}
+            className="text-xs font-bold px-3 py-1.5 rounded-xl bg-teal-50 hover:bg-teal-100 text-teal-700 border border-teal-200 dark:bg-teal-950 dark:border-teal-800 dark:text-teal-300 transition-colors flex items-center gap-1.5"
+          >
+            <Plus className="w-3.5 h-3.5" />
+            <span>New Prescription</span>
+          </button>
+        ) : (
+          <button
+            onClick={() => setSubTab('writer')}
+            className="text-xs font-bold px-3 py-1.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-white transition-colors flex items-center gap-1.5"
+          >
+            <FileText className="w-3.5 h-3.5" />
+            <span>Create Prescription</span>
+          </button>
+        )}
+      </div>
+
+      {/* RENDER ACTIVE SUB-TAB */}
+      {subTab === 'history' ? (
+        <PrescriptionHistoryTab
+          onEditPrescription={handleLoadPrescriptionForEdit}
+          onWriteNew={handleResetToNew}
+        />
+      ) : (
+        <>
+          {/* Top Header & Workstation Controls */}
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
         <div>
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-xl bg-teal-50 dark:bg-teal-950/50 flex items-center justify-center text-teal-600 dark:text-teal-400 border border-teal-200 dark:border-teal-800 shadow-xs">
@@ -1347,6 +1469,8 @@ export default function PrescriptionWriterPage({ prefillAppointment, onResetPref
             </div>
           </div>
         </div>
+      )}
+      </>
       )}
 
       {/* 4. Prescription PDF Preview Modal */}

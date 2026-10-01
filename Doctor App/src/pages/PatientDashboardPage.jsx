@@ -24,6 +24,8 @@ import {
   Search,
   Eye,
   Languages,
+  Printer,
+  FileCheck,
   ArrowRight,
   ArrowLeft
 } from 'lucide-react';
@@ -83,6 +85,31 @@ export default function PatientDashboardPage({ onNavigateToDirectory, onSelectDo
   // Cancel Appointment Modal State
   const [cancelModal, setCancelModal] = useState({ isOpen: false, appointmentId: null, reason: '' });
   const [cancelling, setCancelling] = useState(false);
+
+  // Selected Prescription for in-app viewing & printing
+  const [selectedRx, setSelectedRx] = useState(null);
+
+  // Print Prescription
+  const handlePrintRx = (rx) => {
+    if (rx?.id) {
+      api.logPatientPrescriptionAuditEvent(rx.id, 'printed').catch(e => console.warn(e));
+    }
+    window.print();
+  };
+
+  // Download PDF
+  const handleDownloadRx = (rx) => {
+    if (rx?.id) {
+      api.logPatientPrescriptionAuditEvent(rx.id, 'downloaded').catch(e => console.warn(e));
+      const downloadUrl = api.getPrescriptionPdfUrl(rx.id, true);
+      const a = document.createElement('a');
+      a.href = downloadUrl;
+      a.download = `${rx.prescription_no || rx.id}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    }
+  };
 
   // Fetch Patient Dashboard Data
   const loadDashboardData = async () => {
@@ -491,26 +518,34 @@ export default function PatientDashboardPage({ onNavigateToDirectory, onSelectDo
                       </div>
                     </div>
 
-                    {/* PDF Actions */}
+                    {/* Prescription Actions */}
                     <div className="flex items-center gap-2 pt-2 border-t border-slate-100 dark:border-slate-800">
-                      <a
-                        href={`/api/prescriptions/${rx.id}/pdf`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="flex-1 py-2 px-3 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-colors"
+                      <button
+                        type="button"
+                        onClick={() => setSelectedRx(rx)}
+                        className="flex-1 py-2 px-3 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs flex items-center justify-center gap-1.5 transition-colors shadow-xs"
                       >
                         <Eye className="w-3.5 h-3.5" />
-                        <span>{tPatient('viewPdf')}</span>
-                      </a>
+                        <span>{isPatientRTL ? "نسخہ دیکھیں" : "View Prescription"}</span>
+                      </button>
 
-                      <a
-                        href={`/api/prescriptions/${rx.id}/pdf?download=true`}
-                        className="py-2 px-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-750 text-slate-700 dark:text-slate-200 font-bold text-xs flex items-center justify-center gap-1.5 transition-colors"
+                      <button
+                        type="button"
+                        onClick={() => handlePrintRx(rx)}
+                        className="p-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-750 text-slate-700 dark:text-slate-200 font-bold text-xs flex items-center justify-center transition-colors"
+                        title={isPatientRTL ? "پرنٹ کریں" : "Print"}
+                      >
+                        <Printer className="w-3.5 h-3.5 text-teal-600" />
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => handleDownloadRx(rx)}
+                        className="p-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-50 dark:hover:bg-slate-750 text-slate-700 dark:text-slate-200 font-bold text-xs flex items-center justify-center transition-colors"
                         title={tPatient('downloadPdf')}
                       >
-                        <Download className="w-3.5 h-3.5" />
-                        <span>{tPatient('downloadPdf')}</span>
-                      </a>
+                        <Download className="w-3.5 h-3.5 text-slate-600 dark:text-slate-300" />
+                      </button>
                     </div>
                   </div>
                 ))}
@@ -786,6 +821,214 @@ export default function PatientDashboardPage({ onNavigateToDirectory, onSelectDo
               >
                 {tPatient('keepAppointment')}
               </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Patient Prescription View & Print Modal */}
+      {selectedRx && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-slate-950/70 backdrop-blur-sm animate-fade-in overflow-y-auto">
+          <div 
+            dir={isPatientRTL ? "rtl" : "ltr"}
+            className="bg-white dark:bg-slate-900 w-full max-w-3xl rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col max-h-[92vh]"
+          >
+            {/* Modal Header */}
+            <div className="px-6 py-4 bg-slate-50 dark:bg-slate-850 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between gap-3">
+              <div className="flex items-center gap-2.5">
+                <span className="p-2 rounded-xl bg-teal-50 dark:bg-teal-950/80 text-teal-600 dark:text-teal-400">
+                  <FileText className="w-5 h-5" />
+                </span>
+                <div>
+                  <h3 className="text-sm font-bold text-slate-900 dark:text-white">
+                    {isPatientRTL ? "ڈاکٹر کا سرکاری نسخہ" : "Official Medical Prescription"}
+                  </h3>
+                  <span className="font-mono text-xs font-bold text-teal-600 dark:text-teal-400">
+                    <bdi>{selectedRx.prescription_no || selectedRx.id}</bdi>
+                  </span>
+                </div>
+              </div>
+
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => handlePrintRx(selectedRx)}
+                  className="px-3 py-1.5 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs flex items-center gap-1.5 transition-colors shadow-xs"
+                >
+                  <Printer className="w-3.5 h-3.5" />
+                  <span>{isPatientRTL ? "پرنٹ کریں" : "Print"}</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => handleDownloadRx(selectedRx)}
+                  className="px-3 py-1.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 hover:bg-slate-100 dark:hover:bg-slate-750 text-slate-700 dark:text-slate-200 font-bold text-xs flex items-center gap-1.5 transition-colors"
+                >
+                  <Download className="w-3.5 h-3.5" />
+                  <span>{isPatientRTL ? "ڈاؤن لوڈ PDF" : "Download PDF"}</span>
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setSelectedRx(null)}
+                  className="p-1.5 rounded-xl text-slate-400 hover:text-slate-600 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                >
+                  <XCircle className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+
+            {/* Modal Body / Printable A4 Layout Container */}
+            <div className="p-6 sm:p-8 overflow-y-auto space-y-6 text-xs text-slate-800 dark:text-slate-200">
+              
+              {/* Doctor / Clinic Header */}
+              <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 pb-4 border-b border-slate-200 dark:border-slate-800">
+                <div>
+                  <h2 className="text-base font-black text-slate-900 dark:text-white">
+                    {selectedRx.doctor_name || "Doctor"}
+                  </h2>
+                  <p className="text-teal-600 dark:text-teal-400 font-semibold">
+                    {selectedRx.doctor_specialty || "Medical Specialist"}
+                  </p>
+                  {selectedRx.doctor_pmdc && (
+                    <p className="text-[11px] text-slate-500 font-mono">
+                      PMDC / Reg: {selectedRx.doctor_pmdc}
+                    </p>
+                  )}
+                  <p className="text-slate-500 mt-0.5">
+                    {selectedRx.clinic_name || "DocCare Clinic"}
+                  </p>
+                </div>
+
+                <div className="sm:text-right">
+                  <div className="inline-block px-3 py-1 rounded-full bg-teal-50 dark:bg-teal-950 text-teal-700 dark:text-teal-300 font-mono text-xs font-bold border border-teal-200 dark:border-teal-800">
+                    <bdi>{selectedRx.prescription_no || selectedRx.id}</bdi>
+                  </div>
+                  <p className="text-slate-500 text-[11px] mt-1">
+                    {isPatientRTL ? "تاریخ نسخہ: " : "Date: "} <bdi>{new Date(selectedRx.prescription_date || selectedRx.created_at).toLocaleDateString()}</bdi>
+                  </p>
+                </div>
+              </div>
+
+              {/* Patient Info Bar */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/60 border border-slate-200 dark:border-slate-800">
+                <div>
+                  <span className="text-[10px] uppercase font-bold text-slate-400 block">{isPatientRTL ? "مریض کا نام" : "Patient Name"}</span>
+                  <span className="font-bold text-slate-900 dark:text-white">{selectedRx.patient_name || data?.patient?.name}</span>
+                </div>
+                <div>
+                  <span className="text-[10px] uppercase font-bold text-slate-400 block">{isPatientRTL ? "عمر / جنس" : "Age / Gender"}</span>
+                  <span>{selectedRx.patient_age || data?.patient?.age || "—"} Yrs • {selectedRx.patient_gender || data?.patient?.gender || "—"}</span>
+                </div>
+                <div>
+                  <span className="text-[10px] uppercase font-bold text-slate-400 block">{isPatientRTL ? "تشخیص" : "Diagnosis"}</span>
+                  <span className="font-medium text-slate-700 dark:text-slate-300">{selectedRx.diagnosis || (isPatientRTL ? "طبی معائنہ" : "Clinical Review")}</span>
+                </div>
+                <div>
+                  <span className="text-[10px] uppercase font-bold text-slate-400 block">{isPatientRTL ? "فالو اپ" : "Follow-up"}</span>
+                  <span className="font-medium text-teal-600 dark:text-teal-400">
+                    {selectedRx.follow_up_date ? new Date(selectedRx.follow_up_date).toLocaleDateString() : (isPatientRTL ? "ضرورت پڑنے پر" : "As Needed")}
+                  </span>
+                </div>
+              </div>
+
+              {/* Prescribed Medicines (Rx) */}
+              <div className="space-y-3">
+                <div className="flex items-center gap-2 border-b border-teal-500/20 pb-1.5">
+                  <span className="text-lg font-black text-teal-600 font-serif">℞</span>
+                  <h4 className="text-sm font-bold text-slate-900 dark:text-white">
+                    {isPatientRTL ? "تجویز کردہ ادویات اور ہدایات" : "Prescribed Medications & Dosages"}
+                  </h4>
+                </div>
+
+                {selectedRx.items && selectedRx.items.length > 0 ? (
+                  <div className="border border-slate-200 dark:border-slate-800 rounded-2xl overflow-hidden divide-y divide-slate-100 dark:divide-slate-800">
+                    {selectedRx.items.map((item, idx) => (
+                      <div key={idx} className="p-3.5 bg-white dark:bg-slate-900 hover:bg-slate-50/50 transition-colors flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                        <div className="space-y-0.5">
+                          <div className="flex items-center gap-2">
+                            <span className="w-5 h-5 rounded-full bg-teal-100 dark:bg-teal-950 text-teal-700 dark:text-teal-300 text-[10px] font-bold flex items-center justify-center">
+                              {idx + 1}
+                            </span>
+                            <span className="font-bold text-slate-900 dark:text-white text-xs">
+                              {item.brand_name_snapshot || item.brand_name || item.medicine_name || item.name}
+                            </span>
+                            {(item.strength_snapshot || item.strength) && (
+                              <span className="px-1.5 py-0.2 rounded bg-slate-100 dark:bg-slate-800 text-[10px] text-slate-600 dark:text-slate-300">
+                                {item.strength_snapshot || item.strength}
+                              </span>
+                            )}
+                          </div>
+                          {(item.generic_name_snapshot || item.generic_name) && (
+                            <p className="text-[11px] text-slate-400 ps-7">
+                              Generic: {item.generic_name_snapshot || item.generic_name}
+                            </p>
+                          )}
+                        </div>
+
+                        <div className="flex flex-wrap items-center gap-2 text-[11px] ps-7 sm:ps-0">
+                          <span className="px-2 py-0.5 rounded-lg bg-teal-50 dark:bg-teal-950/80 text-teal-800 dark:text-teal-300 font-medium">
+                            {item.dose || "1 Tab"}
+                          </span>
+                          <span className="px-2 py-0.5 rounded-lg bg-blue-50 dark:bg-blue-950/80 text-blue-800 dark:text-blue-300 font-medium">
+                            {item.frequency || "TDS (ہر 8 گھنٹے)"}
+                          </span>
+                          <span className="px-2 py-0.5 rounded-lg bg-indigo-50 dark:bg-indigo-950/80 text-indigo-800 dark:text-indigo-300 font-medium">
+                            {item.duration || "5 Days"}
+                          </span>
+                          {item.instructions && (
+                            <span className="text-slate-500 italic text-[11px]">
+                              ({item.instructions})
+                            </span>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ) : (
+                  <p className="text-xs text-slate-400 italic">
+                    {isPatientRTL ? "کوئی ادویات درج نہیں کی گئیں" : "No specific medications listed."}
+                  </p>
+                )}
+              </div>
+
+              {/* Lab Tests & Doctor Advice */}
+              {(selectedRx.tests_advised || selectedRx.doctor_instructions || selectedRx.advice) && (
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                  {selectedRx.tests_advised && (
+                    <div className="p-3.5 rounded-2xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-900/40">
+                      <span className="font-bold text-amber-800 dark:text-amber-300 block mb-1">
+                        {isPatientRTL ? "تجویز کردہ لیب ٹیسٹ" : "Advised Lab Tests"}
+                      </span>
+                      <p className="text-amber-900 dark:text-amber-200 text-xs">
+                        {selectedRx.tests_advised}
+                      </p>
+                    </div>
+                  )}
+
+                  {(selectedRx.doctor_instructions || selectedRx.advice) && (
+                    <div className="p-3.5 rounded-2xl bg-teal-50 dark:bg-teal-950/30 border border-teal-200 dark:border-teal-900/40">
+                      <span className="font-bold text-teal-800 dark:text-teal-300 block mb-1">
+                        {isPatientRTL ? "ڈاکٹر کی عمومی ہدایات" : "Doctor's Advice"}
+                      </span>
+                      <p className="text-teal-900 dark:text-teal-200 text-xs">
+                        {selectedRx.doctor_instructions || selectedRx.advice}
+                      </p>
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {/* Footer Note */}
+              <div className="pt-4 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-slate-400 text-center sm:text-left">
+                <p>
+                  {isPatientRTL ? "اللہ شفا دینے والا ہے • جلد صحت یابی کی دعا" : "DocCare Verified Electronic Prescription • Valid Across Pakistan"}
+                </p>
+                <p className="font-mono text-[10px]">
+                  Generated via DocCare Cloud Healthcare OS
+                </p>
+              </div>
+
             </div>
           </div>
         </div>
