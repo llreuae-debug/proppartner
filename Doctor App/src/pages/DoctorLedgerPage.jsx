@@ -253,22 +253,23 @@ export default function DoctorLedgerPage({ onNavigateToPatient }) {
             {/* Desktop Table View */}
             <div className="hidden md:block overflow-x-auto">
               <table className="w-full text-xs text-left">
-                <thead className="bg-slate-50 dark:bg-slate-850/80 text-slate-500 font-bold uppercase text-[10px] tracking-wider border-b border-slate-100 dark:border-slate-800">
+                <thead className="bg-slate-50/90 dark:bg-slate-850/90 text-slate-500 font-bold uppercase text-[10px] tracking-wider border-b border-slate-100 dark:border-slate-800">
                   <tr>
-                    <th className="py-3.5 px-4">Date & Time</th>
-                    <th className="py-3.5 px-4">Patient</th>
-                    <th className="py-3.5 px-4">Type & Category</th>
-                    <th className="py-3.5 px-4">Description</th>
-                    <th className="py-3.5 px-4">Payment Method</th>
-                    <th className="py-3.5 px-4 text-right">Cash In</th>
-                    <th className="py-3.5 px-4 text-right">Cash Out</th>
-                    <th className="py-3.5 px-4 text-right">Balance</th>
-                    <th className="py-3.5 px-4 text-center">Actions</th>
+                    <th className="py-3 px-3.5 font-bold">Date & Time</th>
+                    <th className="py-3 px-3 font-bold">Patient</th>
+                    <th className="py-3 px-3 font-bold">Type & Category</th>
+                    <th className="py-3 px-3 font-bold">Description</th>
+                    <th className="py-3 px-2.5 font-bold text-center">Payment</th>
+                    <th className="py-3 px-3 font-bold text-right">Cash In</th>
+                    <th className="py-3 px-3 font-bold text-right">Cash Out</th>
+                    <th className="py-3 px-3.5 font-bold text-right">Balance</th>
+                    <th className="py-3 px-2.5 font-bold text-center">Actions</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-100 dark:divide-slate-800 font-medium">
                   {entries.map((entry) => {
                     const isCashIn = entry.entry_type === 'cash_in';
+                    const isNegativeBal = (entry.running_balance || 0) < 0;
                     return (
                       <tr 
                         key={entry.id} 
@@ -276,13 +277,13 @@ export default function DoctorLedgerPage({ onNavigateToPatient }) {
                         onClick={() => setSelectedTransactionForDetail(entry)}
                       >
                         {/* 1. Date & Time */}
-                        <td className="py-3.5 px-4 whitespace-nowrap">
-                          <p className="font-bold text-slate-900 dark:text-white">{entry.transaction_date}</p>
-                          <p className="text-[10px] text-slate-400 font-mono">{entry.transaction_time || '10:30 AM'}</p>
+                        <td className="py-3 px-3.5 whitespace-nowrap">
+                          <p className="font-bold text-slate-800 dark:text-slate-100 text-xs">{entry.transaction_date}</p>
+                          <p className="text-[10.5px] text-slate-400 font-medium">{entry.transaction_time || '10:30 AM'}</p>
                         </td>
 
                         {/* 2. Patient */}
-                        <td className="py-3.5 px-4" onClick={(e) => e.stopPropagation()}>
+                        <td className="py-3 px-3" onClick={(e) => e.stopPropagation()}>
                           {entry.patient_id ? (
                             <button
                               type="button"
@@ -294,7 +295,7 @@ export default function DoctorLedgerPage({ onNavigateToPatient }) {
                                 <ExternalLink className="w-2.5 h-2.5 opacity-0 group-hover/p:opacity-100 transition-opacity" />
                               </span>
                               {entry.patient_code && (
-                                <span className="text-[10px] text-slate-400 font-mono">{entry.patient_code}</span>
+                                <span className="text-[10px] text-slate-400 font-semibold">{entry.patient_code}</span>
                               )}
                             </button>
                           ) : (
@@ -306,7 +307,7 @@ export default function DoctorLedgerPage({ onNavigateToPatient }) {
                         </td>
 
                         {/* 3. Type & Category */}
-                        <td className="py-3.5 px-4 whitespace-nowrap">
+                        <td className="py-3 px-3 whitespace-nowrap">
                           <span className={`inline-block text-[10.5px] font-bold px-2 py-0.5 rounded-lg ${
                             isCashIn 
                               ? 'bg-teal-100 text-teal-800 dark:bg-teal-950 dark:text-teal-300' 
@@ -314,57 +315,61 @@ export default function DoctorLedgerPage({ onNavigateToPatient }) {
                           }`}>
                             {entry.type}
                           </span>
-                          <span className="text-[10px] text-slate-400 block mt-0.5">
+                          <span className="text-[10px] text-slate-400 block mt-0.5 font-medium">
                             {entry.category || 'General'}
                           </span>
                         </td>
 
                         {/* 4. Description / Remarks */}
-                        <td className="py-3.5 px-4 max-w-[200px] truncate" title={entry.description || entry.remarks}>
-                          <p className="text-slate-700 dark:text-slate-300 truncate">
+                        <td className="py-3 px-3 max-w-[200px] truncate" title={entry.description || entry.remarks}>
+                          <p className="text-slate-700 dark:text-slate-300 truncate font-medium">
                             {entry.description || entry.remarks || '—'}
                           </p>
                           {entry.reference && (
-                            <span className="text-[10px] text-slate-400 font-mono">Ref: {entry.reference}</span>
+                            <span className="text-[10px] text-slate-400 font-semibold">Ref: {entry.reference}</span>
                           )}
                         </td>
 
                         {/* 5. Payment Method */}
-                        <td className="py-3.5 px-4 whitespace-nowrap">
+                        <td className="py-3 px-2.5 whitespace-nowrap text-center">
                           <span className="px-2 py-0.5 rounded-md bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 text-[10.5px] font-semibold border border-slate-200 dark:border-slate-700">
                             {entry.payment_method || 'Cash'}
                           </span>
                         </td>
 
                         {/* 6. Cash In */}
-                        <td className="py-3.5 px-4 text-right whitespace-nowrap">
+                        <td className="py-3 px-3 text-right whitespace-nowrap">
                           {isCashIn ? (
-                            <span className="font-bold text-[#00875a] dark:text-emerald-400 font-mono text-xs">
+                            <span className="font-bold text-emerald-600 dark:text-emerald-400 text-xs tabular-nums tracking-tight">
                               PKR {Number(entry.amount).toLocaleString()}
                             </span>
                           ) : (
-                            <span className="text-slate-300 dark:text-slate-600">—</span>
+                            <span className="text-slate-300 dark:text-slate-600 font-light">—</span>
                           )}
                         </td>
 
                         {/* 7. Cash Out */}
-                        <td className="py-3.5 px-4 text-right whitespace-nowrap">
+                        <td className="py-3 px-3 text-right whitespace-nowrap">
                           {!isCashIn ? (
-                            <span className="font-bold text-[#c92a2a] dark:text-rose-400 font-mono text-xs">
+                            <span className="font-bold text-rose-600 dark:text-rose-400 text-xs tabular-nums tracking-tight">
                               PKR {Number(entry.amount).toLocaleString()}
                             </span>
                           ) : (
-                            <span className="text-slate-300 dark:text-slate-600">—</span>
+                            <span className="text-slate-300 dark:text-slate-600 font-light">—</span>
                           )}
                         </td>
 
                         {/* 8. Running Balance */}
-                        <td className="py-3.5 px-4 text-right whitespace-nowrap font-mono font-bold text-slate-900 dark:text-white">
-                          PKR {(entry.running_balance || 0).toLocaleString()}
+                        <td className="py-3 px-3.5 text-right whitespace-nowrap">
+                          <span className={`font-bold text-xs tabular-nums tracking-tight ${
+                            isNegativeBal ? 'text-rose-600 dark:text-rose-400' : 'text-slate-900 dark:text-white'
+                          }`}>
+                            {isNegativeBal ? '− ' : ''}PKR {Math.abs(entry.running_balance || 0).toLocaleString()}
+                          </span>
                         </td>
 
                         {/* 9. Actions */}
-                        <td className="py-3.5 px-4 text-center whitespace-nowrap" onClick={(e) => e.stopPropagation()}>
+                        <td className="py-3 px-2.5 text-center whitespace-nowrap" onClick={(e) => e.stopPropagation()}>
                           <div className="flex items-center justify-center gap-1">
                             <button
                               type="button"
