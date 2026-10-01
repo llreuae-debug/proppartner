@@ -138,10 +138,44 @@ export default function DoctorLedgerPage({ onNavigateToPatient }) {
   };
 
   return (
-    <div className="space-y-6 pb-20 max-w-7xl mx-auto">
+    <div id="printable-ledger" className="space-y-6 pb-20 max-w-7xl mx-auto">
       
-      {/* Top Header & Export Controls */}
-      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-5 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm">
+      {/* Printable Statement Header (Visible ONLY on print preview & paper) */}
+      <div className="print-only mb-6 border-b-2 border-teal-600 pb-4">
+        <div className="flex items-start justify-between">
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="text-xl font-black text-slate-900 tracking-tight">DocCare Practice Financial Statement</span>
+            </div>
+            <p className="text-sm font-bold text-teal-700 mt-0.5">{currentDoctor?.name || 'Dr. Tariq Khan'} — {currentDoctor?.specialization || 'Consultant Physician'}</p>
+            <p className="text-xs text-slate-600">{currentDoctor?.clinicName || 'Shifa Executive Clinic & Diagnostic Center'} • PMDC: {currentDoctor?.pmdcNumber || '49821-P'}</p>
+          </div>
+          <div className="text-right text-xs text-slate-500">
+            <p className="font-bold text-slate-800">Generated: {new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' })}</p>
+            <p className="mt-0.5">Records: <strong className="text-slate-800">{entries.length} Transactions</strong></p>
+            <p className="text-[10px] text-teal-700 font-mono">Official Doctor Accounting Record</p>
+          </div>
+        </div>
+
+        {/* Financial Summary Pill Bar for Print */}
+        <div className="grid grid-cols-3 gap-3 mt-4 pt-3 border-t border-slate-200 text-center">
+          <div className="p-2.5 rounded-xl bg-emerald-50 border border-emerald-200">
+            <span className="text-[10px] font-bold text-emerald-800 uppercase block">Total Cash In</span>
+            <span className="text-sm font-black text-emerald-700">PKR {(summary?.total_cash_in || 0).toLocaleString()}</span>
+          </div>
+          <div className="p-2.5 rounded-xl bg-rose-50 border border-rose-200">
+            <span className="text-[10px] font-bold text-rose-800 uppercase block">Total Cash Out</span>
+            <span className="text-sm font-black text-rose-700">PKR {(summary?.total_cash_out || 0).toLocaleString()}</span>
+          </div>
+          <div className="p-2.5 rounded-xl bg-teal-50 border border-teal-200">
+            <span className="text-[10px] font-bold text-teal-800 uppercase block">Net Practice Balance</span>
+            <span className="text-sm font-black text-teal-800">PKR {(summary?.net_balance || 0).toLocaleString()}</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Top Header & Export Controls (Screen View) */}
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 bg-white dark:bg-slate-900 p-5 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm no-print">
         <div>
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-2xl bg-teal-50 dark:bg-teal-950/60 flex items-center justify-center text-teal-600 dark:text-teal-400 border border-teal-200 dark:border-teal-800 shadow-xs">
@@ -177,28 +211,32 @@ export default function DoctorLedgerPage({ onNavigateToPatient }) {
           <button
             type="button"
             onClick={handlePrintLedger}
-            className="px-3.5 py-2 rounded-xl bg-slate-50 hover:bg-slate-100 dark:bg-slate-800 dark:hover:bg-slate-750 text-slate-700 dark:text-slate-200 font-bold text-xs border border-slate-200 dark:border-slate-700 flex items-center gap-1.5 shadow-2xs transition-colors cursor-pointer"
+            className="px-3.5 py-2 rounded-xl bg-teal-600 hover:bg-teal-700 text-white font-bold text-xs border border-teal-600 flex items-center gap-1.5 shadow-sm transition-colors cursor-pointer"
           >
-            <Printer className="w-3.5 h-3.5 text-slate-600" />
+            <Printer className="w-3.5 h-3.5" />
             <span>Print Ledger</span>
           </button>
         </div>
       </div>
 
-      {/* 1. DYNAMIC SUMMARY STATS CARDS */}
-      <LedgerSummaryCards summary={summary} loading={loading} />
+      {/* 1. DYNAMIC SUMMARY STATS CARDS (Screen View) */}
+      <div className="no-print">
+        <LedgerSummaryCards summary={summary} loading={loading} />
+      </div>
 
-      {/* 2. FILTERS & SEARCH & CASH IN / CASH OUT BUTTONS (MATCHING ATTACHED SCREENSHOT) */}
-      <LedgerFiltersBar
-        filters={filters}
-        onChangeFilters={handleUpdateFilters}
-        onResetFilters={handleResetFilters}
-        onOpenCashIn={() => setIsCashInOpen(true)}
-        onOpenCashOut={() => setIsCashOutOpen(true)}
-        patients={patients}
-        currentDoctor={currentDoctor}
-        totalEntries={entries.length}
-      />
+      {/* 2. FILTERS & SEARCH & CASH IN / CASH OUT BUTTONS (Screen View) */}
+      <div className="no-print">
+        <LedgerFiltersBar
+          filters={filters}
+          onChangeFilters={handleUpdateFilters}
+          onResetFilters={handleResetFilters}
+          onOpenCashIn={() => setIsCashInOpen(true)}
+          onOpenCashOut={() => setIsCashOutOpen(true)}
+          patients={patients}
+          currentDoctor={currentDoctor}
+          totalEntries={entries.length}
+        />
+      </div>
 
       {/* 3. LEDGER TRANSACTIONS LIST */}
       <div className="bg-white dark:bg-slate-900 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden">
@@ -458,7 +496,22 @@ export default function DoctorLedgerPage({ onNavigateToPatient }) {
             </div>
           </>
         )}
+      </div>
 
+      {/* Print-Only Signature & Certification Footer */}
+      <div className="print-only mt-8 pt-6 border-t border-slate-300">
+        <div className="flex items-end justify-between text-xs text-slate-600">
+          <div>
+            <p className="font-bold text-slate-800">DocCare Practice Management OS</p>
+            <p className="text-[10px] text-slate-500">Official Clinical Accounting & Tax Ledger Record</p>
+            <p className="text-[10px] text-slate-400 mt-1">This statement was compiled and verified electronically.</p>
+          </div>
+          <div className="text-center">
+            <div className="w-48 border-b border-slate-400 mb-1.5 h-12"></div>
+            <p className="font-bold text-slate-800 text-[11px]">{currentDoctor?.name || 'Doctor Signature'}</p>
+            <p className="text-[10px] text-slate-500">Authorized Signatory & Stamp</p>
+          </div>
+        </div>
       </div>
 
       {/* ==================================================== */}

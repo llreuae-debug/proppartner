@@ -63,7 +63,7 @@ export default function PatientReceiptModal({
         </div>
 
         {/* Printable Receipt Paper Container */}
-        <div ref={printRef} className="p-6 sm:p-8 space-y-6 text-slate-900 dark:text-slate-100 bg-white dark:bg-slate-900 print:p-6 print:text-black">
+        <div id="printable-receipt" ref={printRef} className="p-6 sm:p-8 space-y-6 text-slate-900 dark:text-slate-100 bg-white dark:bg-slate-900 print:p-6 print:text-black">
           
           {/* Header with DocCare Branding & Clinic Info */}
           <div className="flex items-start justify-between border-b-2 border-teal-600 pb-5">

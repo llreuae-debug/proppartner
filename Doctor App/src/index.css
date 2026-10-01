@@ -183,16 +183,22 @@
   filter: drop-shadow(0 4px 12px rgba(13, 148, 136, 0.25));
 }
 
-/* Print Stylesheet for A4 Prescription */
+/* Print Stylesheet for A4 Prescription, Doctor Ledger, Receipts & Medical Documents */
 @page {
   size: A4 portrait;
-  margin: 8mm 10mm;
+  margin: 10mm 12mm;
+}
+
+@media screen {
+  .print-only {
+    display: none !important;
+  }
 }
 
 @media print {
   html, body {
-    width: 210mm;
-    min-height: 297mm;
+    width: 100% !important;
+    min-height: 100% !important;
     background: #ffffff !important;
     color: #0f172a !important;
     margin: 0 !important;
@@ -201,16 +207,33 @@
     print-color-adjust: exact !important;
   }
 
-  body * {
+  /* Hide navigation, sidebars, interactive controls & floating decorations */
+  .no-print,
+  nav,
+  aside,
+  header.app-header,
+  .sidebar,
+  .modal-backdrop,
+  button,
+  .floating-capsule,
+  .floating-particle {
+    display: none !important;
+  }
+
+  /* Show print-only banners & headers */
+  .print-only {
+    display: block !important;
+  }
+
+  /* Isolate Prescription Modal when open */
+  body:has(#printable-prescription) * {
     visibility: hidden;
   }
-  
-  #printable-prescription,
-  #printable-prescription * {
+  body:has(#printable-prescription) #printable-prescription,
+  body:has(#printable-prescription) #printable-prescription * {
     visibility: visible;
   }
-  
-  #printable-prescription {
+  body:has(#printable-prescription) #printable-prescription {
     position: absolute;
     left: 0;
     top: 0;
@@ -227,18 +250,61 @@
     line-height: 1.4;
   }
 
-  .no-print,
-  nav,
-  aside,
-  header,
-  footer,
-  .modal-backdrop,
-  button,
-  .floating-capsule {
-    display: none !important;
+  /* Isolate Payment Receipt Modal when open */
+  body:has(#printable-receipt) * {
+    visibility: hidden;
+  }
+  body:has(#printable-receipt) #printable-receipt,
+  body:has(#printable-receipt) #printable-receipt * {
+    visibility: visible;
+  }
+  body:has(#printable-receipt) #printable-receipt {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100% !important;
+    max-width: 190mm !important;
+    margin: 0 auto !important;
+    padding: 8mm 10mm !important;
+    background: #ffffff !important;
+    box-shadow: none !important;
+    border: 1px solid #cbd5e1 !important;
+    border-radius: 12px !important;
   }
 
-  /* Prevent awkward page splits on medicine rows, headers and signatures */
+  /* Doctor Ledger Print Layout */
+  #printable-ledger {
+    display: block !important;
+    width: 100% !important;
+    background: #ffffff !important;
+    color: #0f172a !important;
+    box-shadow: none !important;
+    border: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  #printable-ledger table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    font-size: 9.5pt !important;
+  }
+
+  #printable-ledger th {
+    background: #f8fafc !important;
+    color: #334155 !important;
+    border-bottom: 2px solid #cbd5e1 !important;
+    padding: 6pt 6pt !important;
+    font-size: 8.5pt !important;
+  }
+
+  #printable-ledger td {
+    padding: 6pt 6pt !important;
+    border-bottom: 1px solid #e2e8f0 !important;
+    color: #0f172a !important;
+  }
+
+  /* Prevent awkward page splits */
   .print-avoid-break,
   tr,
   table,
@@ -250,9 +316,10 @@
     page-break-inside: avoid !important;
   }
 
-  /* Ensure text colors remain crisp on grayscale */
+  /* High-contrast grayscale and crisp lines */
   * {
     -webkit-text-size-adjust: 100%;
   }
 }
+
 
